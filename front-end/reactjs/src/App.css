@@ -1,6 +1,6 @@
 /* Top Bar */
 .TopBar {
-  height: 4.20%;
+  height: 4.40%;
   width: 100%;
   position: fixed;
   z-index: 2;
@@ -16,7 +16,18 @@
   
 }
 
-
+.logo-icon{
+  position: absolute;
+  z-index: 100;
+  height: 70px;
+  width: 140px;
+  
+  /* min-width: 6%; */
+  /* max-width: 7%; */
+  
+  /* margin-left: 70px; */
+  margin-left: 3.64%;
+}
 
 /* Navigation Sidebar */
 
@@ -30,23 +41,28 @@
   padding-top: 20px;
   left: 0;
 
+  width: 16%;
+
+
   /* appearance */
   background-color: #f4f5f7;
-  box-shadow: rgba(37, 37, 37, 0.308) 0px 0px -3px;
-  
+  /* box-shadow: rgba(0, 0, 0, 0.25) 0px 20px 20px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 0px -18px inset; */
+  /* box-shadow: rgba(0, 0, 0, 0.02) 0px 2px 3px 0px, rgba(27, 31, 35, 0.082) 0px 0px 2px 1px; */
+  box-shadow: rgba(12, 12, 12, 0.048) inset 0 0 4px;
 }
 
 .NavBar {
-  margin-top: 140px;
+  margin-top: 200px;
 }
 
 
 .navChoice { /* navigationbar choice clickbox */
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-top: 4%;
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-top: 2%;
   /* margin-bottom: 7%; */
   border-radius: 3px;
+  height:50px;
 
 }
 
@@ -54,25 +70,85 @@ a.navChoice:link, a.navChoice:visited {
   background-color: #f4f5f7;
   
   /* display */
-  padding: 15px;
+  padding: 12px;
   /* text-align: center; */
   text-decoration: none;
   display: block;
   
-  text-indent: 37%;
+  text-indent: 12%;
 
   /* text appearance */
-  font: Trebuchet MS, sans-serif ;
-  font-weight: 605;
-  font-size: 18px;
-  color: #2f2f30;
+  /* font: Trebuchet MS, sans-serif ; */
+  font-family: Segoe UI ;
 
+  font-weight: 590;
+  font-size: 1.1em;
+  color: #575757;
+
+  
 }
 
 a.navChoice:hover, a.navChoice:active {
   background-color: #723C70;
-
-  
   color: #f4f5f7;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px;
 }
 
+
+
+/* NavbarMenu icon adjustments */
+.menu-icon {
+  height: 20px;
+  width: 20px;
+  /* padding-right: 10px; */
+  margin-right: 35px;
+}
+
+.home-icon {
+
+  height: 25px;
+  width: 25px;
+  /* padding-right: 10px; */
+  margin-right: 40px;
+  margin-top: -6px;
+
+}
+
+.backlog-icon {
+  height: 17px;
+  width: 17px;
+  /* padding-right: 10px; */
+  margin-right: 45px;
+  margin-left: 4px;
+  margin-top: -1px;
+}
+
+.projects-icon {
+  height: 21px;
+  width: 21px;
+  /* padding-right: 10px; */
+  margin-right: 45px;
+  margin-left: 3px;
+  margin-top: -5px;
+}
+
+/* NavBarMenu hover option styles */
+#OverviewHover, #BacklogHover, #ProjectsHover {
+  display: none;
+  background-color: #723C70;
+  color: #f4f5f7;  
+
+}
+
+
+@media screen and (max-width: 1000px) {
+  
+  .SideNavBar{
+    width: 28%;
+  }
+
+  .TopBar,
+  .mainContent {
+      width: 100%;
+  }
+}
