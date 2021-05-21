@@ -7,19 +7,21 @@ import overviewicon from './images/overviewout.png'
 import overviewhovericon from './images/overviewhover.png'
 import projecticon from './images/projectout.png'
 import projecthovericon from './images/projecthover.png'
+import userphoto from './images/userphoto.png'
+
 
 
 
 function App() {
 
 	
-	function fnover(link_id){ //Function to replace a div contains with another (used in navbar)
-		console.log("sadasdasdsa");
+	function fnover(link_id){ //Function to replace a div contains with another (used in navbar menu choices on hover)
+		console.log("hover");
 		document.getElementById(link_id.concat("Out")).style.display = "none"; // change display style attribute
 		document.getElementById(link_id.concat("Hover")).style.display = "block";
 	}
 	
-	function fnout(link_id){
+	function fnout(link_id){ //Function to replace a div contains with another (used in navbar menu choices on hover)
 		document.getElementById(link_id.concat("Out")).style.display = "block"; // change display style attribute
 		document.getElementById(link_id.concat("Hover")).style.display = "none";
 		
@@ -35,7 +37,9 @@ function App() {
 			<div class="SideNavBar" >
 				
 
-				
+				<div class="userDisplay">
+					<a href="#" class="userNameNavBar" ><img class = "user-icon" src={userphoto} alt="avatar"></img><li id="userNameDisplay">Dimitris Beros</li></a>
+				</div>
 
 
 
