@@ -8,7 +8,8 @@ import overviewhovericon from './images/overviewhover.png'
 import projecticon from './images/projectout.png'
 import projecthovericon from './images/projecthover.png'
 import userphoto from './images/userphoto.png'
-
+import settingsicon from './images/settingsout.png'
+import settingshovericon from './images/settingshover.png'
 
 
 
@@ -62,6 +63,12 @@ function App() {
 					<div id = "thirdOption" onMouseEnter={() => fnover("Projects")} onMouseLeave={() => fnout("Projects")}>
 						<a href="#" class="navChoice" id="ProjectsOut"><img class = "menu-icon projects-icon" src={projecticon} alt="logo"></img><span>Projects</span></a>
 						<a href="#" class="navChoice" id="ProjectsHover"><img class = "menu-icon projects-icon" src={projecthovericon} alt="logo"></img><span>Projects</span></a>
+					</div>
+
+
+					<div id = "thirdOption" onMouseEnter={() => fnover("Settings")} onMouseLeave={() => fnout("Settings")}>
+						<a href="#" class="navChoice" id="SettingsOut"><img class = "menu-icon settings-icon" src={settingsicon} alt="logo"></img><span>Settings</span></a>
+						<a href="#" class="navChoice" id="SettingsHover"><img class = "menu-icon settings-icon" src={settingshovericon} alt="logo"></img><span>Settings</span></a>
 					</div>
 
 				</div>
