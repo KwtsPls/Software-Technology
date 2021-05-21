@@ -1,3 +1,10 @@
+/* custom properties */
+:root {
+  --navbar-width: 537;
+}
+
+
+
 /* Top Bar */
 .TopBar {
   height: 4.40%;
@@ -42,7 +49,6 @@
   left: 0;
 
   width: 16%;
-
 
   /* appearance */
   background-color: #f4f5f7;
@@ -141,10 +147,29 @@ a.navChoice:hover, a.navChoice:active {
 }
 
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
   
   .SideNavBar{
     width: 28%;
+    
+  }
+
+  .logo-icon{
+    position: absolute;
+    height: 60px;
+    width: 120px;
+    
+    /* min-width: 6%; */
+    /* max-width: 7%; */
+    
+    /* margin-left: 70px; */
+    /* which in percentage of a 1920 width screen is */
+    /* margin-left: 3.64%; */
+
+    /* margin-left: calc(var(--navbar-width)*100%); */
+    margin-left: 50%;
+
+
   }
 
   .TopBar,

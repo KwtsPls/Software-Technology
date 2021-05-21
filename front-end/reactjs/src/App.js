@@ -35,6 +35,11 @@ function App() {
 			<div class="SideNavBar" >
 				
 
+				
+
+
+
+
 				<div class="NavBar">
 
 
