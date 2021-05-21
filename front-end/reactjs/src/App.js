@@ -8,6 +8,7 @@ import overviewhovericon from './images/overviewhover.png'
 import projecticon from './images/projectout.png'
 import projecthovericon from './images/projecthover.png'
 import userphoto from './images/userphoto.png'
+import helpicon from './images/helpicon.png'
 import settingsicon from './images/settingsout.png'
 import settingshovericon from './images/settingshover.png'
 
@@ -71,13 +72,21 @@ function App() {
 						<a href="#" class="navChoice" id="SettingsHover"><img class = "menu-icon settings-icon" src={settingshovericon} alt="logo"></img><span>Settings</span></a>
 					</div>
 
+
+
 				</div>
+
+
+				
 
 
 			</div>
 
 			<div class="TopBar"></div>
 			<img class = "logo-icon" src={logo} alt="logo"></img>
+			<div class="helpButton">
+					<a href="#" class="help-button" ><img class = "help-icon" src={helpicon} alt="help"></img></a>
+			</div>
 			
 
 			<div class="mainContent"></div>

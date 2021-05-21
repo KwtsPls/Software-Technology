@@ -1,13 +1,14 @@
 /* custom properties */
 :root {
-  --navbar-width: 537;
+  --topbar-height: 47.5;
 }
 
 
 
 /* Top Bar */
 .TopBar {
-  height: 4.40%;
+  /* height: 4.40%; */
+  height: 47.5px;
   width: 100%;
   position: fixed;
   z-index: 2;
@@ -35,6 +36,29 @@
   /* margin-left: 70px; */
   margin-left: 3.64%;
 }
+
+
+
+/* help icon */
+
+.helpButton {
+  position: absolute;
+  z-index: 99;
+  margin-top: 9px;
+  margin-left: 98%;
+}
+
+.help-icon {
+  /* display: inline; */
+  
+  height: 18px;
+  width: 18px;
+  /* padding-right: 10px; */
+  margin-right: 40px;
+  margin-left: 3px;
+  margin-top: -5px;
+}
+
 
 /* Navigation Sidebar */
 
@@ -199,13 +223,38 @@ a.navChoice:hover, a.navChoice:active {
   margin-top: -5px;
 }
 
+
+
+
 /* NavBarMenu hover option styles */
-#OverviewHover, #BacklogHover, #ProjectsHover {
+#OverviewHover, #BacklogHover, #ProjectsHover, #SettingsHover {
   display: none;
   background-color: #723C70;
   color: #f4f5f7;  
 
 }
+
+
+
+/* Main Content Screen */
+.mainContent{
+  /* background-color: aquamarine; */
+
+  /* create main content box and place it */
+  display: block;
+  height: 100vh;
+  /* width is 100% - navbar width(16%) */
+  width: 84%;
+  margin-left: 16%;
+
+  padding-top: 47.5px;
+  
+}
+
+
+
+
+
 
 
 
@@ -241,11 +290,15 @@ a.navChoice:hover, a.navChoice:active {
 
   }
 
-  
+  .mainContent{
+    /* width is 100% - navbar width(20%) */
+    width: 80%;
+    margin-left: 20%;
+  }
   
 
-  .TopBar,
-  .mainContent {
+  .TopBar
+  {
       width: 100%;
   }
 }
