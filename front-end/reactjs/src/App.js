@@ -36,40 +36,40 @@ function App() {
 			
 			
 
-			<div class="SideNavBar" >
+			<div className="SideNavBar" >
 				
 
-				<div class="userDisplay">
-					<a href="#" class="userNameNavBar" ><img class = "user-icon" src={userphoto} alt="avatar"></img><li id="userNameDisplay">Dimitris Beros</li></a>
+				<div className="userDisplay">
+					<a href="#" className="userNameNavBar" ><img className = "user-icon" src={userphoto} alt="avatar"></img><li id="userNameDisplay">Dimitris Beros</li></a>
 				</div>
 
 
 
 
-				<div class="NavBar">
+				<div className="NavBar">
 
 
 					<div id = "firstOption" onMouseEnter={() => fnover("Overview")} onMouseLeave={() => fnout("Overview")}>
-						<a href="#" class="navChoice" id="OverviewOut" ><img class = "menu-icon home-icon" src={overviewicon} alt="logo"></img><span>Overview</span></a>
-						<a href="#" class="navChoice" id="OverviewHover"><img class = "menu-icon home-icon" src={overviewhovericon} alt="logo"></img><span>Overview</span></a>
+						<a href="#" className="navChoice" id="OverviewOut" ><img className = "menu-icon home-icon" src={overviewicon} alt="logo"></img><span>Overview</span></a>
+						<a href="#" className="navChoice" id="OverviewHover"><img className = "menu-icon home-icon" src={overviewhovericon} alt="logo"></img><span>Overview</span></a>
 					</div>
 
 
 					<div id = "secondOption" onMouseEnter={() => fnover("Backlog")} onMouseLeave={() => fnout("Backlog")}>
-						<a href="#" class="navChoice" id="BacklogOut"><img class = "menu-icon backlog-icon" src={backlogicon} alt="logo"></img><span>Backlog</span></a>
-						<a href="#" class="navChoice" id="BacklogHover"><img class = "menu-icon backlog-icon" src={backloghovericon} alt="logo"></img><span>Backlog</span></a>
+						<a href="#" className="navChoice" id="BacklogOut"><img className = "menu-icon backlog-icon" src={backlogicon} alt="logo"></img><span>Backlog</span></a>
+						<a href="#" className="navChoice" id="BacklogHover"><img className = "menu-icon backlog-icon" src={backloghovericon} alt="logo"></img><span>Backlog</span></a>
 					</div>
 
 
 					<div id = "thirdOption" onMouseEnter={() => fnover("Projects")} onMouseLeave={() => fnout("Projects")}>
-						<a href="#" class="navChoice" id="ProjectsOut"><img class = "menu-icon projects-icon" src={projecticon} alt="logo"></img><span>Projects</span></a>
-						<a href="#" class="navChoice" id="ProjectsHover"><img class = "menu-icon projects-icon" src={projecthovericon} alt="logo"></img><span>Projects</span></a>
+						<a href="#" className="navChoice" id="ProjectsOut"><img className = "menu-icon projects-icon" src={projecticon} alt="logo"></img><span>Projects</span></a>
+						<a href="#" className="navChoice" id="ProjectsHover"><img className = "menu-icon projects-icon" src={projecthovericon} alt="logo"></img><span>Projects</span></a>
 					</div>
 
 
 					<div id = "thirdOption" onMouseEnter={() => fnover("Settings")} onMouseLeave={() => fnout("Settings")}>
-						<a href="#" class="navChoice" id="SettingsOut"><img class = "menu-icon settings-icon" src={settingsicon} alt="logo"></img><span>Settings</span></a>
-						<a href="#" class="navChoice" id="SettingsHover"><img class = "menu-icon settings-icon" src={settingshovericon} alt="logo"></img><span>Settings</span></a>
+						<a href="#" className="navChoice" id="SettingsOut"><img className = "menu-icon settings-icon" src={settingsicon} alt="logo"></img><span>Settings</span></a>
+						<a href="#" className="navChoice" id="SettingsHover"><img className = "menu-icon settings-icon" src={settingshovericon} alt="logo"></img><span>Settings</span></a>
 					</div>
 
 
@@ -83,7 +83,7 @@ function App() {
 			</Topbar>
 			
 
-			<div class="mainContent"></div>
+			<div className="mainContent"></div>
 
 
 		</div>
