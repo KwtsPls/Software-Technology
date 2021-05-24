@@ -1,4 +1,3 @@
-import logo from './images/logo.png';
 import './App.css';
 import backlogicon from './images/backlogout.png'
 import backloghovericon from './images/backloghover.png'
@@ -8,9 +7,10 @@ import overviewhovericon from './images/overviewhover.png'
 import projecticon from './images/projectout.png'
 import projecthovericon from './images/projecthover.png'
 import userphoto from './images/userphoto.png'
-import helpicon from './images/helpicon.png'
 import settingsicon from './images/settingsout.png'
 import settingshovericon from './images/settingshover.png'
+
+import Topbar from './components/Topbar.js'
 
 
 
@@ -77,16 +77,10 @@ function App() {
 				</div>
 
 
-				
-
-
 			</div>
 
-			<div class="TopBar"></div>
-			<img class = "logo-icon" src={logo} alt="logo"></img>
-			<div class="helpButton">
-					<a href="#" class="help-button" ><img class = "help-icon" src={helpicon} alt="help"></img></a>
-			</div>
+			<Topbar>
+			</Topbar>
 			
 
 			<div class="mainContent"></div>
