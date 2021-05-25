@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import logo from '../images/logo.png';
+import partners from '../images/partners.png';
 
 import '../App.css'
 import '../login.css'
