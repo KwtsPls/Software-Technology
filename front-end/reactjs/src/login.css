@@ -2,6 +2,39 @@
     margin-left: 20vw;
 }
 
+.signup-box{
+    
+        top: 50%; /* IMPORTANT */
+        left: 50%; /* IMPORTANT */
+        display: block;
+        position: absolute;
+        z-index: 2;
+        margin-top: -420px; /* HALF OF THE HEIGHT */
+        margin-left: -250px; /* HALF OF THE WIDTH */
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+
+
+}
+.signuptopbar{
+    height: 70px;
+    width: 500px;
+    background-color: #202020;
+}
+
+.signup-form-box{
+    width: 500px;
+    height: 770px;
+    background-color: #f4f5f7;
+    /* display: block; */
+    float: left;
+    margin-left: 0%;
+    margin-top: 0%;
+}
+
+.signup-content{
+    margin-top: 50px;
+}
+
 .login-form-box{
     width: 500px;
     height: 700px;
@@ -11,7 +44,13 @@
     margin-left: 5%;
     margin-top: 7%;
 
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+
+
 }
+
+
+
 .login-desc-box{
     width: 500px;
     height: 700px;
@@ -21,6 +60,9 @@
     float: left;
     text-align: center;
     margin-top: 7%;
+
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+
 }
 
 
@@ -51,6 +93,11 @@
 
 .login-form-boxes{
     margin-top: 14%;
+}
+
+.signup-form-boxes{
+    margin-top: 3%;
+
 }
 
 .login-button {
@@ -92,6 +139,43 @@
     margin-top: 10%;
 }
 
+.jete_logo-icon-signup{
+    height: 70px;
+    width: 140px;
+    position: relative;
+    z-index: 50;
+    margin-top: 15px;
+    margin-left: 180px;
+}
+
+.signupimage{
+    position: relative;
+}
+
+.partnerssignup{
+    height: 200px;
+    width: 288px;
+    margin-top: 100px;
+    position: absolute;
+    z-index: 0;
+    margin-top: 74vh;
+    margin-left: 5vw;
+    
+}
+
+.notes{
+    display: none;
+}
+
+.etairia {
+    height: 200px;
+    width: 288px;
+    margin-top: 100px;
+    position: absolute;
+    z-index: 1;
+    margin-top: 74vh;
+    margin-left: 60vw;
+}
 
 .partners {
     height: 200px;

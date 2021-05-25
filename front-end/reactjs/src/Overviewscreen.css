@@ -4,12 +4,21 @@
     src:url('./fonts/FredokaOne-Regular.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: myquoteFont;
+    src:url('./fonts/SourceSansPro-Regular.ttf') format('truetype');
+}
+
+
+
+
+
 /* greetings box */
 .greetingsBorder { 
     /* size */
     width: 90%;
     /* height: 200px; */
-    height: 10vw;
+    height: 7vw;
 
 
     /* position */
@@ -17,12 +26,36 @@
     margin-left: 5%;
     background-color: #f4f5f7;
 
+    border: solid;
+    border-color: #202020;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, 0.103) 0px 1px 3px, rgba(0, 0, 0, 0.171) 0px 1px 2px; 
 
-    /* box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px; */
-    /* box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px; */
-    box-shadow: rgba(0, 0, 0, 0.103) 0px 1px 3px, rgba(0, 0, 0, 0.171) 0px 1px 2px;
+    
 }
 
+.quotebox{
+    /* size */
+    width: 90%;
+    /* height: 200px; */
+    height: 2vw;
+
+
+    /* position */
+    margin-left: 5%;
+    background-color: #202020;
+    box-shadow: rgba(0, 0, 0, 0.103) 0px 1px 3px, rgba(0, 0, 0, 0.171) 0px 1px 2px; 
+
+}
+
+.quote{
+    font-family: myquoteFont;
+    color: #f4f5f7;
+    
+    margin-left: 6%;
+    font-size: 1.1em;
+    padding-top: 5px;
+}
 
 
 /* greetings text */
@@ -45,12 +78,12 @@
     z-index: 31;
 
     /* size adjustments */
-    width: 12vw;
-    height: 12vw;
+    width: 10vw;
+    height: 10vw;
 
     /* position adjust */
     margin-left: 62%;
-    margin-top: -25px;
+    margin-top: -32px;
 }
 
 #morning, #noon , #night{

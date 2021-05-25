@@ -59,9 +59,9 @@ class OverviewScreen extends Component {
 
         // this.displayaccordingtotime();
         return (
-            <div>
+            <div className="greetingsBox">
                 
-
+                
                 
                 <div className="greetingsBorder" id="morning" ref={this.morningRef} >
                     
@@ -82,6 +82,10 @@ class OverviewScreen extends Component {
                     <h1 className="greetings night">Goodnight, Stavros</h1>
                     <img className="greetings-Photo night" src={night} alt="time-icon"></img>
 
+                </div>
+
+                <div className="quotebox">
+                    <p className="quote">Code is like humor. When you have to explain it, it’s bad.</p>
                 </div>
             
             </div>

@@ -1,49 +1,77 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import '../App.css';
+import logo from '../images/logo.png';
+import partners from '../images/notes.png';
+import etairia from '../images/etairia.png';
 
+
+import '../App.css';
+import '../login.css'
 
 class SignUpPage extends Component {
     render() { 
         return (
             <div>
-                
-                <div class="top-buffer login-form">
-                    <h1 class="text-center">
-                        Sign Up
-                    </h1>
-                    <form>
-                        <div class="form-group pt-3">
-                            <label class="sr-only" for="inlineFormInputGroup">Username</label>
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">@</div>
+                <div className="signup-box">
+                    <div className="signuptopbar">
+                        <img className = "jete_logo-icon-signup" src={logo} alt="logo"></img>        
+
+                    </div>
+                    <div className="signup-form-box">
+                        
+                        <div className="top-buffer login-form signup-content">
+                            <h1 className="text-center login-header">
+                                Sign Up
+                            </h1>
+                            <form className="signup-form-boxes">
+                                <div className="form-group pt-3">
+                                    <label className="sr-only" for="emailInput">Email</label>
+                                    <div className="input-group mb-2">
+                                        <div className="input-group-prepend">
+                                            <div className="input-group-text">@</div>
+                                        </div>
+                                        <input type="email" class="form-control" id="emailInput" placeholder="Enter email"/>
+                                    </div>
                                 </div>
-                                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username"/>
-                            </div>
+                                <div className="form-group pt-3">
+                                    <label for="shortnameInput">Name</label>
+                                    <input type="name" className="form-control" id="shortnameInput" aria-describedby="emailHelp" placeholder="Your name"/>
+                                </div>
+                                <div className="form-group pt-3">
+                                    <label for="surnameInput">Surname</label>
+                                    <input type="surname" className="form-control" id="surnameInput" placeholder="Your surname"/>
+                                </div>
+                                <div className="form-group pt-3">
+                                    <label for="usernameInput">Username</label>
+                                    <input type="username" className="form-control" id="usernameInput" aria-describedby="emailHelp" placeholder="Username"/>
+                                </div>
+                                <div className="form-group pt-3">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+                                </div>
+                                <div className="form-group pt-3">
+                                    <label for="exampleInputPassword1">Confirm Password</label>
+                                    <input type="password" className="form-control" id="confirmExampleInputPassword1" placeholder="Confirm password"/>
+                                </div>
+                                <div className="form-check pt-3">
+                                    <input type="checkbox" className="form-check-input mycheckbox" id="exampleCheck1"/>
+                                    <label className="form-check-label" for="exampleCheck1">Check me out</label>
+                                </div>
+                                <div className="text-center pt-3">
+                                    <Link to='/paymentPlan'>
+                                        <button type="submit" className="btn-lg btn-primary login-button">Sign Up</button>
+                                    </Link>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group pt-3">
-                            <label for="exampleInputEmail1">Email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
-                        </div>
-                        <div class="form-group pt-3">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"/>
-                        </div>
-                        <div class="form-group pt-3">
-                            <label for="exampleInputPassword1">Confirm Password</label>
-                            <input type="password" class="form-control" id="confirmExampleInputPassword1" placeholder="Confirm password"/>
-                        </div>
-                        <div class="form-check pt-3">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div>
-                        <div class="text-center pt-3">
-                            <Link to='/paymentPlan'>
-                                <button type="submit" class="btn-lg btn-primary">Sign Up</button>
-                            </Link>
-                        </div>
-                    </form>
+                    </div>
+                    
+
+                </div>
+                <div className="signupimage">
+                    <img className = "partnerssignup notes" src={partners} alt="partnerssketch"></img>        
+                    <img className = "partnerssignup etairia" src={etairia} alt="partnerssketch"></img>        
+
                 </div>
             </div>
         );
