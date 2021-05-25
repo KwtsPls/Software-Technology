@@ -39,7 +39,7 @@ class SignUpPage extends Component {
                             <label class="form-check-label" for="exampleCheck1">Check me out</label>
                         </div>
                         <div class="text-center pt-3">
-                            <Link to='/home'>
+                            <Link to='/paymentPlan'>
                                 <button type="submit" class="btn-lg btn-primary">Sign Up</button>
                             </Link>
                         </div>

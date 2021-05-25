@@ -9,6 +9,7 @@ import projecthovericon from '../images/projecthover.png'
 import userphoto from '../images/userphoto.png'
 import settingsicon from '../images/settingsout.png'
 import settingshovericon from '../images/settingshover.png'
+import { Link } from 'react-router-dom'
 
 class SideNavBar extends Component {
 
@@ -29,9 +30,12 @@ class SideNavBar extends Component {
             <div className="SideNavBar" >
 				
 
-				<div className="userDisplay">
-					<a href="#" className="userNameNavBar" ><img className = "user-icon" src={userphoto} alt="avatar"></img><li id="userNameDisplay">Dimitris Beros</li></a>
-				</div>
+				
+				<Link to='/profile'>
+					<div className="userDisplay">
+						<a href="#" className="userNameNavBar" ><img className = "user-icon" src={userphoto} alt="avatar"></img><li id="userNameDisplay">Dimitris Beros</li></a>
+					</div>
+                </Link>
 
 
 
@@ -50,11 +54,12 @@ class SideNavBar extends Component {
 						<a href="#" className="navChoice" id="BacklogHover"><img className = "menu-icon backlog-icon" src={backloghovericon} alt="logo"></img><span>Backlog</span></a>
 					</div>
 
-
-					<div id = "thirdOption" onMouseEnter={() => this.fnover("Projects")} onMouseLeave={() => this.fnout("Projects")}>
-						<a href="#" className="navChoice" id="ProjectsOut"><img className = "menu-icon projects-icon" src={projecticon} alt="logo"></img><span>Projects</span></a>
-						<a href="#" className="navChoice" id="ProjectsHover"><img className = "menu-icon projects-icon" src={projecthovericon} alt="logo"></img><span>Projects</span></a>
-					</div>
+					<Link to='/projects'>
+						<div id = "thirdOption" onMouseEnter={() => this.fnover("Projects")} onMouseLeave={() => this.fnout("Projects")}>
+							<a href="#" className="navChoice" id="ProjectsOut"><img className = "menu-icon projects-icon" src={projecticon} alt="logo"></img><span>Projects</span></a>
+							<a href="#" className="navChoice" id="ProjectsHover"><img className = "menu-icon projects-icon" src={projecthovericon} alt="logo"></img><span>Projects</span></a>
+						</div>
+					</Link>
 
 
 					<div id = "thirdOption" onMouseEnter={() => this.fnover("Settings")} onMouseLeave={() => this.fnout("Settings")}>
