@@ -44,7 +44,7 @@ class OverviewScreen extends Component {
         if( (d.getHours() >= 19) || (d.getHours() >= 0 && d.getHours() < 6) ){
             console.log("Night time");
 		    // document.getElementById("night").style.display = "block"; // change display style attribute
-            const node = this.morningRef.current;
+            const node = this.nightRef.current;
             node.style.display = "block";
         }
 

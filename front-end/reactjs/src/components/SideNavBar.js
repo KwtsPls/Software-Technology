@@ -42,11 +42,12 @@ class SideNavBar extends Component {
 
 				<div className="NavBar">
 
-
-					<div id = "firstOption" onMouseEnter={() => this.fnover("Overview")} onMouseLeave={() => this.fnout("Overview")}>
-						<a href="#" className="navChoice" id="OverviewOut" ><img className = "menu-icon home-icon" src={overviewicon} alt="logo"></img><span>Overview</span></a>
-						<a href="#" className="navChoice" id="OverviewHover"><img className = "menu-icon home-icon" src={overviewhovericon} alt="logo"></img><span>Overview</span></a>
-					</div>
+					<Link to='/home'>
+						<div id = "firstOption" onMouseEnter={() => this.fnover("Overview")} onMouseLeave={() => this.fnout("Overview")}>
+							<a href="#" className="navChoice" id="OverviewOut" ><img className = "menu-icon home-icon" src={overviewicon} alt="logo"></img><span>Overview</span></a>
+							<a href="#" className="navChoice" id="OverviewHover"><img className = "menu-icon home-icon" src={overviewhovericon} alt="logo"></img><span>Overview</span></a>
+						</div>
+					</Link>
 
 
 					<div id = "secondOption" onMouseEnter={() => this.fnover("Backlog")} onMouseLeave={() => this.fnout("Backlog")}>
