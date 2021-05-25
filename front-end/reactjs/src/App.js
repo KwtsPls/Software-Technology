@@ -1,7 +1,8 @@
 import './App.css';
+import './Overviewscreen.css';
+
 import backlogicon from './images/backlogout.png'
 import backloghovericon from './images/backloghover.png'
-import menuicon from './images/backlog2.png'
 import overviewicon from './images/overviewout.png'
 import overviewhovericon from './images/overviewhover.png'
 import projecticon from './images/projectout.png'
@@ -11,6 +12,8 @@ import settingsicon from './images/settingsout.png'
 import settingshovericon from './images/settingshover.png'
 
 import Topbar from './components/Topbar.js'
+import OverviewScreen from './components/OverviewScreen.js'
+
 
 
 
@@ -28,6 +31,7 @@ function App() {
 		document.getElementById(link_id.concat("Hover")).style.display = "none";
 		
 	}
+
 
 	return (
 		<div className="App">
@@ -83,7 +87,10 @@ function App() {
 			</Topbar>
 			
 
-			<div className="mainContent"></div>
+			<div className="mainContent">
+				<OverviewScreen>
+				</OverviewScreen>
+			</div>
 
 
 		</div>
