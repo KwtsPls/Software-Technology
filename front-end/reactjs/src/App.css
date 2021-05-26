@@ -1,7 +1,12 @@
+@font-face {
+  font-family: myquoteFont;
+  src:url('./fonts/SourceSansPro-Bold.ttf') format('truetype');
+}
+
 /* custom properties */
 :root {
   --topbar-height: 47.5;
-  font-family: Segoe UI ;
+  font-family: myquoteFont ;
 
 }
 
@@ -102,8 +107,8 @@ a.userNameNavBar:visited {
 
   /* text appearance */
   text-decoration: none;
-  font-family: Segoe UI;
-  font-weight: 590;
+  font-family: myquoteFont;
+  font-weight: 600;
   /* font-size: 1.3em; */
   font-size: 130%;
 
@@ -151,9 +156,9 @@ a.navChoice:visited {
 
   /* text appearance */
   /* font: Trebuchet MS, sans-serif ; */
-  font-family: Segoe UI;
+  font-family: myquoteFont;
 
-  font-weight: 590;
+  font-weight: 600;
   font-size: 1.1em;
   color: #575757;
 }
