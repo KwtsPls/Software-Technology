@@ -23,7 +23,7 @@ class OverviewScreen extends Component {
 
 
         // if its morning time
-        if(d.getHours() >= 6 && d.getHours() < 1){
+        if(d.getHours() >= 6 && d.getHours() < 13){
             console.log("Morning time");
 		    // document.getElementById("morning").style.display = "block"; // change display style attribute
             const node = this.morningRef.current;
