@@ -9,9 +9,7 @@ class ProjectsPage extends Component {
         return (
             <div>
 				<Topbar/>
-
                 <SideNavBar/>
-
                 <div className="mainContent">
                     <h1 className="text-center">
                         ProjectsPage
@@ -23,9 +21,6 @@ class ProjectsPage extends Component {
                         ProjectsPage
                     </h1>
                 </div>
-                
-                
-                
             </div>
         );
     }

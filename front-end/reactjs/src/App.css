@@ -1,13 +1,12 @@
 @font-face {
   font-family: myquoteFont;
-  src:url('./fonts/SourceSansPro-Bold.ttf') format('truetype');
+  src: url("./fonts/SourceSansPro-Bold.ttf") format("truetype");
 }
 
 /* custom properties */
 :root {
   --topbar-height: 47.5;
-  font-family: myquoteFont ;
-
+  font-family: myquoteFont;
 }
 
 /* Top Bar */
@@ -84,7 +83,7 @@
 
 /* user navbar display */
 .userDisplay {
-  margin-top: 150px;
+  margin-top: 30%;
 }
 
 .user-icon {
@@ -217,7 +216,11 @@ a.navChoice:active {
 #OverviewHover,
 #BacklogHover,
 #ProjectsHover,
-#SettingsHover {
+#SettingsHover,
+#ProfileHover,
+#PersonalisationHover,
+#SecurityHover,
+#BillingHover {
   display: none;
   background-color: #723c70;
   color: #f4f5f7;
@@ -296,11 +299,23 @@ a.navChoice:active {
   margin-top: 100px;
 }
 
+a:link {
+  text-decoration: none;
+}
 
-a:link { text-decoration: none; }
+a:visited {
+  text-decoration: none;
+}
 
-a:visited { text-decoration: none; }
+a:hover {
+  text-decoration: none;
+}
 
-a:hover { text-decoration: none; }
+a:active {
+  text-decoration: none;
+}
 
-a:active { text-decoration: none; }
+.deadSpace {
+  position: absolute;
+  height: 20px;
+}

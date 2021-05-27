@@ -39,7 +39,7 @@ function App() {
 					<Route path="/chat/addContact" exact component={AddContactPage} />
 					<Route path="/projects" exact component={ProjectsPage} />
 					<Route path="/projectCreate" exact component={ProjectCreatePage} />
-					<Route path="/projects/projectNo" exact component={ProjectsPage} />
+					<Route path="/projects/projectNo" exact component={ProjectNoPage} />
 					<Route path="/projNewIssue" exact component={ProjNewIssuePage} />
 				</Switch>
 			</div>

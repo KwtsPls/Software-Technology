@@ -9,7 +9,6 @@ class ProfilePage extends Component {
         return (
             <div>
 				<Topbar/>
-
                 <SideNavBar/>
                 <div className="mainContent">
 
