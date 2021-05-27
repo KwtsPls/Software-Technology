@@ -8,6 +8,8 @@ import '../../css/settings.css';
 
 
 class SettingsProfilePage extends Component {
+    
+
     render() { 
         return (
             <div>
@@ -60,7 +62,7 @@ class SettingsProfilePage extends Component {
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">@</div>
                                     </div>
-                                    <input type="email" class="form-control" id="emailInput" placeholder="Email from backend"/>
+                                    <input type="email" class="form-control" id="emailInput" placeholder="Email from backend" readOnly/>
                                 </div>
                             </div>
 
@@ -82,7 +84,7 @@ class SettingsProfilePage extends Component {
 
 
                         </form>
-                        
+                        <div className="blankspace"/>                            
                     </div>
                 </div>
                 

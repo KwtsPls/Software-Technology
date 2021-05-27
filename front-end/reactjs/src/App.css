@@ -14,7 +14,7 @@
   /* height: 4.40%; */
   height: 47.5px;
   width: 100%;
-  position: fixed;
+  position: absolute;
   z-index: 2;
   top: 0;
   overflow-x: hidden;
@@ -201,6 +201,12 @@ a.navChoice:active {
   margin-right: 40px;
   margin-left: 3px;
   margin-top: -5px;
+}
+
+.blankspace{
+  height: 90px;
+  background-color: #ffff;
+  width: 25px;
 }
 
 .settings-icon {
