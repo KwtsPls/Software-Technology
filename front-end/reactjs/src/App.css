@@ -237,6 +237,20 @@ a.navChoice:active {
   padding-top: 47.5px;
 }
 
+
+
+.breadcrumb-option{
+  /* appearance */
+  color: #91418e !important;
+}
+
+
+.breadcrumb-option:hover{
+  text-decoration: underline;
+  color: #af57ac !important;
+
+}
+
 /* responsiveness */
 @media screen and (max-width: 1600px) {
   .SideNavBar {

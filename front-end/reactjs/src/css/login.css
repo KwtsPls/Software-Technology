@@ -83,12 +83,12 @@
 
 @font-face {
     font-family: myFirstFont;
-    src:url('./fonts/FredokaOne-Regular.ttf') format('truetype');
+    src:url('../fonts/FredokaOne-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: descFont;
-    src:url('./fonts/Teko-Bold.ttf') format('truetype');
+    src:url('../fonts/Teko-Bold.ttf') format('truetype');
 }
 
 .login-form-boxes{

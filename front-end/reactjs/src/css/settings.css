@@ -1,0 +1,72 @@
+@font-face {
+    font-family: myheaderFont;
+    src:url('../fonts/SourceSansPro-Regular.ttf') format('truetype');
+  }
+
+.jete-breadcrump, .jete-settingsMenu{
+    /* position */
+    margin-left: 5vw;
+    margin-top: 3vh;
+}
+
+.jete-settingsMenu{
+    margin-top: 12vh;
+    float: left;
+}
+
+.list-group{
+
+    width: 250px;
+}
+
+.list-group > .active{
+    background-color: #723c70 !important;
+    border-color: #3d113c !important;
+}
+
+.settingsContains{
+    margin-left: 20%;
+    margin-top: 11vh;
+
+    float: left;
+    margin-left: 7vw;
+}
+
+.settings-header{
+    font-family: myquoteFont ;
+    color: #202020ee;
+    font-weight: 200;
+    font-size: 2.4em;
+}
+
+.settingsprofile-form{
+    margin-top: 60px;
+}
+
+.settingsprofile-form > .surname{
+    margin-top: 15px;
+}
+
+.settingsprofile-form > .email{
+    margin-top: 25px;
+}
+
+.settingsprofile-form > .location{
+    margin-top: 15px;
+}
+
+.settingsprofile-form > .bio{
+    margin-top: 15px;
+}
+
+.settingsprofile-form >.form-group {
+    width: 500px;
+}
+
+.settingsprofile-form > .bio > input{
+    height: 80px;
+}
+
+.settingsprofile-button{
+    margin-top: 60px;
+}

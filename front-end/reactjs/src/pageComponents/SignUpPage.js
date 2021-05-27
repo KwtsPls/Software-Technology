@@ -6,7 +6,7 @@ import etairia from '../images/etairia.png';
 
 
 import '../App.css';
-import '../login.css'
+import '../css/login.css'
 
 class SignUpPage extends Component {
     render() { 

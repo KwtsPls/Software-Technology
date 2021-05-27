@@ -1,16 +1,17 @@
 @font-face {
     font-family: myFirstFont;
-    src:url('./fonts/FredokaOne-Regular.ttf') format('truetype');
+    src:url('../fonts/FredokaOne-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: descFont;
-    src:url('./fonts/Teko-Bold.ttf') format('truetype');
+    src:url('../fonts/Teko-Bold.ttf') format('truetype');
 }
 
 
 .paymentplanpage{
     text-align: center;
+    z-index: 2;
 }
 
 .paymentplan-header{
@@ -57,6 +58,18 @@ hr.new5 {
     border: 2px solid #f4f5f7;
     border-radius: 2px;
 }
+
+.workerimage{
+    width: 600px;
+    height: 400px;
+
+    position: relative;
+    z-index: 1;
+    margin-top: 1vh;
+
+
+}
+
 
 @media screen and (max-width: 1600px) {
     .firstpaybox, .secondpaybox{

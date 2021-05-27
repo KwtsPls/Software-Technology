@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
-import '../payment.css';
+import '../css/payment.css';
+
 
 
 
@@ -10,7 +11,7 @@ import '../payment.css';
 class PaymentPlanPage extends Component {
     render() { 
         return (
-            <div>
+            <div className="paypage">
                 <div className="paymentplanpage">
                     
                     <h1 className="paymentplan-header">
@@ -28,6 +29,7 @@ class PaymentPlanPage extends Component {
                     
                     
                 </div>
+
             </div>
         );
     }

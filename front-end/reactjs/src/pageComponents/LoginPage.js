@@ -4,7 +4,7 @@ import logo from '../images/logo.png';
 import partners from '../images/partners.png';
 
 import '../App.css'
-import '../login.css'
+import '../css/login.css'
 
 
 class LoginPage extends Component {
