@@ -51,12 +51,11 @@ class SignUpPage extends Component {
                                 </div>
                                 <div className="form-group pt-3">
                                     <label for="exampleInputPassword1">Confirm Password</label>
-                                    <input type="password" className="form-control" id="confirmExampleInputPassword1" placeholder="Confirm password"/>
+                                    <input type="password" className="form-control" id="pwhelp" placeholder="Confirm password"/>
+                                    <small id="pwhelp" className="form-text text-muted">Password must contain at least one uppercase letter and one number.</small>
+
                                 </div>
-                                <div className="form-check pt-3">
-                                    <input type="checkbox" className="form-check-input mycheckbox" id="exampleCheck1"/>
-                                    <label className="form-check-label" for="exampleCheck1">Check me out</label>
-                                </div>
+                                
                                 <div className="text-center pt-3">
                                     <Link to='/paymentPlan'>
                                         <button type="submit" className="btn-lg btn-primary login-button">Sign Up</button>

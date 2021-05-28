@@ -80,11 +80,15 @@ function SideNavBar(){
 				<div className="deadSpace">
 
 				</div>
+
+				<Link to='/settings/profile'>
 				<div id = "thirdOption" onClick={handleClick} onMouseEnter={() => fnover("Settings")} onMouseLeave={() => fnout("Settings")}>
 					<a href="#" className="navChoice" id="SettingsOut"><img className = "menu-icon settings-icon" src={settingsicon} alt="logo"></img><span>Settings</span></a>
 					<a href="#" className="navChoice" id="SettingsHover"><img className = "menu-icon settings-icon" src={settingshovericon} alt="logo"></img><span>Settings</span></a>
 				</div>
 				{dropdown && <Dropdown/>} 
+				</Link>
+
 			</div>
 		</div>
     );

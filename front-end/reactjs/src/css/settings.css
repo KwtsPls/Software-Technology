@@ -1,7 +1,25 @@
 @font-face {
     font-family: myheaderFont;
     src:url('../fonts/SourceSansPro-Regular.ttf') format('truetype');
-  }
+}
+
+
+.settings-unit{
+    margin-top: 60px;
+    font-family: myquoteFont ;
+    color: #202020ee;
+    font-size: 1.4em;
+}
+
+.paymentplan-button-change{
+    margin-left: 365px;
+    margin-top: 20px;
+}
+
+.creditcard-button-change{
+    margin-left: 385px;
+    margin-top: 20px;
+}
 
 .jete-breadcrump, .jete-settingsMenu{
     /* position */
@@ -69,4 +87,45 @@
 
 .settingsprofile-button{
     margin-top: 60px;
+}
+
+.change-password-form{
+    margin-top: 40px;
+}
+
+.oldpassword, .newpassword, .newpassword-reapeat{
+    margin-top: 15px;
+}
+
+.newpassword{
+    margin-top: 40px;
+}
+
+.passwordchange-button{
+    margin-top: 8%;
+    background-color: #723c70 !important;
+    border-color: #3d113c !important;
+}
+
+.passwordchange-button:hover{
+    
+    background-color: #9c4699 !important;
+    border-color: #3d113c;
+}
+
+.changepasswordline{
+    margin-top: 6%;
+}
+
+.verifyemail-button{
+    margin-left: 300px;
+}
+
+.emailsent-verify{
+    display: none;
+}
+
+.emailsent-verify{
+    margin-top: -5px;
+    margin-left: 70px;
 }

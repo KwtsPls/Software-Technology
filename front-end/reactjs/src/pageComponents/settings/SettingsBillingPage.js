@@ -29,7 +29,7 @@ class SettingsBillingPage extends Component {
                             </Link>
 
 					        <Link to='/settings/personalisation'>
-                            <a href="#" class="list-group-item list-group-item-action">Personisation</a>
+                            <a href="#" class="list-group-item list-group-item-action">Personalisation</a>
                             </Link>
 					        <Link to='/settings/security'>
                             <a href="#" class="list-group-item list-group-item-action">Security</a>
@@ -41,20 +41,31 @@ class SettingsBillingPage extends Component {
                     </div>
 
                     <div className="settingsContains">
-                    <h1 className="settings-header">Account billing</h1>
+                        <h1 className="settings-header">Account billing</h1>
                         <hr className="new4"/>
+
+                        <p className="settings-unit">
+                            <b>Current account status:</b> &emsp; &nbsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &ensp;Jete Premium
+                        </p>
+
+                        <p className="expirationdate">Expires on: &emsp;04/04/21</p>
+                        
+                        <Link to='/paymentPlan'>
+                        <button type="button" className="btn btn-outline-danger paymentplan-button-change">Change payment plan</button>
+                        </Link>
+
+                        <p className="settings-unit">
+                            <b>Credit card:</b>&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &ensp;7XXX-XXXX-XXXX-X420
+                        </p>
+
+                        <button type="button" class="btn btn-outline-warning creditcard-button-change">Change credit card</button>
+                        
+
                     </div>
-                
-                    <h1 className="text-center">
-                        SettingsBillingPage
-                    </h1>
-                    <h1 className="text-center">
-                        SettingsBillingPage
-                    </h1>
-                    <h1 className="text-center">
-                        SettingsBillingPage
-                    </h1>
-                </div>
+                    
+                        
+                        
+                    </div>
                 
             </div>
         );
