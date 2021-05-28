@@ -27,7 +27,7 @@ class SettingsProfilePage extends Component {
                                 Profile
                             </a>
 					        <Link to='/settings/personalisation'>
-                            <a href="#" class="list-group-item list-group-item-action">Personisation</a>
+                            <a href="#" class="list-group-item list-group-item-action">Personalisation</a>
                             </Link>
 					        <Link to='/settings/security'>
                             <a href="#" class="list-group-item list-group-item-action">Security</a>
