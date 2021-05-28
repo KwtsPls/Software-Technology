@@ -34,21 +34,15 @@ class SettingsSecurityPage extends Component {
                     <div className="jete-settingsMenu">
                         <div class="list-group">
                             <Link to='/settings/profile'>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                Profile
-                            </a>
+                                <a href="#" class="list-group-item list-group-item-action">Profile</a>
                             </Link>
-
                             <Link to='/settings/personalisation'>
-                            <a href="#" class="list-group-item list-group-item-action">Personalisation</a>
+                                <a href="#" class="list-group-item list-group-item-action">Personalisation</a>
                             </Link>
-                            
                             <a href="#" class="list-group-item list-group-item-action active">Security</a>
-
                             <Link to='/settings/billing'>
-                            <a href="#" class="list-group-item list-group-item-action">Billing</a>
+                                <a href="#" class="list-group-item list-group-item-action">Billing</a>
                             </Link>
-                            
                         </div>
                     </div>
                     <div className="settingsContains">

@@ -1,5 +1,7 @@
 import './App.css';
 import './css/Overviewscreen.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import Topbar from './components/Topbar.js'
