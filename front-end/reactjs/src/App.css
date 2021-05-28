@@ -114,7 +114,6 @@ a.userNameNavBar:visited {
   color: #3b3b3b;
 }
 
-
 a.userNameNavBar:hover,
 a.userNameNavBar:active {
   color: #723c70;
@@ -170,6 +169,42 @@ a.navChoice:active {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px;
 }
 
+.navChoiceSmall {
+  /* navigationbar choice clickbox */
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-top: 2%;
+  /* margin-bottom: 7%; */
+  border-radius: 3px;
+  height: 40px;
+}
+
+a.navChoiceSmall:link,
+a.navChoiceSmall:visited {
+  /* background-color: #f4f5f7; */
+
+  /* display */
+  padding: 8px;
+  /* text-align: center; */
+  text-decoration: none;
+  display: block;
+
+  /* text appearance */
+  /* font: Trebuchet MS, sans-serif ; */
+  font-family: myquoteFont;
+
+  font-weight: 600;
+  font-size: 1.1em;
+  color: #575757;
+}
+
+a.navChoiceSmall:hover,
+a.navChoiceSmall:active {
+  background-color: #723c70;
+  color: #f4f5f7;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px;
+}
+
 /* NavbarMenu icon adjustments */
 .menu-icon {
   height: 20px;
@@ -204,7 +239,7 @@ a.navChoice:active {
   margin-top: -5px;
 }
 
-.blankspace{
+.blankspace {
   height: 90px;
   background-color: #ffff;
   width: 25px;
@@ -247,18 +282,14 @@ a.navChoice:active {
   padding-top: 47.5px;
 }
 
-
-
-.breadcrumb-option{
+.breadcrumb-option {
   /* appearance */
   color: #91418e !important;
 }
 
-
-.breadcrumb-option:hover{
+.breadcrumb-option:hover {
   text-decoration: underline;
   color: #af57ac !important;
-
 }
 
 /* responsiveness */

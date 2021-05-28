@@ -24,22 +24,30 @@ function fnout(link_id){ //Function to replace a div contains with another (used
 }
 function Dropdown(){
 	return <div>
-		<div id = "firstOption1" onMouseEnter={() => fnover("Profile")} onMouseLeave={() => fnout("Profile")}>
-			<a href="#" className="navChoice text-center" id="ProfileOut"><span>Profile</span></a>
-			<a href="#" className="navChoice text-center" id="ProfileHover"><span>Profile</span></a>
-		</div>     
-		<div id = "secondOption1" onMouseEnter={() => fnover("Personalisation")} onMouseLeave={() => fnout("Personalisation")}>
-			<a href="#" className="navChoice text-center" id="PersonalisationOut"><span>Personalisation</span></a>
-			<a href="#" className="navChoice text-center" id="PersonalisationHover"><span>Personalisation</span></a>
-		</div> 
-		<div id = "thirdOption1" onMouseEnter={() => fnover("Security")} onMouseLeave={() => fnout("Security")}>
-			<a href="#" className="navChoice text-center" id="SecurityOut"><span>Security</span></a>
-			<a href="#" className="navChoice text-center" id="SecurityHover"><span>Security</span></a>
-		</div>
-		<div id = "fourthOption1" onMouseEnter={() => fnover("Billing")} onMouseLeave={() => fnout("Billing")}>
-			<a href="#" className="navChoice text-center" id="BillingOut"><span>Billing</span></a>
-			<a href="#" className="navChoice text-center" id="BillingHover"><span>Billing</span></a>
-		</div>
+		<Link to='/settings/profile'>
+			<div id = "firstOption1" onMouseEnter={() => fnover("Profile")} onMouseLeave={() => fnout("Profile")}>
+				<a href="#" className="navChoiceSmall text-center" id="ProfileOut"><span>Profile</span></a>
+				<a href="#" className="navChoiceSmall text-center" id="ProfileHover"><span>Profile</span></a>
+			</div>
+		</Link>
+		<Link to='/settings/personalisation'>
+			<div id = "secondOption1" onMouseEnter={() => fnover("Personalisation")} onMouseLeave={() => fnout("Personalisation")}>
+				<a href="#" className="navChoiceSmall text-center" id="PersonalisationOut"><span>Personalisation</span></a>
+				<a href="#" className="navChoiceSmall text-center" id="PersonalisationHover"><span>Personalisation</span></a>
+			</div>
+		</Link>
+		<Link to='/settings/security'>
+			<div id = "thirdOption1" onMouseEnter={() => fnover("Security")} onMouseLeave={() => fnout("Security")}>
+				<a href="#" className="navChoiceSmall text-center" id="SecurityOut"><span>Security</span></a>
+				<a href="#" className="navChoiceSmall text-center" id="SecurityHover"><span>Security</span></a>
+			</div>
+		</Link>
+		<Link to='/settings/billing'>
+			<div id = "fourthOption1" onMouseEnter={() => fnover("Billing")} onMouseLeave={() => fnout("Billing")}>
+				<a href="#" className="navChoiceSmall text-center" id="BillingOut"><span>Billing</span></a>
+				<a href="#" className="navChoiceSmall text-center" id="BillingHover"><span>Billing</span></a>
+			</div>
+		</Link>
 		
 	</div>;
 }
@@ -80,15 +88,11 @@ function SideNavBar(){
 				<div className="deadSpace">
 
 				</div>
-
-				<Link to='/settings/profile'>
 				<div id = "thirdOption" onClick={handleClick} onMouseEnter={() => fnover("Settings")} onMouseLeave={() => fnout("Settings")}>
 					<a href="#" className="navChoice" id="SettingsOut"><img className = "menu-icon settings-icon" src={settingsicon} alt="logo"></img><span>Settings</span></a>
 					<a href="#" className="navChoice" id="SettingsHover"><img className = "menu-icon settings-icon" src={settingshovericon} alt="logo"></img><span>Settings</span></a>
 				</div>
 				{dropdown && <Dropdown/>} 
-				</Link>
-
 			</div>
 		</div>
     );
