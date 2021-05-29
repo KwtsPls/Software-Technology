@@ -14,28 +14,15 @@ class SettingsProfilePage extends Component {
         return (
             <div>
                 <Topbar/>
-                
                 <SideNavBar/>
                 <div className="mainContent">
                     
-                    
-                    
-
                     <div className="jete-settingsMenu">
                         <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action active">
-                                Profile
-                            </a>
-					        <Link to='/settings/personalisation'>
-                            <a href="#" class="list-group-item list-group-item-action">Personalisation</a>
-                            </Link>
-					        <Link to='/settings/security'>
-                            <a href="#" class="list-group-item list-group-item-action">Security</a>
-                            </Link>
-                            <Link to='/settings/billing'>
-                            <a href="#" class="list-group-item list-group-item-action">Billing</a>
-                            </Link>
-                            
+                            <a href="#" class="list-group-item list-group-item-action active">Profile</a>
+					        <Link to='/settings/personalisation' class="list-group-item list-group-item-action">Personalisation</Link>
+					        <Link to='/settings/security' class="list-group-item list-group-item-action">Security</Link>
+                            <Link to='/settings/billing' class="list-group-item list-group-item-action">Billing</Link>
                         </div>
                     </div>
 

@@ -22,21 +22,10 @@ class SettingsBillingPage extends Component {
 
                     <div className="jete-settingsMenu">
                         <div class="list-group">
-                            <Link to='/settings/profile'>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                Profile
-                            </a>
-                            </Link>
-
-					        <Link to='/settings/personalisation'>
-                            <a href="#" class="list-group-item list-group-item-action">Personalisation</a>
-                            </Link>
-					        <Link to='/settings/security'>
-                            <a href="#" class="list-group-item list-group-item-action">Security</a>
-                            </Link>
-                            
+                            <Link to='/settings/profile' class="list-group-item list-group-item-action">Profile</Link>
+                            <Link to='/settings/personalisation' class="list-group-item list-group-item-action">Personalisation</Link>
+					        <Link to='/settings/security' class="list-group-item list-group-item-action">Security</Link>
                             <a href="#" class="list-group-item list-group-item-action  active">Billing</a>
-                            
                         </div>
                     </div>
 
