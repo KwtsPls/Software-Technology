@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+//import '../css/settings.css';
 import SideNavBar from '../components/SideNavBar.js'
 import Topbar from '../components/Topbar.js'
 
