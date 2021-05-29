@@ -22,16 +22,18 @@ function PaymentPlanPage() {
                 <h1 className="paymentplan-header">
                     Choose your payment plan
                 </h1>
-                <div className="payChoiceBox firstpaybox">
+                <div className='cont-1'>
+                <div className="payChoiceBox">
                     <h2 className="paychoice-header">Free</h2>
                     <hr className="new5"></hr>
 
                 </div>
-                <div className="payChoiceBox secondpaybox">
+                <div className="payChoiceBox">
                     <h2 className="paychoice-header">Premium</h2>
                     <hr className="new5"></hr>
                     <button onClick={() => setModalShow(true)}> Click me </button>
                     
+                </div>
                 </div>
                 <BankPopUp show={modalShow} onHide={() => setModalShow(false)}/>
                     
