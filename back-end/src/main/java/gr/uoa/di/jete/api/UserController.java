@@ -15,12 +15,10 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 class UserController {
 
     private final UserRepository repository;
-//    private final EmployeeService service;
     private final UserModelAssembler assembler;
 
     UserController(UserRepository repository, UserModelAssembler assembler){
         this.repository = repository;
-//        this.service = service;
         this.assembler = assembler;
     }
 
@@ -71,7 +69,7 @@ class UserController {
                 });
     }
 
-    @DeleteMapping("/employees/{id}")
+    @DeleteMapping("/users/{id}")
     void deleteEmployee(@PathVariable Long id){
         repository.deleteById(id);
     }

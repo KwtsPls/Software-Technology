@@ -17,3 +17,14 @@ class UserModelAssembler implements RepresentationModelAssembler<User, EntityMod
                 linkTo(methodOn(UserController.class).all()).withRel("users"));
     }
 }
+
+@Component
+class ProjectModelAssembler implements RepresentationModelAssembler<Project, EntityModel<Project>> {
+
+    @Override
+    public EntityModel<Project> toModel(Project project){
+        return EntityModel.of(project, //
+                linkTo(methodOn(ProjectController.class).one(project.getId())).withSelfRel(),
+                linkTo(methodOn(ProjectController.class).all()).withRel("projects"));
+    }
+}
