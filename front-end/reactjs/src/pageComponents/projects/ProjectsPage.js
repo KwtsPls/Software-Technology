@@ -3,6 +3,7 @@ import '../../App.css';
 import '../../css/projects.css';
 import SideNavBar from '../../components/SideNavBar.js'
 import Topbar from '../../components/Topbar.js'
+import { Link } from 'react-router-dom'
 
 
 function ProjectsPage() {
@@ -69,19 +70,23 @@ function ProjectsPage() {
                                 <button class="btn btn-outline-secondary" type="button" id="button-addon2">Go</button>
                             </div>
                         </div>
-                        {projNames.map(i => 
-                            <div class="row pt-3">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Project {i}</h5>
-                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <div class="row pt-3 vertical-scrollable overflow-auto">
+                            {projNames.map(i => 
+                                <div class="row pt-3">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Project {i}</h5>
+                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                                <Link to='/projects/projectNo'>
+                                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                                </Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
