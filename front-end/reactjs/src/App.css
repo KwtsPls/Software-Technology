@@ -1,13 +1,12 @@
 @font-face {
   font-family: myquoteFont;
-  src:url('./fonts/SourceSansPro-Bold.ttf') format('truetype');
+  src: url("./fonts/SourceSansPro-Bold.ttf") format("truetype");
 }
 
 /* custom properties */
 :root {
   --topbar-height: 47.5;
-  font-family: myquoteFont ;
-
+  font-family: myquoteFont;
 }
 
 /* Top Bar */
@@ -15,7 +14,7 @@
   /* height: 4.40%; */
   height: 47.5px;
   width: 100%;
-  position: fixed;
+  position: absolute;
   z-index: 2;
   top: 0;
   overflow-x: hidden;
@@ -84,7 +83,7 @@
 
 /* user navbar display */
 .userDisplay {
-  margin-top: 150px;
+  margin-top: 30%;
 }
 
 .user-icon {
@@ -170,6 +169,42 @@ a.navChoice:active {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px;
 }
 
+.navChoiceSmall {
+  /* navigationbar choice clickbox */
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-top: 2%;
+  /* margin-bottom: 7%; */
+  border-radius: 3px;
+  height: 40px;
+}
+
+a.navChoiceSmall:link,
+a.navChoiceSmall:visited {
+  /* background-color: #f4f5f7; */
+
+  /* display */
+  padding: 8px;
+  /* text-align: center; */
+  text-decoration: none;
+  display: block;
+
+  /* text appearance */
+  /* font: Trebuchet MS, sans-serif ; */
+  font-family: myquoteFont;
+
+  font-weight: 600;
+  font-size: 1.1em;
+  color: #575757;
+}
+
+a.navChoiceSmall:hover,
+a.navChoiceSmall:active {
+  background-color: #723c70;
+  color: #f4f5f7;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px;
+}
+
 /* NavbarMenu icon adjustments */
 .menu-icon {
   height: 20px;
@@ -204,6 +239,12 @@ a.navChoice:active {
   margin-top: -5px;
 }
 
+.blankspace {
+  height: 90px;
+  background-color: #ffff;
+  width: 25px;
+}
+
 .settings-icon {
   height: 20px;
   width: 20px;
@@ -217,7 +258,11 @@ a.navChoice:active {
 #OverviewHover,
 #BacklogHover,
 #ProjectsHover,
-#SettingsHover {
+#SettingsHover,
+#ProfileHover,
+#PersonalisationHover,
+#SecurityHover,
+#BillingHover {
   display: none;
   background-color: #723c70;
   color: #f4f5f7;
@@ -235,6 +280,16 @@ a.navChoice:active {
   margin-left: 16%;
 
   padding-top: 47.5px;
+}
+
+.breadcrumb-option {
+  /* appearance */
+  color: #91418e !important;
+}
+
+.breadcrumb-option:hover {
+  text-decoration: underline;
+  color: #af57ac !important;
 }
 
 /* responsiveness */
@@ -282,11 +337,23 @@ a.navChoice:active {
   margin-top: 100px;
 }
 
+a:link {
+  text-decoration: none;
+}
 
-a:link { text-decoration: none; }
+a:visited {
+  text-decoration: none;
+}
 
-a:visited { text-decoration: none; }
+a:hover {
+  text-decoration: none;
+}
 
-a:hover { text-decoration: none; }
+a:active {
+  text-decoration: none;
+}
 
-a:active { text-decoration: none; }
+.deadSpace {
+  position: absolute;
+  height: 20px;
+}

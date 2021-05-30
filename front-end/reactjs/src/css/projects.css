@@ -1,0 +1,31 @@
+.projects-frame {
+  /* position */
+  margin-left: 5vw;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+  margin-right: 5vw;
+}
+
+.full-col {
+  height: 100%;
+}
+
+.vertical-scrollable {
+  height: 500px;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.vertical-scrollable > .row {
+  position: relative;
+}
+
+.horizontal-scrollable {
+  height: 500px;
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.horizontal-scrollable > .row {
+  position: relative;
+}

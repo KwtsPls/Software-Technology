@@ -1,0 +1,131 @@
+@font-face {
+  font-family: myheaderFont;
+  src: url("../fonts/SourceSansPro-Regular.ttf") format("truetype");
+}
+
+.settings-unit {
+  margin-top: 60px;
+  font-family: myquoteFont;
+  color: #202020ee;
+  font-size: 1.4em;
+}
+
+.paymentplan-button-change {
+  margin-left: 365px;
+  margin-top: 20px;
+}
+
+.creditcard-button-change {
+  margin-left: 385px;
+  margin-top: 20px;
+}
+
+.jete-breadcrump,
+.jete-settingsMenu {
+  /* position */
+  margin-left: 5vw;
+  margin-top: 3vh;
+}
+
+.jete-settingsMenu {
+  margin-top: 12vh;
+  float: left;
+}
+
+.list-group {
+  width: 250px;
+}
+
+.list-group > .active {
+  background-color: #723c70 !important;
+  border-color: #3d113c !important;
+}
+
+.settingsContains {
+  margin-left: 20%;
+  margin-top: 11vh;
+
+  float: left;
+  margin-left: 7vw;
+}
+
+.settings-header {
+  font-family: myquoteFont;
+  color: #202020ee;
+  font-weight: 200;
+  font-size: 2.4em;
+}
+
+.settingsprofile-form {
+  margin-top: 60px;
+}
+
+.settingsprofile-form > .surname {
+  margin-top: 15px;
+}
+
+.settingsprofile-form > .email {
+  margin-top: 25px;
+}
+
+.settingsprofile-form > .location {
+  margin-top: 15px;
+}
+
+.settingsprofile-form > .bio {
+  margin-top: 15px;
+}
+
+.settingsprofile-form > .form-group {
+  width: 500px;
+}
+
+.settingsprofile-form > .bio > input {
+  height: 80px;
+}
+
+.settingsprofile-button {
+  margin-top: 60px;
+}
+
+.change-password-form {
+  margin-top: 40px;
+}
+
+.oldpassword,
+.newpassword,
+.newpassword-reapeat {
+  margin-top: 15px;
+}
+
+.newpassword {
+  margin-top: 40px;
+}
+
+.passwordchange-button {
+  margin-top: 8%;
+  background-color: #723c70 !important;
+  border-color: #3d113c !important;
+}
+
+.passwordchange-button:hover {
+  background-color: #9c4699 !important;
+  border-color: #3d113c;
+}
+
+.changepasswordline {
+  margin-top: 6%;
+}
+
+.verifyemail-button {
+  margin-left: 300px;
+}
+
+.emailsent-verify {
+  display: none;
+}
+
+.emailsent-verify {
+  margin-top: -5px;
+  margin-left: 70px;
+}

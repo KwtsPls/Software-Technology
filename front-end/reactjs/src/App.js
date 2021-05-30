@@ -1,5 +1,7 @@
 import './App.css';
-import './Overviewscreen.css';
+import './css/Overviewscreen.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import Topbar from './components/Topbar.js'
@@ -39,7 +41,7 @@ function App() {
 					<Route path="/chat/addContact" exact component={AddContactPage} />
 					<Route path="/projects" exact component={ProjectsPage} />
 					<Route path="/projectCreate" exact component={ProjectCreatePage} />
-					<Route path="/projects/projectNo" exact component={ProjectsPage} />
+					<Route path="/projects/projectNo" exact component={ProjectNoPage} />
 					<Route path="/projNewIssue" exact component={ProjNewIssuePage} />
 				</Switch>
 			</div>

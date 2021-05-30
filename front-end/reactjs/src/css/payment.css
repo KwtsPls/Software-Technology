@@ -1,0 +1,89 @@
+@font-face {
+  font-family: myFirstFont;
+  src: url("../fonts/FredokaOne-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: descFont;
+  src: url("../fonts/Teko-Bold.ttf") format("truetype");
+}
+
+.paymentplanpage {
+  text-align: center;
+  z-index: 2;
+}
+
+.paymentplan-header {
+  margin-top: 7%;
+  /* appearance */
+  font-family: myFirstFont;
+  font-size: 4em;
+  color: #202020;
+}
+
+.payChoiceBox {
+  height: 460px;
+  width: 460px;
+  background-color: #202020;
+  float: left;
+  margin-top: 4%;
+
+  border: solid;
+  border-color: #202020;
+  border-width: 1px;
+  box-shadow: rgba(0, 0, 0, 0.103) 0px 1px 3px, rgba(0, 0, 0, 0.171) 0px 1px 2px;
+}
+
+.firstpaybox {
+  margin-left: 24%;
+}
+
+.secondpaybox {
+  margin-left: 5%;
+}
+
+.paychoice-header {
+  /* appearance */
+  font-family: descFont;
+  font-size: 2.7em;
+  color: #f4f5f7;
+  margin-top: 47px;
+}
+
+hr.new5 {
+  border: 2px solid #f4f5f7;
+  border-radius: 2px;
+}
+
+.workerimage {
+  width: 600px;
+  height: 400px;
+
+  position: relative;
+  z-index: 1;
+  margin-top: 1vh;
+}
+
+@media screen and (max-width: 1600px) {
+  .firstpaybox,
+  .secondpaybox {
+    float: none;
+    display: block;
+    position: absolute;
+
+    top: 50%; /* IMPORTANT */
+    left: 50%; /* IMPORTANT */
+    margin-top: -170px; /* HALF OF THE HEIGHT */
+    margin-left: -230px; /* HALF OF THE WIDTH */
+  }
+  .secondpaybox {
+    margin-top: 330px;
+  }
+}
+
+.cont-1 {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}

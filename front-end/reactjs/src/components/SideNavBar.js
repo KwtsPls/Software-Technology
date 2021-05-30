@@ -10,72 +10,92 @@ import userphoto from '../images/userphoto.png'
 import settingsicon from '../images/settingsout.png'
 import settingshovericon from '../images/settingshover.png'
 import { Link } from 'react-router-dom'
+import { useEffect, useState } from "react";
 
-class SideNavBar extends Component {
+function fnover(link_id){ //Function to replace a div contains with another (used in navbar menu choices on hover)
+	console.log("hover");
+	document.getElementById(link_id.concat("Out")).style.display = "none"; // change display style attribute
+	document.getElementById(link_id.concat("Hover")).style.display = "block";
+}
 
-    fnover(link_id){ //Function to replace a div contains with another (used in navbar menu choices on hover)
-		console.log("hover");
-		document.getElementById(link_id.concat("Out")).style.display = "none"; // change display style attribute
-		document.getElementById(link_id.concat("Hover")).style.display = "block";
-	}
-	
-	fnout(link_id){ //Function to replace a div contains with another (used in navbar menu choices on hover)
-		document.getElementById(link_id.concat("Out")).style.display = "block"; // change display style attribute
-		document.getElementById(link_id.concat("Hover")).style.display = "none";
+function fnout(link_id){ //Function to replace a div contains with another (used in navbar menu choices on hover)
+	document.getElementById(link_id.concat("Out")).style.display = "block"; // change display style attribute
+	document.getElementById(link_id.concat("Hover")).style.display = "none";
+}
+function Dropdown(){
+	return <div>
+		<Link to='/settings/profile'>
+			<div id = "firstOption1" onMouseEnter={() => fnover("Profile")} onMouseLeave={() => fnout("Profile")}>
+				<a href="#" className="navChoiceSmall text-center" id="ProfileOut"><span>Profile</span></a>
+				<a href="#" className="navChoiceSmall text-center" id="ProfileHover"><span>Profile</span></a>
+			</div>
+		</Link>
+		<Link to='/settings/personalisation'>
+			<div id = "secondOption1" onMouseEnter={() => fnover("Personalisation")} onMouseLeave={() => fnout("Personalisation")}>
+				<a href="#" className="navChoiceSmall text-center" id="PersonalisationOut"><span>Personalisation</span></a>
+				<a href="#" className="navChoiceSmall text-center" id="PersonalisationHover"><span>Personalisation</span></a>
+			</div>
+		</Link>
+		<Link to='/settings/security'>
+			<div id = "thirdOption1" onMouseEnter={() => fnover("Security")} onMouseLeave={() => fnout("Security")}>
+				<a href="#" className="navChoiceSmall text-center" id="SecurityOut"><span>Security</span></a>
+				<a href="#" className="navChoiceSmall text-center" id="SecurityHover"><span>Security</span></a>
+			</div>
+		</Link>
+		<Link to='/settings/billing'>
+			<div id = "fourthOption1" onMouseEnter={() => fnover("Billing")} onMouseLeave={() => fnout("Billing")}>
+				<a href="#" className="navChoiceSmall text-center" id="BillingOut"><span>Billing</span></a>
+				<a href="#" className="navChoiceSmall text-center" id="BillingHover"><span>Billing</span></a>
+			</div>
+		</Link>
 		
-	}
+	</div>;
+}
 
-    render() { 
-        return (
-            <div className="SideNavBar" >
-				
+function SideNavBar(){
 
-				
-				<Link to='/profile'>
-					<div className="userDisplay">
-						<a href="#" className="userNameNavBar" ><img className = "user-icon" src={userphoto} alt="avatar"></img><li id="userNameDisplay">Dimitris Beros</li></a>
+	const [dropdown, setClick] = useState(false);
+
+	const handleClick = () => setClick(!dropdown);
+
+    return (
+        <div className="SideNavBar" >
+			
+			<Link to='/profile'>
+				<div className="userDisplay">
+					<a href="#" className="userNameNavBar" ><img className = "user-icon" src={userphoto} alt="avatar"></img><li id="userNameDisplay">Dimitris Beros</li></a>
+				</div>
+            </Link>
+
+			<div className="NavBar">
+
+				<Link to='/home'>
+					<div id = "firstOption" onMouseEnter={() => fnover("Overview")} onMouseLeave={() => fnout("Overview")}>
+						<a href="#" className="navChoice" id="OverviewOut" ><img className = "menu-icon home-icon" src={overviewicon} alt="logo"></img><span>Overview</span></a>
+						<a href="#" className="navChoice" id="OverviewHover"><img className = "menu-icon home-icon" src={overviewhovericon} alt="logo"></img><span>Overview</span></a>
 					</div>
-                </Link>
-
-
-
-
-				<div className="NavBar">
-
-					<Link to='/home'>
-						<div id = "firstOption" onMouseEnter={() => this.fnover("Overview")} onMouseLeave={() => this.fnout("Overview")}>
-							<a href="#" className="navChoice" id="OverviewOut" ><img className = "menu-icon home-icon" src={overviewicon} alt="logo"></img><span>Overview</span></a>
-							<a href="#" className="navChoice" id="OverviewHover"><img className = "menu-icon home-icon" src={overviewhovericon} alt="logo"></img><span>Overview</span></a>
-						</div>
-					</Link>
-
-
-					<div id = "secondOption" onMouseEnter={() => this.fnover("Backlog")} onMouseLeave={() => this.fnout("Backlog")}>
-						<a href="#" className="navChoice" id="BacklogOut"><img className = "menu-icon backlog-icon" src={backlogicon} alt="logo"></img><span>Backlog</span></a>
-						<a href="#" className="navChoice" id="BacklogHover"><img className = "menu-icon backlog-icon" src={backloghovericon} alt="logo"></img><span>Backlog</span></a>
+				</Link>
+				<div id = "secondOption" onMouseEnter={() => fnover("Backlog")} onMouseLeave={() => fnout("Backlog")}>
+					<a href="#" className="navChoice" id="BacklogOut"><img className = "menu-icon backlog-icon" src={backlogicon} alt="logo"></img><span>Backlog</span></a>
+					<a href="#" className="navChoice" id="BacklogHover"><img className = "menu-icon backlog-icon" src={backloghovericon} alt="logo"></img><span>Backlog</span></a>
+				</div>
+				<Link to='/projects'>
+					<div id = "thirdOption" onMouseEnter={() => fnover("Projects")} onMouseLeave={() => fnout("Projects")}>
+						<a href="#" className="navChoice" id="ProjectsOut"><img className = "menu-icon projects-icon" src={projecticon} alt="logo"></img><span>Projects</span></a>
+						<a href="#" className="navChoice" id="ProjectsHover"><img className = "menu-icon projects-icon" src={projecthovericon} alt="logo"></img><span>Projects</span></a>
 					</div>
-
-					<Link to='/projects'>
-						<div id = "thirdOption" onMouseEnter={() => this.fnover("Projects")} onMouseLeave={() => this.fnout("Projects")}>
-							<a href="#" className="navChoice" id="ProjectsOut"><img className = "menu-icon projects-icon" src={projecticon} alt="logo"></img><span>Projects</span></a>
-							<a href="#" className="navChoice" id="ProjectsHover"><img className = "menu-icon projects-icon" src={projecthovericon} alt="logo"></img><span>Projects</span></a>
-						</div>
-					</Link>
-
-
-					<div id = "thirdOption" onMouseEnter={() => this.fnover("Settings")} onMouseLeave={() => this.fnout("Settings")}>
-						<a href="#" className="navChoice" id="SettingsOut"><img className = "menu-icon settings-icon" src={settingsicon} alt="logo"></img><span>Settings</span></a>
-						<a href="#" className="navChoice" id="SettingsHover"><img className = "menu-icon settings-icon" src={settingshovericon} alt="logo"></img><span>Settings</span></a>
-					</div>
-
-
+				</Link>
+				<div className="deadSpace">
 
 				</div>
-
-
+				<div id = "thirdOption" onClick={handleClick} onMouseEnter={() => fnover("Settings")} onMouseLeave={() => fnout("Settings")}>
+					<a href="#" className="navChoice" id="SettingsOut"><img className = "menu-icon settings-icon" src={settingsicon} alt="logo"></img><span>Settings</span></a>
+					<a href="#" className="navChoice" id="SettingsHover"><img className = "menu-icon settings-icon" src={settingshovericon} alt="logo"></img><span>Settings</span></a>
+				</div>
+				{dropdown && <Dropdown/>} 
 			</div>
-        );
-    }
+		</div>
+    );
 }
  
 export default SideNavBar;

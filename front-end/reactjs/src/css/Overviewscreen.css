@@ -1,12 +1,12 @@
 
 @font-face {
     font-family: myFirstFont;
-    src:url('./fonts/FredokaOne-Regular.ttf') format('truetype');
+    src:url('../fonts/FredokaOne-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: myquoteFont;
-    src:url('./fonts/SourceSansPro-Regular.ttf') format('truetype');
+    src:url('../fonts/SourceSansPro-Regular.ttf') format('truetype');
 }
 
 
