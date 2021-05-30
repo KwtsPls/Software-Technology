@@ -28,3 +28,14 @@ class ProjectModelAssembler implements RepresentationModelAssembler<Project, Ent
                 linkTo(methodOn(ProjectController.class).all()).withRel("projects"));
     }
 }
+
+@Component
+class DeveloperModelAssembler implements RepresentationModelAssembler<Developer, EntityModel<Developer>> {
+
+    @Override
+    public EntityModel<Developer> toModel(Developer developer){
+        return EntityModel.of(developer, //
+                linkTo(methodOn(DeveloperController.class).one(developer.getUserId(),developer.getProjectId())).withSelfRel(),
+                linkTo(methodOn(DeveloperController.class).all()).withRel("developers"));
+    }
+}

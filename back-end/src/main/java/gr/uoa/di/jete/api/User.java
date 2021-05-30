@@ -17,7 +17,7 @@ class User {
     private String firstname;
     private String lastname;
 
-    User(){}
+    public User(){}
     User(String username, String password, String email, String bio, String location,
          Long status, String pronouns, String firstname, String lastname){
         this.username = username;

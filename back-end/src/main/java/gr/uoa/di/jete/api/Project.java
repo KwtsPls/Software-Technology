@@ -1,8 +1,6 @@
 package gr.uoa.di.jete.api;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 
@@ -12,7 +10,7 @@ class Project {
     private String title;
     private String description;
 
-    Project(){}
+    public Project(){}
     Project(String title,String description){
         this.title = title;
         this.description = description;
