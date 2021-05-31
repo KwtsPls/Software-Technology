@@ -39,3 +39,14 @@ class DeveloperModelAssembler implements RepresentationModelAssembler<Developer,
                 linkTo(methodOn(DeveloperController.class).all()).withRel("developers"));
     }
 }
+
+@Component
+class EpicModelAssembler implements RepresentationModelAssembler<Epic, EntityModel<Epic>> {
+
+    @Override
+    public EntityModel<Epic> toModel(Epic epic){
+        return EntityModel.of(epic, //
+                linkTo(methodOn(EpicController.class).one(epic.getId(),epic.getProjectId())).withSelfRel(),
+                linkTo(methodOn(EpicController.class).all()).withRel("epics"));
+    }
+}
