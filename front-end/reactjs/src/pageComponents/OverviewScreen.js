@@ -65,21 +65,21 @@ class OverviewScreen extends Component {
                 
                 <div className="greetingsBorder" id="morning" ref={this.morningRef} >
                     
-                    <h1 className="greetings morning">Good morning, Stavros</h1>
+                    <h1 className="greetings morning">Καλημέρα, bderos97</h1>
                     <img className="greetings-Photo morning" src={morning} alt="time-icon"></img>
 
                 </div>
 
                 <div className="greetingsBorder" id="noon" ref={this.noonRef} >
                     
-                    <h1 className="greetings noon">Good afternoon, Stavros</h1>
+                    <h1 className="greetings noon">Καλό απόγευμα, bderos97</h1>
                     <img className="greetings-Photo noon" src={morning} alt="time-icon"></img>
 
                 </div>
 
                 <div className="greetingsBorder" id="night" ref={this.nightRef} >
                     
-                    <h1 className="greetings night">Goodnight, Stavros</h1>
+                    <h1 className="greetings night">Καλό βράδυ, bderos97</h1>
                     <img className="greetings-Photo night" src={night} alt="time-icon"></img>
 
                 </div>

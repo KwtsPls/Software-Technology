@@ -15,10 +15,10 @@ class SettingsPersonalisationPage extends Component {
                 <div className="mainContent">
                     <div className="jete-settingsMenu">
                         <div class="list-group">
-                            <Link to='/settings/profile' class="list-group-item list-group-item-action">Profile</Link>
-                            <a href="#" class="list-group-item list-group-item-action active">Personalisation</a>
-                            <Link to='/settings/security' class="list-group-item list-group-item-action">Security</Link>
-                            <Link to='/settings/billing' class="list-group-item list-group-item-action">Billing</Link>
+                            <Link to='/settings/profile' class="list-group-item list-group-item-action">Προφίλ</Link>
+                            <a href="#" class="list-group-item list-group-item-action active">Εξατομίκευση</a>
+                            <Link to='/settings/security' class="list-group-item list-group-item-action">Ασφάλεια</Link>
+                            <Link to='/settings/billing' class="list-group-item list-group-item-action">Χρεώσεις</Link>
                         </div>
                     </div>
                 </div>

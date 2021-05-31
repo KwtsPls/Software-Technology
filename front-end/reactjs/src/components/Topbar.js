@@ -8,9 +8,9 @@ class TopBar extends Component {
             <div>
                 <div className="TopBar"></div>
 			    <img className = "logo-icon" src={logo} alt="logo"></img>
-			    <div className="helpButton">
+			    {/* <div className="helpButton">
 					<a href="#" className="help-button" ><img className = "help-icon" src={helpicon} alt="help"></img></a>
-			    </div>
+			    </div> */}
             </div>
         );
     }

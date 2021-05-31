@@ -14,8 +14,8 @@
   /* height: 4.40%; */
   height: 47.5px;
   width: 100%;
-  position: absolute;
-  z-index: 2;
+  position: fixed;
+  z-index: 998;
   top: 0;
   overflow-x: hidden;
   padding-top: 20px;
@@ -27,8 +27,8 @@
 }
 
 .logo-icon {
-  position: absolute;
-  z-index: 100;
+  position: fixed;
+  z-index: 999;
   height: 70px;
   width: 140px;
 
@@ -46,11 +46,12 @@
   z-index: 99;
   margin-top: 9px;
   margin-left: 98%;
+  position: fixed;
+
 }
 
 .help-icon {
   /* display: inline; */
-
   height: 18px;
   width: 18px;
   /* padding-right: 10px; */
@@ -302,6 +303,7 @@ a.navChoiceSmall:active {
     position: absolute;
     height: 60px;
     width: 120px;
+    position: fixed;
 
     /* min-width: 6%; */
     /* max-width: 7%; */

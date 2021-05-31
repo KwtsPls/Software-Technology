@@ -11,7 +11,7 @@
 }
 
 .vertical-scrollable {
-  height: 500px;
+  height: 100%;
   width: 100%;
   overflow-y: scroll;
 }
@@ -28,4 +28,39 @@
 
 .horizontal-scrollable > .row {
   position: relative;
+}
+
+.card-body{
+  background-color: #f4f5f7;
+}
+
+.card-title{
+  font-weight: 580;
+}
+
+.project-button{
+  background-color: #723c70 !important;
+  border-color: #3d113c !important;
+}
+
+.project-button:hover{
+  background-color: #9c4699 !important;
+  border-color: #3d113c !important;
+}
+
+.nav-link{
+  color: #723c70 !important;
+}
+
+.nav-link:hover{
+  color: #9c4699 !important;
+}
+
+.nav-item > .active{
+  color: #474747 !important;
+}
+
+.btn-outline-secondary:hover{
+  background-color: #202020 !important;
+
 }
