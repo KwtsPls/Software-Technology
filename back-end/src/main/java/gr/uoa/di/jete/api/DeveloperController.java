@@ -16,10 +16,15 @@ public class DeveloperController {
 
     private final DeveloperRepository repository;
     private final DeveloperModelAssembler assembler;
+    private final UserRepository userRep;
+    private final ProjectRepository projectRep;
 
-    DeveloperController(DeveloperRepository repository, DeveloperModelAssembler assembler){
+    DeveloperController(DeveloperRepository repository, DeveloperModelAssembler assembler,
+                        UserRepository userRep,ProjectRepository projectRep){
         this.repository = repository;
         this.assembler = assembler;
+        this.userRep = userRep;
+        this.projectRep = projectRep;
     }
 
     //Aggregate root
@@ -36,6 +41,14 @@ public class DeveloperController {
 
     @PostMapping("/developers")
     Developer newDeveloper(@RequestBody Developer newDeveloper){
+        //Search for User with given id
+        User user = userRep.findById(newDeveloper.getUserId()) //
+                .orElseThrow(()-> new UserNotFoundException(newDeveloper.getUserId()));
+
+        //Search for project with given id
+        Project project = projectRep.findById(newDeveloper.getProjectId())
+                .orElseThrow(()-> new ProjectNotFoundException(newDeveloper.getProjectId()));
+
         return repository.save(newDeveloper);
     }
 

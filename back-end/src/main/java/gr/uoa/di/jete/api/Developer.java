@@ -62,7 +62,7 @@ class Developer {
 
     @Override
     public String toString(){
-        return "Project{" + "user_id=" + this.getUserId() + ", project_id='" + this.getProjectId()
-                + '\'' + ", role='" + this.role + '\'' + '}';
+        return "Developer{" + "user_id=" + this.getUserId() + ", project_id=" + this.getProjectId()
+                + '\'' + ", role=" + this.role + '\'' + '}';
     }
 }

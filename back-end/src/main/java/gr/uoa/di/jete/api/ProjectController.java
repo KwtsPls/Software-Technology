@@ -16,10 +16,15 @@ public class ProjectController {
 
     private final ProjectRepository repository;
     private final ProjectModelAssembler assembler;
+    private final UserRepository userRep;
+    private final DeveloperRepository devRep;
 
-    ProjectController(ProjectRepository repository, ProjectModelAssembler assembler){
+    ProjectController(ProjectRepository repository, ProjectModelAssembler assembler,
+                      UserRepository userRep,DeveloperRepository devRep){
         this.repository = repository;
         this.assembler = assembler;
+        this.userRep = userRep;
+        this.devRep = devRep;
     }
 
     //Aggregate root
@@ -34,9 +39,16 @@ public class ProjectController {
     }
     // end::get-aggregate-root[]
 
-    @PostMapping("/projects")
-    Project newProject(@RequestBody Project newProject){
-        return repository.save(newProject);
+    @PostMapping("/projects/create/{user_id}")
+    Project newProject(@RequestBody Project newProject,@PathVariable Long user_id){
+        //Search for User with given id
+        User user = userRep.findById(user_id) //
+                .orElseThrow(()-> new UserNotFoundException(user_id));
+        //Create an entry for a new developer on the db and save him as a product owner
+        Project temp = repository.save(newProject);
+        Developer dev = new Developer(user_id,newProject.getId(), 1L);
+        this.devRep.save(dev);
+        return temp;
     }
 
     //Single item
