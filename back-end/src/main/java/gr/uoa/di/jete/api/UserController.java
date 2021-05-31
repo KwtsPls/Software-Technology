@@ -70,7 +70,7 @@ class UserController {
                 pronouns, firstname, lastname);
     }
     */
-    
+
     @DeleteMapping("/users/{id}")
     void deleteEmployee(@PathVariable Long id){
         userService.deleteById(id);
