@@ -2,9 +2,11 @@ package gr.uoa.di.jete.api;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Optional;
 
 
 @Entity
+@Table(name = "user")
 class User {
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     private String username;
@@ -137,5 +139,7 @@ class User {
     public void setPronouns(String pronouns) {
         this.pronouns = pronouns;
     }
+
+
 }
 
