@@ -7,13 +7,13 @@ import Topbar from '../components/Topbar.js'
 
 function ProfilePage() {
 
-    const [txt, setTxt] = useState(['alex','john'])
+    const [contacts, setTxt] = useState([])
     
     function mount(){
         fetch('https://jsonplaceholder.typicode.com/users')
             .then(res => res.json())
-            .then(json => {
-                setTxt(json)
+            .then((data) => {
+                setTxt(data)
             })
     }
 
@@ -55,7 +55,15 @@ function ProfilePage() {
                 </h1>
                 <div className="text-center">
                 {mount()}
-                {txt}
+                {contacts.map((contact) => (
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{contact.name}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{contact.email}</h6>
+                <p class="card-text">{contact.company.catchPhrase}</p>
+              </div>
+            </div>
+          ))}
                 </div>
                 
                 
