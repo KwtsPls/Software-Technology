@@ -1,7 +1,6 @@
 package gr.uoa.di.jete.api;
 import com.sun.istack.NotNull;
 
-import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 

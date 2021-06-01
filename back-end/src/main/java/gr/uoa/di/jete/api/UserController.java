@@ -30,6 +30,7 @@ class UserController {
 
     //Aggregate root
     //tag::get-aggregate-root[]
+    @CrossOrigin
     @GetMapping("/users")
     CollectionModel<EntityModel<User>> all(){
         List<EntityModel<User>> users = userService.getUserCollectionList();

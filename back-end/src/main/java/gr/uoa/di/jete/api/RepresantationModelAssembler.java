@@ -50,3 +50,14 @@ class EpicModelAssembler implements RepresentationModelAssembler<Epic, EntityMod
                 linkTo(methodOn(EpicController.class).all()).withRel("epics"));
     }
 }
+
+@Component
+class SprintModelAssembler implements RepresentationModelAssembler<Sprint, EntityModel<Sprint>> {
+
+    @Override
+    public EntityModel<Sprint> toModel(Sprint sprint){
+        return EntityModel.of(sprint, //
+                linkTo(methodOn(SprintController.class).one(sprint.getId(),sprint.getProjectId())).withSelfRel(),
+                linkTo(methodOn(SprintController.class).all()).withRel("sprints"));
+    }
+}
