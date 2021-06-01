@@ -26,26 +26,26 @@ function Dropdown(){
 	return <div>
 		<Link to='/settings/profile'>
 			<div id = "firstOption1" onMouseEnter={() => fnover("Profile")} onMouseLeave={() => fnout("Profile")}>
-				<a href="#" className="navChoiceSmall text-center" id="ProfileOut"><span>Profile</span></a>
-				<a href="#" className="navChoiceSmall text-center" id="ProfileHover"><span>Profile</span></a>
+				<a href="#" className="navChoiceSmall text-center" id="ProfileOut"><span>Προφίλ</span></a>
+				<a href="#" className="navChoiceSmall text-center" id="ProfileHover"><span>Προφίλ</span></a>
 			</div>
 		</Link>
 		<Link to='/settings/personalisation'>
 			<div id = "secondOption1" onMouseEnter={() => fnover("Personalisation")} onMouseLeave={() => fnout("Personalisation")}>
-				<a href="#" className="navChoiceSmall text-center" id="PersonalisationOut"><span>Personalisation</span></a>
-				<a href="#" className="navChoiceSmall text-center" id="PersonalisationHover"><span>Personalisation</span></a>
+				<a href="#" className="navChoiceSmall text-center" id="PersonalisationOut"><span>Εξατομίκευση</span></a>
+				<a href="#" className="navChoiceSmall text-center" id="PersonalisationHover"><span>Εξατομίκευση</span></a>
 			</div>
 		</Link>
 		<Link to='/settings/security'>
 			<div id = "thirdOption1" onMouseEnter={() => fnover("Security")} onMouseLeave={() => fnout("Security")}>
-				<a href="#" className="navChoiceSmall text-center" id="SecurityOut"><span>Security</span></a>
-				<a href="#" className="navChoiceSmall text-center" id="SecurityHover"><span>Security</span></a>
+				<a href="#" className="navChoiceSmall text-center" id="SecurityOut"><span>Ασφάλεια</span></a>
+				<a href="#" className="navChoiceSmall text-center" id="SecurityHover"><span>Ασφάλεια</span></a>
 			</div>
 		</Link>
 		<Link to='/settings/billing'>
 			<div id = "fourthOption1" onMouseEnter={() => fnover("Billing")} onMouseLeave={() => fnout("Billing")}>
-				<a href="#" className="navChoiceSmall text-center" id="BillingOut"><span>Billing</span></a>
-				<a href="#" className="navChoiceSmall text-center" id="BillingHover"><span>Billing</span></a>
+				<a href="#" className="navChoiceSmall text-center" id="BillingOut"><span>Χρεώσεις</span></a>
+				<a href="#" className="navChoiceSmall text-center" id="BillingHover"><span>Χρεώσεις</span></a>
 			</div>
 		</Link>
 		
@@ -63,7 +63,7 @@ function SideNavBar(){
 			
 			<Link to='/profile'>
 				<div className="userDisplay">
-					<a href="#" className="userNameNavBar" ><img className = "user-icon" src={userphoto} alt="avatar"></img><li id="userNameDisplay">Dimitris Beros</li></a>
+					<a href="#" className="userNameNavBar" ><img className = "user-icon" src={userphoto} alt="avatar"></img><li id="userNameDisplay">bderos97</li></a>
 				</div>
             </Link>
 
@@ -71,8 +71,8 @@ function SideNavBar(){
 
 				<Link to='/home'>
 					<div id = "firstOption" onMouseEnter={() => fnover("Overview")} onMouseLeave={() => fnout("Overview")}>
-						<a href="#" className="navChoice" id="OverviewOut" ><img className = "menu-icon home-icon" src={overviewicon} alt="logo"></img><span>Overview</span></a>
-						<a href="#" className="navChoice" id="OverviewHover"><img className = "menu-icon home-icon" src={overviewhovericon} alt="logo"></img><span>Overview</span></a>
+						<a href="#" className="navChoice" id="OverviewOut" ><img className = "menu-icon home-icon" src={overviewicon} alt="logo"></img><span>Σύνοψη</span></a>
+						<a href="#" className="navChoice" id="OverviewHover"><img className = "menu-icon home-icon" src={overviewhovericon} alt="logo"></img><span>Σύνοψη</span></a>
 					</div>
 				</Link>
 				<div id = "secondOption" onMouseEnter={() => fnover("Backlog")} onMouseLeave={() => fnout("Backlog")}>
@@ -89,8 +89,8 @@ function SideNavBar(){
 
 				</div>
 				<div id = "thirdOption" onClick={handleClick} onMouseEnter={() => fnover("Settings")} onMouseLeave={() => fnout("Settings")}>
-					<a href="#" className="navChoice" id="SettingsOut"><img className = "menu-icon settings-icon" src={settingsicon} alt="logo"></img><span>Settings</span></a>
-					<a href="#" className="navChoice" id="SettingsHover"><img className = "menu-icon settings-icon" src={settingshovericon} alt="logo"></img><span>Settings</span></a>
+					<a href="#" className="navChoice" id="SettingsOut"><img className = "menu-icon settings-icon" src={settingsicon} alt="logo"></img><span>Ρυθμίσεις</span></a>
+					<a href="#" className="navChoice" id="SettingsHover"><img className = "menu-icon settings-icon" src={settingshovericon} alt="logo"></img><span>Ρυθμίσεις</span></a>
 				</div>
 				{dropdown && <Dropdown/>} 
 			</div>

@@ -103,7 +103,7 @@ function ProjectNoPage() {
                                             <div class="card-body">
                                                 <h5 class="card-title">{i}</h5>
                                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                                <a href="#" class="btn btn-primary project-button">Go somewhere</a>
                                             </div>
                                         </div>
                                     </div>
@@ -115,7 +115,7 @@ function ProjectNoPage() {
                                             <div class="card-body">
                                                 <h5 class="card-title">{i}</h5>
                                                 <p class="card-text">With supporting text below as a natural lead-in to additional content. With supporting text below as a natural lead-in to additional content.</p>
-                                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                                <a href="#" class="btn btn-primary project-button">Go somewhere</a>
                                             </div>
                                         </div>
                                     </div>

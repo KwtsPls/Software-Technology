@@ -24,7 +24,7 @@ function ProjectsPage() {
     }
 
     let allNames = ['Atlas','Zeus','Prometheus','Apollo','Johnny','Porta'];
-    let archNames = ['Tzvrths','Thomas','Margarita','Pokopikos','Johnny palios'];
+    let archNames = ['Epikalesths','Thomas','Margarita','Pokopikos','Johnny palios'];
 
 
     const [projNames, changeProj] = useState(allNames);
@@ -45,10 +45,10 @@ function ProjectsPage() {
                     </nav>
                     <div class="row justify-content-between">
                         <div class="col-6">
-                            <h1 className="text">ProjectsPage</h1>
+                            <h1 className="text">Projects</h1>
                         </div>
                         <div class="col-6">
-                            <button type="button" class="btn btn-outline-secondary float-end">New Project</button>
+                            <button type="button" class="btn btn-outline-secondary float-end">Δημιουργία Project</button>
                         </div>
                     </div>
                     <div class="row pt-4">
@@ -56,10 +56,10 @@ function ProjectsPage() {
                         <div class="col-8">
                             <ul class="nav nav-tabs"> 
                                 <li class="nav-item"  onClick={clickAll}>
-                                    <a class={all} aria-current="page" href="#">All projects</a>
+                                    <a class={all} aria-current="page" href="#">Σε εξέλιξη</a>
                                 </li>
                                 <li class="nav-item" onClick={clickArch}>
-                                    <a class={arch} href="#">Archived projects</a>
+                                    <a class={arch} href="#">Αρχειοθετημένα</a>
                                 </li>
                             </ul>
                         </div>
@@ -79,7 +79,7 @@ function ProjectsPage() {
                                                 <h5 class="card-title">Project {i}</h5>
                                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                                 <Link to='/projects/projectNo'>
-                                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                                    <a href="#" class="btn btn-primary project-button">Go somewhere</a>
                                                 </Link>
                                             </div>
                                         </div>

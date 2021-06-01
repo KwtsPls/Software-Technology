@@ -19,27 +19,27 @@ class SettingsProfilePage extends Component {
                     
                     <div className="jete-settingsMenu">
                         <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action active">Profile</a>
-					        <Link to='/settings/personalisation' class="list-group-item list-group-item-action">Personalisation</Link>
-					        <Link to='/settings/security' class="list-group-item list-group-item-action">Security</Link>
-                            <Link to='/settings/billing' class="list-group-item list-group-item-action">Billing</Link>
+                            <a href="#" class="list-group-item list-group-item-action active">Προφίλ</a>
+					        <Link to='/settings/personalisation' class="list-group-item list-group-item-action">Εξατομίκευση</Link>
+					        <Link to='/settings/security' class="list-group-item list-group-item-action">Ασφάλεια</Link>
+                            <Link to='/settings/billing' class="list-group-item list-group-item-action">Χρεώσεις</Link>
                         </div>
                     </div>
 
                     <div className="settingsContains">
-                        <h1 className="settings-header">Public profile</h1>
+                        <h1 className="settings-header">Δημόσιο προφίλ</h1>
                         <hr className="new4"/>
 
 
                         <form className="settingsprofile-form">
                             <div className="form-group name">
-                                <label for="settingsname">Name</label>
+                                <label for="settingsname">Όνομα</label>
                                 <input type="text" className="form-control" id="settingsname"  placeholder="Name from backend"/>
                             </div>
                             <div className="form-group surname">
-                                <label for="settingssurname">Surname</label>
+                                <label for="settingssurname">Επίθετο</label>
                                 <input type="text" className="form-control" id="settingssurname" aria-describedby="namehelp" placeholder="Surname from backend"/>
-                                <small id="surnamehelp" className="form-text text-muted">Your name and surname appears on your public profile</small>
+                                <small id="surnamehelp" className="form-text text-muted">Το όνομα και το επίθετό σας εμφανίζονται στο δημόσιο προφίλ σας</small>
                             </div>
                             
 
@@ -56,18 +56,18 @@ class SettingsProfilePage extends Component {
 
 
                             <div className="form-group bio">
-                                <label for="settingsbio">Bio</label>
+                                <label for="settingsbio">Περιγραφή</label>
                                 {/* <input type="text" className="form-control" id="settingsbio" aria-describedby="biohelp" placeholder="Bio from backend"/> */}
                                 <textarea className="form-control" id="settingsbio" placeholder="Bio from backend"></textarea>
-                                <small id="biohelp" className="form-text text-muted">Tell us a bit about yourself</small>
+                                <small id="biohelp" className="form-text text-muted">Πείτε μας κάτι για εσάς</small>
                             </div>
 
                             <div className="form-group location">
-                                <label for="locationname">Location</label>
+                                <label for="locationname">Τοποθεσία</label>
                                 <input type="text" className="form-control" id="locationname"  placeholder="Location from Backend"/>
                             </div>
 
-                            <button type="button" class="btn btn-success settingsprofile-button">Update my profile</button>
+                            <button type="button" class="btn btn-success settingsprofile-button">Ενημέρωση στοιχείων</button>
 
 
                         </form>
