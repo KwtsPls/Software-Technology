@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import '../App.css';
 //import '../css/settings.css';
 import SideNavBar from '../components/SideNavBar.js'
@@ -7,15 +7,28 @@ import Topbar from '../components/Topbar.js'
 
 function ProfilePage() {
 
+    let keepo=false;
+    const [isLoading, setLoading] = useState(true);
     const [contacts, setTxt] = useState([])
     
-    function mount(){
-        fetch('https://jsonplaceholder.typicode.com/users')
+    useEffect(() => {
+        fetch('http://localhost:8080/users')
             .then(res => res.json())
             .then((data) => {
-                setTxt(data)
+                setTxt(data);
+                setLoading(false);
             })
+
+        keepo = false;
+    }, []);
+
+
+    if (isLoading) {
+        return <div className="mainContent"><h1>Loading...</h1></div>;
     }
+    
+
+    
 
         return (
             <div>
@@ -53,22 +66,41 @@ function ProfilePage() {
                 <h1 className="text-center">
                     ProfilePage
                 </h1>
-                <div className="text-center">
-                {mount()}
-                {contacts.map((contact) => (
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">{contact.name}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{contact.email}</h6>
-                <p class="card-text">{contact.company.catchPhrase}</p>
-              </div>
-            </div>
-          ))}
-                </div>
+                {/* <div className="text-center">
+                <button onClick={mount}></button>
+                </div> */}
+                
+                
+                {console.log(contacts)}
+                {console.log(contacts._embedded.userList[1].password)}
+
+                {/* {console.log(typeof contacts[1])}
+                {console.log(contacts.password)} */}
+
+                
+
+
+                {contacts._embedded.userList.map((contact) => (
+                    <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{contact.password}</h5>
+                        
+                    </div>
+                    </div>
+                ))}
+
+
+                {/* <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{contacts.password}</h5>
+                    </div>
+                </div> */}
                 
                 
             </div>
         );
+
+    
     
 }
  
