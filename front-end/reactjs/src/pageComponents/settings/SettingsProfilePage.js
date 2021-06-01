@@ -41,6 +41,12 @@ class SettingsProfilePage extends Component {
                                 <input type="text" className="form-control" id="settingssurname" aria-describedby="namehelp" placeholder="Surname from backend"/>
                                 <small id="surnamehelp" className="form-text text-muted">Το όνομα και το επίθετό σας εμφανίζονται στο δημόσιο προφίλ σας</small>
                             </div>
+                            <div className="form-group usernamesettings">
+                                <label for="settingsname">Username</label>
+                                <input type="text" className="form-control" id="settingsusername" aria-describedby="usernamehelp" placeholder="Username from backend"/>
+                                <small id="usernamehelp" className="form-text text-muted">Το username σας πρέπει να αποτελείται από τουλάχιστον 6 λατινικούς χαρακτήρες και αριθμούς</small>
+
+                            </div>
                             
 
                             <div className="form-group pt-3 email">

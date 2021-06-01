@@ -41,6 +41,8 @@
   border-color: #3d113c !important;
 }
 
+
+
 .settingsContains {
   margin-left: 20%;
   margin-top: 11vh;
@@ -128,4 +130,8 @@
 .emailsent-verify {
   margin-top: -5px;
   margin-left: 70px;
+}
+
+.usernamesettings{
+  margin-top: 25px;
 }
