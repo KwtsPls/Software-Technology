@@ -19,7 +19,7 @@ class LoginPage extends Component {
             <div className="login-screen">
                 <div className="login-desc-box">
                     <img className = "jete_logo-icon-login" src={logo} alt="logo"></img>        
-                    <p className="desc-header">Welcome to  our platform</p>
+                    <p className="desc-header">Καλωσήρθατε</p>
                     <img className = "partners" src={partners} alt="partnerssketch"></img>        
 
                 </div>
@@ -30,16 +30,16 @@ class LoginPage extends Component {
                             <div>
                                 <div className="top-buffer">
                                     <h1 className="text-center login-header">
-                                        Sign In
+                                        Σύνδεση
                                     </h1>
                                     <form className="login-form-boxes">
                                         <div className="form-group pt-3">
                                             <label for="exampleInputEmail1">Email</label>
-                                            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+                                            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Πληκτρολογίστε το email σας"/>
                                         </div>
                                         <div className="form-group pt-3">
-                                            <label for="exampleInputPassword1">Password</label>
-                                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+                                            <label for="exampleInputPassword1">Κωδικός πρόσβασης</label>
+                                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Πληκτρολογίστε τον κωδικό σας"/>
                                         </div>
                                         <div className="form-check pt-3">
                                             <input type="checkbox" class="form-check-input mycheckbox" id="exampleCheck1"/>
@@ -47,13 +47,13 @@ class LoginPage extends Component {
                                         </div>
                                         <div className="text-center pt-3">
                                             <Link to='/home'>
-                                                <button type="submit" className="btn-lg btn-primary login-button">Sign In</button>
+                                                <button type="submit" className="btn-lg btn-primary login-button">Σύνδεση</button>
                                             </Link>
                                         </div>
                                         <div className="text-center pt-3">
-                                            <small id="emailHelp" className="form-text text-muted">Is this your first time here? </small>
+                                            <small id="emailHelp" className="form-text text-muted">Είναι η πρώτη σας φορά εδώ; </small>
                                             <Link to='/signUp'>
-                                                <small id="signUpLink" className="form-text signup-link" style={this.signUpStyle}> Sign up</small>
+                                                <small id="signUpLink" className="form-text signup-link" style={this.signUpStyle}> Εγγραφείτε</small>
                                             </Link>
                                         </div>
                                     </form>

@@ -21,7 +21,7 @@ class SignUpPage extends Component {
                         
                         <div className="top-buffer login-form signup-content">
                             <h1 className="text-center login-header">
-                                Sign Up
+                                Εγγραφή
                             </h1>
                             <form className="signup-form-boxes">
                                 <div className="form-group pt-3">
@@ -30,35 +30,37 @@ class SignUpPage extends Component {
                                         <div className="input-group-prepend">
                                             <div className="input-group-text">@</div>
                                         </div>
-                                        <input type="email" class="form-control" id="emailInput" placeholder="Enter email"/>
+                                        <input type="email" class="form-control" id="emailInput" placeholder="Πληκτρολογίστε το email σας"/>
                                     </div>
                                 </div>
                                 <div className="form-group pt-3">
-                                    <label for="shortnameInput">Name</label>
-                                    <input type="name" className="form-control" id="shortnameInput" aria-describedby="emailHelp" placeholder="Your name"/>
+                                    <label for="shortnameInput">Όνομα</label>
+                                    <input type="name" className="form-control" id="shortnameInput" placeholder="Πληκτρολογίστε το όνομα σας"/>
                                 </div>
                                 <div className="form-group pt-3">
-                                    <label for="surnameInput">Surname</label>
-                                    <input type="surname" className="form-control" id="surnameInput" placeholder="Your surname"/>
+                                    <label for="surnameInput">Επίθετο</label>
+                                    <input type="surname" className="form-control" id="surnameInput" placeholder="Πληκτρολογίστε το επίθετο σας"/>
                                 </div>
                                 <div className="form-group pt-3">
                                     <label for="usernameInput">Username</label>
-                                    <input type="username" className="form-control" id="usernameInput" aria-describedby="emailHelp" placeholder="Username"/>
+                                    <input type="username" className="form-control" id="usernameInput" aria-describedby="usernamehelp" placeholder="Πληκτρολογίστε το username σας"/>
+                                    <small id="usernamehelp" className="form-text text-muted">Το username σας πρέπει να αποτελείται από τουλάχιστον 6 λατινικούς χαρακτήρες και αριθμούς</small>
+
                                 </div>
                                 <div className="form-group pt-3">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+                                    <label for="exampleInputPassword1">Κωδικός πρόσβασης</label>
+                                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Πληκτρολογίστε τον κωδικό σας"/>
                                 </div>
                                 <div className="form-group pt-3">
-                                    <label for="exampleInputPassword1">Confirm Password</label>
-                                    <input type="password" className="form-control" id="pwhelp" placeholder="Confirm password"/>
-                                    <small id="pwhelp" className="form-text text-muted">Password must contain at least one uppercase letter and one number.</small>
+                                    <label for="exampleInputPassword1">Επιβεβαίωση κωδικού</label>
+                                    <input type="password" className="form-control" id="pwhelp" placeholder="Πληκτρολογήστε ξανά τον κωδικό σας"/>
+                                    <small id="pwhelp" className="form-text text-muted">Ο κωδικός πρόσβασης πρέπει να περιέγχει τουλάχιστον ένα κεφαλαίο γράμμα και έναν αριθμό</small>
 
                                 </div>
                                 
                                 <div className="text-center pt-3">
                                     <Link to='/paymentPlan'>
-                                        <button type="submit" className="btn-lg btn-primary login-button">Sign Up</button>
+                                        <button type="submit" className="btn-lg btn-primary login-button">Εγγραφή</button>
                                     </Link>
                                 </div>
                             </form>

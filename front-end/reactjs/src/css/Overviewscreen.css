@@ -9,7 +9,10 @@
     src:url('../fonts/SourceSansPro-Regular.ttf') format('truetype');
 }
 
-
+@font-face {
+    font-family: mygreetingsFont;
+    src: url("../fonts/Arimo-VariableFont_wght.ttf") format("truetype");
+}
 
 
 
@@ -61,7 +64,7 @@
 /* greetings text */
 .greetings{
     /* appearance */
-    font-family: myFirstFont;
+    font-family: mygreetingsFont;
     font-size: 4vw;
     color: #202020;
 

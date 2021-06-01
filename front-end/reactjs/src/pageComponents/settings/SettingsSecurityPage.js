@@ -33,59 +33,59 @@ class SettingsSecurityPage extends Component {
 
                     <div className="jete-settingsMenu">
                         <div class="list-group">
-                            <Link to='/settings/profile' class="list-group-item list-group-item-action">Profile</Link>
-                            <Link to='/settings/personalisation' class="list-group-item list-group-item-action">Personalisation</Link>
-                            <a href="#" class="list-group-item list-group-item-action active">Security</a>
-                            <Link to='/settings/billing' class="list-group-item list-group-item-action">Billing</Link>
+                            <Link to='/settings/profile' class="list-group-item list-group-item-action">Προφίλ</Link>
+                            <Link to='/settings/personalisation' class="list-group-item list-group-item-action">Εξατομίκευση</Link>
+                            <a href="#" class="list-group-item list-group-item-action active">Ασφάλεια</a>
+                            <Link to='/settings/billing' class="list-group-item list-group-item-action">Χρεώσεις</Link>
                         </div>
                     </div>
                     <div className="settingsContains">
-                        <h1 className="settings-header">Account security</h1>
+                        <h1 className="settings-header">Ασφάλεια λογαριασμού</h1>
                         <hr className="new4"/>
 
 
                         <p className="settings-unit">
-                            <b>Change password:</b>
+                            <b>Αλλαγή κωδικού πρόσβασης:</b>
                         </p>
 
                         <form className="settingsprofile-form change-password-form">
                             
                             <div className="form-group oldpassword">
-                                <label for="settingsoldpassword">Old password:</label>
-                                <input type="password" className="form-control" id="settingsoldpassword"  placeholder="Type your old password"/>
+                                <label for="settingsoldpassword">Παλιός κωδικός:</label>
+                                <input type="password" className="form-control" id="settingsoldpassword"  placeholder="Πληκτρολογίστε τον τωρινό κωδικό σας"/>
                             </div>
                             
                             <div className="form-group newpassword">
-                                <label for="settingsnewpassword">New password:</label>
-                                <input type="password" className="form-control" id="settingsnewpassword"  placeholder="Type your new password"/>
+                                <label for="settingsnewpassword">Νέος κωδικός:</label>
+                                <input type="password" className="form-control" id="settingsnewpassword"  placeholder="Πληκτρολογίστε τον νέο κωδικό σας"/>
                             </div>
                             
 
                             <div className="form-group newpassword-reapeat">
-                                <label for="settingsnewpassword-repeat">Confirm password:</label>
-                                <input type="password" className="form-control" id="settingsnewpassword-repeat" aria-describedby="pwhelp" placeholder="Type new password again"/>
-                                <small id="pwhelp" className="form-text text-muted"><br/>Password must contain at least one uppercase letter and one number.</small>
+                                <label for="settingsnewpassword-repeat">Επιβεβαίωση νέου κωδικού:</label>
+                                <input type="password" className="form-control" id="settingsnewpassword-repeat" aria-describedby="pwhelp" placeholder="Πληκτρολογίστε τον νέο κωδικό σας ξανά"/>
+                                <small id="pwhelp" className="form-text text-muted"><br/>Ο κωδικός πρόσβασης πρέπει να περιέγχει τουλάχιστον ένα κεφαλαίο γράμμα και έναν αριθμό</small>
 
                             </div>
 
-                            <button type="button" class="btn btn-primary passwordchange-button">Change password</button>
+                            <button type="button" class="btn btn-primary passwordchange-button">Επιβεβαίωση</button>
 
                         </form>
 
                         <hr className="changepasswordline"/>
 
                         {/* <p className="settings-unit">
-                            <b>Email verification:</b>&emsp; &emsp; &emsp; Your email is already verified!
+                            <b>Email verification:</b>&emsp; &emsp; &emsp; Το email σας είναι ήδη επαληθευμένο!
                         </p> */}
 
                         <p className="settings-unit">
-                            <b>Email verification:</b>
+                            <b>Επαλήθευση email:</b>
                         </p>
 
-                        <button ref={this.verify} onClick={this.verifyemail} type="button" class="btn btn-success verifyemail-button">Resend verification email</button>
+                        <button ref={this.verify} onClick={this.verifyemail} type="button" class="btn btn-success verifyemail-button">Αποστολή μηνυμήματος επαλήθευσης</button>
                         
                         <p ref={this.verifymsg} className="settings-unit emailsent-verify">
-                            Verification email sent! Check your inbox! 
+                            Το μήνυμα εστάλη!Δείτε το email σας! 
                         </p>
 
                         <div className="blankspace"/>                            

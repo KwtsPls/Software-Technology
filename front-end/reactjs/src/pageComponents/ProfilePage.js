@@ -1,12 +1,35 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import '../App.css';
 //import '../css/settings.css';
 import SideNavBar from '../components/SideNavBar.js'
 import Topbar from '../components/Topbar.js'
 
 
-class ProfilePage extends Component {
-    render() { 
+function ProfilePage() {
+
+    let keepo=false;
+    const [isLoading, setLoading] = useState(true);
+    const [contacts, setTxt] = useState([])
+    
+    useEffect(() => {
+        fetch('http://localhost:8080/users')
+            .then(res => res.json())
+            .then((data) => {
+                setTxt(data);
+                setLoading(false);
+            })
+
+        keepo = false;
+    }, []);
+
+
+    if (isLoading) {
+        return <div className="mainContent"><h1>Loading...</h1></div>;
+    }
+    
+
+    
+
         return (
             <div>
 				<Topbar/>
@@ -31,11 +54,54 @@ class ProfilePage extends Component {
                 <h1 className="text-center">
                     ProfilePage
                 </h1>
+                <h1 className="text-center">
+                    ProfilePage
+                </h1>
+                <h1 className="text-center">
+                    ProfilePage
+                </h1>
+                <h1 className="text-center">
+                    ProfilePage
+                </h1>
+                <h1 className="text-center">
+                    ProfilePage
+                </h1>
+                {/* <div className="text-center">
+                <button onClick={mount}></button>
+                </div> */}
+                
+                
+                {console.log(contacts)}
+                {console.log(contacts._embedded.userList[1].password)}
+
+                {/* {console.log(typeof contacts[1])}
+                {console.log(contacts.password)} */}
+
+                
+
+
+                {contacts._embedded.userList.map((contact) => (
+                    <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{contact.password}</h5>
+                        
+                    </div>
+                    </div>
+                ))}
+
+
+                {/* <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{contacts.password}</h5>
+                    </div>
+                </div> */}
                 
                 
             </div>
         );
-    }
+
+    
+    
 }
  
 export default ProfilePage;
