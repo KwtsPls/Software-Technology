@@ -30,7 +30,7 @@ function SettingsBillingPage() {
                     <hr className="new4"/>
 
                     <p className="settings-unit">
-                        <b>Τρέχον πρόγραμμα:</b> &emsp; &nbsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &ensp;Jete Premium
+                        <b>Τρέχον πρόγραμμα:</b> &emsp; &nbsp; &nbsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &ensp;Jete Premium
                     </p>
 
                     <p className="expirationdate">Λήξη συνδρομής: &emsp;04/04/21</p>
