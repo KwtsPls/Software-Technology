@@ -64,7 +64,7 @@ class SettingsSecurityPage extends Component {
                             <div className="form-group newpassword-reapeat">
                                 <label for="settingsnewpassword-repeat">Επιβεβαίωση νέου κωδικού:</label>
                                 <input type="password" className="form-control" id="settingsnewpassword-repeat" aria-describedby="pwhelp" placeholder="Πληκτρολογίστε τον νέο κωδικό σας ξανά"/>
-                                <small id="pwhelp" className="form-text text-muted"><br/>Ο κωδικός πρόσβασης πρέπει να περιέγχει τουλάχιστον ένα κεφαλαίο γράμμα και έναν αριθμό.</small>
+                                <small id="pwhelp" className="form-text text-muted"><br/>Ο κωδικός πρόσβασης πρέπει να περιέγχει τουλάχιστον ένα κεφαλαίο γράμμα και έναν αριθμό</small>
 
                             </div>
 

@@ -69,7 +69,7 @@
 .desc-header{
    /* appearance */
     font-family: descFont;
-    font-size: 2.7em;
+    font-size: 2.5em;
     color: #f4f5f7;
     margin-top: 47px;   
 }
@@ -77,22 +77,22 @@
 .login-header{
     /* appearance */
     font-family: myFirstFont;
-    font-size: 4em;
+    font-size: 3.2em;
     color: #202020;
 }
 
 @font-face {
     font-family: myFirstFont;
-    src:url('../fonts/FredokaOne-Regular.ttf') format('truetype');
+    src:url('../fonts/DelaGothicOne-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: descFont;
-    src:url('../fonts/Teko-Bold.ttf') format('truetype');
+    src:url('../fonts/DelaGothicOne-Regular.ttf') format('truetype');
 }
 
 .login-form-boxes{
-    margin-top: 14%;
+    margin-top: 22%;
 }
 
 .signup-form-boxes{
