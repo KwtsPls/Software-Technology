@@ -45,7 +45,7 @@ function ProjectsPage() {
                     </nav>
                     <div class="row justify-content-between">
                         <div class="col-6">
-                            <h1 className="text">Projects</h1>
+                            <h1 className="text projects-page-header">Projects</h1>
                         </div>
                         <div class="col-6">
                             <button type="button" class="btn btn-outline-secondary float-end">Δημιουργία Project</button>
@@ -65,7 +65,7 @@ function ProjectsPage() {
                         </div>
                         {/* ----------- Search Bar ------------ */}
                         <div class="col-4">
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3 searchbar">
                                 <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="button-addon2"/>
                                 <button class="btn btn-outline-secondary" type="button" id="button-addon2">Go</button>
                             </div>

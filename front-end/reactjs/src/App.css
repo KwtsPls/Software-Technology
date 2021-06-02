@@ -22,7 +22,7 @@
   left: 0;
 
   /* appearance */
-  background-color: #202020;
+  background-color: #0f0f0f;
   box-shadow: rgba(71, 71, 71, 0.219) 0px 0px 0px;
 }
 
@@ -73,14 +73,14 @@
   padding-top: 20px;
   left: 0;
 
-  width: 16%;
+  width: 278px;
 
   /* appearance */
   background-color: #f4f5f7;
   /* box-shadow: rgba(0, 0, 0, 0.25) 0px 20px 20px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 0px -18px inset; */
   /* box-shadow: rgba(0, 0, 0, 0.02) 0px 2px 3px 0px, rgba(27, 31, 35, 0.082) 0px 0px 2px 1px; */
-  box-shadow: rgba(12, 12, 12, 0.13) inset 0 0 6px;
-}
+  /* box-shadow: rgba(12, 12, 12, 0.13) inset 0 0 6px; */
+  box-shadow: rgba(0, 0, 0, 0.288) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 0.5px inset;}
 
 /* user navbar display */
 .userDisplay {

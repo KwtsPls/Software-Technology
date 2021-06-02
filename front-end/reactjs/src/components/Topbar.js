@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../images/logo.png';
+import logo from '../images/logo2.png';
 import helpicon from '../images/helpicon.png'
 
 class TopBar extends Component {

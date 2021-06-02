@@ -10,6 +10,14 @@
   height: 100%;
 }
 
+.searchbar{
+  margin-top: 5px;
+}
+
+.projects-page-header{
+  margin-left: -1px;
+}
+
 .vertical-scrollable {
   height: 100%;
   width: 100%;
@@ -44,7 +52,7 @@
 }
 
 .project-button:hover{
-  background-color: #9c4699 !important;
+  background-color: #8a4f8a !important;
   border-color: #3d113c !important;
 }
 
