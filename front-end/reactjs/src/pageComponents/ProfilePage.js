@@ -22,10 +22,41 @@ function ProfilePage() {
         keepo = false;
     }, []);
 
+    function kappa(){
+        if (isLoading) {
+            return  ( 
+                <div>
+                    <div className="mainContent"><h1>Loading...</h1></div>
+                </div>
+                );
+        }
 
-    if (isLoading) {
-        return <div className="mainContent"><h1>Loading...</h1></div>;
+        return (
+            <div>
+                {console.log(contacts)}
+                {console.log(contacts._embedded.userList[1].password)}
+                {contacts._embedded.userList.map((contact) => (
+                    <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{contact.password}</h5>
+                        
+                    </div>
+                    </div>
+                ))}
+            </div>
+        );
     }
+
+
+    // if (isLoading) {
+    //     return  ( 
+    //         <div>
+    //             <Topbar/>
+    //             <SideNavBar/>
+    //             <div className="mainContent"><h1>Loading...</h1></div>
+    //         </div>
+    //         );
+    // }
     
 
     
@@ -70,9 +101,9 @@ function ProfilePage() {
                 <button onClick={mount}></button>
                 </div> */}
                 
+                {kappa()}
                 
-                {console.log(contacts)}
-                {console.log(contacts._embedded.userList[1].password)}
+                
 
                 {/* {console.log(typeof contacts[1])}
                 {console.log(contacts.password)} */}
@@ -80,14 +111,7 @@ function ProfilePage() {
                 
 
 
-                {contacts._embedded.userList.map((contact) => (
-                    <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">{contact.password}</h5>
-                        
-                    </div>
-                    </div>
-                ))}
+                
 
 
                 {/* <div class="card">

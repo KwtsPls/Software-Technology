@@ -23,30 +23,30 @@ function BankPopUp(props){
                 >
                 <Modal.Header>
                     <Modal.Title id="contained-modal-title-vcenter">
-                    Payment Details
+                    Πληροφορίες πληρωμής
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form class="row g-3">
                         <div class="col-12">
-                            <label for="inputAddress" class="form-label">Cardholder Name</label>
+                            <label for="inputAddress" class="form-label">Όνομα κατόχου</label>
                             <input type="text" class="form-control" id="cardholderName" placeholder="John Doe"/>
                         </div>
                         <div class="col-12">
-                            <label for="inputAddress2" class="form-label">Credit Card Number</label>
+                            <label for="inputAddress2" class="form-label">Αριθμός πιστωτικής κάρτας</label>
                             <input type="text" class="form-control" id="creditCardNumber" placeholder="0000 0000 0000 0000" minlength="16" maxlength="16"/>
                         </div>
                         <div class="col-md-4">
-                            <label for="inputExpMonth" class="form-label">Expiry Month</label>
+                            <label for="inputExpMonth" class="form-label">Μήνας λήξης</label>
                             <select id="inputExpMonth" class="form-select">
-                                <option selected>Choose...</option>
+                                <option selected>Επιλέξτε...</option>
                                 {months.map(i => <option key={i}>{i}</option>)}
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="inputExpYear" class="form-label">Expiry Year</label>
+                            <label for="inputExpYear" class="form-label">Έτος λήξης</label>
                             <select id="inputExpYear" class="form-select">
-                                <option selected>Choose...</option>
+                                <option selected>Επιλέξτε...</option>
                                 {years.map(i => <option key={i}>{i}</option>)}
                             </select>
                         </div>
@@ -60,13 +60,13 @@ function BankPopUp(props){
                         <PaymentIcon icon="paypal" style={{ margin: 10, width: 70 }} />
                         <div class="col-8">
                             {/* <Link to='/home'> */}
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Επιβεβαίωση</button>
                             {/* </Link> */}
                         </div>
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="outline-danger" onClick={props.onHide}>Close</Button>
+                    <Button variant="outline-danger" onClick={props.onHide}>Άκυρο</Button>
                 </Modal.Footer>
             </Modal>
 		</div>

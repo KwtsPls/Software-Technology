@@ -108,7 +108,7 @@ a.userNameNavBar:visited {
   /* text appearance */
   text-decoration: none;
   font-family: myquoteFont;
-  font-weight: 600;
+  font-weight: 590;
   /* font-size: 1.3em; */
   font-size: 130%;
 
@@ -158,7 +158,7 @@ a.navChoice:visited {
   /* font: Trebuchet MS, sans-serif ; */
   font-family: myquoteFont;
 
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.1em;
   color: #575757;
 }
@@ -166,6 +166,8 @@ a.navChoice:visited {
 a.navChoice:hover,
 a.navChoice:active {
   background-color: #723c70;
+  /* background: rgb(71,11,69);
+  background: linear-gradient(38deg, rgba(71,11,69,1) 0%, rgba(121,43,119,1) 45%, rgba(154,78,152,1) 100%); */
   color: #f4f5f7;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 3px;
 }
@@ -194,7 +196,7 @@ a.navChoiceSmall:visited {
   /* font: Trebuchet MS, sans-serif ; */
   font-family: myquoteFont;
 
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1.1em;
   color: #575757;
 }
