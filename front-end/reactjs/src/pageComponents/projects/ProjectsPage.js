@@ -43,43 +43,43 @@ function ProjectsPage() {
                             <li className="breadcrumb-item active" aria-current="page">Projects</li>
                         </ol>
                     </nav>
-                    <div class="row justify-content-between">
-                        <div class="col-6">
+                    <div className="row justify-content-between">
+                        <div className="col-6">
                             <h1 className="text projects-page-header">Projects</h1>
                         </div>
-                        <div class="col-6">
-                            <button type="button" class="btn btn-outline-secondary float-end">Δημιουργία Project</button>
+                        <div className="col-6">
+                            <button type="button" className="btn btn-outline-secondary float-end">Δημιουργία Project</button>
                         </div>
                     </div>
-                    <div class="row pt-4">
+                    <div className="row pt-4">
                         {/* ----------- Nav Tabs ------------ */}
-                        <div class="col-8">
-                            <ul class="nav nav-tabs"> 
-                                <li class="nav-item"  onClick={clickAll}>
-                                    <a class={all} aria-current="page" href="#">Σε εξέλιξη</a>
+                        <div className="col-8">
+                            <ul className="nav nav-tabs"> 
+                                <li className="nav-item"  onClick={clickAll}>
+                                    <a className={all} aria-current="page" href="#">Σε εξέλιξη</a>
                                 </li>
-                                <li class="nav-item" onClick={clickArch}>
-                                    <a class={arch} href="#">Αρχειοθετημένα</a>
+                                <li className="nav-item" onClick={clickArch}>
+                                    <a className={arch} href="#">Αρχειοθετημένα</a>
                                 </li>
                             </ul>
                         </div>
                         {/* ----------- Search Bar ------------ */}
-                        <div class="col-4">
-                            <div class="input-group mb-3 searchbar">
-                                <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="button-addon2"/>
-                                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Go</button>
+                        <div className="col-4">
+                            <div className="input-group mb-3 searchbar">
+                                <input type="text" className="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="button-addon2"/>
+                                <button className="btn btn-outline-secondary" type="button" id="button-addon2">Go</button>
                             </div>
                         </div>
-                        <div class="row pt-3 vertical-scrollable overflow-auto">
+                        <div className="row pt-3 vertical-scrollable overflow-auto">
                             {projNames.map(i => 
-                                <div class="row pt-3">
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Project {i}</h5>
-                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <div className="row pt-3">
+                                    <div className="col-12">
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <h5 className="card-title">Project {i}</h5>
+                                                <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                                 <Link to='/projects/projectNo'>
-                                                    <a href="#" class="btn btn-primary project-button">Go somewhere</a>
+                                                    <a href="#" className="btn btn-primary project-button">Go somewhere</a>
                                                 </Link>
                                             </div>
                                         </div>
@@ -93,10 +93,10 @@ function ProjectsPage() {
         </div>
     );
     
-        searchButton.addEventListener('click', () => {
-        const inputValue = searchInput.value;
-        alert(inputValue);
-        });
+        // searchButton.addEventListener('click', () => {
+        // const inputValue = searchInput.value;
+        // alert(inputValue);
+        // });
 }
  
 export default ProjectsPage;

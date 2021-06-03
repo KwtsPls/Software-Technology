@@ -17,7 +17,7 @@ class LoginPage extends Component {
 
     render() { 
         return (
-            <div class="loginbackground">
+            <div className="loginbackground">
                 <div className="login-screen">
                     <div className="login-desc-box">
                         <img className = "jete_logo-icon-login" src={logo} alt="logo"></img>        
@@ -44,7 +44,7 @@ class LoginPage extends Component {
                                                 <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Πληκτρολογίστε τον κωδικό σας"/>
                                             </div>
                                             <div className="form-check pt-3">
-                                                <input type="checkbox" class="form-check-input mycheckbox" id="exampleCheck1"/>
+                                                <input type="checkbox" className="form-check-input mycheckbox" id="exampleCheck1"/>
                                                 <label className="form-check-label" for="exampleCheck1">Remember me</label>
                                             </div>
                                             <div className="text-center pt-3">

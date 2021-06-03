@@ -65,57 +65,57 @@ function ProjectNoPage() {
                             <li className="breadcrumb-item active" aria-current="page">Proj Name</li>
                         </ol>
                     </nav>
-                    <div class="row justify-content-between">
-                        <div class="col-6">
+                    <div className="row justify-content-between">
+                        <div className="col-6">
                             <h1 className="text">Project Something</h1>
                         </div>
-                        <div class="col-6">
-                            <button type="button" class="btn btn-outline-secondary float-end">Create Issue</button>
+                        <div className="col-6">
+                            <button type="button" className="btn btn-outline-secondary float-end">Create Issue</button>
                         </div>
                     </div>
-                    <div class="row pt-4">
+                    <div className="row pt-4">
                         {/* ----------- Nav Tabs ------------ */}
-                        <div class="col-8">
-                            <ul class="nav nav-tabs"> 
-                                <li class="nav-item"  onClick={clickSpr}>
-                                    <a class={spr} aria-current="page" href="#">Sprints</a>
+                        <div className="col-8">
+                            <ul className="nav nav-tabs"> 
+                                <li className="nav-item"  onClick={clickSpr}>
+                                    <a className={spr} aria-current="page" href="#">Sprints</a>
                                 </li>
-                                <li class="nav-item" onClick={clickEpics}>
-                                    <a class={epics} href="#">Epics</a>
+                                <li className="nav-item" onClick={clickEpics}>
+                                    <a className={epics} href="#">Epics</a>
                                 </li>
-                                <li class="nav-item" onClick={clickPastSpr}>
-                                    <a class={pastSpr} href="#">Past Sprints</a>
+                                <li className="nav-item" onClick={clickPastSpr}>
+                                    <a className={pastSpr} href="#">Past Sprints</a>
                                 </li>
                             </ul>
                         </div>
                         {/* ----------- Search Bar ------------ */}
-                        <div class="col-4">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="button-addon2"/>
-                                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Go</button>
+                        <div className="col-4">
+                            <div className="input-group mb-3">
+                                <input type="text" className="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="button-addon2"/>
+                                <button className="btn btn-outline-secondary" type="button" id="button-addon2">Go</button>
                             </div>
                         </div>
-                        <div class={vertOrHoz}>
+                        <div className={vertOrHoz}>
                             {!sprintShowing && epicNames.map(i => 
-                                <div class="row pt-3">
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{i}</h5>
-                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                <a href="#" class="btn btn-primary project-button">Go somewhere</a>
+                                <div className="row pt-3">
+                                    <div className="col-12">
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <h5 className="card-title">{i}</h5>
+                                                <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                                <a href="#" className="btn btn-primary project-button">Go somewhere</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             )}
                             {sprintShowing && sprintsShown.map(i => 
-                                    <div class="col-4 full-col">
-                                        <div class="card full-col">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{i}</h5>
-                                                <p class="card-text">With supporting text below as a natural lead-in to additional content. With supporting text below as a natural lead-in to additional content.</p>
-                                                <a href="#" class="btn btn-primary project-button">Go somewhere</a>
+                                    <div className="col-4 full-col">
+                                        <div className="card full-col">
+                                            <div className="card-body">
+                                                <h5 className="card-title">{i}</h5>
+                                                <p className="card-text">With supporting text below as a natural lead-in to additional content. With supporting text below as a natural lead-in to additional content.</p>
+                                                <a href="#" className="btn btn-primary project-button">Go somewhere</a>
                                             </div>
                                         </div>
                                     </div>
@@ -127,10 +127,10 @@ function ProjectNoPage() {
         </div>
     );
     
-        searchButton.addEventListener('click', () => {
-        const inputValue = searchInput.value;
-        alert(inputValue);
-        });
+        // searchButton.addEventListener('click', () => {
+        // const inputValue = searchInput.value;
+        // alert(inputValue);
+        // });
 }
  
 export default ProjectNoPage;
