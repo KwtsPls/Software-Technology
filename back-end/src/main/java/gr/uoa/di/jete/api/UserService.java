@@ -38,6 +38,12 @@ class UserService {
         return userModelAssembler.toModel(user);
     }
 
+    //Returns the User with the given username and password
+    public EntityModel<User> getUserByLogin(String username,String password) {
+        User user = userRepository.findByLogin(username,password).orElseThrow(() -> new UserNotFoundException(-1L));
+        return userModelAssembler.toModel(user);
+    }
+
 
     //Inserts new user to Table
     public User addNewUser(User newUser) {

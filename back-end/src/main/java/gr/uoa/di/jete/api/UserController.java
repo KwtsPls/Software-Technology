@@ -39,13 +39,18 @@ class UserController {
     }
     // end::get-aggregate-root[]
 
+    //Single item
+    @GetMapping("/users/login/u={username}&p={password}")
+    EntityModel<User> login(@PathVariable String username,@PathVariable String password){
+        return userService.getUserByLogin(username,password);
+    }
+
     @PostMapping("/users")
     User newUser(@RequestBody User newUser){
         return userService.addNewUser(newUser);
     }
 
     //Single item
-
     @GetMapping("/users/{id}")
      EntityModel<User> one(@PathVariable Long id){
         return userService.getUserById(id);
