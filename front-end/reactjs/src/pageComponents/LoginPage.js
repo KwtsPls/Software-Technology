@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import logo from '../images/logo.png';
 import partners from '../images/partners.png';
+import { Redirect } from "react-router-dom";
+
 
 import '../App.css'
 import '../css/login.css'
@@ -9,26 +11,29 @@ import '../css/login.css'
 
 function LoginPage() {
 
-    
-    signUpStyle = {
-        color: 'black'
+    let user = 'Adam647'
+    let pass = 'aosdid1209j'
 
-    }
+    let dataReceived = []
 
     function sendLoginCredentials() {
-        // Simple PUT request with a JSON body using fetch
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: 'user', password: 'pass'})
-        };
-        fetch('http://localhost:8080/users/1', requestOptions)
+        fetch('http://localhost:8080/users/login/u=' + user + '&p=' + pass)
+        //fetch('http://localhost:8080/users/login/u=Adam647&p=aosdid1209j')
             .then(response => response.json())
             .then(data => {
                 console.log(data); // JSON data parsed by `data.json()` call
-              });
-            setTimeout(function(){window.location.reload();}, 100);
-    }
+                dataReceived = data;
+            })
+            .then( () => {
+                if (dataReceived.id != null){
+                    window.location.replace("http://localhost:3000/home")
+                }
+                else{
+                    window.location.replace("http://youtube.com")
+                }
+            });
+            //setTimeout(function(){;}, 100);
+    } 
 
     return (
         <div className="loginbackground">
@@ -61,14 +66,14 @@ function LoginPage() {
                                             <label className="form-check-label" for="exampleCheck1">Remember me</label>
                                         </div>
                                         <div className="text-center pt-3">
-                                            <Link to='/home'>
-                                                <button type="submit" className="btn-lg btn-primary login-button">Σύνδεση</button>
-                                            </Link>
+                                            {/* <Link to='/home'> */}
+                                                <button type="button" className="btn-lg btn-primary login-button" onClick={sendLoginCredentials}>Σύνδεση</button>
+                                            {/* </Link> */}
                                         </div>
                                         <div className="text-center pt-3">
                                             <small id="emailHelp" className="form-text text-muted">Είναι η πρώτη σας φορά εδώ; </small>
                                             <Link to='/signUp'>
-                                                <small id="signUpLink" className="form-text signup-link" style={this.signUpStyle}> Εγγραφείτε</small>
+                                                <small id="signUpLink" className="form-text signup-link signUpStyle"> Εγγραφείτε</small>
                                             </Link>
                                         </div>
                                     </form>
