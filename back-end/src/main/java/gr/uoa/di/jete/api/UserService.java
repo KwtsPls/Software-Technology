@@ -40,7 +40,7 @@ class UserService {
 
     //Returns the User with the given username and password
     public EntityModel<User> getUserByLogin(String username,String password) {
-        User user = userRepository.findByLogin(username,password).orElseThrow(() -> new UserNotFoundException(-1L));
+        User user = userRepository.findByLogin(username,password).orElse(new User());
         return userModelAssembler.toModel(user);
     }
 
@@ -57,16 +57,7 @@ class UserService {
         if(!(newUser.getEmail()!=null
                 && newUser.getEmail().length()>0))
             throw new IllegalStateException("Invalid Input");
-        if(!(newUser.getBio()!=null
-                && newUser.getBio().length()>0))
-            throw new IllegalStateException("Invalid Input");
-        if(!(newUser.getLocation()!=null
-                && newUser.getLocation().length()>0))
-            throw new IllegalStateException("Invalid Input");
         if(newUser.getStatus() == null)
-            throw new IllegalStateException("Invalid Input");
-        if(!(newUser.getPronouns()!=null
-                && newUser.getPronouns().length()>0))
             throw new IllegalStateException("Invalid Input");
         if(!(newUser.getFirstName()!=null
                 && newUser.getFirstName().length()>0))
@@ -74,7 +65,6 @@ class UserService {
         if(!(newUser.getLastName()!=null
                 && newUser.getLastName().length()>0))
             throw new IllegalStateException("Invalid Input");
-
 
 
         Optional<User> userByEmail = userRepository.findUserByEmail(newUser.getEmail());

@@ -45,6 +45,17 @@ class UserController {
         return userService.getUserByLogin(username,password);
     }
 
+    //Method for user registration
+    @PostMapping("/users/register/")
+    User registerUser(@RequestBody UserDataTransferObject newUser){
+        //Create a validation object and check email and password validity
+        RegistrationValidation validation = new RegistrationValidation();
+        if(!validation.isValid(newUser.getEmail(), newUser.getPassword(), newUser.getMatchingPassword()))
+            throw new InvalidUserRegistration();
+        User user = newUser.createUser();
+        return userService.addNewUser(user);
+    }
+
     @PostMapping("/users")
     User newUser(@RequestBody User newUser){
         return userService.addNewUser(newUser);
