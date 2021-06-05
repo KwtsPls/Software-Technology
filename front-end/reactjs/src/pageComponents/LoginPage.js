@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom'
 import logo from '../images/logo.png';
 import partners from '../images/partners.png';
-import { Redirect } from "react-router-dom";
+import {Modal} from "react-bootstrap"
 
 
 import '../App.css'
@@ -10,15 +10,17 @@ import '../css/login.css'
 
 
 function LoginPage() {
+    const [user, setUser] = useState("");
+    const [pass, setPass] = useState("");
 
-    let user = 'Adam647'
-    let pass = 'aosdid1209j'
+    const [showModal, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     let dataReceived = []
 
     function sendLoginCredentials() {
         fetch('http://localhost:8080/users/login/u=' + user + '&p=' + pass)
-        //fetch('http://localhost:8080/users/login/u=Adam647&p=aosdid1209j')
             .then(response => response.json())
             .then(data => {
                 console.log(data); // JSON data parsed by `data.json()` call
@@ -26,13 +28,12 @@ function LoginPage() {
             })
             .then( () => {
                 if (dataReceived.id != null){
-                    window.location.replace("http://localhost:3000/home")
+                    window.location.replace("http://localhost:3000/home");
                 }
                 else{
-                    window.location.replace("http://youtube.com")
+                    handleShow();
                 }
             });
-            //setTimeout(function(){;}, 100);
     } 
 
     return (
@@ -54,12 +55,12 @@ function LoginPage() {
                                     </h1>
                                     <form className="login-form-boxes">
                                         <div className="form-group pt-3">
-                                            <label for="exampleInputEmail1">Email</label>
-                                            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Πληκτρολογίστε το email σας"/>
+                                            <label for="exampleInputUsername1">Όνομα χρήστη</label>
+                                            <input type="username" className="form-control" id="exampleInputUsername1" aria-describedby="usernameHelp" placeholder="Πληκτρολογίστε το όνομα χρήστη σας" value={user} onChange={e => setUser(e.target.value)}/>
                                         </div>
                                         <div className="form-group pt-3">
                                             <label for="exampleInputPassword1">Κωδικός πρόσβασης</label>
-                                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Πληκτρολογίστε τον κωδικό σας"/>
+                                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Πληκτρολογίστε τον κωδικό σας"  value={pass} onChange={e => setPass(e.target.value)}/>
                                         </div>
                                         <div className="form-check pt-3">
                                             <input type="checkbox" className="form-check-input mycheckbox" id="exampleCheck1"/>
@@ -83,6 +84,19 @@ function LoginPage() {
                     </div>
                 </div>
             </div>
+            <Modal show={showModal} centered>
+                <Modal.Header>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Σφάλμα
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Λάθος όνομα χρήστη ή κωδικός
+                </Modal.Body>
+                <Modal.Footer>
+                    <button type="button" class="btn btn-outline-danger" onClick={handleClose}>Κλείσιμο</button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }
