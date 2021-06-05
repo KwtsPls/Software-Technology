@@ -36,9 +36,9 @@ function ProfilePage() {
                 {console.log(contacts)}
                 {console.log(contacts._embedded.userList[1].password)}
                 {contacts._embedded.userList.map((contact) => (
-                    <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">{contact.password}</h5>
+                    <div className="card">
+                    <div className="card-body">
+                        <h5 className="card-title text-center">{contact.password}</h5>
                         
                     </div>
                     </div>
@@ -114,9 +114,9 @@ function ProfilePage() {
                 
 
 
-                {/* <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{contacts.password}</h5>
+                {/* <div className="card">
+                    <div className="card-body">
+                        <h5 className="card-title">{contacts.password}</h5>
                     </div>
                 </div> */}
                 

@@ -6,3 +6,9 @@ class UserNotFoundException extends RuntimeException {
         super("Could not find User " + id);
     }
 }
+
+class InvalidUserRegistration extends RuntimeException {
+    InvalidUserRegistration() {
+        super("Invalid Input for Registration");
+    }
+}

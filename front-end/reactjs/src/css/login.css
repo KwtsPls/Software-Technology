@@ -1,231 +1,215 @@
-.loginbackground{
-    background-image: url('../images/loginback.png');
-    height: 100vh;
-    background-size: 100% 100%;
-    /* background: #492448 !important; */
-    /* min-height: 100%; */
-
+.loginbackground {
+  background-image: url("../images/loginback.png");
+  height: 100vh;
+  background-size: 100% 100%;
+  /* background: #492448 !important; */
+  /* min-height: 100%; */
 }
 
-.login-screen{
-    margin-left: 22vw;
-    background-color: #492448 !important;
-    
-
+.login-screen {
+  margin-left: 22vw;
+  background-color: #492448 !important;
 }
 
-.signup-box{
-    
-        top: 50%; /* IMPORTANT */
-        left: 50%; /* IMPORTANT */
-        display: block;
-        position: absolute;
-        z-index: 2;
-        margin-top: -420px; /* HALF OF THE HEIGHT */
-        margin-left: -250px; /* HALF OF THE WIDTH */
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-
-
+.signup-box {
+  top: 50%; /* IMPORTANT */
+  left: 50%; /* IMPORTANT */
+  display: block;
+  position: absolute;
+  z-index: 2;
+  margin-top: -420px; /* HALF OF THE HEIGHT */
+  margin-left: -250px; /* HALF OF THE WIDTH */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
-.signuptopbar{
-    height: 70px;
-    width: 500px;
-    background-color: #202020;
+.signuptopbar {
+  height: 70px;
+  width: 500px;
+  background-color: #202020;
 }
 
-.signup-form-box{
-    width: 500px;
-    height: 770px;
-    background-color: #f4f5f7;
-    /* display: block; */
-    float: left;
-    margin-left: 0%;
-    margin-top: 0%;
+.signup-form-box {
+  width: 500px;
+  height: 770px;
+  background-color: #f4f5f7;
+  /* display: block; */
+  float: left;
+  margin-left: 0%;
+  margin-top: 0%;
 }
 
-.signup-content{
-    margin-top: 25px;
+.signup-content {
+  margin-top: 25px;
 }
 
-.login-form-box{
-    width: 500px;
-    height: 700px;
-    background-color: #f4f5f7;
-    /* display: block; */
-    float: left;
-    margin-left: 5%;
-    margin-top: 7%;
+.login-form-box {
+  width: 500px;
+  height: 700px;
+  background-color: #f4f5f7;
+  /* display: block; */
+  float: left;
+  margin-left: 5%;
+  margin-top: 7%;
 
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-
-
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
+.login-desc-box {
+  width: 500px;
+  height: 700px;
+  background-color: #202020;
 
+  /* display: block; */
+  float: left;
+  text-align: center;
+  margin-top: 7%;
 
-.login-desc-box{
-    width: 500px;
-    height: 700px;
-    background-color: #202020;
-
-    /* display: block; */
-    float: left;
-    text-align: center;
-    margin-top: 7%;
-
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
-
-.desc-header{
-   /* appearance */
-    font-family: descFont;
-    font-size: 2.5em;
-    color: #f4f5f7;
-    margin-top: 47px;   
+.desc-header {
+  /* appearance */
+  font-family: descFont;
+  font-size: 2.5em;
+  color: #f4f5f7;
+  margin-top: 47px;
 }
 
-.login-header{
-    /* appearance */
-    font-family: myFirstFont;
-    font-size: 3.2em;
-    color: #202020;
+.login-header {
+  /* appearance */
+  font-family: myFirstFont;
+  font-size: 3.2em;
+  color: #202020;
 }
 
 @font-face {
-    font-family: myFirstFont;
-    src:url('../fonts/DelaGothicOne-Regular.ttf') format('truetype');
+  font-family: myFirstFont;
+  src: url("../fonts/DelaGothicOne-Regular.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: descFont;
-    src:url('../fonts/DelaGothicOne-Regular.ttf') format('truetype');
+  font-family: descFont;
+  src: url("../fonts/DelaGothicOne-Regular.ttf") format("truetype");
 }
 
-.login-form-boxes{
-    margin-top: 22%;
+.login-form-boxes {
+  margin-top: 22%;
 }
 
-.signup-form-boxes{
-    margin-top: 3%;
-
+.signup-form-boxes {
+  margin-top: 3%;
 }
 
 .login-button {
-    margin-top: 10%;
-     
-    background-color: #723c70 !important;
-    border: #723c70;
+  margin-top: 10%;
 
+  background-color: #723c70 !important;
+  border: #723c70;
 }
 
 .login-button:hover {
-    background-color: #883985 !important;
-    
+  background-color: #883985 !important;
 }
 
-.signup-link:hover{
-    color: #883985 !important;
+.signup-link:hover {
+  color: #883985 !important;
 }
 
-.mycheckbox:focus{
-    border-color: #b34caf !important;
+.mycheckbox:focus {
+  border-color: #b34caf !important;
 }
 
 .mycheckbox:checked {
-    background-color: #5f1d5d !important;
-    border-color: #b34caf !important;
+  background-color: #5f1d5d !important;
+  border-color: #b34caf !important;
 }
-
 
 .jete_logo-icon-login {
-    height: 100px;
-    width: 200px;
-  
-    /* min-width: 6%; */
-    /* max-width: 7%; */
-  
-    /* margin-left: 70px; */
-    /* margin-left: 30%; */
-    margin-top: 10%;
+  height: 100px;
+  width: 200px;
+
+  /* min-width: 6%; */
+  /* max-width: 7%; */
+
+  /* margin-left: 70px; */
+  /* margin-left: 30%; */
+  margin-top: 10%;
 }
 
-.jete_logo-icon-signup{
-    height: 70px;
-    width: 140px;
-    position: relative;
-    z-index: 50;
-    margin-top: 15px;
-    margin-left: 180px;
+.jete_logo-icon-signup {
+  height: 70px;
+  width: 140px;
+  position: relative;
+  z-index: 50;
+  margin-top: 15px;
+  margin-left: 180px;
 }
 
-.signupimage{
-    position: relative;
+.signupimage {
+  position: relative;
 }
 
-.partnerssignup{
-    height: 200px;
-    width: 288px;
-    margin-top: 100px;
-    position: absolute;
-    z-index: 0;
-    margin-top: 74vh;
-    margin-left: 5vw;
-    
+.partnerssignup {
+  height: 200px;
+  width: 288px;
+  margin-top: 100px;
+  position: absolute;
+  z-index: 0;
+  margin-top: 74vh;
+  margin-left: 5vw;
 }
 
-.notes{
-    display: none;
+.notes {
+  display: none;
 }
 
 .etairia {
-    height: 200px;
-    width: 288px;
-    margin-top: 100px;
-    position: absolute;
-    z-index: 1;
-    margin-top: 74vh;
-    margin-left: 60vw;
+  height: 200px;
+  width: 288px;
+  margin-top: 100px;
+  position: absolute;
+  z-index: 1;
+  margin-top: 74vh;
+  margin-left: 60vw;
 }
 
 .partners {
-    height: 200px;
-    width: 288px;
-    margin-top: 100px;
-
+  height: 200px;
+  width: 288px;
+  margin-top: 100px;
 }
 
 /* responsiveness */
 @media screen and (max-width: 1500px) {
-    
-    .loginbackground{
-        /* background-image: url('../images/loginback.png'); */
-        width: 100%;
-        height: 100vh;
-        /* background-size: 100% 100%; */
-        background: #492448 !important;
-        min-height: 100%;
-        
-        overflow-y: auto;
-        
-    }
+  .loginbackground {
+    /* background-image: url('../images/loginback.png'); */
+    width: 100%;
+    height: 100vh;
+    /* background-size: 100% 100%; */
+    background: #492448 !important;
+    min-height: 100%;
 
-    .login-screen{margin-left: 18vw;}
+    overflow-y: auto;
+  }
 
-    .login-form-box{
-        
-        display: block;
-        
-        margin-left: 0%;
-        
-    
-    }
-    .login-desc-box{
-        display: block;
-        
-        margin-left: 0%;
-    }
-    
+  .login-screen {
+    margin-left: 18vw;
+  }
 
+  .login-form-box {
+    display: block;
+
+    margin-left: 0%;
+  }
+  .login-desc-box {
+    display: block;
+
+    margin-left: 0%;
+  }
+}
+
+.signUpStyle {
+  color: "black";
 }

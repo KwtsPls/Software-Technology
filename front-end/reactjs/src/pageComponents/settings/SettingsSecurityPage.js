@@ -32,11 +32,11 @@ class SettingsSecurityPage extends Component {
                 <div className="mainContent">
 
                     <div className="jete-settingsMenu">
-                        <div class="list-group">
-                            <Link to='/settings/profile' class="list-group-item list-group-item-action">Προφίλ</Link>
-                            <Link to='/settings/personalisation' class="list-group-item list-group-item-action">Εξατομίκευση</Link>
-                            <a href="#" class="list-group-item list-group-item-action active">Ασφάλεια</a>
-                            <Link to='/settings/billing' class="list-group-item list-group-item-action">Χρεώσεις</Link>
+                        <div className="list-group">
+                            <Link to='/settings/profile' className="list-group-item list-group-item-action">Προφίλ</Link>
+                            <Link to='/settings/personalisation' className="list-group-item list-group-item-action">Εξατομίκευση</Link>
+                            <a href="#" className="list-group-item list-group-item-action active">Ασφάλεια</a>
+                            <Link to='/settings/billing' className="list-group-item list-group-item-action">Χρεώσεις</Link>
                         </div>
                     </div>
                     <div className="settingsContains">
@@ -68,7 +68,7 @@ class SettingsSecurityPage extends Component {
 
                             </div>
 
-                            <button type="button" class="btn btn-primary passwordchange-button">Επιβεβαίωση</button>
+                            <button type="button" className="btn btn-primary passwordchange-button">Επιβεβαίωση</button>
 
                         </form>
 
@@ -82,7 +82,7 @@ class SettingsSecurityPage extends Component {
                             <b>Επαλήθευση email:</b>
                         </p>
 
-                        <button ref={this.verify} onClick={this.verifyemail} type="button" class="btn btn-success verifyemail-button">Αποστολή μηνυμήματος επαλήθευσης</button>
+                        <button ref={this.verify} onClick={this.verifyemail} type="button" className="btn btn-success verifyemail-button">Αποστολή μηνυμήματος επαλήθευσης</button>
                         
                         <p ref={this.verifymsg} className="settings-unit emailsent-verify">
                             Το μήνυμα εστάλη!Δείτε το email σας! 

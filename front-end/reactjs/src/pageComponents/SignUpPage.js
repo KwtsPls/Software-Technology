@@ -30,7 +30,7 @@ class SignUpPage extends Component {
                                         <div className="input-group-prepend">
                                             <div className="input-group-text">@</div>
                                         </div>
-                                        <input type="email" class="form-control" id="emailInput" placeholder="Πληκτρολογίστε το email σας"/>
+                                        <input type="email" className="form-control" id="emailInput" placeholder="Πληκτρολογίστε το email σας"/>
                                     </div>
                                 </div>
                                 <div className="form-group pt-3">

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../App.css';
 import backlogicon from '../images/backlogout.png'
 import backloghovericon from '../images/backloghover.png'
@@ -10,7 +10,7 @@ import userphoto from '../images/userphoto.png'
 import settingsicon from '../images/settingsout.png'
 import settingshovericon from '../images/settingshover.png'
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function fnover(link_id){ //Function to replace a div contains with another (used in navbar menu choices on hover)
 	console.log("hover");
@@ -22,6 +22,7 @@ function fnout(link_id){ //Function to replace a div contains with another (used
 	document.getElementById(link_id.concat("Out")).style.display = "block"; // change display style attribute
 	document.getElementById(link_id.concat("Hover")).style.display = "none";
 }
+
 function Dropdown(){
 	return <div>
 		<Link to='/settings/profile'>
