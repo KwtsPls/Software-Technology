@@ -1,4 +1,4 @@
-package gr.uoa.di.cliapp;
+package gr.uoa.di.jete.cliapp;
 
 import org.jline.terminal.Terminal;
 import org.jline.utils.AttributedStringBuilder;

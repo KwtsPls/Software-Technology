@@ -1,6 +1,4 @@
-package gr.uoa.di.cliapp;
-
-import gr.uoa.di.cliapp.ShellHelper;
+package gr.uoa.di.jete.cliapp;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;

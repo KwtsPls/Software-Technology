@@ -1,1 +1,3 @@
 rootProject.name = 'cli-app'
+include ":api"
+project(":api").projectDir = file("../back-end")

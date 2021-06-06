@@ -13,9 +13,18 @@ repositories {
 }
 
 dependencies {
+	implementation project (":api");
+	implementation group: 'org.uispec4j', name: 'uispec4j', version: '2.2'
+	//Thanks for using https://jar-download.com
+
+	implementation 'com.google.code.gson:gson:2.8.7'
 	implementation 'org.springframework.shell:spring-shell-starter:2.0.1.RELEASE'
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.3'
 	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5'
+	implementation 'com.google.code.findbugs:jsr305:3.0.2'
+	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'mysql:mysql-connector-java'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

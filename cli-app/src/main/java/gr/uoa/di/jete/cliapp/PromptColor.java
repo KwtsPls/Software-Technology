@@ -1,4 +1,4 @@
-package gr.uoa.di.cliapp;
+package gr.uoa.di.jete.cliapp;
 
 
 public enum PromptColor {
