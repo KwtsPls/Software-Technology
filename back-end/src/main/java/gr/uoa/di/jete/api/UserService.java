@@ -1,10 +1,7 @@
 package gr.uoa.di.jete.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,9 +9,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-class UserService {
+class UserService{
 
-    @Autowired
     private final UserRepository userRepository;
     private final UserModelAssembler userModelAssembler;
 
@@ -39,11 +35,16 @@ class UserService {
     }
 
     //Returns the User with the given username and password
-    public EntityModel<User> getUserByLogin(String username,String password) {
+    public EntityModel<User> getUserByLogin(String username, String password) {
         User user = userRepository.findByLogin(username,password).orElse(new User());
         return userModelAssembler.toModel(user);
     }
 
+    //Returns the User with the given username and password
+    public EntityModel<User> getUserByUsername(String username) {
+        User user = userRepository.findByUsername(username).orElse(new User());
+        return userModelAssembler.toModel(user);
+    }
 
     //Inserts new user to Table
     public User addNewUser(User newUser) {
@@ -71,7 +72,7 @@ class UserService {
         if (userByEmail.isPresent())
             throw new EmailInUseException(newUser.getEmail());
 
-        Optional<User> userByUsername = userRepository.findByUsername(newUser.getEmail());
+        Optional<User> userByUsername = userRepository.findByUsername(newUser.getUsername());
         if (userByUsername.isPresent())
             throw new UserInUseException(newUser.getUsername());
 
@@ -144,40 +145,6 @@ class UserService {
             user.setUsername(username);
         }
     }
-
-    /*
-    @Transactional
-    public void updateUser(Long id, String username, String email,
-                           String bio, String location, Long status,
-                           String pronouns, String firstname, String lastname) {
-
-        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-
-        if (username != null && username.length() > 0 && !Objects.equals(user.getUsername(), username)) {
-            Optional<User> opt_user = userRepository.findByUsername(username);
-            if (opt_user.isPresent()) throw new IllegalStateException("USERNAME: " + username + "ALREADY IN USE!");
-            user.setUsername(username);
-        }
-        if (email != null && email.length() > 0 && !Objects.equals(user.getEmail(), email)) {
-            Optional<User> opt_user = userRepository.findUserByEmail(email);
-            if (opt_user.isPresent()) throw new IllegalStateException("EMAIL: " + email + "ALREADY EXISTS!");
-            user.setEmail(email);
-        }
-        if (bio != null && bio.length() > 0 && !Objects.equals(user.getBio(), bio))
-            user.setBio(bio);
-        if(location!=null && location.length()>0 && !Objects.equals(user.getLocation(),location))
-            user.setLocation(location);
-        if(status!=null && !Objects.equals(user.getStatus(),status))
-            user.setStatus(status);
-        if(pronouns!=null && pronouns.length()>0 && !Objects.equals(user.getPronouns(),pronouns))
-            user.setPronouns(pronouns);
-        if(firstname!=null && firstname.length()>0 && !Objects.equals(user.getFirstName(),firstname))
-            user.setFirstName(firstname);
-        if(lastname!=null && lastname.length()>0 && !Objects.equals(user.getLastName(),lastname))
-            user.setLastName(lastname);
-    }
-
-     */
 
     public void deleteById(Long id) {
         userRepository.deleteById(id);
