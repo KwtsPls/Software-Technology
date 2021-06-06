@@ -88,6 +88,7 @@
 
 .settingsprofile-button {
   margin-top: 60px;
+  margin-left: 324px;
 }
 
 .change-password-form {
@@ -105,7 +106,8 @@
 }
 
 .passwordchange-button {
-  margin-top: 8%;
+  margin-top: 50px;
+  margin-left: 390px;
   background-color: #723c70 !important;
   border-color: #3d113c !important;
 }
@@ -120,7 +122,8 @@
 }
 
 .verifyemail-button {
-  margin-left: 300px;
+  margin-left: 218px;
+  margin-top: 25px;
 }
 
 .emailsent-verify {
