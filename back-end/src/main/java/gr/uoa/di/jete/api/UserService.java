@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -181,5 +179,10 @@ class UserService {
 
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    public EntityModel<User> getUserByUsername(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException(username));
+        return userModelAssembler.toModel(user);
     }
 }

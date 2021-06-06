@@ -1,13 +1,11 @@
 package gr.uoa.di.jete.api;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.hateoas.*;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -45,6 +43,11 @@ class UserController {
         return userService.getUserByLogin(username,password);
     }
 
+    //Method for getting User By Username
+    @GetMapping("/users/name={username}")
+    EntityModel<User> getByUsername(@PathVariable String username){
+        return userService.getUserByUsername(username);
+    }
     //Method for user registration
     @PostMapping("/users/register/")
     User registerUser(@RequestBody UserDataTransferObject newUser){

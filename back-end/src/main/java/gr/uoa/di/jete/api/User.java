@@ -1,13 +1,14 @@
 package gr.uoa.di.jete.api;
 
+import com.google.gson.annotations.SerializedName;
+
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Optional;
 
 
 @Entity
 @Table(name = "user")
-class User {
+public class User {
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     private String username;
     private String password;
@@ -16,12 +17,14 @@ class User {
     private String location;
     private Long status;
     private String pronouns;
+    @SerializedName(value = "firstName")
     private String firstname;
+    @SerializedName(value = "lastName")
     private String lastname;
 
     public User(){}
-    User(String username, String password, String email, String bio, String location,
-         Long status, String pronouns, String firstname, String lastname){
+    public User(String username, String password, String email, String bio, String location,
+                Long status, String pronouns, String firstname, String lastname){
         this.username = username;
         this.password = password;
         this.email = email;
@@ -64,6 +67,7 @@ class User {
     public void setLastName(String lastName) {
         this.lastname = lastName;
     }
+
 
 
     @Override
