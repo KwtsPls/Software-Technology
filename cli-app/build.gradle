@@ -1,0 +1,26 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.0'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'gr.uoa.di'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.shell:spring-shell-starter:2.0.1.RELEASE'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.3'
+	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+
+test {
+	useJUnitPlatform()
+}
