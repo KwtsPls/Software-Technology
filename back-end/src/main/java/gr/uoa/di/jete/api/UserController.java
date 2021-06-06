@@ -21,6 +21,7 @@ import java.util.List;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+@CrossOrigin(origins={ "http://localhost:3000/" })
 @RestController("/api")
 class UserController {
 
@@ -43,13 +44,7 @@ class UserController {
                 linkTo(methodOn(UserController.class).all()).withSelfRel());
     }
 
-    //Single item
     @CrossOrigin
-    @PostMapping("/users/login")
-    EntityModel<User> login(@NotNull @RequestBody LoginCredentials loginCredentials){
-        return userService.getUserByLogin(loginCredentials.getUsername(),loginCredentials.getPassword());
-    }
-
     @RequestMapping(value = "/users/login/success", method = RequestMethod.GET)
     @ResponseBody
     public EntityModel<User> currentUserName(Principal principal) {

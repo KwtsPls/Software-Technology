@@ -20,14 +20,20 @@ function LoginPage() {
     let dataReceived = []
 
     function sendLoginCredentials() {
-        fetch('http://localhost:8080/users/login/u=' + user + '&p=' + pass)
+        fetch('http://localhost:8080/users/login/success', {
+            method: 'get', 
+            headers: new Headers({
+                authorization: 'Basic ' + window.btoa(user + ':' + pass) 
+        })
+        })
             .then(response => response.json())
             .then(data => {
+                console.log("13v");
                 console.log(data); // JSON data parsed by `data.json()` call
                 dataReceived = data;
             })
             .then( () => {
-                if (dataReceived.id != null){
+                if (dataReceived){
                     window.location.replace("http://localhost:3000/home");
                 }
                 else{

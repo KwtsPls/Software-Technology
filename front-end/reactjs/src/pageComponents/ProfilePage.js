@@ -12,7 +12,12 @@ function ProfilePage() {
     const [contacts, setTxt] = useState([])
     
     useEffect(() => {
-        fetch('http://localhost:8080/users')
+        fetch('http://localhost:8080/users', {
+            method: 'get', 
+            headers: new Headers({
+                authorization: 'Basic ' + window.btoa("abc:1234") 
+        })
+        })
             .then(res => res.json())
             .then((data) => {
                 setTxt(data);

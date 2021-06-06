@@ -39,15 +39,13 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .csrf()
-            .disable()
+            .disable().cors().and()
             .authorizeRequests()
             .antMatchers("/users/register")
             .permitAll()
             .anyRequest()
             .authenticated()
             .and()
-            .formLogin().permitAll()
-            .and()
-            .logout().permitAll();
+            .httpBasic();
     }
 }
