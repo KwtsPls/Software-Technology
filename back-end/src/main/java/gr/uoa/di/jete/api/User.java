@@ -78,10 +78,10 @@ public class User {
             return false;
         User user = (User) o;
         return Objects.equals(this.id, user.id) && Objects.equals(this.username, user.username)
-                && Objects.equals(this.email, user.email) && Objects.equals(this.bio,user.bio)
-                && Objects.equals(this.firstname,user.firstname) && Objects.equals(this.lastname,user.lastname)
-                && Objects.equals(this.location,user.location) && Objects.equals(this.status,user.status)
-                && Objects.equals(this.pronouns,user.pronouns) && Objects.equals(this.password,user.password) ;
+                && Objects.equals(this.email, user.email) && Objects.equals(this.bio, user.bio)
+                && Objects.equals(this.firstname, user.firstname) && Objects.equals(this.lastname, user.lastname)
+                && Objects.equals(this.location, user.location) && Objects.equals(this.status, user.status)
+                && Objects.equals(this.pronouns, user.pronouns) && Objects.equals(this.password, user.password) ;
 
     }
 
@@ -119,6 +119,8 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public void setPassword(String password) { this.password = password; }
 
     public String getBio() {
         return bio;

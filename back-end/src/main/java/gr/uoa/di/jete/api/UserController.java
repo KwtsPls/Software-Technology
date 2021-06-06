@@ -1,10 +1,21 @@
 package gr.uoa.di.jete.api;
 
 
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+=======
+import org.jetbrains.annotations.NotNull;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+import org.springframework.hateoas.*;
+
+import java.security.Principal;
+>>>>>>> aad641a273fb909e3de4e81457b1cf8833ae0b04
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -16,18 +27,14 @@ class UserController {
     private final UserService userService;
 
 
-
-//    private final UserRepository repository;
-//    private final UserModelAssembler assembler;
-
     UserController(UserService userService){
-//        this.repository = repository;
         this.userService = userService;
-//        this.assembler = assembler;
     }
 
-    //Aggregate root
-    //tag::get-aggregate-root[]
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @CrossOrigin
     @GetMapping("/users")
     CollectionModel<EntityModel<User>> all(){
@@ -35,12 +42,18 @@ class UserController {
         return CollectionModel.of(users,
                 linkTo(methodOn(UserController.class).all()).withSelfRel());
     }
-    // end::get-aggregate-root[]
 
     //Single item
-    @GetMapping("/users/login/u={username}&p={password}")
-    EntityModel<User> login(@PathVariable String username,@PathVariable String password){
-        return userService.getUserByLogin(username,password);
+    @CrossOrigin
+    @PostMapping("/users/login")
+    EntityModel<User> login(@NotNull @RequestBody LoginCredentials loginCredentials){
+        return userService.getUserByLogin(loginCredentials.getUsername(),loginCredentials.getPassword());
+    }
+
+    @RequestMapping(value = "/users/login/success", method = RequestMethod.GET)
+    @ResponseBody
+    public EntityModel<User> currentUserName(Principal principal) {
+        return userService.getUserByUsername(principal.getName());
     }
 
     //Method for getting User By Username
@@ -49,13 +62,16 @@ class UserController {
         return userService.getUserByUsername(username);
     }
     //Method for user registration
-    @PostMapping("/users/register/")
+    @CrossOrigin
+    @PostMapping("/users/register")
     User registerUser(@RequestBody UserDataTransferObject newUser){
         //Create a validation object and check email and password validity
         RegistrationValidation validation = new RegistrationValidation();
         if(!validation.isValid(newUser.getEmail(), newUser.getPassword(), newUser.getMatchingPassword()))
             throw new InvalidUserRegistration();
         User user = newUser.createUser();
+        PasswordEncoder passwordEncoder = encoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userService.addNewUser(user);
     }
 
@@ -76,26 +92,9 @@ class UserController {
         return userService.updateUser(newUser,id);
     }
 
-    /*
-    @PutMapping("/users/{id}")
-    void updateUser(@PathVariable("id") Long id, @RequestParam(required = false) String username,
-                    @RequestParam(required = false) String email,
-                    @RequestParam(required = false) String bio,
-                    @RequestParam(required = false) String location,
-                    @RequestParam(required = false) Long status,
-                    @RequestParam(required = false) String pronouns,
-                    @RequestParam(required = false) String firstname,
-                    @RequestParam(required = false) String lastname) {
-        userService.updateUser(id, username, email, bio, location, status,
-                pronouns, firstname, lastname);
-    }
-    */
-
     @DeleteMapping("/users/{id}")
     void deleteEmployee(@PathVariable Long id){
         userService.deleteById(id);
     }
-
-
 
 }
