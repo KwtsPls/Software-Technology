@@ -16,19 +16,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-<<<<<<< HEAD
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-<<<<<<< HEAD
-
 	implementation 'com.google.code.gson:gson:2.8.7'
-||||||| 30c532e
-=======
-	implementation 'org.springframework.boot:spring-boot-starter-security'
->>>>>>> caaa8e7af62b0a851cecffa90c040b32bb607de4
-||||||| caaa8e7
-=======
-	implementation 'com.google.code.gson:gson:2.8.7'
->>>>>>> b58fdb22ace5cbc9391c12ecf8f18704a2ae9a8f
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
