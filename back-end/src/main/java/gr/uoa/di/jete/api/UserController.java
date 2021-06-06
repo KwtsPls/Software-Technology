@@ -1,21 +1,13 @@
 package gr.uoa.di.jete.api;
 
 
-import org.jetbrains.annotations.NotNull;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-=======
-import org.jetbrains.annotations.NotNull;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
-
-import org.springframework.hateoas.*;
 
 import java.security.Principal;
->>>>>>> aad641a273fb909e3de4e81457b1cf8833ae0b04
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
