@@ -1,7 +1,6 @@
 package gr.uoa.di.jete.api;
 
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,7 +13,8 @@ import java.util.List;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-@RestController("/api")
+@CrossOrigin
+@RestController
 class UserController {
 
     private final UserService userService;
@@ -28,7 +28,6 @@ class UserController {
         return new BCryptPasswordEncoder();
     }
 
-    @CrossOrigin
     @GetMapping("/users")
     CollectionModel<EntityModel<User>> all(){
         List<EntityModel<User>> users = userService.getUserCollectionList();
@@ -36,7 +35,6 @@ class UserController {
                 linkTo(methodOn(UserController.class).all()).withSelfRel());
     }
 
-    @CrossOrigin
     @RequestMapping(value = "/users/login/success", method = RequestMethod.GET)
     @ResponseBody
     public EntityModel<User> currentUserName(Principal principal) {
@@ -47,19 +45,6 @@ class UserController {
     @GetMapping("/users/name={username}")
     EntityModel<User> getByUsername(@PathVariable String username){
         return userService.getUserByUsername(username);
-    }
-    //Method for user registration
-    @CrossOrigin
-    @PostMapping("/users/register")
-    User registerUser(@RequestBody UserDataTransferObject newUser){
-        //Create a validation object and check email and password validity
-        RegistrationValidation validation = new RegistrationValidation();
-        if(!validation.isValid(newUser.getEmail(), newUser.getPassword(), newUser.getMatchingPassword()))
-            throw new InvalidUserRegistration();
-        User user = newUser.createUser();
-        PasswordEncoder passwordEncoder = encoder();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userService.addNewUser(user);
     }
 
     @PostMapping("/users")
