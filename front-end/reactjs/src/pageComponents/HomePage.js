@@ -6,10 +6,10 @@ import { useHistory } from 'react-router-dom'
 
 function HomePage() {
     const history = useHistory();
-    const isUserLoggedIn = JSON.parse(localStorage.getItem('loggedUser'));
+    const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
 
     useEffect(() => {
-        if (!isUserLoggedIn){
+        if (!loggedUser){
             history.push("/login");
         }
     }, []);

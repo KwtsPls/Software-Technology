@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import '../../App.css';
 import '../../css/settings.css';
 import SideNavBar from '../../components/SideNavBar.js'
@@ -9,6 +9,15 @@ import BankPopUp from '../../components/BankPopUp.js'
 
 
 function SettingsBillingPage() {
+
+    const history = useHistory();
+    const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+
+    useEffect(() => {
+        if (!loggedUser){
+            history.push("/login");
+        }
+    }, []);
 
     const [modalShow, setModalShow] = useState(false);
 

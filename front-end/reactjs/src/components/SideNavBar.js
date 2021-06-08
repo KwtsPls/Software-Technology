@@ -71,11 +71,11 @@ function SideNavBar(){
         <div className="SideNavBar" >
 			<Link to='/profile'>
 				<div className="userDisplay">
-					<a href="#" className="userNameNavBar" ><img className = "user-icon" src={userphoto} alt="avatar"></img><li id="userNameDisplay">{loggedUser.username}</li></a>
+					<a href="#" className="userNameNavBar" ><img className = "user-icon" src={userphoto} alt="avatar"></img><li id="userNameDisplay">{loggedUser && loggedUser.username}</li></a>
 				</div>
             </Link>
 
-			<button onClick={logout}>yes</button>
+			<button onClick={logout}>logout</button>
 			<div className="NavBar">
 
 				<Link to='/home'>

@@ -1,12 +1,21 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import '../../App.css';
 import '../../css/projects.css';
 import SideNavBar from '../../components/SideNavBar.js'
 import Topbar from '../../components/Topbar.js'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 
 function ProjectsPage() {
+
+    const history = useHistory();
+    const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+
+    useEffect(() => {
+        if (!loggedUser){
+            history.push("/login");
+        }
+    }, []);
 
     const [all, changeAll] = useState("nav-link active");
     const [arch, changeArch] = useState("nav-link");

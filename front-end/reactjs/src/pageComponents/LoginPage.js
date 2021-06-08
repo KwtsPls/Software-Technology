@@ -1,9 +1,8 @@
-import React, { Component, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import logo from '../images/logo.png';
 import partners from '../images/partners.png';
 import {Modal} from "react-bootstrap"
-
 
 import '../App.css'
 import '../css/login.css'
@@ -11,6 +10,13 @@ import '../css/login.css'
 
 function LoginPage() {
     const history = useHistory();
+    const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+
+    useEffect(() => {
+        if (loggedUser){
+            history.push("/home");
+        }
+    }, []);
 
     const [user, setUser] = useState("");
     const [pass, setPass] = useState("");

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import '../../App.css';
 import { Link, useHistory } from 'react-router-dom'
-
 import SideNavBar from '../../components/SideNavBar.js'
 import Topbar from '../../components/Topbar.js'
 import '../../css/settings.css';
 
 
 function SettingsProfilePage() {
+
+    const history = useHistory();
+    const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
 
     const [isLoading, setLoading] = useState(true);
     const [user, setUser] = useState([])
@@ -19,20 +21,14 @@ function SettingsProfilePage() {
     const [bio, setBio] = useState("")
     const [loc, setLoc] = useState("")
 
-    const history = useHistory();
-    const isUserLoggedIn = JSON.parse(localStorage.getItem('loggedUser'));
-
-    
     useEffect(() => {
-        if (!isUserLoggedIn){
+        if (!loggedUser){
             history.push("/login");
         }
         else{
-            fetch('http://localhost:8080/users/1', {
+            fetch('http://localhost:8080/users/' + loggedUser.id, {
                 method: 'get', 
-                headers: new Headers({
-                    authorization: 'Basic ' + window.btoa("abc:1234") 
-            })
+                headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
             })
                 .then(res => res.json())
                 .then((data) => {
@@ -60,7 +56,7 @@ function SettingsProfilePage() {
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json',
-                        authorization: 'Basic ' + window.btoa("abc:1234") 
+                        'Authorization': 'Bearer ' + loggedUser.accessToken  
                     },
             body: JSON.stringify({  firstName: conditionalUpdate(fName,'firstName'),
                                     lastName: conditionalUpdate(lName,'lastName'),
@@ -69,7 +65,7 @@ function SettingsProfilePage() {
                                     bio: conditionalUpdate(bio,'bio')
                                 })
         };
-        fetch('http://localhost:8080/users/1', requestOptions)
+        fetch('http://localhost:8080/users/' + loggedUser.id, requestOptions)
             .then(response => response.json())
             .then(data => {
                 console.log(data); // JSON data parsed by `data.json()` call

@@ -3,56 +3,36 @@ import '../App.css';
 //import '../css/settings.css';
 import SideNavBar from '../components/SideNavBar.js'
 import Topbar from '../components/Topbar.js'
+import { useHistory } from 'react-router-dom'
 
 
 function ProfilePage() {
 
+    const history = useHistory();
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
 
     let keepo=false;
     const [isLoading, setLoading] = useState(true);
     const [contacts, setTxt] = useState([])
 
-    // fetch('http://localhost:8080/signin', { //from login page just to be able to see
-    //         method: 'post', 
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify({  username: user,
-    //                                 password: pass
-    //     })
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log(data);
-    //         if (data.accessToken) {
-    //           localStorage.setItem("loggedUser", JSON.stringify(data));
-    //         }
-    //         console.log(data);
-    //         dataReceived = data;
-    //       }).then( () => {
-    //             if (dataReceived){
-    //                 localStorage.setItem("loggedUser", true);
-    //                 console.log("logged in");
-    //                 history.push("/home");
-    //             }
-    //             else{
-    //                 handleShow();
-    //             }
-    //         });
-    
     useEffect(() => {
-        console.log(loggedUser.accessToken);
-        fetch('http://localhost:8080/users', {
-            method: 'get', 
-            headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
-        })
-            .then(res => res.json())
-            .then((data) => {
-                console.log(data);
-                setTxt(data);
-                setLoading(false);
+        if (!loggedUser){
+            history.push("/login");
+        }
+        else{
+            fetch('http://localhost:8080/users', {
+                method: 'get', 
+                headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
             })
-
-        keepo = false;
+                .then(res => res.json())
+                .then((data) => {
+                    console.log(data);
+                    setTxt(data);
+                    setLoading(false);
+                })
+    
+            keepo = false;
+        }
     }, []);
 
     function kappa(){
