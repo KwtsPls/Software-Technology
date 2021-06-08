@@ -1,4 +1,4 @@
-package gr.uoa.di.jete;
+package gr.uoa.di.jete.api;
 
 public class JwtResponse {
     private String token;

@@ -1,7 +1,5 @@
 package gr.uoa.di.jete.api;
 
-import gr.uoa.di.jete.JwtResponse;
-import gr.uoa.di.jete.JwtUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

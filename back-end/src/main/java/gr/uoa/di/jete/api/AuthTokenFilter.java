@@ -1,6 +1,5 @@
 package gr.uoa.di.jete.api;
 
-import gr.uoa.di.jete.JwtUtils;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
