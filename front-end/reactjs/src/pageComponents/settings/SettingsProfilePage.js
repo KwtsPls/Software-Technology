@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../App.css';
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import SideNavBar from '../../components/SideNavBar.js'
 import Topbar from '../../components/Topbar.js'
@@ -18,14 +18,29 @@ function SettingsProfilePage() {
     const [username, setUsername] = useState("")
     const [bio, setBio] = useState("")
     const [loc, setLoc] = useState("")
+
+    const history = useHistory();
+    const isUserLoggedIn = JSON.parse(localStorage.getItem('loggedUser'));
+
     
     useEffect(() => {
-        fetch('http://localhost:8080/users/1')
-            .then(res => res.json())
-            .then((data) => {
-                setUser(data);
-                setLoading(false);
+        if (!isUserLoggedIn){
+            history.push("/login");
+        }
+        else{
+            fetch('http://localhost:8080/users/1', {
+                method: 'get', 
+                headers: new Headers({
+                    authorization: 'Basic ' + window.btoa("abc:1234") 
             })
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    setUser(data);
+                    setLoading(false);
+                })
+
+        }
     }, []);
 
     function placeHolder(load,attr){
@@ -40,9 +55,6 @@ function SettingsProfilePage() {
         return stateItem;
     }
 
-
-    //Note to Stavros: at the moment Put requests only add a
-    //   zero the end of first name, working on more
     function changeInfo() {
         // Simple PUT request with a JSON body using fetch
         const requestOptions = {
@@ -64,6 +76,9 @@ function SettingsProfilePage() {
               });
             setTimeout(function(){window.location.reload();}, 100);
     }
+
+    
+    
 
     return (
         <div>

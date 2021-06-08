@@ -55,19 +55,27 @@ function Dropdown(){
 
 function SideNavBar(){
 
+	const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+
 	const [dropdown, setClick] = useState(false);
 
 	const handleClick = () => setClick(!dropdown);
 
+	function logout() {
+        localStorage.removeItem("loggedUser");
+		console.log("logging out");
+		setTimeout(function(){window.location.reload();}, 10);
+    }
+
     return (
         <div className="SideNavBar" >
-			
 			<Link to='/profile'>
 				<div className="userDisplay">
-					<a href="#" className="userNameNavBar" ><img className = "user-icon" src={userphoto} alt="avatar"></img><li id="userNameDisplay">bderos97</li></a>
+					<a href="#" className="userNameNavBar" ><img className = "user-icon" src={userphoto} alt="avatar"></img><li id="userNameDisplay">{loggedUser.username}</li></a>
 				</div>
             </Link>
 
+			<button onClick={logout}>yes</button>
 			<div className="NavBar">
 
 				<Link to='/home'>
