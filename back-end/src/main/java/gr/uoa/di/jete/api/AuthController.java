@@ -57,6 +57,8 @@ public class AuthController {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
+        userService.addNewUser(user);
+
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 }
