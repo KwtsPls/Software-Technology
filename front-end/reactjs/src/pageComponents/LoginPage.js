@@ -1,5 +1,5 @@
-import React, { Component, useState } from 'react';
-import { Link } from 'react-router-dom'
+import React, { Component, useState} from 'react';
+import { Link, useHistory } from 'react-router-dom'
 import logo from '../images/logo.png';
 import partners from '../images/partners.png';
 import {Modal} from "react-bootstrap"
@@ -10,6 +10,8 @@ import '../css/login.css'
 
 
 function LoginPage() {
+    const history = useHistory();
+
     const [user, setUser] = useState("");
     const [pass, setPass] = useState("");
 
@@ -20,26 +22,47 @@ function LoginPage() {
     let dataReceived = []
 
     function sendLoginCredentials() {
-        fetch('http://localhost:8080/users/login/success', {
-            method: 'get', 
-            headers: new Headers({
-                authorization: 'Basic ' + window.btoa(user + ':' + pass) 
+        fetch('http://localhost:8080/signin', {
+            method: 'post', 
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({  username: user,
+                                    password: pass
         })
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log("13v");
-                console.log(data); // JSON data parsed by `data.json()` call
-                dataReceived = data;
-            })
-            .then( () => {
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            if (data.accessToken) {
+              localStorage.setItem("loggedUser", JSON.stringify(data));
+            }
+            console.log(data);
+            dataReceived = data;
+          }).then( () => {
                 if (dataReceived){
-                    window.location.replace("http://localhost:3000/home");
+                    //localStorage.setItem("loggedUser", true);
+                    console.log("logged in");
+                    history.push("/home");
                 }
                 else{
                     handleShow();
                 }
             });
+            // .then(response => response.json())
+            // .then(data => {
+            //     console.log("13v");
+            //     console.log(data); // JSON data parsed by `data.json()` call
+            //     dataReceived = data;
+            // })
+            // .then( () => {
+            //     if (dataReceived){
+            //         localStorage.setItem("loggedUser", true);
+            //         console.log("logged in");
+            //         history.push("/home");
+            //     }
+            //     else{
+            //         handleShow();
+            //     }
+            // });
     } 
 
     return (
