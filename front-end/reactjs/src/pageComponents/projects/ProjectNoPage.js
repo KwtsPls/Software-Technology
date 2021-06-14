@@ -3,7 +3,9 @@ import '../../App.css';
 import '../../css/projects.css';
 import SideNavBar from '../../components/SideNavBar.js'
 import Topbar from '../../components/Topbar.js'
+import Backlog from '../../components/Backlog.js'
 import { Link, useHistory } from 'react-router-dom'
+
 
 
 function ProjectNoPage() {
@@ -17,37 +19,53 @@ function ProjectNoPage() {
         }
     }, []);
 
-    const [spr, changeSpr] = useState("nav-link active");
+    const [backlog, changeBacklog] = useState("nav-link active");
+    const [spr, changeSpr] = useState("nav-link");
     const [epics, changeEpics] = useState("nav-link");
     const [pastSpr, changePastSpr] = useState("nav-link");
-    const [sprintShowing, changeTab] = useState(true);
+    const [pressedTab, changeTab] = useState("backlog");
     const [vertOrHoz, changeVerHoz] = useState("row pt-3 overflow-auto horizontal-scrollable");
 
+    function clickBacklog() {
+        changeBacklog("nav-link active");
+        changeSpr("nav-link");
+        changeEpics("nav-link");
+        changePastSpr("nav-link");
+        changeSprShown(sprNames);
+        changeTab("backlog");
+        changeVerHoz("row pt-3 vertical-scrollable overflow-auto");
+    }
+
     function clickSpr() {
+        changeBacklog("nav-link");
         changeSpr("nav-link active");
         changeEpics("nav-link");
         changePastSpr("nav-link");
         changeSprShown(sprNames);
-        changeTab(true);
+        changeTab("sprints");
         changeVerHoz("row pt-3 overflow-auto horizontal-scrollable");
     }
 
     function clickEpics() {
+        changeBacklog("nav-link");
         changeSpr("nav-link");
         changeEpics("nav-link active");
         changePastSpr("nav-link");
-        changeTab(false);
+        changeTab("epics");
         changeVerHoz("row pt-3 vertical-scrollable overflow-auto");
     }
 
     function clickPastSpr() {
+        changeBacklog("nav-link");
         changeSpr("nav-link");
         changeEpics("nav-link");
         changePastSpr("nav-link active");
         changeSprShown(pastSprNames);
-        changeTab(true);
+        changeTab("sprints");
         changeVerHoz("row pt-3 overflow-auto horizontal-scrollable");
     }
+
+
 
     let sprNames = ['Sprint 1','Sprint 2','Sprint 3','Sprint 4','Sprint 5'];
     let pastSprNames = ['Old Sprint 1','Old Sprint 2','Old Sprint 3','Old Sprint 4','Old Sprint 5'];
@@ -86,8 +104,11 @@ function ProjectNoPage() {
                         {/* ----------- Nav Tabs ------------ */}
                         <div className="col-8">
                             <ul className="nav nav-tabs"> 
+                                <li className="nav-item"  onClick={clickBacklog}>
+                                    <a className={backlog} aria-current="page" href="#">Backlog</a>
+                                </li>
                                 <li className="nav-item"  onClick={clickSpr}>
-                                    <a className={spr} aria-current="page" href="#">Sprints</a>
+                                    <a className={spr} href="#">Sprints</a>
                                 </li>
                                 <li className="nav-item" onClick={clickEpics}>
                                     <a className={epics} href="#">Epics</a>
@@ -105,7 +126,7 @@ function ProjectNoPage() {
                             </div>
                         </div>
                         <div className={vertOrHoz}>
-                            {!sprintShowing && epicNames.map(i => 
+                            {(pressedTab === "epics") && epicNames.map(i => 
                                 <div className="row pt-3">
                                     <div className="col-12">
                                         <div className="card">
@@ -118,7 +139,7 @@ function ProjectNoPage() {
                                     </div>
                                 </div>
                             )}
-                            {sprintShowing && sprintsShown.map(i => 
+                            {(pressedTab === "sprints") && sprintsShown.map(i => 
                                     <div className="col-4 full-col">
                                         <div className="card full-col">
                                             <div className="card-body">
@@ -129,6 +150,7 @@ function ProjectNoPage() {
                                         </div>
                                     </div>
                             )}
+                            {(pressedTab === "backlog") && (<Backlog/>)}
                         </div>
                     </div>
                 </div>
