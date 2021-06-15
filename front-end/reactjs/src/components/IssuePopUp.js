@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import '../App.css';
 import {Modal, Button} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import PaymentIcon from 'react-payment-icons-inline';
+import AssignDev from './AssignDev.js'
 
 
 
@@ -16,6 +14,8 @@ function IssuePopUp(props){
     const sprints = ['Τρέχων Sprint', 'Επόμενο Sprint', 'Παράεπομενο Sprint']
 
     const [selectedType, setIssTy] = useState('')
+
+    const [devs, setDevs] = useState([])
 
     return (
         <div>
@@ -62,7 +62,7 @@ function IssuePopUp(props){
                             </div>
                             </>
                         )}
-                        {(selectedType === 'Task') && (
+                        {(selectedType === 'Task') && ( <>
                             <div className="col-md-6">
                                 <label for="chooseStory" className="form-label">Ανάθεση σε Story</label>
                                 <select id="chooseStory" className="form-select">
@@ -70,17 +70,19 @@ function IssuePopUp(props){
                                     {stories.map(i => <option key={i}>{i}</option>)}
                                 </select>
                             </div>
-                        )}
-                        <div className="col-12">
-                            <label for="assignDev" className="form-label">Assign Dev</label>
-                            <input type="text" className="form-control" id="assignDev" placeholder="Dev name"/>
-                        </div>
+                            <div className="col-12">
+                                <label for="assignDev" className="form-label">Assign Dev</label>
+                                <AssignDev devs={devs} setDevs={setDevs}/>
+                            </div>
+                        </>)}
+                    </form>
+                    <div className="row g-3 pt-3">
                         <div className="col-8">
                             {/* <Link to='/home'> */}
                                 <button type="submit" className="btn btn-primary">Επιβεβαίωση</button>
                             {/* </Link> */}
                         </div>
-                    </form>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="outline-danger" onClick={props.onHide}>Άκυρο</Button>

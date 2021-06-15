@@ -1,9 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import '../App.css';
-import {Modal, Button} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import PaymentIcon from 'react-payment-icons-inline';
 
 
 
@@ -16,11 +12,10 @@ function Backlog(){
     const [cond4, setCond4] = useState(true);
     const [cond5, setCond5] = useState(false);
 
-    const [perc, setPerc] = useState(calcPerc);
 
     function doneSatus(cond){
         if (cond){
-            return (<span class="badge bg-success rounded-pill" style={{'background-image': "linear-gradient(to bottom right,#992b95,#2136f5a6)"}}>
+            return (<span class="badge bg-success rounded-pill cool-purple">
                 Done
             </span>);
         }
@@ -68,6 +63,8 @@ function Backlog(){
         console.log(count / 5)
         return (count / 5) * 100
     }
+
+    const [perc, setPerc] = useState(calcPerc());
 
     useEffect(() => {
         setPerc(calcPerc)
