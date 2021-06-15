@@ -5,6 +5,7 @@ import SideNavBar from '../../components/SideNavBar.js'
 import Topbar from '../../components/Topbar.js'
 import Backlog from '../../components/Backlog.js'
 import { Link, useHistory } from 'react-router-dom'
+import IssuePopUp from '../../components/IssuePopUp.js'
 
 
 
@@ -18,6 +19,8 @@ function ProjectNoPage() {
             history.push("/login");
         }
     }, []);
+
+    const [modalShow, setModalShow] = useState(false);
 
     const [backlog, changeBacklog] = useState("nav-link active");
     const [spr, changeSpr] = useState("nav-link");
@@ -78,6 +81,7 @@ function ProjectNoPage() {
 
     return (
         <div>
+            <IssuePopUp show={modalShow} onHide={() => setModalShow(false)}/>
 			<Topbar/>
             <SideNavBar/>
             <div className="mainContent">
@@ -97,7 +101,7 @@ function ProjectNoPage() {
                             <h1 className="text">Project Something</h1>
                         </div>
                         <div className="col-6">
-                            <button type="button" className="btn btn-outline-secondary float-end">Create Issue</button>
+                            <button type="button" className="btn btn-outline-secondary float-end" onClick={() => setModalShow(true)}>Create Issue</button>
                         </div>
                     </div>
                     <div className="row pt-4">
