@@ -4,6 +4,7 @@ import '../../css/projects.css';
 import SideNavBar from '../../components/SideNavBar.js'
 import Topbar from '../../components/Topbar.js'
 import { Link, useHistory } from 'react-router-dom'
+import NewProjectPopUp from '../../components/NewProjectPopUp.js'
 
 
 function ProjectsPage() {
@@ -32,7 +33,7 @@ function ProjectsPage() {
         changeProj(archNames);
     }
 
-    let allNames = ['Atlas','Zeus','Prometheus','Apollo','Johnny','Porta'];
+    const [allNames, setAllNames] = useState(['Atlas','Zeus','Prometheus','Apollo','Johnny','Porta']);
     let archNames = ['Epikalesths','Thomas','Margarita','Pokopikos','Johnny palios'];
 
 
@@ -41,8 +42,16 @@ function ProjectsPage() {
     const searchButton = document.getElementById('search-button');
     const searchInput = document.getElementById('search-input');
 
+    const [searchVal, setSearch] = useState("");
+    const [modalShow, setModalShow] = useState(false);
+
+    function addProj(name) {
+        allNames.push(name)
+    }
+
     return (
         <div>
+            <NewProjectPopUp show={modalShow} onHide={() => setModalShow(false)} addProj={addProj}/>
 			<Topbar/>
             <SideNavBar/>
             <div className="mainContent">
@@ -57,7 +66,7 @@ function ProjectsPage() {
                             <h1 className="text projects-page-header">Projects</h1>
                         </div>
                         <div className="col-6">
-                            <button type="button" className="btn btn-outline-secondary float-end">Δημιουργία Project</button>
+                            <button type="button" className="btn btn-outline-secondary float-end" onClick={() => setModalShow(true)}>Δημιουργία Project</button>
                         </div>
                     </div>
                     <div className="row pt-4">
@@ -75,13 +84,13 @@ function ProjectsPage() {
                         {/* ----------- Search Bar ------------ */}
                         <div className="col-4">
                             <div className="input-group mb-3 searchbar">
-                                <input type="text" className="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="button-addon2"/>
+                                <input type="text" className="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="button-addon2" value={searchVal} onChange={e => setSearch(e.target.value)}/>
                                 <button className="btn btn-outline-secondary" type="button" id="button-addon2">Go</button>
                             </div>
                         </div>
                         <div className="row pt-3 vertical-scrollable overflow-auto">
-                            {projNames.map(i => 
-                                <div className="row pt-3">
+                            {projNames.map(i => i.toLowerCase().includes(searchVal.toLowerCase()) &&
+                                (<div className="row pt-3">
                                     <div className="col-12">
                                         <div className="card">
                                             <div className="card-body">
@@ -93,7 +102,7 @@ function ProjectsPage() {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>)
                             )}
                         </div>
                     </div>
@@ -102,10 +111,10 @@ function ProjectsPage() {
         </div>
     );
     
-        // searchButton.addEventListener('click', () => {
-        // const inputValue = searchInput.value;
-        // alert(inputValue);
-        // });
+    // searchButton.addEventListener('click', () => {
+    // const inputValue = searchInput.value;
+    // alert(inputValue);
+    // });
 }
  
 export default ProjectsPage;

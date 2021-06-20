@@ -18,11 +18,14 @@ function AssignDev(props){
     }
 
     function addDev() {
-        props.devs.push(devToBeAdded)
-        //setDevs()
-        console.log("added " + devToBeAdded)
+        var index = props.devs.indexOf(devToBeAdded)
+        if (index == -1) {
+            props.devs.push(devToBeAdded)
+            //setDevs()
+            console.log("added " + devToBeAdded)
+            incr()
+        }
         setDev("")
-        incr()
     }
 
     function remDev(name) {
@@ -39,7 +42,7 @@ function AssignDev(props){
         <div className="container"> 
             <div className="row" style={{position: 'relative', left: '0'}}>
                 <div className="col-10">
-                    <input type="text" className="form-control" id="assignDev" placeholder="Dev name"  value={devToBeAdded} onChange={e => setDev(e.target.value)}/>
+                    <input type="text" className="form-control" id="assignDev" placeholder="Username του Developer"  value={devToBeAdded} onChange={e => setDev(e.target.value)}/>
                 </div>
                 <div className="col-2">
                     <div className="btn btn-outline-primary" onClick={addDev}>Add</div>
@@ -51,7 +54,7 @@ function AssignDev(props){
                 {
                     props.devs.map(i => <div key={i}>
                         <span class="badge bg-primary rounded-pill cool-purple">{i}</span>
-                        <small> added as dev </small>
+                        <small>{props.message}</small>
                         <span class="badge bg-danger rounded-pill  float-end" onClick={() => remDev(i)}>remove</span>
                         </div>
                     )

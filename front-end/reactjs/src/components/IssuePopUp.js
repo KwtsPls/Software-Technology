@@ -72,7 +72,7 @@ function IssuePopUp(props){
                             </div>
                             <div className="col-12">
                                 <label for="assignDev" className="form-label">Assign Dev</label>
-                                <AssignDev devs={devs} setDevs={setDevs}/>
+                                <AssignDev devs={devs} setDevs={setDevs} message=" added as dev "/>
                             </div>
                         </>)}
                     </form>
