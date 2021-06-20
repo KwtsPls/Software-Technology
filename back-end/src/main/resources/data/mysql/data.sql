@@ -19,7 +19,7 @@ Create table for projects for app and add some dummy data
 ----------------------------------------------------------
 */
 drop table if exists project;
-create table project(id int not null auto_increment,title varchar(40),description varchar(200));
+create table project(id int not null primary key auto_increment,title varchar(40),description varchar(200));
 
 insert into project(title,description) values('jete','just a dummy description');
 insert into project(title,description) values('app','just a dummy description');
@@ -73,17 +73,17 @@ Create table for sprints for app and add some dummy data
 */
 drop table if exists sprint;
 create table sprint
-(id int not null auto_increment, project_id int not null, title varchar(45) not null, status int not null,
+(id int not null, project_id int not null, title varchar(45) not null, status int not null,
     constraint sprint_pk
         primary key (project_id, id),
     constraint fk_sprint_project1
         foreign key (project_id) references project (id)
 );
 
-insert into sprint(project_id, title, status) values(1,'sprint#1',1);
-insert into sprint(project_id, title, status) values(1,'sprint#2',0);
-insert into sprint(project_id, title, status) values(1,'sprint#3',0);
-insert into sprint(project_id, title, status) values(1,'sprint#4',2);
-insert into sprint(project_id, title, status) values(2,'sprint#1',1);
-insert into sprint(project_id, title, status) values(2,'sprint#2',2);
-insert into sprint(project_id, title, status) values(3,'sprint#1',1);
+insert into sprint(id,project_id, title, status) values(1,1,'sprint#1',1);
+insert into sprint(id,project_id, title, status) values(2,1,'sprint#2',0);
+insert into sprint(id,project_id, title, status) values(3,1,'sprint#3',0);
+insert into sprint(id,project_id, title, status) values(4,1,'sprint#4',2);
+insert into sprint(id,project_id, title, status) values(5,2,'sprint#1',1);
+insert into sprint(id,project_id, title, status) values(6,2,'sprint#2',2);
+insert into sprint(id,project_id, title, status) values(7,3,'sprint#1',1);
