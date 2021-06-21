@@ -4,7 +4,7 @@ import '../App.css';
 
 
 
-function Backlog(){
+function Backlog(props){
 
     const [cond1, setCond1] = useState(true);
     const [cond2, setCond2] = useState(false);
@@ -23,22 +23,32 @@ function Backlog(){
     }
 
     function gg1(){
+        props.setSelectedTask(tasks[0])
+        props.setModalTaskInfoShow(true)
         setCond1(!cond1)
     }
 
     function gg2(){
+        props.setSelectedTask(tasks[1])
+        props.setModalTaskInfoShow(true)
         setCond2(!cond2)
     }
 
     function gg3(){
+        props.setSelectedTask(tasks[2])
+        props.setModalTaskInfoShow(true)
         setCond3(!cond3)
     }
 
     function gg4(){
+        props.setSelectedTask(tasks[3])
+        props.setModalTaskInfoShow(true)
         setCond4(!cond4)
     }
 
     function gg5(){
+        props.setSelectedTask(tasks[4])
+        props.setModalTaskInfoShow(true)
         setCond5(!cond5)
     }
 
@@ -70,28 +80,30 @@ function Backlog(){
         setPerc(calcPerc)
     }, [cond1,cond2,cond3,cond4,cond5]);
 
+    const tasks = ['Make Unittests for new modules','Correct port connectivity for PDCH','Rewrite auth for system_aaa','Make new OHM samples','Cook a nice carbonara']
+
     return (
         <div class="container">
             <div class="row">
             <ul class="list-group" style={{width: '100%'}}>
                 <li class="list-group-item d-flex justify-content-between align-items-center" onClick={gg1}>
-                    Make Unittests for new modules
+                    {tasks[0]}
                     {doneSatus(cond1)}
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center" onClick={gg2}>
-                    Correct port connectivity for PDCH
+                    {tasks[1]}
                     {doneSatus(cond2)}
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center" onClick={gg3}>
-                    Rewrite auth for system_aaa
+                    {tasks[2]}
                     {doneSatus(cond3)}
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center" onClick={gg4}>
-                    Make new OHM samples
+                    {tasks[3]}
                     {doneSatus(cond4)}
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center" onClick={gg5}>
-                    Cook a nice carbonara
+                    {tasks[4]}
                     {doneSatus(cond5)}
                 </li>
             </ul>

@@ -6,6 +6,7 @@ import Topbar from '../../components/Topbar.js'
 import Backlog from '../../components/Backlog.js'
 import { Link, useHistory } from 'react-router-dom'
 import IssuePopUp from '../../components/IssuePopUp.js'
+import TaskInfoPopUp from '../../components/TaskInfoPopUp.js'
 
 
 
@@ -20,7 +21,8 @@ function ProjectNoPage() {
         }
     }, []);
 
-    const [modalShow, setModalShow] = useState(false);
+    const [modalIssueShow, setModalIssueShow] = useState(false);
+    const [modalTaskInfoShow, setModalTaskInfoShow] = useState(false);
 
     const [backlog, changeBacklog] = useState("nav-link active");
     const [spr, changeSpr] = useState("nav-link");
@@ -76,12 +78,15 @@ function ProjectNoPage() {
     
     const [sprintsShown, changeSprShown] = useState(sprNames);
 
+    const [clickedTask, setClickedTask] = useState("");
+
     const searchButton = document.getElementById('search-button');
     const searchInput = document.getElementById('search-input');
 
     return (
         <div>
-            <IssuePopUp show={modalShow} onHide={() => setModalShow(false)}/>
+            <IssuePopUp show={modalIssueShow} onHide={() => setModalIssueShow(false)}/>
+            <TaskInfoPopUp show={modalTaskInfoShow} taskName={clickedTask} onHide={() => setModalTaskInfoShow(false)}/>
 			<Topbar/>
             <SideNavBar/>
             <div className="mainContent">
@@ -101,7 +106,7 @@ function ProjectNoPage() {
                             <h1 className="text">Project Something</h1>
                         </div>
                         <div className="col-6">
-                            <button type="button" className="btn btn-outline-secondary float-end" onClick={() => setModalShow(true)}>Create Issue</button>
+                            <button type="button" className="btn btn-outline-secondary float-end" onClick={() => setModalIssueShow(true)}>Create Issue</button>
                         </div>
                     </div>
                     <div className="row pt-4">
@@ -154,7 +159,7 @@ function ProjectNoPage() {
                                         </div>
                                     </div>
                             )}
-                            {(pressedTab === "backlog") && (<Backlog/>)}
+                            {(pressedTab === "backlog") && (<Backlog setModalTaskInfoShow={setModalTaskInfoShow} setSelectedTask={setClickedTask} selectedTask={clickedTask}/>)}
                         </div>
                     </div>
                 </div>

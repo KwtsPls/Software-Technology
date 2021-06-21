@@ -17,6 +17,11 @@ function IssuePopUp(props){
 
     const [devs, setDevs] = useState([])
 
+    function cancel() {
+        props.onHide()
+        setDevs([])
+    }
+
     return (
         <div>
             <Modal
@@ -27,7 +32,7 @@ function IssuePopUp(props){
                 >
                 <Modal.Header>
                     <Modal.Title id="contained-modal-title-vcenter">
-                    Δημιουργία νέου Ιssue
+                        Δημιουργία νέου Ιssue
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -35,6 +40,10 @@ function IssuePopUp(props){
                         <div className="col-12">
                             <label for="inputTittle" className="form-label">Τίτλος Issue</label>
                             <input type="text" className="form-control" id="issueTittle" placeholder="Τίτλος"/>
+                        </div>
+                        <div className="col-12">
+                            <label for="inputDescription" className="form-label">Περιγραφή Issue</label>
+                            <textarea type="text" className="form-control" id="issueDescription" placeholder="Περιγραφή"/>
                         </div>
                         <div className="col-md-6">
                             <label for="inputIssueType" className="form-label">Είδος Issue</label>
@@ -85,7 +94,7 @@ function IssuePopUp(props){
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="outline-danger" onClick={props.onHide}>Άκυρο</Button>
+                    <Button variant="outline-danger" onClick={cancel}>Άκυρο</Button>
                 </Modal.Footer>
             </Modal>
 		</div>
