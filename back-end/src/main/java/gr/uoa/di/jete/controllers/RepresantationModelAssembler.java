@@ -63,9 +63,22 @@ class SprintModelAssembler implements RepresentationModelAssembler<Sprint, Entit
 
     @NotNull
     @Override
-    public EntityModel<Sprint> toModel(@NotNull Sprint sprint){
+    public EntityModel<Sprint> toModel(@NotNull Sprint sprint) {
         return EntityModel.of(sprint, //
-                linkTo(methodOn(SprintController.class).one(sprint.getId(),sprint.getProjectId())).withSelfRel(),
+                linkTo(methodOn(SprintController.class).one(sprint.getId(), sprint.getProjectId())).withSelfRel(),
                 linkTo(methodOn(SprintController.class).all()).withRel("sprints"));
     }
+}
+
+@Component
+class WalletModelAssembler implements RepresentationModelAssembler<Wallet, EntityModel<Wallet>> {
+
+    @NotNull
+    @Override
+    public EntityModel<Wallet> toModel(@NotNull Wallet wallet) {
+        return EntityModel.of(wallet, //
+                linkTo(methodOn(WalletController.class).one(wallet.getId())).withSelfRel());
+//                linkTo(methodOn(WalletController.class).all()).withRel("sprints"));
+    }
+
 }

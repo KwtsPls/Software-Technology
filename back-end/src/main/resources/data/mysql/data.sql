@@ -87,3 +87,13 @@ insert into sprint(id,project_id, title, status) values(4,1,'sprint#4',2);
 insert into sprint(id,project_id, title, status) values(5,2,'sprint#1',1);
 insert into sprint(id,project_id, title, status) values(6,2,'sprint#2',2);
 insert into sprint(id,project_id, title, status) values(7,3,'sprint#1',1);
+
+
+drop table if exists wallet;
+create table wallet(id int not null primary key,card1 varchar(20),card2 varchar(20),card3 varchar(20)
+                   ,subscription_starts date,subscription_ends date,
+                   constraint fk_user_wallet
+                    foreign key (id) references user (id));
+
+
+
