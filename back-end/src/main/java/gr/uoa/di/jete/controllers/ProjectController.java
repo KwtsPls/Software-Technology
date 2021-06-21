@@ -18,6 +18,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
+@CrossOrigin
 public class ProjectController {
 
     private final ProjectRepository repository;
@@ -48,7 +49,7 @@ public class ProjectController {
     @PostMapping("/projects/create/{user_id}")
     Project newProject(@RequestBody Project newProject,@PathVariable Long user_id){
         //Search for User with given id
-        User user = userRep.findById(user_id) //
+        userRep.findById(user_id) //
                 .orElseThrow(()-> new UserNotFoundException(user_id));
         //Create an entry for a new developer on the db and save him as a product owner
         Project temp = repository.save(newProject);
@@ -78,6 +79,16 @@ public class ProjectController {
                     newProject.setId(id);
                     return repository.save(newProject);
                 });
+    }
+
+    @GetMapping("/users/{user_id}/projects")
+    CollectionModel<EntityModel<Project>> getUserProjects(@PathVariable Long user_id){
+        List<EntityModel<Project>> projects =  repository.findAllByUserId(user_id).stream()
+                .map(assembler::toModel)
+                .collect(Collectors.toList());
+
+        return CollectionModel.of(projects,
+                linkTo(methodOn(ProjectController.class).getUserProjects(user_id)).withSelfRel());
     }
 
     @DeleteMapping("/projects/{id}")

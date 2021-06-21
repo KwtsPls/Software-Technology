@@ -52,6 +52,13 @@ class UserService{
         return userModelAssembler.toModel(user);
     }
 
+    //Returns the Users with that are assigned to the given project
+    public List<EntityModel<User>> getUsersByProjectId(Long project_id) {
+        return  userRepository.findAllByProjectId(project_id).stream()
+                .map(userModelAssembler::toModel)
+                .collect(Collectors.toList());
+    }
+
     //Inserts new user to Table
     public User addNewUser(User newUser) {
 

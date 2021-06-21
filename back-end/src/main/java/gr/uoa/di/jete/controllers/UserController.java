@@ -59,6 +59,12 @@ class UserController {
         return userService.getUserById(id);
     }
 
+    @GetMapping("/projects/{project_id}/users")
+    CollectionModel<EntityModel<User>> getUsersFromProject(@PathVariable Long project_id){
+        List<EntityModel<User>> users = userService.getUsersByProjectId(project_id);
+        return CollectionModel.of(users,
+                linkTo(methodOn(UserController.class).getUsersFromProject(project_id)).withSelfRel());
+    }
 
     @PutMapping("/users/{id}")
     User replaceUser(@RequestBody User newUser, @PathVariable Long id){
