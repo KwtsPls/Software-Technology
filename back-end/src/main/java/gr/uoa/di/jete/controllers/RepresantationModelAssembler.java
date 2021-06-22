@@ -53,7 +53,7 @@ class EpicModelAssembler implements RepresentationModelAssembler<Epic, EntityMod
     @Override
     public EntityModel<Epic> toModel(@NotNull Epic epic){
         return EntityModel.of(epic, //
-                linkTo(methodOn(EpicController.class).one(epic.getId(),epic.getProjectId())).withSelfRel(),
+                linkTo(methodOn(EpicController.class).one(epic.getId(),epic.getProject_id())).withSelfRel(),
                 linkTo(methodOn(EpicController.class).all()).withRel("epics"));
     }
 }
@@ -67,5 +67,29 @@ class SprintModelAssembler implements RepresentationModelAssembler<Sprint, Entit
         return EntityModel.of(sprint, //
                 linkTo(methodOn(SprintController.class).one(sprint.getId(),sprint.getProjectId())).withSelfRel(),
                 linkTo(methodOn(SprintController.class).all()).withRel("sprints"));
+    }
+}
+
+@Component
+class StoryModelAssembler implements RepresentationModelAssembler<Story, EntityModel<Story>> {
+
+    @NotNull
+    @Override
+    public EntityModel<Story> toModel(@NotNull Story story){
+        return EntityModel.of(story, //
+                linkTo(methodOn(StoryController.class).one(story.getId(),story.getProject_id(),story.getSprint_id(),story.getEpic_id())).withSelfRel(),
+                linkTo(methodOn(StoryController.class).all()).withRel("stories"));
+    }
+}
+
+@Component
+class TaskModelAssembler implements RepresentationModelAssembler<Task, EntityModel<Task>> {
+
+    @NotNull
+    @Override
+    public EntityModel<Task> toModel(@NotNull Task task){
+        return EntityModel.of(task, //
+                linkTo(methodOn(TaskController.class).one(task.getId(),task.getProject_id(),task.getSprint_id(),task.getEpic_id(),task.getStory_id())).withSelfRel(),
+                linkTo(methodOn(TaskController.class).all()).withRel("tasks"));
     }
 }

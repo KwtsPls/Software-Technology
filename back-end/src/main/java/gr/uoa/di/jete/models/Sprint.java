@@ -1,29 +1,37 @@
 package gr.uoa.di.jete.models;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 @Entity
 @IdClass(SprintId.class)
+@Table(name="sprint")
 public
 class Sprint {
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     private  @Id Long project_id;
     private String title;
     private Long status;
+    private Date date_from;
+    private Date date_to;
 
     public Sprint(){}
-    Sprint(Long project_id,String title,Long status){
+    Sprint(Long project_id,String title,Long status,Date dateFrom,Date dateTo){
         this.project_id = project_id;
         this.title = title;
         this.status = status;
+        this.date_from = dateFrom;
+        this.date_to = dateTo;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setUserId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -73,8 +81,28 @@ class Sprint {
 
     @Override
     public String toString(){
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        String dateFromStr = df.format(date_from);
+        String dateToStr = df.format(date_to);
+
         return "Sprint{" + "id=" + this.id + ", project_id=" + this.id
                 + '\'' + ", status=" + this.status
-                + ", title='" + this.title + '\'' + '}';
+                + ", title='" + this.title + '\'' + ", dateFrom="+dateFromStr+", dateTo="+dateToStr +'}';
+    }
+
+    public Date getDateFrom() {
+        return date_from;
+    }
+
+    public void setDateFrom(Date dateFrom) {
+        this.date_from = dateFrom;
+    }
+
+    public Date getDateTo() {
+        return date_to;
+    }
+
+    public void setDateTo(Date dateTo) {
+        this.date_to = dateTo;
     }
 }

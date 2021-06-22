@@ -3,45 +3,34 @@ package gr.uoa.di.jete.models;
 import javax.persistence.*;
 import java.util.Objects;
 
-enum epic_status{
-    IN_PROGRESS,
-    IDLE,
-    DONE
-}
-
 @Entity
 @IdClass(EpicId.class)
+@Table(name="epic")
 public
 class Epic {
-    private @Id Long id;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     private  @Id Long project_id;
     private Long status;
     private String description;
     private String title;
 
     public Epic(){}
-    Epic(Long project_id,Long status,String description,String title){
+    public Epic(Long project_id,Long status,String description,String title){
         this.project_id = project_id;
         this.status = status;
         this.description = description;
         this.title = title;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() {return this.id; }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getProjectId() {
-        return project_id;
-    }
+    public Long getProject_id() { return project_id; }
 
-    public void setProjectId(Long project_id) {
-        this.project_id = project_id;
-    }
+    public void setProject_id(Long project_id) { this.project_id = project_id; }
 
     public Long getStatus() {
         return status;

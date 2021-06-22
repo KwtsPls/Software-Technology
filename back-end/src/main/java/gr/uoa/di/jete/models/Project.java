@@ -1,6 +1,7 @@
 package gr.uoa.di.jete.models;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Objects;
 
 
@@ -10,11 +11,15 @@ class Project {
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     private String title;
     private String description;
+    private Long status;
+    private Date date_finished;
 
     public Project(){}
-    Project(String title,String description){
+    Project(String title,String description,Long status,Date date_finished){
         this.title = title;
         this.description = description;
+        this.status = status;
+        this.date_finished = date_finished;
     }
 
     public String getTitle() {
@@ -41,6 +46,21 @@ class Project {
         this.description = description;
     }
 
+    public Long getStatus() {
+        return status;
+    }
+
+    public void setStatus(Long status) {
+        this.status = status;
+    }
+
+    public Date getDate_finished() {
+        return date_finished;
+    }
+
+    public void setDate_finished(Date date_finished) {
+        this.date_finished = date_finished;
+    }
 
     @Override
     public boolean equals(Object o){
@@ -61,7 +81,7 @@ class Project {
 
     @Override
     public String toString(){
-        return "Project{" + "id=" + this.id + ", title='" + this.title
+        return "Project{" + "id=" + this.id + ", title='" + this.title + ", status" + this.status
                 + '\'' + ", description='" + this.description + '\'' + '}';
     }
 }

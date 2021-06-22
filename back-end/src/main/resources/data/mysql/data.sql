@@ -73,17 +73,17 @@ Create table for sprints for app and add some dummy data
 */
 drop table if exists sprint;
 create table sprint
-(id int not null, project_id int not null, title varchar(45) not null, status int not null,
+(id int not null, project_id int not null, title varchar(45) not null, status int not null,dateFrom date,dateTo date,
     constraint sprint_pk
         primary key (project_id, id),
     constraint fk_sprint_project1
         foreign key (project_id) references project (id)
 );
 
-insert into sprint(id,project_id, title, status) values(1,1,'sprint#1',1);
-insert into sprint(id,project_id, title, status) values(2,1,'sprint#2',0);
-insert into sprint(id,project_id, title, status) values(3,1,'sprint#3',0);
-insert into sprint(id,project_id, title, status) values(4,1,'sprint#4',2);
-insert into sprint(id,project_id, title, status) values(5,2,'sprint#1',1);
-insert into sprint(id,project_id, title, status) values(6,2,'sprint#2',2);
-insert into sprint(id,project_id, title, status) values(7,3,'sprint#1',1);
+insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(1,1,'sprint#1',1,'10-06-2021','20-06-2021');
+insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(2,1,'sprint#2',0,'10-06-2021','20-06-2021');
+insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(3,1,'sprint#3',0,'10-06-2021','20-06-2021');
+insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(4,1,'sprint#4',2,'10-06-2021','20-06-2021');
+insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(5,2,'sprint#1',1,'10-06-2021','20-06-2021');
+insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(6,2,'sprint#2',2,'10-06-2021','20-06-2021');
+insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(7,3,'sprint#1',1,'10-06-2021','20-06-2021');

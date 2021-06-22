@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -36,12 +35,6 @@ class UserController {
                 linkTo(methodOn(UserController.class).all()).withSelfRel());
     }
 
-    @RequestMapping(value = "/users/login/success", method = RequestMethod.GET)
-    @ResponseBody
-    public EntityModel<User> currentUserName(Principal principal) {
-        return userService.getUserByUsername(principal.getName());
-    }
-
     //Method for getting User By Username
     @GetMapping("/users/name={username}")
     EntityModel<User> getByUsername(@PathVariable String username){
@@ -65,6 +58,7 @@ class UserController {
         return CollectionModel.of(users,
                 linkTo(methodOn(UserController.class).getUsersFromProject(project_id)).withSelfRel());
     }
+
 
     @PutMapping("/users/{id}")
     User replaceUser(@RequestBody User newUser, @PathVariable Long id){

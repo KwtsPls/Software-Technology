@@ -3,13 +3,15 @@ package gr.uoa.di.jete.controllers;
 
 import gr.uoa.di.jete.exceptions.ProjectNotFoundException;
 import gr.uoa.di.jete.exceptions.UserNotFoundException;
-import gr.uoa.di.jete.models.*;
+import gr.uoa.di.jete.models.Developer;
+import gr.uoa.di.jete.models.Project;
+import gr.uoa.di.jete.models.User;
 import gr.uoa.di.jete.repositories.DeveloperRepository;
 import gr.uoa.di.jete.repositories.ProjectRepository;
 import gr.uoa.di.jete.repositories.UserRepository;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
-
-import org.springframework.hateoas.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,7 +55,7 @@ public class ProjectController {
                 .orElseThrow(()-> new UserNotFoundException(user_id));
         //Create an entry for a new developer on the db and save him as a product owner
         Project temp = repository.save(newProject);
-        Developer dev = new Developer(user_id,newProject.getId(), 1L);
+        Developer dev = new Developer(user_id,newProject.getId(),1L,0L);
         this.devRep.save(dev);
         return temp;
     }
@@ -89,6 +91,16 @@ public class ProjectController {
 
         return CollectionModel.of(projects,
                 linkTo(methodOn(ProjectController.class).getUserProjects(user_id)).withSelfRel());
+    }
+
+    //Method to check if a user with a given username exists in a given project
+    @GetMapping("/projects/{id}/user={username}")
+    String checkUserInProject(@PathVariable Long id,@PathVariable String username){
+        User user = repository.findUserByUsernameInProject(id,username).orElse(new User());
+        if(user.getId()!=null)
+            return "YES";
+        else
+            return "NO";
     }
 
     @DeleteMapping("/projects/{id}")

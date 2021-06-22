@@ -3,12 +3,13 @@ package gr.uoa.di.jete.controllers;
 
 import gr.uoa.di.jete.exceptions.EpicNotFoundException;
 import gr.uoa.di.jete.exceptions.ProjectNotFoundException;
-import gr.uoa.di.jete.models.*;
+import gr.uoa.di.jete.models.Epic;
+import gr.uoa.di.jete.models.EpicId;
 import gr.uoa.di.jete.repositories.EpicRepository;
 import gr.uoa.di.jete.repositories.ProjectRepository;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
-
-import org.springframework.hateoas.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,8 +45,11 @@ public class EpicController {
     @PostMapping("/epics")
     Epic newEpic(@RequestBody Epic newEpic){
         //Search for project with given id
-        Project project = projectRep.findById(newEpic.getProjectId())
-                .orElseThrow(()-> new ProjectNotFoundException(newEpic.getProjectId()));
+        projectRep.findById(newEpic.getProject_id())
+                .orElseThrow(()-> new ProjectNotFoundException(newEpic.getProject_id()));
+
+        Long newId = repository.findMaxId().orElse(0L);
+        newEpic.setId(newId+1L);
 
         return repository.save(newEpic);
     }

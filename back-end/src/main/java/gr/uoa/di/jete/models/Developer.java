@@ -10,12 +10,14 @@ class Developer {
     private @Id Long user_id;
     private  @Id Long project_id;
     private Long role;
+    private Long accepted;
 
     public Developer(){}
-    public Developer(Long user_id, Long project_id, Long role){
+    public Developer(Long user_id, Long project_id, Long role,Long accepted){
         this.user_id = user_id;
         this.project_id = project_id;
         this.role = role;
+        this.accepted = accepted;
     }
 
     public Long getUserId() {
@@ -65,5 +67,13 @@ class Developer {
     public String toString(){
         return "Developer{" + "user_id=" + this.getUserId() + ", project_id=" + this.getProjectId()
                 + '\'' + ", role=" + this.role + '\'' + '}';
+    }
+
+    public Long getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(Long accepted) {
+        this.accepted = accepted;
     }
 }

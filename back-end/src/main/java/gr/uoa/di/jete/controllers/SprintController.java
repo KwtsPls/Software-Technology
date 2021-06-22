@@ -44,8 +44,11 @@ public class SprintController {
     @PostMapping("/sprints")
     Sprint newSprint(@RequestBody Sprint newSprint){
         //Search for project with given id
-        Project project = projectRep.findById(newSprint.getProjectId())
+        projectRep.findById(newSprint.getProjectId())
                 .orElseThrow(()-> new ProjectNotFoundException(newSprint.getProjectId()));
+
+        Long newId = repository.findMaxId().orElse(0L);
+        newSprint.setId(newId+1L);
 
         return repository.save(newSprint);
     }

@@ -1,13 +1,14 @@
 package gr.uoa.di.jete.models;
-import com.sun.istack.NotNull;
 
+import org.jetbrains.annotations.NotNull;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class EpicId implements Serializable {
-    @NotNull
-    private Long id;
-    @NotNull
+    private @NotNull @GeneratedValue(strategy = GenerationType.AUTO) Long id;
     private Long project_id;
 
     public EpicId() {}
@@ -24,11 +25,11 @@ public class EpicId implements Serializable {
         this.id = id;
     }
 
-    public Long getProjectId() {
+    public Long getProject_id() {
         return project_id;
     }
 
-    public void setProjectId(Long project_id) {
+    public void setProject_id(Long project_id) {
         this.project_id = project_id;
     }
 

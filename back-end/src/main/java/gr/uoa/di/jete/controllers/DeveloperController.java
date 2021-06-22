@@ -60,7 +60,7 @@ public class DeveloperController {
     }
 
     //Single item
-    @GetMapping("/developers/{user_id}/{project_id}")
+    @GetMapping("/developers/users/{user_id}/projects/{project_id}")
     EntityModel<Developer> one(@PathVariable Long user_id,@PathVariable Long project_id){
         Developer developer = repository.findById(new DeveloperId(user_id,project_id)) //
                 .orElseThrow(()-> new DeveloperNotFoundException(new DeveloperId(user_id,project_id)));
@@ -68,7 +68,7 @@ public class DeveloperController {
         return assembler.toModel(developer);
     }
 
-    @PutMapping("/developers/{user_id}/{project_id}")
+    @PutMapping("/developers/users/{user_id}/projects/{project_id}")
     Developer replaceDeveloper(@RequestBody Developer newDeveloper, @PathVariable Long user_id,@PathVariable Long project_id){
         return repository.findById(new DeveloperId(user_id,project_id))
                 .map(user -> {
@@ -80,6 +80,14 @@ public class DeveloperController {
                     newDeveloper.setProjectId(project_id);
                     return repository.save(newDeveloper);
                 });
+    }
+
+    //Endpoint to get the vital info of the developers of a project
+    @GetMapping("/developers/projects/{project_id}")
+    List<DeveloperInfo> allDevelopersInfo(@PathVariable Long project_id){
+        List<?> devInfos = repository.findDeveloperInfoInProject(project_id);
+        List<DeveloperInfo> developerInfos = (List<DeveloperInfo>)(List<?>) devInfos;
+        return developerInfos;
     }
 
     @DeleteMapping("/developers/{user_id}/{project_id}")
