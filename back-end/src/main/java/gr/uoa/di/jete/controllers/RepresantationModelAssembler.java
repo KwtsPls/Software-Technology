@@ -82,3 +82,16 @@ class WalletModelAssembler implements RepresentationModelAssembler<Wallet, Entit
     }
 
 }
+
+@Component
+class PaymentsModelAssembler implements RepresentationModelAssembler<Payments, EntityModel<Payments>> {
+
+    @NotNull
+    @Override
+    public EntityModel<Payments> toModel(@NotNull Payments payments) {
+        return EntityModel.of(payments, //
+                linkTo(methodOn(PaymentsController.class).one(payments.getId(),payments.getUserId())).withSelfRel(),
+                linkTo(methodOn(PaymentsController.class).all()).withRel("payments"));
+    }
+
+}

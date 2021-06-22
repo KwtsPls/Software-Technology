@@ -96,4 +96,9 @@ create table wallet(id int not null primary key,card1 varchar(20),card2 varchar(
                     foreign key (id) references user (id));
 
 
+drop table if exists payments;
+create table payments(id int not null primary key AUTO_INCREMENT, user_id int not null,
+    received_date date, received float,
+    constraint fk_payments_user1
+        foreign key (user_id) references user (id));
 
