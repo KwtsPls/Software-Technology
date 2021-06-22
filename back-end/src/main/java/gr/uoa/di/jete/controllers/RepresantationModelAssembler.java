@@ -63,9 +63,9 @@ class SprintModelAssembler implements RepresentationModelAssembler<Sprint, Entit
 
     @NotNull
     @Override
-    public EntityModel<Sprint> toModel(@NotNull Sprint sprint){
+    public EntityModel<Sprint> toModel(@NotNull Sprint sprint) {
         return EntityModel.of(sprint, //
-                linkTo(methodOn(SprintController.class).one(sprint.getId(),sprint.getProjectId())).withSelfRel(),
+                linkTo(methodOn(SprintController.class).one(sprint.getId(), sprint.getProjectId())).withSelfRel(),
                 linkTo(methodOn(SprintController.class).all()).withRel("sprints"));
     }
 }
@@ -91,5 +91,27 @@ class TaskModelAssembler implements RepresentationModelAssembler<Task, EntityMod
         return EntityModel.of(task, //
                 linkTo(methodOn(TaskController.class).one(task.getId(),task.getProject_id(),task.getSprint_id(),task.getEpic_id(),task.getStory_id())).withSelfRel(),
                 linkTo(methodOn(TaskController.class).all()).withRel("tasks"));
+    }
+}
+
+class WalletModelAssembler implements RepresentationModelAssembler<Wallet, EntityModel<Wallet>> {
+
+    @NotNull
+    @Override
+    public EntityModel<Wallet> toModel(@NotNull Wallet wallet) {
+        return EntityModel.of(wallet, //
+                linkTo(methodOn(WalletController.class).one(wallet.getId())).withSelfRel());
+    }
+}
+
+@Component
+class PaymentsModelAssembler implements RepresentationModelAssembler<Payments, EntityModel<Payments>> {
+
+    @NotNull
+    @Override
+    public EntityModel<Payments> toModel(@NotNull Payments payments) {
+        return EntityModel.of(payments, //
+                linkTo(methodOn(PaymentsController.class).one(payments.getId(),payments.getUserId())).withSelfRel(),
+                linkTo(methodOn(PaymentsController.class).all()).withRel("payments"));
     }
 }

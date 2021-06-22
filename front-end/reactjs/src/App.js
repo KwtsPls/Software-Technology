@@ -15,10 +15,8 @@ import SettingsProfilePage from './pageComponents/settings/SettingsProfilePage.j
 import ProfilePage from './pageComponents/ProfilePage.js'
 import ChatPage from './pageComponents/chat/ChatPage.js'
 import AddContactPage from './pageComponents/chat/AddContactPage.js'
-import ProjectCreatePage from './pageComponents/projects/ProjectCreatePage.js'
 import ProjectNoPage from './pageComponents/projects/ProjectNoPage.js'
 import ProjectsPage from './pageComponents/projects/ProjectsPage.js'
-import ProjNewIssuePage from './pageComponents/projects/ProjNewIssuePage.js'
 
 
 function App() {
@@ -39,9 +37,7 @@ function App() {
 					<Route path="/chat" exact component={ChatPage} />
 					<Route path="/chat/addContact" exact component={AddContactPage} />
 					<Route path="/projects" exact component={ProjectsPage} />
-					<Route path="/projectCreate" exact component={ProjectCreatePage} />
 					<Route path="/projects/projectNo" exact component={ProjectNoPage} />
-					<Route path="/projNewIssue" exact component={ProjNewIssuePage} />
 				</Switch>
 			</div>
 		</Router>

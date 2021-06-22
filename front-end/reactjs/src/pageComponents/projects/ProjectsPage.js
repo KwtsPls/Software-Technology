@@ -5,6 +5,7 @@ import SideNavBar from '../../components/SideNavBar.js'
 import Topbar from '../../components/Topbar.js'
 import { Link, useHistory } from 'react-router-dom'
 import NewProjectPopUp from '../../components/NewProjectPopUp.js'
+import ProjectInfoPopUp from '../../components/ProjectInfoPopUp.js'
 
 
 function ProjectsPage() {
@@ -44,6 +45,7 @@ function ProjectsPage() {
 
     const [searchVal, setSearch] = useState("");
     const [modalShow, setModalShow] = useState(false);
+    const [modalInfoShow, setModalInfoShow] = useState(false);
 
     function addProj(name) {
         allNames.push(name)
@@ -52,6 +54,7 @@ function ProjectsPage() {
     return (
         <div>
             <NewProjectPopUp show={modalShow} onHide={() => setModalShow(false)} addProj={addProj}/>
+            <ProjectInfoPopUp show={modalInfoShow} onHide={() => setModalInfoShow(false)}/>
 			<Topbar/>
             <SideNavBar/>
             <div className="mainContent">
@@ -93,12 +96,19 @@ function ProjectsPage() {
                                 (<div className="row pt-3">
                                     <div className="col-12">
                                         <div className="card">
-                                            <div className="card-body">
-                                                <h5 className="card-title">Project {i}</h5>
-                                                <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                <Link to='/projects/projectNo'>
-                                                    <a href="#" className="btn btn-primary project-button">Go somewhere</a>
-                                                </Link>
+                                            <div className="card-body container">
+                                                <div className="row">
+                                                    <div className="col-11">
+                                                        <h5 className="card-title">Project {i}</h5>
+                                                        <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                                        <Link to='/projects/projectNo'>
+                                                            <a href="#" className="btn btn-primary project-button">Go somewhere</a>
+                                                        </Link>
+                                                    </div>
+                                                    <div className="col-1">
+                                                        <button onClick={() => setModalInfoShow(true)}>info</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

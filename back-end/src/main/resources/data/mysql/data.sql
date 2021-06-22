@@ -87,3 +87,17 @@ insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(4,1,'spr
 insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(5,2,'sprint#1',1,'10-06-2021','20-06-2021');
 insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(6,2,'sprint#2',2,'10-06-2021','20-06-2021');
 insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(7,3,'sprint#1',1,'10-06-2021','20-06-2021');
+
+
+drop table if exists wallet;
+create table wallet(id int not null primary key,card1 varchar(20),card2 varchar(20),card3 varchar(20)
+                   ,subscription_starts date,subscription_ends date,
+                   constraint fk_user_wallet
+                    foreign key (id) references user (id));
+
+
+drop table if exists payments;
+create table payments(id int not null primary key AUTO_INCREMENT, user_id int not null,
+    received_date date, received float,
+    constraint fk_payments_user1
+        foreign key (user_id) references user (id));
