@@ -198,6 +198,57 @@
 
 }
 
+.container-signup{
+  max-width: 700px;
+  width: 100%;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius:  4px;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, .05);
+
+
+}
+
+.signup-button{
+  margin-top: 20px;
+}
+
+.user-details{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.input-box{
+  margin: 20px 0 12px 0;
+
+  width: calc(100% / 2 - 20px);
+}
+
+.user-details .input-box input{
+  height: auto;
+  line-height: 1.5;
+
+  width: 100%;
+  outline: none;
+  /* border-radius: 5px; */
+  
+  padding-left: 15px;
+}
+
+.user-details .input-box .details{
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+
+}
+
+
+
+
+
+
+
 .content{
   margin: 8%;
   margin-top: 10%;
@@ -276,6 +327,22 @@
 
 }
 
+.signuplogo{
+  height: 50px;
+  width: 100px;
+  margin-left: 0px;
+  margin-top: -50px;
+
+}
+
+body{
+  background: linear-gradient(
+      to bottom right,
+      #992b95,
+      #510c80a6
+    ) fixed;
+    /* background: #202020; */
+}
 
 
 /* responsiveness */

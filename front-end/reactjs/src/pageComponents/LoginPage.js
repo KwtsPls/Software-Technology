@@ -16,8 +16,10 @@ function LoginPage() {
         if (loggedUser){
             history.push("/home");
         }
-
+        
         document.body.style.backgroundColor = "#0f0f0f";
+
+        
     }, []);
 
     const [user, setUser] = useState("");
