@@ -89,11 +89,11 @@ function LoginPage() {
                         <form className="loginform">
                             <div className="form-group loginformgroup">
                                 <label for="exampleInputUsername1">Όνομα χρήστη</label>
-                                <input type="username" className = "form-control" id="exampleInputUsername1" aria-describedby="usernameHelp" placeholder="Πληκτρολογίστε το όνομα χρήστη σας" value={user} onChange={e => setUser(e.target.value)}/>
+                                <input type="username" className = "form-control loginform-control" id="exampleInputUsername1" aria-describedby="usernameHelp" placeholder="Πληκτρολογίστε το όνομα χρήστη σας" value={user} onChange={e => setUser(e.target.value)}/>
                             </div>
                             <div className="form-group loginformgroup">
                                 <label for="exampleInputPassword1">Κωδικός πρόσβασης</label>
-                                <input type="password" className = "form-control" id="exampleInputPassword1" placeholder="Πληκτρολογίστε τον κωδικό σας"  value={pass} onChange={e => setPass(e.target.value)}/>
+                                <input type="password" className = "form-control loginform-control" id="exampleInputPassword1" placeholder="Πληκτρολογίστε τον κωδικό σας"  value={pass} onChange={e => setPass(e.target.value)}/>
                             </div>
                             <div className="form-group loginformgroup form-check">
                                 <input type="checkbox" className="form-check-input mycheckbox" id="exampleCheck1"/>
