@@ -19,12 +19,13 @@ Create table for projects for app and add some dummy data
 ----------------------------------------------------------
 */
 drop table if exists project;
-create table project(id int not null primary key auto_increment,title varchar(40),description varchar(200));
+create table project(id int not null primary key auto_increment,title varchar(40),description varchar(200)
+                    ,status int not null,date_finished date);
 
-insert into project(title,description) values('jete','just a dummy description');
-insert into project(title,description) values('app','just a dummy description');
-insert into project(title,description) values('app_new_4','just a dummy description');
-insert into project(title,description) values('MY NEW PROJECT','not much');
+insert into project(title,description,status,date_finished) values('jete','just a dummy description',0,null);
+insert into project(title,description,status,date_finished) values('app','just a dummy description',0,null);
+insert into project(title,description,status,date_finished) values('app_new_4','just a dummy description',0,null);
+insert into project(title,description,status,date_finished) values('MY NEW PROJECT','not much',0,null);
 
 
 /*
@@ -33,18 +34,18 @@ Create table for developers for app and add some dummy data
 -----------------------------------------------------------
 */
 drop table if exists developer;
-create table developer(id int,project_id int,role int,
+create table developer(id int,project_id int,role int,accepted int,
     constraint developer_pk
         primary key (id,project_id),
     constraint fk_developer_user_project1
         foreign key (project_id) references project (id)
 );
 
-insert into developer(id, project_id, role) values(2,1,1);
-insert into developer(id, project_id, role) values(4,1,2);
-insert into developer(id, project_id, role) values(3,2,1);
-insert into developer(id, project_id, role) values(6,2,1);
-insert into developer(id, project_id, role) values(1,4,1);
+insert into developer(id, project_id, role,accepted) values(2,1,1,1);
+insert into developer(id, project_id, role,accepted) values(4,1,2,1);
+insert into developer(id, project_id, role,accepted) values(3,2,1,1);
+insert into developer(id, project_id, role,accepted) values(6,2,1,1);
+insert into developer(id, project_id, role,accepted) values(1,4,1,1);
 
 
 /*
@@ -88,14 +89,59 @@ insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(5,2,'spr
 insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(6,2,'sprint#2',2,'10-06-2021','20-06-2021');
 insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(7,3,'sprint#1',1,'10-06-2021','20-06-2021');
 
+/*
+--------------------------------------------------------
+Create table for story for app and add some dummy data
+--------------------------------------------------------
+*/
+drop table if exists story;
+create table story(id int not null,epic_id int not null,sprint_id int not null ,project_id int not null
+                  ,title varchar(45) not null,description varchar(45),status int not null,
+                   constraint story_pk
+                       primary key (id,epic_id,sprint_id,project_id),
+                   constraint fk_story_project
+                       foreign key (project_id) references project (id),
+                   constraint fk_story_epic
+                        foreign key (epic_id) references epic (id),
+                   constraint fk_story_sprint
+                        foreign key (sprint_id) references sprint (id));
 
+/*
+--------------------------------------------------------
+Create table for story for app and add some dummy data
+--------------------------------------------------------
+*/
+drop table if exists task;
+create table task(id int not null,story_id int not null,epic_id int not null,sprint_id int not null ,project_id int not null
+    ,title varchar(45) not null,description varchar(45),status int not null,
+                   constraint task_pk
+                       primary key (id,epic_id,sprint_id,project_id),
+                   constraint fk_task_project
+                       foreign key (project_id) references project (id),
+                   constraint fk_task_epic
+                       foreign key (epic_id) references epic (id),
+                   constraint fk_task_sprint
+                       foreign key (sprint_id) references sprint (id),
+                   constraint fk_task_story
+                        foreign key (story_id) references story (id));
+
+
+/*
+--------------------------------------------------------
+Create table for wallet for app and add some dummy data
+--------------------------------------------------------
+*/
 drop table if exists wallet;
 create table wallet(id int not null primary key,card1 varchar(20),card2 varchar(20),card3 varchar(20)
                    ,subscription_starts date,subscription_ends date,
                    constraint fk_user_wallet
                     foreign key (id) references user (id));
 
-
+/*
+--------------------------------------------------------
+Create table for payment for app and add some dummy data
+--------------------------------------------------------
+*/
 drop table if exists payments;
 create table payments(id int not null primary key AUTO_INCREMENT, user_id int not null,
     received_date date, received float,
