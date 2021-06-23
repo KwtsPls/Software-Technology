@@ -38,6 +38,10 @@
 
 Επιστρέφει "YES" αν ο χρήστης με {username} υπάρχει στο project με id {id} διαφορετικά επιστρέφει "NO".<br><br>
 
+`[POST] /projects/create/{user_id}`
+
+Δημιουργεί ένα project με project owner ton {user_id}. Το json που αναμένεται για να επιτύχει το request είναι της μορφής : <br><br>
+{"title":string,"description":string,"status":"0/1","date_finished":?}<br><br>
 
 `[GET] /users/name={username}`
 
