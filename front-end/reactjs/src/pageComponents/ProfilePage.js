@@ -11,7 +11,6 @@ function ProfilePage() {
     const history = useHistory();
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
 
-    let keepo=false;
     const [isLoading, setLoading] = useState(true);
     const [contacts, setTxt] = useState([])
 
@@ -30,8 +29,6 @@ function ProfilePage() {
                     setTxt(data);
                     setLoading(false);
                 })
-    
-            keepo = false;
         }
     }, []);
 

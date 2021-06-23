@@ -50,6 +50,7 @@ function LoginPage() {
           }).then( () => {
                 if (dataReceived.status != 401){
                     //localStorage.setItem("loggedUser", true);
+                    console.log(dataReceived); // REMOVE AT END
                     console.log("logged in");
                     history.push("/home");
                 }
