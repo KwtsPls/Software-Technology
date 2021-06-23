@@ -81,13 +81,13 @@ create table sprint
         foreign key (project_id) references project (id)
 );
 
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(1,1,'sprint#1',1,'10-06-2021','20-06-2021');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(2,1,'sprint#2',0,'10-06-2021','20-06-2021');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(3,1,'sprint#3',0,'10-06-2021','20-06-2021');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(4,1,'sprint#4',2,'10-06-2021','20-06-2021');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(5,2,'sprint#1',1,'10-06-2021','20-06-2021');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(6,2,'sprint#2',2,'10-06-2021','20-06-2021');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(7,3,'sprint#1',1,'10-06-2021','20-06-2021');
+insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(1,1,'sprint#1',1,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(2,1,'sprint#2',0,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(3,1,'sprint#3',0,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(4,1,'sprint#4',2,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(5,2,'sprint#1',1,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(6,2,'sprint#2',2,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(7,3,'sprint#1',1,'2021-06-10','2021-06-20');
 
 /*
 --------------------------------------------------------
@@ -102,10 +102,7 @@ create table story(id int not null,epic_id int not null,sprint_id int not null ,
                    constraint fk_story_project
                        foreign key (project_id) references project (id),
                    constraint fk_story_epic
-                        foreign key (epic_id) references epic (id),
-                   constraint fk_story_sprint
-                        foreign key (sprint_id) references sprint (id));
-
+                        foreign key (epic_id) references epic (id));
 /*
 --------------------------------------------------------
 Create table for story for app and add some dummy data
@@ -120,8 +117,6 @@ create table task(id int not null,story_id int not null,epic_id int not null,spr
                        foreign key (project_id) references project (id),
                    constraint fk_task_epic
                        foreign key (epic_id) references epic (id),
-                   constraint fk_task_sprint
-                       foreign key (sprint_id) references sprint (id),
                    constraint fk_task_story
                         foreign key (story_id) references story (id));
 
