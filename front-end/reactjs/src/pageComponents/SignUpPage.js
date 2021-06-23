@@ -15,6 +15,21 @@ function SignUpPage() {
         if (loggedUser){
             history.push("/home");
         }
+        document.body.style.display = "flex";
+        document.body.style.height = "100vh";
+        document.body.style.justifyContent = "center";
+        document.body.style.alignItems = "center";
+        document.body.style.padding = "10px";
+        
+        return () => {
+            // Anything in here is fired on component unmount.
+            document.body.style.display = "";
+            document.body.style.height = "";
+            document.body.style.justifyContent = "";
+            document.body.style.alignItems = "";
+            document.body.style.padding = "";
+        }
+
     }, []);
 
     const [email, setEmail] = useState("");
@@ -65,68 +80,55 @@ function SignUpPage() {
 
     return (
         <div>
-            <div className="signup-box">
-                <div className="signuptopbar">
-                    <img className = "jete_logo-icon-signup" src={logo} alt="logo"></img>        
+            <img className = "signuplogo" src={logo} alt="partnerssketch"></img>        
 
-                </div>
-                <div className="signup-form-box">
-                        
-                    <div className="top-buffer login-form signup-content">
-                        <h1 className="text-center login-header">
-                            Εγγραφή
-                        </h1>
-                        <form className="signup-form-boxes">
-                            <div className="form-group pt-3">
-                                <label className="sr-only" for="emailInput">Email</label>
-                                <div className="input-group mb-2">
-                                    <div className="input-group-prepend">
-                                        <div className="input-group-text">@</div>
-                                    </div>
-                                    <input type="email" className="form-control" id="emailInput" placeholder="Πληκτρολογίστε το email σας" value={email} onChange={e => setEmail(e.target.value)}/>
-                                </div>
-                            </div>
-                            <div className="form-group pt-3">
-                                <label for="shortnameInput">Όνομα</label>
-                                <input type="name" className="form-control" id="shortnameInput" placeholder="Πληκτρολογίστε το όνομα σας" value={firstName} onChange={e => setFirst(e.target.value)}/>
-                            </div>
-                            <div className="form-group pt-3">
-                                <label for="surnameInput">Επίθετο</label>
-                                <input type="surname" className="form-control" id="surnameInput" placeholder="Πληκτρολογίστε το επίθετο σας" value={lastName} onChange={e => setLast(e.target.value)}/>
-                            </div>
-                            <div className="form-group pt-3">
-                                <label for="usernameInput">Username</label>
-                                <input type="username" className="form-control" id="usernameInput" aria-describedby="usernamehelp" placeholder="Πληκτρολογίστε το username σας" value={username} onChange={e => setUsername(e.target.value)}/>
-                                <small id="usernamehelp" className="form-text text-muted">Το username σας πρέπει να αποτελείται από τουλάχιστον 6 λατινικούς χαρακτήρες και αριθμούς</small>
+            <div className="container container-signup">
+                <h1 className="signin-text mb-3">Εγγραφή</h1>
+                
+                <form>
+                    <div className="user-details">
 
-                            </div>
-                            <div className="form-group pt-3">
-                                <label for="exampleInputPassword1">Κωδικός πρόσβασης</label>
-                                <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Πληκτρολογίστε τον κωδικό σας" value={pass1} onChange={e => setPass1(e.target.value)}/>
-                            </div>
-                            <div className="form-group pt-3">
-                                <label for="exampleInputPassword1">Επιβεβαίωση κωδικού</label>
-                                <input type="password" className="form-control" id="pwhelp" placeholder="Πληκτρολογήστε ξανά τον κωδικό σας" value={pass2} onChange={e => setPass2(e.target.value)}/>
-                                <small id="pwhelp" className="form-text text-muted">Ο κωδικός πρόσβασης πρέπει να περιέγχει τουλάχιστον ένα κεφαλαίο γράμμα και έναν αριθμό</small>
+                        <div className="input-box">
+                            <span className = "details">Όνομα</span>
+                            <input className="form-control"  type="text" value={firstName} onChange={e => setFirst(e.target.value)} placeholder="Πληκτρολογίστε το όνομα σας" />
+                        </div>
 
-                            </div>
-                                
-                            <div className="text-center pt-3">
-                                <Link to='/paymentPlan'>
-                                    <button type="button" className="btn-lg btn-primary login-button" onClick={sendSignupCredentials}>Εγγραφή</button>
-                                </Link>
-                            </div>
-                        </form>
+                        <div className="input-box">
+                            <span className = "details">Επίθετο</span>
+                            <input className="form-control"  type="text" value={lastName} onChange={e => setLast(e.target.value)} placeholder="Πληκτρολογίστε το επίθετο σας" />
+                        </div>
+
+                        <div className="input-box">
+                            <span className = "details">Username</span>
+                            <input className="form-control"  type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Πληκτρολογίστε το username σας" aria-describedby="usernamehelp" />
+                            <small id="usernamehelp" className="form-text text-muted">Το username σας πρέπει να αποτελείται από τουλάχιστον 6 λατινικούς χαρακτήρες και αριθμούς</small>
+                        </div>
+
+                        <div className="input-box">
+                            <span className = "details">Email</span>
+                            <input className="form-control"  type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Πληκτρολογίστε το email σας" />
+                        </div>
+
+                        <div className="input-box">
+                            <span className = "details">Κωδικός πρόσβασης</span>
+                            <input className="form-control"  type="password" placeholder="Πληκτρολογίστε τον κωδικό σας" />
+                        </div>
+
+                        <div className="input-box">
+                            <span className = "details">Επιβεβαίωση κωδικού</span>
+                            <input  className="form-control" type="password" placeholder="Πληκτρολογίστε ξανά τον κωδικό" />
+                        </div>
+
+                        <div className="text-center pt-3">
+                            <Link to='/paymentPlan'>
+                                <button type="button" className="btn-lg btn-primary login-button signup-button" onClick={sendSignupCredentials}>Εγγραφή</button>
+                            </Link>
+                        </div>
+
                     </div>
-                </div>
-                    
-
+                </form>
             </div>
-            <div className="signupimage">
-                <img className = "partnerssignup notes" src={partners} alt="partnerssketch"></img>        
-                <img className = "partnerssignup etairia" src={etairia} alt="partnerssketch"></img>        
 
-            </div>
         </div>
     );
 }

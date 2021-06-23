@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import { Link, useHistory } from 'react-router-dom'
-import logo from '../images/logo.png';
+import logo from '../images/logo2.png';
 import partners from '../images/partners.png';
 import {Modal} from "react-bootstrap"
 
@@ -16,6 +16,10 @@ function LoginPage() {
         if (loggedUser){
             history.push("/home");
         }
+        
+        document.body.style.backgroundColor = "#0f0f0f";
+
+        
     }, []);
 
     const [user, setUser] = useState("");
@@ -44,7 +48,7 @@ function LoginPage() {
             console.log(data);
             dataReceived = data;
           }).then( () => {
-                if (dataReceived){
+                if (dataReceived.status != 401){
                     //localStorage.setItem("loggedUser", true);
                     console.log("logged in");
                     history.push("/home");
@@ -72,66 +76,55 @@ function LoginPage() {
     } 
 
     return (
-        <div className="loginbackground">
-            <div className="login-screen">
-                <div className="login-desc-box">
-                    <img className = "jete_logo-icon-login" src={logo} alt="logo"></img>        
-                    <p className="desc-header">Καλωσήρθατε</p>
-                    <img className = "partners" src={partners} alt="partnerssketch"></img>        
-                </div>
-                <div className="login-form-box">
-                    <div className="login-form">
-                                    
-                        <div className="col-auto">
-                            <div>
-                                <div className="top-buffer">
-                                    <h1 className="text-center login-header">
-                                        Σύνδεση
-                                    </h1>
-                                    <form className="login-form-boxes">
-                                        <div className="form-group pt-3">
-                                            <label for="exampleInputUsername1">Όνομα χρήστη</label>
-                                            <input type="username" className="form-control" id="exampleInputUsername1" aria-describedby="usernameHelp" placeholder="Πληκτρολογίστε το όνομα χρήστη σας" value={user} onChange={e => setUser(e.target.value)}/>
-                                        </div>
-                                        <div className="form-group pt-3">
-                                            <label for="exampleInputPassword1">Κωδικός πρόσβασης</label>
-                                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Πληκτρολογίστε τον κωδικό σας"  value={pass} onChange={e => setPass(e.target.value)}/>
-                                        </div>
-                                        <div className="form-check pt-3">
-                                            <input type="checkbox" className="form-check-input mycheckbox" id="exampleCheck1"/>
-                                            <label className="form-check-label" for="exampleCheck1">Remember me</label>
-                                        </div>
-                                        <div className="text-center pt-3">
-                                            {/* <Link to='/home'> */}
-                                                <button type="button" className="btn-lg btn-primary login-button" onClick={sendLoginCredentials}>Σύνδεση</button>
-                                            {/* </Link> */}
-                                        </div>
-                                        <div className="text-center pt-3">
-                                            <small id="emailHelp" className="form-text text-muted">Είναι η πρώτη σας φορά εδώ; </small>
-                                            <Link to='/signUp'>
-                                                <small id="signUpLink" className="form-text signup-link signUpStyle"> Εγγραφείτε</small>
-                                            </Link>
-                                        </div>
-                                    </form>
-                                </div>
+        <div>
+            <img className = "loginlogo" src={logo} alt="partnerssketch"></img>        
+
+            <div className="container">
+
+                <div className="row content">
+                    <div className="col-md-6 mb-3 eikona">
+                        <img className = "img-fluid partners" src={partners} alt="partnerssketch"></img>        
+                        
+                    </div>
+                    <div className="col-md-6">
+                        <h1 className="signin-text mb-3">Σύνδεση</h1>
+                        <form className="loginform">
+                            <div className="form-group loginformgroup">
+                                <label for="exampleInputUsername1">Όνομα χρήστη</label>
+                                <input type="username" className = "form-control loginform-control" id="exampleInputUsername1" aria-describedby="usernameHelp" placeholder="Πληκτρολογίστε το όνομα χρήστη σας" value={user} onChange={e => setUser(e.target.value)}/>
                             </div>
-                        </div>
+                            <div className="form-group loginformgroup">
+                                <label for="exampleInputPassword1">Κωδικός πρόσβασης</label>
+                                <input type="password" className = "form-control loginform-control" id="exampleInputPassword1" placeholder="Πληκτρολογίστε τον κωδικό σας"  value={pass} onChange={e => setPass(e.target.value)}/>
+                            </div>
+                            <div className="form-group loginformgroup form-check">
+                                <input type="checkbox" className="form-check-input mycheckbox" id="exampleCheck1"/>
+                                <label className="form-check-label" for="exampleCheck1">Remember me</label>
+                            </div>
+                            <button type="button" className="btn-lg btn-primary login-button" onClick={sendLoginCredentials}>Σύνδεση</button>
+                            <div className="signupadvice">
+                                <small id="emailHelp" className="form-text text-muted signupadvice-muted-text">Είναι η πρώτη σας φορά εδώ; </small>
+                                <Link to='/signUp'>
+                                    <small id="signUpLink" className="form-text signup-link signUpStyle"> Εγγραφείτε</small>
+                                </Link>
+                            </div>
+                        </form>
                     </div>
                 </div>
+                <Modal show={showModal} centered>
+                    <Modal.Header>
+                        <Modal.Title id="contained-modal-title-vcenter">
+                            Σφάλμα
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        Λάθος όνομα χρήστη ή κωδικός
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <button type="button" class="btn btn-outline-danger" onClick={handleClose}>Κλείσιμο</button>
+                    </Modal.Footer>
+                </Modal>
             </div>
-            <Modal show={showModal} centered>
-                <Modal.Header>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                        Σφάλμα
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    Λάθος όνομα χρήστη ή κωδικός
-                </Modal.Body>
-                <Modal.Footer>
-                    <button type="button" class="btn btn-outline-danger" onClick={handleClose}>Κλείσιμο</button>
-                </Modal.Footer>
-            </Modal>
         </div>
     );
 }
