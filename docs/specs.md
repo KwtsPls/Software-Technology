@@ -29,7 +29,6 @@
 `[GET] /developers/projects/{project_id}`
 
 Επιστρέφει τους χρήστες που συμμετέχουν στο project με id {project_id} στην παρακάτω μορφή : <br><br>
-
 [[user_id1,username1,accepted1,role1],[user_id2,username2,accepted2,role2],..].
 
 `[GET] /projects/{id}/user={username}`
@@ -47,5 +46,4 @@
 `[POST] /developers`
 
 Προσθέτει έναν user σε έναν project. Το json που αναμένεται για να επιτύχει το request είναι της μορφής : <br><br>
-
 {"user_id":"${user_id}","project_id":"${project_id}","role":"0/1","accepted":"0"}
