@@ -187,20 +187,21 @@
 
 #signUpLink{
   text-decoration: underline !important;
-  color: #b34caf;
+  color: #5f1d5d;
+  
 
 }
 
 #signUpLink:hover{
   text-decoration: underline !important;
-  color: #5f1d5d;
+  color: #b34caf;
 
 }
 
 .content{
   margin: 8%;
   margin-top: 10%;
-  background-color: #202020;
+  background-color: #fff;
   padding: 4rem 1rem 4rem 1rem;
   /* box-shadow: 0 0 5px 5px rgba(0, 0, 0, .05); */
   box-shadow: #723c70 0px 0px 0px 4px;
@@ -210,9 +211,9 @@
   margin-top: 25px;
 }
 
-.signupadvice-muted-text{
+/* .signupadvice-muted-text{
   color: #f4f5f7 !important;
-}
+} */
 
 .loginform{
   margin-top: 60px;
@@ -244,12 +245,12 @@
 }
 
 .loginformgroup{
-  color: #fff;
+  color: #202020;
 }
 
-.signin-text{
+/* .signin-text{
   color: #fff !important;
-}
+} */
 
 .form-control:focus{
   color:#202020;
@@ -265,9 +266,11 @@
 }
 
 .loginlogo{
-  height: 70px;
-  width: 140px;
+  height: 50px;
+  width: 100px;
   margin-left: 20px;
+  margin-top: 10px;
+
 }
 
 

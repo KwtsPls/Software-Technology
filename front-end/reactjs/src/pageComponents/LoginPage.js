@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import { Link, useHistory } from 'react-router-dom'
-import logo from '../images/logo.png';
+import logo from '../images/logo2.png';
 import partners from '../images/partners.png';
 import {Modal} from "react-bootstrap"
 
@@ -17,7 +17,7 @@ function LoginPage() {
             history.push("/home");
         }
 
-        document.body.style.backgroundColor = "#f4f5f7";
+        document.body.style.backgroundColor = "#0f0f0f";
     }, []);
 
     const [user, setUser] = useState("");
