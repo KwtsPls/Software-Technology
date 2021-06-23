@@ -46,7 +46,7 @@ public class DeveloperController {
     }
     // end::get-aggregate-root[]
 
-    @PostMapping("/developers")
+    @PostMapping("/developers/")
     Developer newDeveloper(@RequestBody Developer newDeveloper){
         //Search for User with given id
         User user = userRep.findById(newDeveloper.getUserId()) //

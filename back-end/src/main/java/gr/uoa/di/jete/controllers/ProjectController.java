@@ -103,6 +103,13 @@ public class ProjectController {
             return "NO";
     }
 
+    @PutMapping("/projects/{id}/archive")
+    String archiveProject(@PathVariable Long id){
+        repository.findById(id).orElseThrow(() -> new ProjectNotFoundException(id));
+        repository.setStatusToArchived(id);
+        return "OK";
+    }
+
     @DeleteMapping("/projects/{id}")
     void deleteProject(@PathVariable Long id){
         repository.deleteById(id);

@@ -1,24 +1,21 @@
 package gr.uoa.di.jete.models;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import gr.uoa.di.jete.exceptions.DeveloperNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-//@IdClass(WalletId.class)
 public class Wallet {
 
     private @Id Long id;
-//    private @Id Long user_id;
 
     private String card1;
     private String card2;

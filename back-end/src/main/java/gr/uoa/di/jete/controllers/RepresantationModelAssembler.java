@@ -94,6 +94,7 @@ class TaskModelAssembler implements RepresentationModelAssembler<Task, EntityMod
     }
 }
 
+@Component
 class WalletModelAssembler implements RepresentationModelAssembler<Wallet, EntityModel<Wallet>> {
 
     @NotNull
