@@ -84,6 +84,15 @@ public class DeveloperController {
                 });
     }
 
+    @PutMapping("/developers/users/{user_id}/projects/{project_id}/accept")
+    String acceptProjectInvitation(@PathVariable Long user_id,@PathVariable Long project_id){
+        int status = repository.setDeveloperAcceptedTrue(user_id,project_id);
+        if(status==1)
+            return "OK";
+        else
+            return "ERROR";
+    }
+
     //Endpoint to get the vital info of the developers of a project
     @GetMapping("/developers/projects/{project_id}")
     List<DeveloperInfo> allDevelopersInfo(@PathVariable Long project_id){
@@ -92,7 +101,12 @@ public class DeveloperController {
         return developerInfos;
     }
 
-    @DeleteMapping("/developers/{user_id}/{project_id}")
+    @GetMapping("/developers/users/{user_id}/notifications")
+    List<?> getNotificationsNumber(@PathVariable Long user_id){
+        return repository.getProjectsNotificationNumber(user_id);
+    }
+
+    @DeleteMapping("/developers/users/{user_id}/projects/{project_id}")
     void deleteDeveloper( @PathVariable Long user_id,@PathVariable Long project_id){
         repository.deleteById(new DeveloperId(user_id,project_id));
     }
