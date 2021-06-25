@@ -41,7 +41,7 @@
 `[POST] /projects/create/{user_id}`
 
 Δημιουργεί ένα project με project owner ton {user_id}. Το json που αναμένεται για να επιτύχει το request είναι της μορφής : <br><br>
-{"title":string,"description":string,"status":"0/1","date_finished":?}<br><br>
+{"title":string,"description":string,"status":"0","date_finished":null}<br><br>
 
 `[GET] /users/name={username}`
 
