@@ -15,7 +15,7 @@
   height: 47.5px;
   width: 100%;
   position: fixed;
-  z-index: 998;
+  z-index: 997;
   top: 0;
   overflow-x: hidden;
   padding-top: 20px;
@@ -37,6 +37,25 @@
 
   /* margin-left: 70px; */
   margin-left: 3.64%;
+}
+
+.logout-option{
+  position: fixed;
+  z-index: 998;
+  color:rgb(238, 238, 238) !important;
+  margin-left: 900px;
+  /* float: right; */
+  right: 15px;
+  top: 10px;
+  border-color: #fff !important;
+  text-decoration: none;
+  
+}
+
+.logout-option:hover {
+  color: rgb(184, 44, 44) !important;
+  /* border-color: rgb(189, 40, 40) !important; */
+  cursor: pointer;
 }
 
 /* help icon */

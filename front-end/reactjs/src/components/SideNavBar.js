@@ -61,11 +61,11 @@ function SideNavBar(){
 
 	const handleClick = () => setClick(!dropdown);
 
-	function logout() {
-        localStorage.removeItem("loggedUser");
-		console.log("logging out");
-		setTimeout(function(){window.location.reload();}, 10);
-    }
+	// function logout() {
+    //     localStorage.removeItem("loggedUser");
+	// 	console.log("logging out");
+	// 	setTimeout(function(){window.location.reload();}, 10);
+    // }
 
     return (
         <div className="SideNavBar" >
@@ -75,7 +75,7 @@ function SideNavBar(){
 				</div>
             </Link>
 
-			<button onClick={logout}>logout</button>
+			{/* <button onClick={logout}>logout</button> */}
 			<div className="NavBar">
 
 				<Link to='/home'>

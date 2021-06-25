@@ -17,6 +17,8 @@ function SettingsBillingPage() {
         if (!loggedUser){
             history.push("/login");
         }
+        document.body.style.background = "#fff";
+
     }, []);
 
     const [modalShow, setModalShow] = useState(false);
@@ -25,16 +27,15 @@ function SettingsBillingPage() {
         <div>
             <Topbar/>
             <SideNavBar/>
-            <div className="mainContent">
-                <div className="jete-settingsMenu">
+            <div className="mainContent"  >
+                <div className="jete-settingsMenu settings-postition">
                     <div className="list-group">
                         <Link to='/settings/profile' className="list-group-item list-group-item-action">Προφίλ</Link>
-                        <Link to='/settings/personalisation' className="list-group-item list-group-item-action">Εξατομίκευση</Link>
 					    <Link to='/settings/security' className="list-group-item list-group-item-action">Ασφάλεια</Link>
                         <a href="#" className="list-group-item list-group-item-action  active">Χρεώσεις</a>
                     </div>
                 </div>
-                <div className="settingsContains">
+                <div className="settingsContains settings-postition">
                     <h1 className="settings-header">Χρεώσεις λογαριασμού</h1>
                     <hr className="new4"/>
 
