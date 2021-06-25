@@ -41,11 +41,11 @@ create table developer(id int,project_id int,role int,accepted int,
         foreign key (project_id) references project (id)
 );
 
-insert into developer(id, project_id, role,accepted) values(2,1,1,1);
-insert into developer(id, project_id, role,accepted) values(4,1,2,1);
-insert into developer(id, project_id, role,accepted) values(3,2,1,1);
-insert into developer(id, project_id, role,accepted) values(6,2,1,1);
-insert into developer(id, project_id, role,accepted) values(1,4,1,1);
+insert into developer(user_id, project_id, role,accepted) values(2,1,1,1);
+insert into developer(user_id, project_id, role,accepted) values(4,1,2,1);
+insert into developer(user_id, project_id, role,accepted) values(3,2,1,1);
+insert into developer(user_id, project_id, role,accepted) values(6,2,1,1);
+insert into developer(user_id, project_id, role,accepted) values(1,4,1,1);
 
 
 /*
