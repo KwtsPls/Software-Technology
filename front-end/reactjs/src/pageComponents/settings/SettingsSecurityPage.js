@@ -14,6 +14,8 @@ function SettingsSecurityPage(){
         if (!loggedUser){
             history.push("/login");
         }
+        document.body.style.background = "#fff";
+
     }, []);
 
     // Fix later
@@ -39,15 +41,14 @@ function SettingsSecurityPage(){
             <Topbar/>
             <SideNavBar/>
             <div className="mainContent">
-                <div className="jete-settingsMenu">
+                <div className="jete-settingsMenu settings-postition">
                     <div className="list-group">
                         <Link to='/settings/profile' className="list-group-item list-group-item-action">Προφίλ</Link>
-                        <Link to='/settings/personalisation' className="list-group-item list-group-item-action">Εξατομίκευση</Link>
                         <a href="#" className="list-group-item list-group-item-action active">Ασφάλεια</a>
                         <Link to='/settings/billing' className="list-group-item list-group-item-action">Χρεώσεις</Link>
                     </div>
                 </div>
-                <div className="settingsContains">
+                <div className="settingsContains settings-postition">
                     <h1 className="settings-header">Ασφάλεια λογαριασμού</h1>
                     <hr className="new4"/>
 

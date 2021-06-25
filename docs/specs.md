@@ -38,6 +38,10 @@
 
 Επιστρέφει "YES" αν ο χρήστης με {username} υπάρχει στο project με id {id} διαφορετικά επιστρέφει "NO".<br><br>
 
+`[POST] /projects/create/{user_id}`
+
+Δημιουργεί ένα project με project owner ton {user_id}. Το json που αναμένεται για να επιτύχει το request είναι της μορφής : <br><br>
+{"title":string,"description":string,"status":"0","date_finished":null}<br><br>
 
 `[GET] /users/name={username}`
 
@@ -49,7 +53,7 @@
 Αλλάζει την κατάσταση του project με id {id} από IN_PROGRESS σε DONE.<br><br>
 
 
-`[POST] /developers`
+`[POST] /developers/`
 
 Προσθέτει έναν user σε έναν project. Το json που αναμένεται για να επιτύχει το request είναι της μορφής : <br><br>
 {"user_id":"${user_id}","project_id":"${project_id}","role":"0/1","accepted":"0"}<br><br>

@@ -14,11 +14,18 @@ function LoginPage() {
 
     useEffect(() => {
         if (loggedUser){
+            document.body.style.background = "#fff";
+            document.body.style.backgroundColor = "#fff";
+
             history.push("/home");
         }
         
         document.body.style.backgroundColor = "#0f0f0f";
+        document.body.style.background = "linear-gradient( to bottom right ,#992b95, #510c80a6) fixed";
 
+        return () => { 
+     
+        }
         
     }, []);
 
@@ -50,6 +57,7 @@ function LoginPage() {
           }).then( () => {
                 if (dataReceived.status != 401){
                     //localStorage.setItem("loggedUser", true);
+                    console.log(dataReceived); // REMOVE AT END
                     console.log("logged in");
                     history.push("/home");
                 }

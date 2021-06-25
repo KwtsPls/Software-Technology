@@ -8,14 +8,39 @@ import AssignDev from './AssignDev.js'
 
 function NewProjectPopUp(props){
 
+    const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+
     const [devs, setDevs] = useState([])
 
     const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
 
     function submit(name) {
         props.addProj(name)
         props.onHide()
-        setTitle("")
+
+        fetch('http://localhost:8080/projects/create/1', { // TO BE CHANGED
+                method: 'post', 
+                headers: { Authorization: 'Bearer ' + loggedUser.accessToken,
+                            'Content-Type': 'application/json'  
+                    },
+                body: JSON.stringify({  date_finished: null,
+                                        description: description,
+                                        status: 0,
+                                        title: title
+
+                    })
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    console.log(data);
+                    //setRawProjects(data);
+                    //setLoading(false);
+                    setTitle("")
+                    setDescription("")
+                    })
+
+        
     }
 
     return (
@@ -39,7 +64,7 @@ function NewProjectPopUp(props){
                         </div>
                         <div className="col-12">
                             <label for="inputDescription" className="form-label">Περιγραφή Project</label>
-                            <textarea type="text" className="form-control" id="projectDescription" placeholder="Περιγραφή"/>
+                            <textarea type="text" className="form-control" id="projectDescription" placeholder="Περιγραφή" value={description} onChange={e => setDescription(e.target.value)}/>
                         </div>
                         <div className="col-12">
                             <label for="assignDev" className="form-label">Πρόσκληση προς Developers</label>

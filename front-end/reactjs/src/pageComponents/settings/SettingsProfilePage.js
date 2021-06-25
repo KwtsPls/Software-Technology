@@ -26,6 +26,8 @@ function SettingsProfilePage() {
             history.push("/login");
         }
         else{
+            document.body.style.background = "#fff";
+
             fetch('http://localhost:8080/users/' + loggedUser.id, {
                 method: 'get', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
@@ -35,7 +37,7 @@ function SettingsProfilePage() {
                     setUser(data);
                     setLoading(false);
                 })
-
+            
         }
     }, []);
 
@@ -82,16 +84,15 @@ function SettingsProfilePage() {
             <SideNavBar/>
             <div className="mainContent">
                 
-                <div className="jete-settingsMenu">
+                <div className="jete-settingsMenu settings-postition">
                     <div className="list-group">
                         <a href="#" className="list-group-item list-group-item-action active">Προφίλ</a>
-				        <Link to='/settings/personalisation' className="list-group-item list-group-item-action">Εξατομίκευση</Link>
 				        <Link to='/settings/security' className="list-group-item list-group-item-action">Ασφάλεια</Link>
                         <Link to='/settings/billing' className="list-group-item list-group-item-action">Χρεώσεις</Link>
                     </div>
                 </div>
                 
-                <div className="settingsContains">
+                <div className="settingsContains settings-postition">
                     <h1 className="settings-header">Δημόσιο προφίλ</h1>
                     <hr className="new4"/>
 

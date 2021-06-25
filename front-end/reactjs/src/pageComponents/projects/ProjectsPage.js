@@ -13,11 +13,34 @@ function ProjectsPage() {
     const history = useHistory();
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
 
+    const [isLoading, setLoading] = useState(true);
+    const [rawProjects, setRawProjects] = useState([]);
+
     useEffect(() => {
         if (!loggedUser){
             history.push("/login");
         }
+        else{
+            fetch('http://localhost:8080/users/1/projects', { // TO BE CHANGED
+                method: 'get', 
+                headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    console.log(data);
+                    setRawProjects(data);
+                    setLoading(false);
+                    })
+        }
     }, []);
+
+    const [projectList,setProjectList] = useState([])
+
+    useEffect(() => {
+        if (!isLoading){
+            setProjectList(rawProjects._embedded.projectList)
+        }
+    },[isLoading])
 
     const [all, changeAll] = useState("nav-link active");
     const [arch, changeArch] = useState("nav-link");
@@ -92,15 +115,16 @@ function ProjectsPage() {
                             </div>
                         </div>
                         <div className="row pt-3 vertical-scrollable overflow-auto">
-                            {projNames.map(i => i.toLowerCase().includes(searchVal.toLowerCase()) &&
-                                (<div className="row pt-3">
+                            {
+                                projectList.map(i => i.title.toLowerCase().includes(searchVal.toLowerCase()) &&
+                                (<div key={i.id + i.title} className="row pt-3">
                                     <div className="col-12">
                                         <div className="card">
                                             <div className="card-body container">
                                                 <div className="row">
                                                     <div className="col-11">
-                                                        <h5 className="card-title">Project {i}</h5>
-                                                        <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                                        <h5 className="card-title">{i.title}</h5>
+                                                        <p className="card-text">{i.description}</p>
                                                         <Link to='/projects/projectNo'>
                                                             <a href="#" className="btn btn-primary project-button">Go somewhere</a>
                                                         </Link>

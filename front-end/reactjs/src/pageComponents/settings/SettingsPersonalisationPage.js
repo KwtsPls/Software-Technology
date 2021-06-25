@@ -15,6 +15,8 @@ function SettingsPersonalisationPage(){
         if (!loggedUser){
             history.push("/login");
         }
+        document.body.style.background = "#fff";
+
     }, []);
 
     return (

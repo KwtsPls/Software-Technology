@@ -11,7 +11,6 @@ function ProfilePage() {
     const history = useHistory();
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
 
-    let keepo=false;
     const [isLoading, setLoading] = useState(true);
     const [contacts, setTxt] = useState([])
 
@@ -20,6 +19,8 @@ function ProfilePage() {
             history.push("/login");
         }
         else{
+            document.body.style.background = "#fff";
+
             fetch('http://localhost:8080/users', {
                 method: 'get', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
@@ -30,8 +31,6 @@ function ProfilePage() {
                     setTxt(data);
                     setLoading(false);
                 })
-    
-            keepo = false;
         }
     }, []);
 
@@ -80,36 +79,19 @@ function ProfilePage() {
                 <SideNavBar/>
                 <div className="mainContent">
 
-                    <div className="jete-breadcrump">
-                        <nav aria-label="breadcrumb">
-                            <ol className="breadcrumb">
-                                <li className="breadcrumb-item"><a href="#" className="breadcrumb-option">Home</a></li>
-                                <li className="breadcrumb-item"><a href="#" className="breadcrumb-option">Library</a></li>
-                                <li className="breadcrumb-item active" aria-current="page">Data</li>
-                            </ol>
-                        </nav>
+                    <div className="row pt-4">
+                            {/* ----------- Nav Tabs ------------ */}
+                        <div className="col-md-6 offset-md-1 bg-success">
+                            <p>Edw profile</p>
+                        </div>
+                        <div className="col-md-2 offset-md-1 bg-primary">
+                            <p>Edw profile</p>
+                        </div>
                     </div>
 
 
                 </div>
-                <h1 className="text-center">
-                    ProfilePage
-                </h1>
-                <h1 className="text-center">
-                    ProfilePage
-                </h1>
-                <h1 className="text-center">
-                    ProfilePage
-                </h1>
-                <h1 className="text-center">
-                    ProfilePage
-                </h1>
-                <h1 className="text-center">
-                    ProfilePage
-                </h1>
-                <h1 className="text-center">
-                    ProfilePage
-                </h1>
+                
                 {/* <div className="text-center">
                 <button onClick={mount}></button>
                 </div> */}
