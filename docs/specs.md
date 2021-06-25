@@ -53,7 +53,7 @@
 Αλλάζει την κατάσταση του project με id {id} από IN_PROGRESS σε DONE.<br><br>
 
 
-`[POST] /developers`
+`[POST] /developers/`
 
 Προσθέτει έναν user σε έναν project. Το json που αναμένεται για να επιτύχει το request είναι της μορφής : <br><br>
 {"user_id":"${user_id}","project_id":"${project_id}","role":"0/1","accepted":"0"}<br><br>
