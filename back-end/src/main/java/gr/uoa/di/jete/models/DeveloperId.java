@@ -1,13 +1,9 @@
 package gr.uoa.di.jete.models;
-import com.sun.istack.NotNull;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 public class DeveloperId implements Serializable {
-    @NotNull
     private Long user_id;
-    @NotNull
     private Long project_id;
 
     public DeveloperId() {}
@@ -16,19 +12,19 @@ public class DeveloperId implements Serializable {
         this.project_id = project_id;
     }
 
-    public Long getUserId() {
+    public Long getUser_id() {
         return user_id;
     }
 
-    public void setUserId(Long user_id) {
+    public void setUser_id(Long user_id) {
         this.user_id = user_id;
     }
 
-    public Long getProjectId() {
+    public Long getProject_id() {
         return project_id;
     }
 
-    public void setProjectId(Long project_id) {
+    public void setProject_id(Long project_id) {
         this.project_id = project_id;
     }
 

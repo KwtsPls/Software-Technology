@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+@CrossOrigin
 @RestController
 public class DeveloperController {
 
@@ -36,7 +37,7 @@ public class DeveloperController {
 
     //Aggregate root
     //tag::get-aggregate-root[]
-    @GetMapping("/developers")
+    @GetMapping("/developers/")
     CollectionModel<EntityModel<Developer>> all(){
         List<EntityModel<Developer>> developer = repository.findAll().stream() //
                 .map(assembler :: toModel) //
@@ -48,13 +49,14 @@ public class DeveloperController {
 
     @PostMapping("/developers/")
     Developer newDeveloper(@RequestBody Developer newDeveloper){
+        System.out.println(newDeveloper.getUser_id()+" "+newDeveloper.getProject_id());
         //Search for User with given id
-        User user = userRep.findById(newDeveloper.getUserId()) //
-                .orElseThrow(()-> new UserNotFoundException(newDeveloper.getUserId()));
+        userRep.findById(newDeveloper.getUser_id()) //
+                .orElseThrow(()-> new UserNotFoundException(newDeveloper.getUser_id()));
 
         //Search for project with given id
-        Project project = projectRep.findById(newDeveloper.getProjectId())
-                .orElseThrow(()-> new ProjectNotFoundException(newDeveloper.getProjectId()));
+        projectRep.findById(newDeveloper.getProject_id())
+                .orElseThrow(()-> new ProjectNotFoundException(newDeveloper.getProject_id()));
 
         return repository.save(newDeveloper);
     }
@@ -76,8 +78,8 @@ public class DeveloperController {
                     return repository.save(newDeveloper);
                 })
                 .orElseGet(()->{
-                    newDeveloper.setUserId(user_id);
-                    newDeveloper.setProjectId(project_id);
+                    newDeveloper.setUser_id(user_id);
+                    newDeveloper.setProject_id(project_id);
                     return repository.save(newDeveloper);
                 });
     }

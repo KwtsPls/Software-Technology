@@ -41,7 +41,7 @@ class DeveloperModelAssembler implements RepresentationModelAssembler<Developer,
     @Override
     public EntityModel<Developer> toModel(@NotNull Developer developer){
         return EntityModel.of(developer, //
-                linkTo(methodOn(DeveloperController.class).one(developer.getUserId(),developer.getProjectId())).withSelfRel(),
+                linkTo(methodOn(DeveloperController.class).one(developer.getUser_id(),developer.getProject_id())).withSelfRel(),
                 linkTo(methodOn(DeveloperController.class).all()).withRel("developers"));
     }
 }

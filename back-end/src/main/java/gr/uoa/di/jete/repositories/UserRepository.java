@@ -3,8 +3,10 @@ package gr.uoa.di.jete.repositories;
 
 import gr.uoa.di.jete.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,4 +28,9 @@ public interface UserRepository extends JpaRepository<User, Long>{
 
     @Query("select u from User u,Project p,Developer d where d.user_id = u.id and d.project_id = p.id and d.project_id=?1")
     List<User> findAllByProjectId(Long Id);
+
+    @Transactional
+    @Modifying
+    @Query("update User u set u.is_enabled=1 where u.verification_code=?1 and u.username=?2")
+    int setEnabledToTrue(String code,String username);
 }

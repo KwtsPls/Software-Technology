@@ -5,6 +5,7 @@ import java.util.Objects;
 
 @Entity
 @IdClass(DeveloperId.class)
+@Table(name="developer")
 public
 class Developer {
     private @Id Long user_id;
@@ -20,20 +21,20 @@ class Developer {
         this.accepted = accepted;
     }
 
-    public Long getUserId() {
-        return user_id;
-    }
-
-    public void setUserId(Long user_id) {
-        this.user_id = user_id;
-    }
-
-    public Long getProjectId() {
+    public Long getProject_id() {
         return project_id;
     }
 
-    public void setProjectId(Long project_id) {
+    public void setProject_id(Long project_id) {
         this.project_id = project_id;
+    }
+
+    public Long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 
     public Long getRole() {
@@ -44,6 +45,13 @@ class Developer {
         this.role = role;
     }
 
+    public Long getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(Long accepted) {
+        this.accepted = accepted;
+    }
 
     @Override
     public boolean equals(Object o){
@@ -65,15 +73,7 @@ class Developer {
 
     @Override
     public String toString(){
-        return "Developer{" + "user_id=" + this.getUserId() + ", project_id=" + this.getProjectId()
+        return "Developer{" + "user_id=" + this.getUser_id() + ", project_id=" + this.getProject_id()
                 + '\'' + ", role=" + this.role + '\'' + '}';
-    }
-
-    public Long getAccepted() {
-        return accepted;
-    }
-
-    public void setAccepted(Long accepted) {
-        this.accepted = accepted;
     }
 }

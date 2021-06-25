@@ -1,5 +1,6 @@
 package gr.uoa.di.jete.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.annotations.SerializedName;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.Objects;
 public class User {
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     private String username;
+    @JsonIgnore
     private String password;
     private String email;
     private String bio;
@@ -21,6 +23,8 @@ public class User {
     private String firstname;
     @SerializedName(value = "lastName")
     private String lastname;
+    private @JsonIgnore String verification_code;
+    private @JsonIgnore boolean is_enabled;
 
     public User(){}
     public User(String username, String password, String email, String bio, String location,
@@ -68,7 +72,21 @@ public class User {
         this.lastname = lastName;
     }
 
+    public String getVerification_code() {
+        return verification_code;
+    }
 
+    public void setVerification_code(String verification_code) {
+        this.verification_code = verification_code;
+    }
+
+    public boolean isIs_enabled() {
+        return is_enabled;
+    }
+
+    public void setIs_enabled(boolean is_enabled) {
+        this.is_enabled = is_enabled;
+    }
 
     @Override
     public boolean equals(Object o){
@@ -81,7 +99,8 @@ public class User {
                 && Objects.equals(this.email, user.email) && Objects.equals(this.bio, user.bio)
                 && Objects.equals(this.firstname, user.firstname) && Objects.equals(this.lastname, user.lastname)
                 && Objects.equals(this.location, user.location) && Objects.equals(this.status, user.status)
-                && Objects.equals(this.pronouns, user.pronouns) && Objects.equals(this.password, user.password) ;
+                && Objects.equals(this.pronouns, user.pronouns) && Objects.equals(this.password, user.password)
+                && Objects.equals(this.verification_code,user.verification_code) && Objects.equals(this.is_enabled,user.is_enabled);
 
     }
 
@@ -145,7 +164,5 @@ public class User {
     public void setPronouns(String pronouns) {
         this.pronouns = pronouns;
     }
-
-
 }
 

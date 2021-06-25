@@ -1,5 +1,5 @@
 package gr.uoa.di.jete.models;
-import com.sun.istack.NotNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 import java.util.Objects;

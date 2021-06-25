@@ -23,10 +23,13 @@ public class CustomUserDetails implements UserDetails {
     private String pronouns;
     private String firstname;
     private String lastname;
+    private String verification_code;
+    private boolean is_enabled;
     private Collection<? extends GrantedAuthority> authorities;
 
     public CustomUserDetails(Long id,String username,String password,String email,
                              String bio,String location,String pronouns,String firstname,String lastname,
+                             String verification_code,boolean is_enabled,
                              Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
@@ -37,6 +40,8 @@ public class CustomUserDetails implements UserDetails {
         this.pronouns = pronouns;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.verification_code =verification_code;
+        this.is_enabled = is_enabled;
         this.authorities = authorities;
     }
 
@@ -54,6 +59,8 @@ public class CustomUserDetails implements UserDetails {
                 user.getPronouns(),
                 user.getFirstName(),
                 user.getLastName(),
+                user.getVerification_code(),
+                user.isIs_enabled(),
                 authorities);
     }
 
@@ -97,7 +104,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.is_enabled;
     }
 
     @Override

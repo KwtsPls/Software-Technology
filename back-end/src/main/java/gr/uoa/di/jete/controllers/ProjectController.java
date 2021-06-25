@@ -1,6 +1,5 @@
 package gr.uoa.di.jete.controllers;
 
-
 import gr.uoa.di.jete.exceptions.ProjectNotFoundException;
 import gr.uoa.di.jete.exceptions.UserNotFoundException;
 import gr.uoa.di.jete.models.Developer;

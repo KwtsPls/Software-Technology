@@ -59,6 +59,10 @@ class UserService{
                 .collect(Collectors.toList());
     }
 
+    public int setUserToEnabled(String code, String username) {
+        return userRepository.setEnabledToTrue(code,username);
+    }
+
     //Inserts new user to Table
     public User addNewUser(User newUser) {
 
