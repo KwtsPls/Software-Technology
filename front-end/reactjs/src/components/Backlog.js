@@ -77,7 +77,7 @@ function Backlog(props){
     const [perc, setPerc] = useState(calcPerc());
 
     useEffect(() => {
-        setPerc(calcPerc)
+        setPerc(calcPerc())
     }, [cond1,cond2,cond3,cond4,cond5]);
 
     const tasks = ['Make Unittests for new modules','Correct port connectivity for PDCH','Rewrite auth for system_aaa','Make new OHM samples','Cook a nice carbonara']

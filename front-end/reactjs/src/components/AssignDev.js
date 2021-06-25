@@ -5,6 +5,9 @@ import '../App.css';
 
 
 function AssignDev(props){
+
+    const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+
     const [devToBeAdded, setDev] = useState('')
 
     const [count, setCount] = useState(0)
@@ -17,19 +20,41 @@ function AssignDev(props){
         setCount(count-1)
     }
 
+    function indexOf(array,user){
+        for(var i = 0; i < array.length; i++){
+            if (array[i].username === user){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     function addDev() {
-        var index = props.devs.indexOf(devToBeAdded)
-        if (index == -1) {
-            props.devs.push(devToBeAdded)
-            //setDevs()
-            console.log("added " + devToBeAdded)
-            incr()
+        var index = indexOf(props.devs, devToBeAdded)
+        if (index === -1) {
+            fetch('http://localhost:8080/users/name=' + devToBeAdded, {
+                method: 'get', 
+                headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.id != null) {
+                        props.devs.push({id: data.id, username: devToBeAdded})
+                        console.log("added " + devToBeAdded)
+                        incr()
+                    }
+                    else {
+                        console.log("tried to add " + devToBeAdded + " but username does not exist")
+                    }
+                })
+            
         }
         setDev("")
     }
 
     function remDev(name) {
-        var index = props.devs.indexOf(name);
+        var index = indexOf(props.devs, name);
         if (index !== -1) {
             props.devs.splice(index, 1);
         }
@@ -52,10 +77,10 @@ function AssignDev(props){
             <div className="col-10">
                 <small>Number of devs: {count}</small>
                 {
-                    props.devs.map(i => <div key={i}>
-                        <span class="badge bg-primary rounded-pill cool-purple">{i}</span>
+                    props.devs.map(i => <div key={i.username}>
+                        <span class="badge bg-primary rounded-pill cool-purple">{i.username}</span>
                         <small>{props.message}</small>
-                        <span class="badge bg-danger rounded-pill  float-end" onClick={() => remDev(i)}>remove</span>
+                        <span class="badge bg-danger rounded-pill  float-end" onClick={() => remDev(i.username)}>remove</span>
                         </div>
                     )
                 }

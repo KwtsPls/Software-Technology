@@ -15,8 +15,30 @@ function NewProjectPopUp(props){
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
 
-    function submit(name) {
-        props.addProj(name)
+    const [showEmptyTitle, setShowEmptyTitle] = useState(false)
+    const [showEmptyDescription, setShowEmptyDescription] = useState(false)
+
+    function submit() {
+        let earlyExit = false
+        if (title === ""){
+            earlyExit = true;
+            setShowEmptyTitle(true);
+        }
+        else {
+            setShowEmptyTitle(false)
+        }
+        if (description === ""){
+            earlyExit = true;
+            setShowEmptyDescription(true);
+        }
+        else {
+            setShowEmptyDescription(false)
+        }
+        if (earlyExit){
+            return ;
+        }
+
+        props.addProj(title)
         props.onHide()
 
         fetch('http://localhost:8080/projects/create/1', { // TO BE CHANGED
@@ -28,19 +50,45 @@ function NewProjectPopUp(props){
                                         description: description,
                                         status: 0,
                                         title: title
-
                     })
             })
                 .then(res => res.json())
                 .then((data) => {
-                    console.log(data);
-                    //setRawProjects(data);
-                    //setLoading(false);
+                    console.log(data)
                     setTitle("")
                     setDescription("")
+                    return data;
                     })
-
+                .then((data) => {
+                    for (const dev of devs){
+                        console.log("sending request for " + dev.username + " with id " + dev.id + " to project with id " + data.id);
+                        fetch('http://localhost:8080/developers/', { 
+                            method: 'post', 
+                            headers: { Authorization: 'Bearer ' + loggedUser.accessToken,
+                                'Content-Type': 'application/json'  },
+                            body: JSON.stringify({  user_id: dev.id,
+                                        project_id: data.id,
+                                        role: 0,
+                                        accepted: 0
+                                    })
+                        })
+                            .then(res => res.json())
+                            .then((data) => {
+                                console.log(data);
+                            })
+                    }
+                })
         
+        
+    }
+
+    function clickExit(){
+        props.onHide()
+        setDevs([])
+        setTitle("")
+        setDescription("")
+        setShowEmptyTitle(false)
+        setShowEmptyDescription(false)
     }
 
     return (
@@ -59,12 +107,18 @@ function NewProjectPopUp(props){
                 <Modal.Body>
                     <form className="row g-3">
                         <div className="col-12">
-                            <label for="inputTittle" className="form-label">Τίτλος Project</label>
+                            <label for="inputTittle" className="form-label">Τίτλος Project <span style={{color: "#cc0000"}}>*</span></label>
                             <input type="text" className="form-control" id="projectTittle" placeholder="Τίτλος" value={title} onChange={e => setTitle(e.target.value)}/>
+                            <div>
+                                { (showEmptyTitle) && <span class="badge bg-danger rounded-pill">Ο τίτλος δεν μπορεί να είναι κενός</span>}
+                            </div>
                         </div>
                         <div className="col-12">
-                            <label for="inputDescription" className="form-label">Περιγραφή Project</label>
+                            <label for="inputDescription" className="form-label">Περιγραφή Project <span style={{color: "#cc0000"}}>*</span></label>
                             <textarea type="text" className="form-control" id="projectDescription" placeholder="Περιγραφή" value={description} onChange={e => setDescription(e.target.value)}/>
+                            <div>
+                                { (showEmptyDescription) && <span class="badge bg-danger rounded-pill">Η περιγραφή δεν μπορεί να είναι κενή</span>}
+                            </div>
                         </div>
                         <div className="col-12">
                             <label for="assignDev" className="form-label">Πρόσκληση προς Developers</label>
@@ -74,13 +128,13 @@ function NewProjectPopUp(props){
                     <div className="row g-3 pt-3">
                         <div className="col-8">
                             {/* <Link to='/home'> */}
-                                <button className="btn btn-primary" onClick={() => submit(title)}>Επιβεβαίωση</button>
+                                <button className="btn btn-primary" onClick={() => submit()}>Επιβεβαίωση</button>
                             {/* </Link> */}
                         </div>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="outline-danger" onClick={props.onHide}>Άκυρο</Button>
+                    <Button variant="outline-danger" onClick={clickExit}>Άκυρο</Button>
                 </Modal.Footer>
             </Modal>
 		</div>
