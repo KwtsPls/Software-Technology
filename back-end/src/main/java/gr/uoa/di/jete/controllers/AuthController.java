@@ -77,9 +77,9 @@ public class AuthController {
         user.setVerification_code(randomCode);
         user.setIs_enabled(false);
 
-        userService.addNewUser(user);
-
         this.sendVerificationEmail(user,"http://localhost:8080");
+
+        userService.addNewUser(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
