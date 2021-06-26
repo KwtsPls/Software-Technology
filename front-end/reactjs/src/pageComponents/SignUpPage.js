@@ -195,9 +195,7 @@ function SignUpPage() {
                         </div>
 
                         <div className="text-center pt-3">
-                            <Link to='/paymentPlan'>
-                                <button type="button" className="btn-lg btn-primary login-button signup-button mybtn" onClick={sendSignupCredentials}>Εγγραφή</button>
-                            </Link>
+                            <button type="button" className="btn-lg btn-primary login-button signup-button mybtn" onClick={sendSignupCredentials}>Εγγραφή</button>
                         </div>
 
                     </div>
