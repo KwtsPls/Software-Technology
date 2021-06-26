@@ -21,7 +21,7 @@ function SignUpPage() {
         document.body.style.alignItems = "center";
         document.body.style.padding = "10px";
         document.body.style.background = "linear-gradient(45deg, #935bb7 0%,#7c39a8 50%,#6c2f91 51%,#6f259f 100%) fixed";
-        
+
         return () => {
             // Anything in here is fired on component unmount.
             document.body.style.display = "";
@@ -40,84 +40,158 @@ function SignUpPage() {
     const [pass1, setPass1] = useState("");
     const [pass2, setPass2] = useState("");
 
+    const [showEmptyEmail, setShowEmptyEmail] = useState(false)
+    const [showEmptyFirstName, setShowEmptyFirstName] = useState(false)
+    const [showEmptyLastName, setShowEmptyLastName] = useState(false)
+    const [showEmptyUsername, setShowEmptyUsername] = useState(false)
+    const [showEmptyPass1, setShowEmptyPass1] = useState(false)
+    const [showEmptyPass2, setShowEmptyPass2] = useState(false)
+    const [showPasswordsDontMatch, setShowPasswordsDontMatch] = useState(false)
+
+    useEffect(() => {
+        setShowPasswordsDontMatch(false);
+    }, [pass1, pass2]);
+
     function sendSignupCredentials() {
-        if (!email || !firstName || !lastName || !username || !pass1 || !pass2){
-            ;
+        console.log(13);
+        let earlyExit = false
+        if (!email){
+            console.log("email is empty");
+            earlyExit = true;
+            setShowEmptyEmail(true);
         }
-        else{
-            fetch('http://localhost:8080/signup', {
-                method: 'post', 
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({  username: username,
-                                        firstname: firstName,
-                                        lastname: lastName,
-                                        password: pass1,
-                                        matchingPassword: pass2,
-                                        email: email
-                })
+        else {
+            setShowEmptyEmail(false);
+        }
+        if (!firstName){
+            console.log("firstName is empty");
+            earlyExit = true;
+            setShowEmptyFirstName(true);
+        }
+        else {
+            setShowEmptyFirstName(false);
+        }
+        if (!lastName){
+            console.log("lastName is empty");
+            earlyExit = true;
+            setShowEmptyLastName(true);
+        }
+        else {
+            setShowEmptyLastName(false);
+        }
+        if (!username){
+            console.log("username is empty");
+            earlyExit = true;
+            setShowEmptyUsername(true);
+        }
+        else {
+            setShowEmptyUsername(false);
+        }
+        if (!pass1){
+            console.log("pass1 is empty");
+            earlyExit = true;
+            setShowEmptyPass1(true);
+        }
+        else {
+            setShowEmptyPass1(false);
+        }
+        if (!pass2){
+            console.log("pass2 is empty");
+            earlyExit = true;
+            setShowEmptyPass2(true);
+        }
+        else {
+            setShowEmptyPass2(false);
+        }
+        if (pass1 != pass2){
+            console.log("passwords don't match");
+            earlyExit = true;
+            setShowPasswordsDontMatch(true);
+        }
+
+        if (earlyExit){
+            return ;
+        }
+
+        console.log(12);
+        fetch('http://localhost:8080/signup', {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({  username: username,
+                                    firstname: firstName,
+                                    lastname: lastName,
+                                    password: pass1,
+                                    matchingPassword: pass2,
+                                    email: email
             })
-            .then(response => response.json())
-            .then(data => console.log(data));
-            // .then(response => response.json())
-            // .then(data => {
-            //     console.log(data);
-            //     if (data.accessToken) {
-            //       localStorage.setItem("loggedUser", JSON.stringify(data));
-            //     }
-            //     console.log(data);
-            //     dataReceived = data;
-            //   }).then( () => {
-            //         if (dataReceived){
-            //             //localStorage.setItem("loggedUser", true);
-            //             console.log("logged in");
-            //             history.push("/home");
-            //         }
-            //         else{
-            //             handleShow();
-            //         }
-            //     });
-        }
-    }
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .then(() => {; // perimenw apadisi apo ta paidia kai tha to allaksw
+            //history.push("/paymentPlan");
+        });
+}
 
     return (
         <div>
-            <img className = "signuplogo" src={logo} alt="partnerssketch"></img>        
+            <img className = "signuplogo" src={logo} alt="partnerssketch"></img>
 
             <div className="container container-signup">
                 <h1 className="signin-text mb-3">Εγγραφή</h1>
-                
+
                 <form>
                     <div className="user-details">
 
                         <div className="input-box">
                             <span className = "details">Όνομα</span>
                             <input className="form-control"  type="text" value={firstName} onChange={e => setFirst(e.target.value)} placeholder="Πληκτρολογίστε το όνομα σας" />
+                            <div>
+                                { (showEmptyFirstName) && <span class="badge bg-danger rounded-pill">Το Όνομα δεν μπορεί να είναι κενό</span>}
+                            </div>
                         </div>
 
                         <div className="input-box">
                             <span className = "details">Επίθετο</span>
                             <input className="form-control"  type="text" value={lastName} onChange={e => setLast(e.target.value)} placeholder="Πληκτρολογίστε το επίθετο σας" />
+                            <div>
+                                { (showEmptyLastName) && <span class="badge bg-danger rounded-pill">Το Επίθετο δεν μπορεί να είναι κενό</span>}
+                            </div>
                         </div>
 
                         <div className="input-box">
                             <span className = "details">Username</span>
                             <input className="form-control"  type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Πληκτρολογίστε το username σας" aria-describedby="usernamehelp" />
+                            <div>
+                                { (showEmptyUsername) && <span class="badge bg-danger rounded-pill">Το username δεν μπορεί να είναι κενό</span>}
+                            </div>
                             <small id="usernamehelp" className="form-text text-muted">Το username σας πρέπει να αποτελείται από τουλάχιστον 6 λατινικούς χαρακτήρες και αριθμούς</small>
                         </div>
 
                         <div className="input-box">
                             <span className = "details">Email</span>
                             <input className="form-control"  type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Πληκτρολογίστε το email σας" />
+                            <div>
+                                { (showEmptyEmail) && <span class="badge bg-danger rounded-pill">Το email δεν μπορεί να είναι κενό</span>}
+                            </div>
                         </div>
 
                         <div className="input-box">
                             <span className = "details">Κωδικός πρόσβασης</span>
-                            <input className="form-control"  type="password" placeholder="Πληκτρολογίστε τον κωδικό σας" />
+                            <input className="form-control"  type="password" value={pass1} onChange={e => setPass1(e.target.value)} placeholder="Πληκτρολογίστε τον κωδικό σας" />
+                            <div>
+                                { (showEmptyPass1) && <span class="badge bg-danger rounded-pill">Ο κωδικός δεν μπορεί να είναι κενός</span>}
+                            </div>
                         </div>
 
                         <div className="input-box">
                             <span className = "details">Επιβεβαίωση κωδικού</span>
-                            <input  className="form-control" type="password" placeholder="Πληκτρολογίστε ξανά τον κωδικό" />
+                            <input  className="form-control" type="password" value={pass2} onChange={e => setPass2(e.target.value)} placeholder="Πληκτρολογίστε ξανά τον κωδικό" />
+                            <div>
+                                { (showEmptyPass2) && <span class="badge bg-danger rounded-pill">Ο κωδικός δεν μπορεί να είναι κενός</span>}
+                            </div>
+                            <div>
+                                { (showPasswordsDontMatch) && <span class="badge bg-danger rounded-pill">Οι δυο κωδικοί δεν είναι ίδιοι</span>}
+                            </div>
                         </div>
 
                         <div className="text-center pt-3">
@@ -133,5 +207,5 @@ function SignUpPage() {
         </div>
     );
 }
- 
+
 export default SignUpPage;
