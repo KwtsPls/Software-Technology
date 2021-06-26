@@ -1,11 +1,26 @@
 @font-face {
   font-family: myFirstFont;
-  src: url("../fonts/FredokaOne-Regular.ttf") format("truetype");
+  src: url("../fonts/DelaGothicOne-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: descFont;
-  src: url("../fonts/Teko-Bold.ttf") format("truetype");
+  font-family: myquoteFont;
+  src: url("../fonts/SourceSansPro-Bold.ttf") format("truetype");
+}
+
+.paymenttitle{
+  font-family: myFirstFont;
+  font-weight: 600 !important;
+  color: #ffffff;
+  text-shadow: #111111 3px 5px 2px;
+}
+
+.paymentchoicetitle{
+  margin-top: 80px;
+  font-family: myquoteFont;
+  font-weight: 600 !important;
+  font-size: 2.6rem;
+  color: #202020;
 }
 
 .paymentplanpage {
@@ -21,18 +36,7 @@
   color: #202020;
 }
 
-.payChoiceBox {
-  height: 460px;
-  width: 460px;
-  background-color: #202020;
-  float: left;
-  margin-top: 4%;
 
-  border: solid;
-  border-color: #202020;
-  border-width: 1px;
-  box-shadow: rgba(0, 0, 0, 0.103) 0px 1px 3px, rgba(0, 0, 0, 0.171) 0px 1px 2px;
-}
 
 .firstpaybox {
   margin-left: 24%;
@@ -64,26 +68,47 @@ hr.new5 {
   margin-top: 1vh;
 }
 
-@media screen and (max-width: 1600px) {
-  .firstpaybox,
-  .secondpaybox {
-    float: none;
-    display: block;
-    position: absolute;
 
-    top: 50%; /* IMPORTANT */
-    left: 50%; /* IMPORTANT */
-    margin-top: -170px; /* HALF OF THE HEIGHT */
-    margin-left: -230px; /* HALF OF THE WIDTH */
-  }
-  .secondpaybox {
-    margin-top: 330px;
-  }
+.pay-content{
+  margin: 8%;
+  margin-top: 10vh;
 }
 
-.cont-1 {
-  padding: 1rem;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+.paymenttitle{
+  margin-top: 20vh;
+}
+
+.choiceboxes{
+  margin-top: 8vh;
+}
+
+.paychoice-box{
+  /* margin: 1%; */
+  height: 380px;
+  background-color: rgb(245, 245, 245);
+  background-color: #fff;
+
+  border-radius: 4px;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, .05);
+  max-width: 400px;
+  /* padding: 4rem 1rem 4rem 1rem; */
+  min-width: 200px;
+
+
+}
+
+
+
+.mylist{
+  margin-top: 20px;
+  max-width: 400px;
+  min-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 780px) {
+  .paychoice-box{
+    margin-top: 25px;
+  }
 }

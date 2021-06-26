@@ -1,6 +1,6 @@
 @font-face {
   font-family: myquoteFont;
-  src: url("./fonts/SourceSansPro-Bold.ttf") format("truetype");
+  src: url("./fonts/SourceSansPro-Regular.ttf") format("truetype");
 }
 
 /* custom properties */
@@ -392,4 +392,8 @@ a:active {
 
 .cool-purple{
   background-image: linear-gradient(to bottom right,#992b95,#2136f5a6);
+}
+
+.mybtn{
+  border-radius: 20px !important;
 }
