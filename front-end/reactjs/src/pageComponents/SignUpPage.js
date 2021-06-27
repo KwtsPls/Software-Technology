@@ -47,6 +47,8 @@ function SignUpPage() {
     const [showEmptyPass1, setShowEmptyPass1] = useState(false)
     const [showEmptyPass2, setShowEmptyPass2] = useState(false)
     const [showPasswordsDontMatch, setShowPasswordsDontMatch] = useState(false)
+    const [showAlreadyEmail, setShowAlreadyEmail] = useState(false)
+    const [showAlreadyUsername, setShowAlreadyUsername] = useState(false)
 
     useEffect(() => {
         setShowPasswordsDontMatch(false);
@@ -109,6 +111,9 @@ function SignUpPage() {
             setShowPasswordsDontMatch(true);
         }
 
+        setShowAlreadyUsername(false)
+        setShowAlreadyEmail(false)
+
         if (earlyExit){
             return ;
         }
@@ -125,10 +130,26 @@ function SignUpPage() {
                                     email: email
             })
         })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .then(() => {; // perimenw apadisi apo ta paidia kai tha to allaksw
-            //history.push("/paymentPlan");
+        .then(response => {
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.indexOf("application/json") !== -1) {
+                return response.json().then(data => {
+                console.log(data)
+                if (data.message === "User registered successfully!"){
+                    history.push("/paymentPlan");
+                }
+                });
+            } else {
+                return response.text().then(text => {
+                console.log(text)
+                if (text.includes("Username ") && text.includes(" already in use")){
+                    setShowAlreadyUsername(true)
+                }
+                if (text.includes("Email ") && text.includes(" already in use")){
+                    setShowAlreadyEmail(true)
+                }
+                });
+            }
         });
 }
 
@@ -164,6 +185,9 @@ function SignUpPage() {
                             <div>
                                 { (showEmptyUsername) && <span class="badge bg-danger rounded-pill">Το username δεν μπορεί να είναι κενό</span>}
                             </div>
+                            <div>
+                                { (showAlreadyUsername) && <span class="badge bg-danger rounded-pill">Το username αυτό είναι ήδη σε χρήση</span>}
+                            </div>
                             <small id="usernamehelp" className="form-text text-muted">Το username σας πρέπει να αποτελείται από τουλάχιστον 6 λατινικούς χαρακτήρες και αριθμούς</small>
                         </div>
 
@@ -172,6 +196,9 @@ function SignUpPage() {
                             <input className="form-control"  type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Πληκτρολογίστε το email σας" />
                             <div>
                                 { (showEmptyEmail) && <span class="badge bg-danger rounded-pill">Το email δεν μπορεί να είναι κενό</span>}
+                            </div>
+                            <div>
+                                { (showAlreadyEmail) && <span class="badge bg-danger rounded-pill">Το email αυτό είναι ήδη σε χρήση</span>}
                             </div>
                         </div>
 
