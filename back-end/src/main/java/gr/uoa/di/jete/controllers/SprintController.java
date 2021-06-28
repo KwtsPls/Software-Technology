@@ -44,8 +44,8 @@ public class SprintController {
     @PostMapping("/sprints")
     Sprint newSprint(@RequestBody Sprint newSprint){
         //Search for project with given id
-        projectRep.findById(newSprint.getProjectId())
-                .orElseThrow(()-> new ProjectNotFoundException(newSprint.getProjectId()));
+        projectRep.findById(newSprint.getProject_id())
+                .orElseThrow(()-> new ProjectNotFoundException(newSprint.getProject_id()));
 
         Long newId = repository.findMaxId().orElse(0L);
         newSprint.setId(newId+1L);

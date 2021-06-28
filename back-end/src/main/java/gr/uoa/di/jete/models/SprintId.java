@@ -24,11 +24,12 @@ public class SprintId implements Serializable {
         this.id = id;
     }
 
-    public Long getProjectId() {
+    @NotNull
+    public Long getProject_id() {
         return project_id;
     }
 
-    public void setProjectId(Long project_id) {
+    public void setProject_id(@NotNull Long project_id) {
         this.project_id = project_id;
     }
 
