@@ -60,13 +60,13 @@ function BankPopUp(props){
                         <PaymentIcon icon="paypal" style={{ margin: 10, width: 70 }} />
                         <div className="col-8">
                             {/* <Link to='/home'> */}
-                                <button type="submit" className="btn btn-primary">Επιβεβαίωση</button>
+                                <button type="submit" className="btn btn-primary mybtn">Επιβεβαίωση</button>
                             {/* </Link> */}
                         </div>
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="outline-danger" onClick={props.onHide}>Άκυρο</Button>
+                    <Button className="mybtn" variant="outline-danger" onClick={props.onHide}>Άκυρο</Button>
                 </Modal.Footer>
             </Modal>
 		</div>

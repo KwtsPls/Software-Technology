@@ -27,3 +27,5 @@ back-end/src/main/java/gr/uoa/di/jete/api/UserController.java
 back-end/src/main/java/gr/uoa/di/jete/api/UserController.java
 back-end/src/main/java/gr/uoa/di/jete/api/UserController.java
 back-end/src/main/java/gr/uoa/di/jete/api/UserController.java
+.idea/sqldialects.xml
+back-end/src/main/resources/data/mysql/data.sql

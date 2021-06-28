@@ -21,7 +21,7 @@ function LoginPage() {
         }
         
         document.body.style.backgroundColor = "#0f0f0f";
-        document.body.style.background = "linear-gradient( to bottom right ,#992b95, #510c80a6) fixed";
+        document.body.style.background = "linear-gradient(45deg, #935bb7 0%,#7c39a8 50%,#6c2f91 51%,#6f259f 100%) fixed";
 
         return () => { 
      
@@ -109,7 +109,7 @@ function LoginPage() {
                                 <input type="checkbox" className="form-check-input mycheckbox" id="exampleCheck1"/>
                                 <label className="form-check-label" for="exampleCheck1">Remember me</label>
                             </div>
-                            <button type="button" className="btn-lg btn-primary login-button" onClick={sendLoginCredentials}>Σύνδεση</button>
+                            <button type="button" className="btn-lg btn-primary login-button mybtn" onClick={sendLoginCredentials}>Σύνδεση</button>
                             <div className="signupadvice">
                                 <small id="emailHelp" className="form-text text-muted signupadvice-muted-text">Είναι η πρώτη σας φορά εδώ; </small>
                                 <Link to='/signUp'>
@@ -129,7 +129,7 @@ function LoginPage() {
                         Λάθος όνομα χρήστη ή κωδικός
                     </Modal.Body>
                     <Modal.Footer>
-                        <button type="button" class="btn btn-outline-danger" onClick={handleClose}>Κλείσιμο</button>
+                        <button type="button" class="btn btn-outline-danger mybtn" onClick={handleClose}>Κλείσιμο</button>
                     </Modal.Footer>
                 </Modal>
             </div>

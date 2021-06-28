@@ -243,7 +243,10 @@
 
 }
 
-
+.signin-text{
+  font-family: myFirstFont;
+  font-weight: 600 !important;
+}
 
 
 
@@ -251,7 +254,7 @@
 
 .content{
   margin: 8%;
-  margin-top: 10%;
+  margin-top: 15vh;
   background-color: #fff;
   padding: 4rem 1rem 4rem 1rem;
   box-shadow: 0 0 5px 5px rgba(0, 0, 0, .05);

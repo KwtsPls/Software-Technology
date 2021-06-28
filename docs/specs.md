@@ -57,3 +57,24 @@
 
 Προσθέτει έναν user σε έναν project. Το json που αναμένεται για να επιτύχει το request είναι της μορφής : <br><br>
 {"user_id":"${user_id}","project_id":"${project_id}","role":"0/1","accepted":"0"}<br><br>
+
+`[PUT] /developers/users/{user_id}/projects/{project_id}/accept`
+
+Δέχεται ο developer με user_id {user_id} και project_id {project_id}. Η απάντηση είναι OK σε περίπτωση επιτυχίας και "ERROR" διαφορετικά.<br><br>
+
+`[DELETE] /developers/users/{user_id}/projects/{project_id}`
+
+Διαγράφεται ο developer με {user_id} και {project_id}.<br><br>
+
+`[GET] /developers/users/{user_id}/notifications`
+
+Ο συνολικός αριθμός αιτημάτων που αφορούν τον user με id {user_id} όσον αφορά τα πρότζεκτ στα οποία συμμετέχει. Η απάντηση είναι της μορφής :
+
+[num] , όπου num ένας ακέραιος.<br><br>
+
+
+
+
+
+
+
