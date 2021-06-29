@@ -44,10 +44,10 @@ function PaymentPlanPage() {
 
                 <div className = "col-md-4 offset-md-1 paychoice-box text-center">
                     <h2 className="paymentchoicetitle">Jete Δωρεάν</h2>
-                    <ul class="list-group list-group-flush mylist">
-                        <li class="list-group-item">Προτέρημα #1</li>
-                        <li class="list-group-item">Προτέρημα #2</li>
-                        <li class="list-group-item">Μειονέκτημα #3</li>
+                    <ul className="list-group list-group-flush mylist">
+                        <li className="list-group-item">Προτέρημα #1</li>
+                        <li className="list-group-item">Προτέρημα #2</li>
+                        <li className="list-group-item">Μειονέκτημα #3</li>
                     </ul>
                     <Link to='/home'>
                         {/* edw POST KAI GET GIA TA LOGIN CREDENTIALS  */}
@@ -58,11 +58,11 @@ function PaymentPlanPage() {
 
                 
                 <div className = "col-md-4 offset-md-2 paychoice-box text-center" >
-                    <h2 className="paymentchoicetitle">Jete Premium</h2>
-                    <ul class="list-group list-group-flush mylist">
-                        <li class="list-group-item">Προτέρημα #1</li>
-                        <li class="list-group-item">Προτέρημα #2</li>
-                        <li class="list-group-item">Προτέρημα #3</li>
+                    <h2 className="paymentchoicetitle premium">Jete Premium</h2>
+                    <ul className="list-group list-group-flush mylist">
+                        <li className="list-group-item">Προτέρημα #1</li>
+                        <li className="list-group-item">Προτέρημα #2</li>
+                        <li className="list-group-item">Προτέρημα #3</li>
                         
                     </ul>
                     <button className= "btn-lg btn-primary login-button mybtn" onClick={() => setModalShow(true)}> Αγορά </button>
