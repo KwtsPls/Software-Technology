@@ -48,18 +48,12 @@ function ProfilePage() {
 
     }, []);
 
-    function kappa(){
-        if (isLoading) {
-            return  ( 
-                <div>
-                    <div className="mainContent"><h1>Loading...</h1></div>
-                </div>
-                );
+    useEffect(() => {
+        if (!isLoading){
+            setdoneProjects(0);
+            setcurrentProjects(0);
         }
-
-       
-    }
-
+    },[isLoading]) //depend ob isLoading
 
     
 
@@ -107,7 +101,7 @@ function ProfilePage() {
                             </div>    
                         </div>
                         <div className="row d-flex justify-content-center ">
-                            <div className="col-md-10 pt-4 pb-4 bg-success">
+                            <div className="col-md-10 pt-5 pb-4 bg-success">
                                 <ul className="list-group" style={{width: '100%'}}>
                                     <li className="list-group-item d-flex justify-content-between align-items-center">
                                         Tρέχων projects
@@ -127,34 +121,10 @@ function ProfilePage() {
 
                         </div>
                     </div>
-                    
-
+                
 
                 </div>
-                
-                {/* <div className="text-center">
-                <button onClick={mount}></button>
-                </div> */}
-                
-                {kappa()}
-                <img className = " mx-auto d-block profile-img" src={userphoto} alt="avatar"/>
-                
-                
-
-                {/* {console.log(typeof contacts[1])}
-                {console.log(contacts.password)} */}
-
-                
-
-
-                
-
-
-                {/* <div className="card">
-                    <div className="card-body">
-                        <h5 className="card-title">{contacts.password}</h5>
-                    </div>
-                </div> */}
+            
                 
                 
             </div>
