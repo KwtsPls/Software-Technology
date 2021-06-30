@@ -93,3 +93,69 @@
 #morning, #noon , #night{
     display: none;
 }
+
+/* okkkkkk */
+
+.homepage{
+    margin-top: 70px;
+}
+
+.homepage-text{
+    font-family: myquoteFont;
+    
+}
+.greetings-text{
+    margin-top: 12px;
+    font-size: 3.5rem;
+    color: #ffffff;
+}
+
+.sun-img{
+    /* size adjustments */
+    width: 100px;
+    height: 100px;
+}
+
+.bg-trans{
+    background-color: #ffffff;
+}
+
+.project-tile{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;    text-decoration: none;
+    border-radius: 4px;
+    background-color: #7c3f7a !important;
+
+}
+
+.greetingstile{
+    
+    /* background-color: #202020 !important; */
+    background-color: #0f0f0f !important;
+
+    border-radius: 4px 0px 0px 4px;
+    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;     */
+}
+
+.tile-sun{
+    border-radius: 0px 4px 4px 0px;
+}
+
+.project-tile:hover{
+    text-decoration: none;
+    background-color: #202020 !important;
+    cursor: pointer;
+}
+
+.project-tile:hover h5{
+    
+    color: #ffffff !important;
+}
+
+.project-tile-name{
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+.recproj{
+    margin-top: 10vh !important;
+}
