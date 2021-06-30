@@ -65,7 +65,7 @@ class SprintModelAssembler implements RepresentationModelAssembler<Sprint, Entit
     @Override
     public EntityModel<Sprint> toModel(@NotNull Sprint sprint) {
         return EntityModel.of(sprint, //
-                linkTo(methodOn(SprintController.class).one(sprint.getId(), sprint.getProjectId())).withSelfRel(),
+                linkTo(methodOn(SprintController.class).one(sprint.getId(), sprint.getProject_id())).withSelfRel(),
                 linkTo(methodOn(SprintController.class).all()).withRel("sprints"));
     }
 }
@@ -91,6 +91,18 @@ class TaskModelAssembler implements RepresentationModelAssembler<Task, EntityMod
         return EntityModel.of(task, //
                 linkTo(methodOn(TaskController.class).one(task.getId(),task.getProject_id(),task.getSprint_id(),task.getEpic_id(),task.getStory_id())).withSelfRel(),
                 linkTo(methodOn(TaskController.class).all()).withRel("tasks"));
+    }
+}
+
+@Component
+class AssigneeModelAssembler implements RepresentationModelAssembler<Assignee, EntityModel<Assignee>> {
+
+    @NotNull
+    @Override
+    public EntityModel<Assignee> toModel(@NotNull Assignee assignee){
+        return EntityModel.of(assignee, //
+                linkTo(methodOn(AssigneeController.class).one(assignee.getUser_id(), assignee.getEpic_id(), assignee.getSprint_id(), assignee.getProject_id(), assignee.getStory_id(), assignee.getTask_id())).withSelfRel(),
+                linkTo(methodOn(AssigneeController.class).all()).withRel("assignees"));
     }
 }
 

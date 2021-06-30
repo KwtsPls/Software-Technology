@@ -11,7 +11,7 @@ import java.util.Objects;
 @Table(name="sprint")
 public
 class Sprint {
-    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+    private @Id Long id;
     private  @Id Long project_id;
     private String title;
     private Long status;
@@ -19,7 +19,8 @@ class Sprint {
     private Date date_to;
 
     public Sprint(){}
-    Sprint(Long project_id,String title,Long status,Date dateFrom,Date dateTo){
+    public Sprint(Long id,Long project_id,String title,Long status,Date dateFrom,Date dateTo){
+        this.id = id;
         this.project_id = project_id;
         this.title = title;
         this.status = status;
@@ -35,11 +36,11 @@ class Sprint {
         this.id = id;
     }
 
-    public Long getProjectId() {
+    public Long getProject_id() {
         return project_id;
     }
 
-    public void setProjectId(Long project_id) {
+    public void setProject_id(Long project_id) {
         this.project_id = project_id;
     }
 
@@ -59,6 +60,21 @@ class Sprint {
         this.title = title;
     }
 
+    public Date getDate_from() {
+        return date_from;
+    }
+
+    public void setDate_from(Date date_from) {
+        this.date_from = date_from;
+    }
+
+    public Date getDate_to() {
+        return date_to;
+    }
+
+    public void setDate_to(Date date_to) {
+        this.date_to = date_to;
+    }
 
     @Override
     public boolean equals(Object o){
@@ -90,19 +106,5 @@ class Sprint {
                 + ", title='" + this.title + '\'' + ", dateFrom="+dateFromStr+", dateTo="+dateToStr +'}';
     }
 
-    public Date getDateFrom() {
-        return date_from;
-    }
 
-    public void setDateFrom(Date dateFrom) {
-        this.date_from = dateFrom;
-    }
-
-    public Date getDateTo() {
-        return date_to;
-    }
-
-    public void setDateTo(Date dateTo) {
-        this.date_to = dateTo;
-    }
 }

@@ -92,7 +92,7 @@ hr.new5 {
   box-shadow: 0 0 5px 5px rgba(0, 0, 0, .05);
   max-width: 400px;
   /* padding: 4rem 1rem 4rem 1rem; */
-  min-width: 200px;
+  min-width: 212px;
 
 
 }
@@ -105,7 +105,28 @@ hr.new5 {
   min-width: 200px;
   margin-left: auto;
   margin-right: auto;
+  width: 10px !important;
 }
+
+@media screen and (min-width: 991px) and (max-width: 1198px){
+  .paychoice-box{
+    height: 420px;
+  }
+  .premium{
+    margin-top: 35px;
+  }
+}
+
+@media screen and (min-width: 780px) and (max-width: 991px) {
+  
+  .paychoice-box{
+    height: 420px;
+  }
+  .premium{
+    margin-top: 75px;
+  }
+}
+
 
 @media screen and (max-width: 780px) {
   .paychoice-box{

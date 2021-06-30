@@ -1,0 +1,48 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url("../fonts/DelaGothicOne-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: myquoteFont;
+    src:   url("../fonts/SourceSansPro-Bold.ttf") format("truetype");
+}
+
+
+
+.bg-success{
+    background-color: #f4f5f7 !important;
+}
+
+.bg-primary{
+    background-color: #0740b1 !important;
+}
+
+
+
+.profile-img{
+    width: 155px;
+    height: 155px;
+    border-radius: 50%;
+}
+
+.profile-text{
+    font-family: myquoteFont;
+}
+
+.badge-pill{
+    background-color: #723c70 !important;
+    background-color: #272727 !important;
+
+}
+
+.list-group-item{
+    background-color: #f4f5f7 !important;
+    border-left: 0px !important;
+    border-right: 0px !important;
+
+}
+
+.profile-container{
+    border-radius: 5px;
+}

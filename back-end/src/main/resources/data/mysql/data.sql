@@ -34,11 +34,13 @@ Create table for developers for app and add some dummy data
 -----------------------------------------------------------
 */
 drop table if exists developer;
-create table developer(id int,project_id int,role int,accepted int,
+create table developer(user_id int,project_id int,role int,accepted int,
     constraint developer_pk
-        primary key (id,project_id),
+        primary key (user_id,project_id),
     constraint fk_developer_user_project1
-        foreign key (project_id) references project (id)
+        foreign key (project_id) references project (id),
+    constraint fk_developer_user
+        foreign key (user_id) references user (id)
 );
 
 insert into developer(user_id, project_id, role,accepted) values(2,1,1,1);
@@ -102,7 +104,8 @@ create table story(id int not null,epic_id int not null,sprint_id int not null ,
                    constraint fk_story_project
                        foreign key (project_id) references project (id),
                    constraint fk_story_epic
-                        foreign key (epic_id) references epic (id));
+                        foreign key (epic_id) references epic (id)
+);
 /*
 --------------------------------------------------------
 Create table for story for app and add some dummy data
@@ -119,6 +122,25 @@ create table task(id int not null,story_id int not null,epic_id int not null,spr
                        foreign key (epic_id) references epic (id),
                    constraint fk_task_story
                         foreign key (story_id) references story (id));
+
+
+
+/*
+--------------------------------------------------------
+Create table for assignee for app and add some dummy data
+--------------------------------------------------------
+*/
+create table assignee
+(
+    user_id int not null,
+    project_id int not null,
+    sprint_id int not null,
+    epic_id int not null,
+    story_id int not null,
+    task_id int not null,
+    constraint assignee_pk
+        unique (user_id, project_id, sprint_id, story_id, task_id, epic_id)
+);
 
 
 /*
