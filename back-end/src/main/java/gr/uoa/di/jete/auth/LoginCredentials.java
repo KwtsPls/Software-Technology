@@ -2,11 +2,15 @@ package gr.uoa.di.jete.auth;
 
 import java.util.Objects;
 
+
 public class LoginCredentials {
     private String username;
     private String password;
 
-    public LoginCredentials(String username,String password){
+    public LoginCredentials() {
+    }
+
+    public LoginCredentials(String username, String password){
         this.username = username;
         this.password = password;
     }
