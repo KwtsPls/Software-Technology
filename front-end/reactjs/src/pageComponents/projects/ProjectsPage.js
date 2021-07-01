@@ -18,11 +18,16 @@ function ProjectsPage() {
     const [rawProjects, setRawProjects] = useState([]);
 
     useEffect(() => {
+        document.body.style.background = "#fff";
+
+        // setLoading(false);
         if (!loggedUser){
             history.push("/login");
         }
         else{
             fetch('http://localhost:8080/users/'+ loggedUser.id +'/projects', {
+            // fetch('http://localhost:8080/users/1/projects', {
+
                 method: 'get', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
             })
@@ -149,24 +154,25 @@ function ProjectsPage() {
                                 (<div key={i.id + i.title} className="row pt-3">
                                     <div className="col-12">
                                         <div className="card">
-                                            <div className="card-body container">
+                                            <div className="card-body proj-container">
                                                 <div className="row">
-                                                    <div className="col-11">
+                                                    <div className="col-12">
+                                                        
                                                         <h5 className="card-title">{i.title}</h5>
                                                         <p className="card-text">{i.description}</p>
+                                                        <button className="btn btn-primary btn-sm btn-dark proj-info-btn" onClick={() => showInfo(i.id,i.title,i.status)}>Πληροφορίες / Αρχειοθέτηση</button>
+                                                        {!i.status && (<button className="btn btn-primary btn-sm btn btn-success proj-devadd-btn"  onClick={() => showAdd(i.id,i.title)}>Προσθήκη συνεργάτη</button>)}
                                                         <Link to={{pathname: '/projects/projectNo',
                                                                     state: {
                                                                         projectId: i.id,
                                                                         projectName: i.title
                                                                     }
                                                                 }}>
-                                                            <a href="#" className="btn btn-primary project-button">Go somewhere</a>
+
+                                                            <a href="#" className="btn btn-primary  btn-sm project-button">Μετάβαση στο project</a>
                                                         </Link>
                                                     </div>
-                                                    <div className="col-1">
-                                                        <button onClick={() => showInfo(i.id,i.title,i.status)}>info</button>
-                                                        {!i.status && (<button onClick={() => showAdd(i.id,i.title)}>add</button>)}
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>

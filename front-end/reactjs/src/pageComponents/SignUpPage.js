@@ -49,10 +49,15 @@ function SignUpPage() {
     const [showPasswordsDontMatch, setShowPasswordsDontMatch] = useState(false)
     const [showAlreadyEmail, setShowAlreadyEmail] = useState(false)
     const [showAlreadyUsername, setShowAlreadyUsername] = useState(false)
+    const [showBadPassInput, setShowBadPassInput] = useState(false)
 
     useEffect(() => {
         setShowPasswordsDontMatch(false);
     }, [pass1, pass2]);
+
+    function passwordValid(str) {
+        return /[a-z]/.test(str) && /[A-Z]/.test(str) && /\d/.test(str);
+    }
 
     function sendSignupCredentials() {
         console.log(13);
@@ -95,7 +100,15 @@ function SignUpPage() {
             setShowEmptyPass1(true);
         }
         else {
-            setShowEmptyPass1(false);
+            if(!passwordValid(pass1)){
+                earlyExit = true;
+                setShowBadPassInput(true);
+                setShowEmptyPass1(false);
+
+            }else{
+                setShowBadPassInput(false);
+                setShowEmptyPass1(false);
+            }
         }
         if (!pass2){
             console.log("pass2 is empty");
@@ -165,7 +178,7 @@ function SignUpPage() {
 
                         <div className="input-box">
                             <span className = "details">Όνομα</span>
-                            <input className="form-control"  type="text" value={firstName} onChange={e => setFirst(e.target.value)} placeholder="Πληκτρολογίστε το όνομα σας" />
+                            <input className="form-control"  type="text" value={firstName} onChange={e => setFirst(e.target.value)} placeholder="Πληκτρολογίστε το όνομα σας" maxLength="15"/>
                             <div>
                                 { (showEmptyFirstName) && <span className="badge bg-danger rounded-pill">Το Όνομα δεν μπορεί να είναι κενό</span>}
                             </div>
@@ -173,7 +186,7 @@ function SignUpPage() {
 
                         <div className="input-box">
                             <span className = "details">Επίθετο</span>
-                            <input className="form-control"  type="text" value={lastName} onChange={e => setLast(e.target.value)} placeholder="Πληκτρολογίστε το επίθετο σας" />
+                            <input className="form-control"  type="text" value={lastName} onChange={e => setLast(e.target.value)} placeholder="Πληκτρολογίστε το επίθετο σας" maxLength="20"/>
                             <div>
                                 { (showEmptyLastName) && <span className="badge bg-danger rounded-pill">Το Επίθετο δεν μπορεί να είναι κενό</span>}
                             </div>
@@ -181,7 +194,7 @@ function SignUpPage() {
 
                         <div className="input-box">
                             <span className = "details">Username</span>
-                            <input className="form-control"  type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Πληκτρολογίστε το username σας" aria-describedby="usernamehelp" />
+                            <input className="form-control"  type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Πληκτρολογίστε το username σας" aria-describedby="usernamehelp" maxLength="10"/>
                             <div>
                                 { (showEmptyUsername) && <span className="badge bg-danger rounded-pill">Το username δεν μπορεί να είναι κενό</span>}
                             </div>
@@ -206,6 +219,8 @@ function SignUpPage() {
                             <span className = "details">Κωδικός πρόσβασης</span>
                             <input className="form-control"  type="password" value={pass1} onChange={e => setPass1(e.target.value)} placeholder="Πληκτρολογίστε τον κωδικό σας" />
                             <div>
+                                { (showBadPassInput) && <span className="badge bg-danger rounded-pill">Ο κωδικός πρέπει να περιέγχει τουλάχιστον <br/>ένα κεφαλαίο γράμμα και έναν αριθμό</span>}
+
                                 { (showEmptyPass1) && <span className="badge bg-danger rounded-pill">Ο κωδικός δεν μπορεί να είναι κενός</span>}
                             </div>
                         </div>

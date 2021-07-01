@@ -47,6 +47,8 @@
 }
 
 .project-button{
+  margin-left: 20px;
+
   background-color: #723c70 !important;
   border-color: #3d113c !important;
 }
@@ -71,4 +73,12 @@
 .btn-outline-secondary:hover{
   background-color: #202020 !important;
 
+}
+
+.proj-devadd-btn{
+  margin-left: 20px;
+}
+
+.goproject{
+  background-color: #0f0f0f !important;
 }

@@ -14,26 +14,30 @@ function OverviewScreen() {
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
     const [isLoading, setLoading] = useState(true);
     const [tilecounter, setTileCounter] = useState(0);
+    const [rawProjects, setRawProjects] = useState([]);
 
 
     useEffect(() => {
         document.body.style.background = "#fff";
 
+        // setLoading(false);
         if (!loggedUser){
             history.push("/login");
         }
         else{
-            document.body.style.background = "#fff";
+            // fetch('http://localhost:8080/users/'+ loggedUser.id +'/projects', {
+            fetch('http://localhost:8080/users/1/projects', {
 
-            fetch('http://localhost:8080/users', {
                 method: 'get', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
             })
                 .then(res => res.json())
                 .then((data) => {
                     console.log(data);
+                    setRawProjects(data);
                     setLoading(false);
                 })
+            
         }
 
     }, []);
@@ -62,7 +66,7 @@ function OverviewScreen() {
 
             <div className="row mt-5 d-flex justify-content-center">
                 <div className="col-md-6 pt-3 pb-3  greetingstile">
-                    <h1 className="homepage-text text-center greetings-text">Καλησπέρα, kostopez</h1>
+                    <h1 className="homepage-text text-center greetings-text">Καλησπέρα, {loggedUser && loggedUser.username}</h1>
 
                     
                 </div>
@@ -80,7 +84,7 @@ function OverviewScreen() {
             <div className="recproj">
                 <div className="row mt-5 d-flex justify-content-center">
                     <div className="col-md-8 mt-5 bg-trans ">
-                        <h2 className="homepage-text">Πρόσφατα projects &bull; </h2>
+                        <h2 className="homepage-text curr-proj-title">Πρόσφατα projects &bull; </h2>
 
                     </div>
                 </div>
@@ -91,6 +95,7 @@ function OverviewScreen() {
                         {get_recentProjectTile(0)}
                         {get_recentProjectTile(0)}
                         {get_recentProjectTile(0)}
+
 
                         {/* {projectList.map(i => i.title.toLowerCase().includes(searchVal.toLowerCase()) &&
                     
