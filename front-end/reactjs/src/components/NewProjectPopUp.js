@@ -38,7 +38,6 @@ function NewProjectPopUp(props){
             return ;
         }
 
-        props.addProj(title)
         props.onHide()
 
         fetch('http://localhost:8080/projects/create/' + loggedUser.id, {

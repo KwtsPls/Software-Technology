@@ -31,38 +31,50 @@ function ProjectsPage() {
                     console.log(data);
                     setRawProjects(data);
                     setLoading(false);
-                    })
+                })
+            
         }
     }, []);
 
     const [projectList,setProjectList] = useState([])
+    const [projectListCurrent,setProjectListCurrent] = useState([])
+    const [projectListArch,setProjectListArch] = useState([])
+
+    const rpCurr = []
+    const rpArch = []
 
     useEffect(() => {
         if (!isLoading){
-            setProjectList(rawProjects._embedded.projectList)
+            for (var i=0; i < rawProjects._embedded.projectList.length; i++){
+                if (rawProjects._embedded.projectList[i].status){
+                    rpArch.push(rawProjects._embedded.projectList[i])
+                }
+                else {
+                    rpCurr.push(rawProjects._embedded.projectList[i])
+                }
+            }
+            setProjectListCurrent(rpCurr)
+            setProjectListArch(rpArch)
+            setProjectList(rpCurr)
         }
     },[isLoading])
 
-    const [all, changeAll] = useState("nav-link active");
+    const [all, changeCurrent] = useState("nav-link active");
     const [arch, changeArch] = useState("nav-link");
 
-    function clickAll() {
-        changeAll("nav-link active");
+    function clickCurrent() {
+        changeCurrent("nav-link active");
         changeArch("nav-link");
-        changeProj(allNames);
+        setProjectList(projectListCurrent);
     }
 
     function clickArch() {
-        changeAll("nav-link");
+        changeCurrent("nav-link");
         changeArch("nav-link active")
-        changeProj(archNames);
+        setProjectList(projectListArch);
     }
 
-    const [allNames, setAllNames] = useState(['Atlas','Zeus','Prometheus','Apollo','Johnny','Porta']);
-    let archNames = ['Epikalesths','Thomas','Margarita','Pokopikos','Johnny palios'];
 
-
-    const [projNames, changeProj] = useState(allNames);
 
     const searchButton = document.getElementById('search-button');
     const searchInput = document.getElementById('search-input');
@@ -72,19 +84,19 @@ function ProjectsPage() {
     const [modalInfoShow, setModalInfoShow] = useState(false); 
     const [modalAddShow, setModalAddShow] = useState(false); 
     const [infoId, setInfoId] = useState(0); // the id of the project, which will be passed to the info modal
+    const [infoName, setInfoName] = useState("Project");
+    const [infoArchStatus, setInfoArchStatus] = useState(0);
 
-
-    function addProj(name) {
-        allNames.push(name)
-    }
-
-    function showInfo(id){
+    function showInfo(id,name,status){
         setInfoId(id)
+        setInfoName(name)
+        setInfoArchStatus(status)
         setModalInfoShow(true)
     } 
 
-    function showAdd(id){
+    function showAdd(id,name){
         setInfoId(id)
+        setInfoName(name)
         setModalAddShow(true)
     } 
 
@@ -92,9 +104,9 @@ function ProjectsPage() {
 
     return (
         <div>
-            <NewProjectPopUp show={modalShow} onHide={() => setModalShow(false)} addProj={addProj}/>
-            <ProjectInfoPopUp show={modalInfoShow} onHide={() => setModalInfoShow(false)} projectId={infoId}/>
-            <ProjectAddDevPopUp show={modalAddShow} onHide={() => setModalAddShow(false)} projectId={infoId}/>
+            <NewProjectPopUp show={modalShow} onHide={() => setModalShow(false)} />
+            <ProjectInfoPopUp show={modalInfoShow} onHide={() => setModalInfoShow(false)} projectId={infoId} status={infoArchStatus} projName={infoName}/>
+            <ProjectAddDevPopUp show={modalAddShow} onHide={() => setModalAddShow(false)} projectId={infoId} projName={infoName}/>
 			<Topbar/>
             <SideNavBar/>
             <div className="mainContent">
@@ -116,7 +128,7 @@ function ProjectsPage() {
                         {/* ----------- Nav Tabs ------------ */}
                         <div className="col-8">
                             <ul className="nav nav-tabs"> 
-                                <li className="nav-item"  onClick={clickAll}>
+                                <li className="nav-item"  onClick={clickCurrent}>
                                     <a className={all} aria-current="page" href="#">Σε εξέλιξη</a>
                                 </li>
                                 <li className="nav-item" onClick={clickArch}>
@@ -152,8 +164,8 @@ function ProjectsPage() {
                                                         </Link>
                                                     </div>
                                                     <div className="col-1">
-                                                        <button onClick={() => showInfo(i.id)}>info</button>
-                                                        <button onClick={() => showAdd(i.id)}>add</button>
+                                                        <button onClick={() => showInfo(i.id,i.title,i.status)}>info</button>
+                                                        {!i.status && (<button onClick={() => showAdd(i.id,i.title)}>add</button>)}
                                                     </div>
                                                 </div>
                                             </div>

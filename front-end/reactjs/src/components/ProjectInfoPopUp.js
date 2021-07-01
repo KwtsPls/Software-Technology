@@ -11,39 +11,29 @@ function ProjectInfoPopUp(props){
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
 
     //const devs = ['alex','mich34','nikos','alejiz90']
+    const [owner,setOwner] = useState([])
     const [devs,setDevs] = useState([])
-    const devsPending = ['aerjerr','mrjkfnrj','rnf','fifimiio']
+    const [devsPending,setDevsPending] = useState([])
 
     const [title, setTitle] = useState("")
 
     function archive() {
-        // call to data base
-    }
-
-    useEffect(() => {
-        setDevs([])
-        if (props.show){
-            console.log("el fetch")
-            fetch('http://localhost:8080/projects/' + props.projectId + '/users' , {
-                method: 'get', 
-                headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
+        fetch('http://localhost:8080/projects/' + props.projectId + '/archive' , {
+                method: 'put', 
+                headers: { Authorization: 'Bearer ' + loggedUser.accessToken
+                    }
             })
                 .then(res => res.json())
                 .then((data) => {
                     console.log(data)
-                    if (data._embedded){
-                        for (var i=0; i< data._embedded.userList.length; i++){
-                            devs.push(data._embedded.userList[i].username)
-                            console.log(data._embedded.userList[i].username)
-                        }
-                        setDevs(devs)
-                        console.log(devs)
-                    }
-                    // setTitle("")
-                    // setDescription("")
-                    // return data;
-                    })
-            //fetch('http://localhost:8080/developers/users/'+loggedUser.id+'/notifications', {
+                })
+    }
+
+    useEffect(() => {
+        setOwner([])
+        setDevs([])
+        setDevsPending([])
+        if (props.show){
             fetch('http://localhost:8080/developers/projects/' + props.projectId, {
                 method: 'get', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
@@ -51,6 +41,23 @@ function ProjectInfoPopUp(props){
                 .then(res => res.json())
                 .then((data) => {
                     console.log(data)
+                    for (var i=0; i< data.length; i++){
+                        if(data[i][3]){
+                            owner.push(data[i][1])
+                        }
+                        else {
+                            if (data[i][2]){
+                                devs.push(data[i][1])
+                            }
+                            else {
+                                devsPending.push(data[i][1])
+                            }
+
+                        }
+                    }
+                    setOwner(owner)
+                    setDevs(devs)
+                    setDevsPending(devsPending)
                     // setTitle("")
                     // setDescription("")
                     // return data;
@@ -73,34 +80,31 @@ function ProjectInfoPopUp(props){
                 >
                 <Modal.Header>
                     <Modal.Title id="contained-modal-title-vcenter">
-                    Πληροφορίες για _ProjName_
+                        Πληροφορίες για το {props.projName}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form className="row g-3">
                         <div className="col-12">
                             <label for="inputTittle" className="form-label">Product Owner:</label>
-                            <div><span class="badge bg-primary rounded-pill cool-purple">prOwn1</span></div>
+                            <div><span class="badge bg-primary rounded-pill cool-purple">{owner[0]}</span></div>
                         </div>
                         <div className="col-12">
                             <label className="form-label">Developers: </label>
-                            {retDevs()}
-                            {//devs.map(i => <div><span class="badge bg-primary rounded-pill cool-purple">{i}</span></div>
-                            //)
-                            }
+                            {devs.map(i => <div><span class="badge bg-primary rounded-pill cool-purple">{i}</span></div>)}
                         </div>
                         <div className="col-12">
                             <label className="form-label">Developers που δεν έχουν απαντήσει: </label>
-                            {devsPending.map(i => <div><span class="badge bg-primary rounded-pill cool-purple">{i}</span></div>
-                            )
-                            }
+                            {devsPending.map(i => <div><span class="badge bg-primary rounded-pill cool-purple">{i}</span></div>)}
                         </div>
                     </form>
-                    <div className="row g-3 pt-3">
-                        <div className="col-12 text-center">
-                            <button className="btn btn-outline-warning text-center" onClick={() => archive()}>Αρχειοθέτηση</button>
-                        </div>
-                    </div>
+                    { !props.status && (loggedUser.id === loggedUser.id) &&
+                        (<div className="row g-3 pt-3">
+                            <div className="col-12 text-center">
+                                <button className="btn btn-outline-warning text-center" onClick={() => archive()}>Αρχειοθέτηση</button>
+                            </div>
+                        </div>)
+                    }
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="outline-danger" onClick={props.onHide}>Άκυρο</Button>

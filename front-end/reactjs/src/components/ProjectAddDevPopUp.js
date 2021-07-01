@@ -87,7 +87,7 @@ function ProjectAddDevPopUp(props){
                 >
                 <Modal.Header>
                     <Modal.Title id="contained-modal-title-vcenter">
-                    Πληροφορίες για _ProjName_
+                        Προσθήκη Developer στο {props.projName}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
