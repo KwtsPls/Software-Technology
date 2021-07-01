@@ -45,7 +45,38 @@ public class TaskController {
     }
     // end::get-aggregate-root[]
 
-    @PostMapping("/projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{story_id}/tasks")
+    //Endpoint to get all tasks in project
+    @GetMapping("/projects/{project_id}/stories/{story_id}/tasks")
+    CollectionModel<EntityModel<Task>> getAllTasksInStory(@PathVariable Long project_id,@PathVariable Long story_id){
+        List<EntityModel<Task>> task = repository.findAllByProjectAndStoryId(project_id,story_id).stream() //
+                .map(assembler :: toModel) //
+                .collect(Collectors.toList());
+        return CollectionModel.of(task,
+                linkTo(methodOn(TaskController.class).getAllTasksInStory(project_id,story_id)).withSelfRel());
+    }
+
+    //Endpoint to get all tasks in an sprint
+    @GetMapping("/projects/{project_id}/sprints/{sprint_id}/stories/{story_id}/tasks")
+    CollectionModel<EntityModel<Task>> getAllTasksInSprint(@PathVariable Long project_id,@PathVariable Long sprint_id,@PathVariable Long story_id){
+        List<EntityModel<Task>> task = repository.findAllByProjectAndSprintAndStoryId(project_id,sprint_id,story_id).stream() //
+                .map(assembler :: toModel) //
+                .collect(Collectors.toList());
+        return CollectionModel.of(task,
+                linkTo(methodOn(TaskController.class).getAllTasksInSprint(project_id,sprint_id,story_id)).withSelfRel());
+    }
+
+    //Endpoint to get all tasks in epics
+    @GetMapping("/projects/{project_id}/epics/{epic_id}/stories/{story_id}/tasks")
+    CollectionModel<EntityModel<Task>> getAllTasksInEpic(@PathVariable Long project_id,@PathVariable Long epic_id,@PathVariable Long story_id){
+        List<EntityModel<Task>> task = repository.findAllByProjectAndEpicAndStoryId(project_id,epic_id,story_id).stream() //
+                .map(assembler :: toModel) //
+                .collect(Collectors.toList());
+        return CollectionModel.of(task,
+                linkTo(methodOn(TaskController.class).getAllTasksInEpic(project_id,epic_id,story_id)).withSelfRel());
+    }
+
+    //Endpoint to create a new task
+    @PostMapping("/projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{story_id}/tasks/create")
     Task newTask(@RequestBody Task newTask,@PathVariable Long project_id,@PathVariable Long sprint_id,@PathVariable Long epic_id,@PathVariable Long story_id){
         //Search for project with given id
         epicRep.findById(new EpicId(epic_id,project_id)).orElseThrow(()-> new EpicNotFoundException(new EpicId(epic_id,project_id)));
@@ -67,8 +98,14 @@ public class TaskController {
         return assembler.toModel(task);
     }
 
-    @DeleteMapping("/projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{story_id}/tasks/{id}")
-    void deleteEpic(@PathVariable Long id,@PathVariable Long project_id,@PathVariable Long sprint_id,@PathVariable Long epic_id,@PathVariable Long story_id){
+    @PutMapping("/projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{story_id}/tasks/{id}/archive")
+    void archiveTask(@PathVariable Long id,@PathVariable Long project_id,@PathVariable Long sprint_id,@PathVariable Long epic_id,@PathVariable Long story_id){
+        repository.archiveTask(id,story_id,project_id,sprint_id,epic_id);
+    }
+
+    @DeleteMapping("/projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{story_id}/tasks/{id}/delete")
+    void deleteTask(@PathVariable Long id,@PathVariable Long project_id,@PathVariable Long sprint_id,@PathVariable Long epic_id,@PathVariable Long story_id){
+        repository.deleteAllAssigneesInTask(id,story_id,project_id,sprint_id,epic_id);
         repository.deleteById(new TaskId(id,epic_id,sprint_id,project_id,story_id));
     }
 }
