@@ -1,10 +1,14 @@
 package gr.uoa.di.jete.controllers;
 
 
+import gr.uoa.di.jete.exceptions.DeveloperNotFoundException;
 import gr.uoa.di.jete.exceptions.EpicNotFoundException;
 import gr.uoa.di.jete.exceptions.ProjectNotFoundException;
+import gr.uoa.di.jete.models.Developer;
+import gr.uoa.di.jete.models.DeveloperId;
 import gr.uoa.di.jete.models.Epic;
 import gr.uoa.di.jete.models.EpicId;
+import gr.uoa.di.jete.repositories.DeveloperRepository;
 import gr.uoa.di.jete.repositories.EpicRepository;
 import gr.uoa.di.jete.repositories.ProjectRepository;
 import org.springframework.hateoas.CollectionModel;
@@ -24,11 +28,13 @@ public class EpicController {
     private final EpicRepository repository;
     private final EpicModelAssembler assembler;
     private final ProjectRepository projectRep;
+    private final DeveloperRepository devRep;
 
-    EpicController(EpicRepository repository, EpicModelAssembler assembler,ProjectRepository projectRep){
+    EpicController(EpicRepository repository, EpicModelAssembler assembler, ProjectRepository projectRep, DeveloperRepository devRep){
         this.repository = repository;
         this.assembler = assembler;
         this.projectRep = projectRep;
+        this.devRep = devRep;
     }
 
     //Aggregate root
@@ -43,7 +49,7 @@ public class EpicController {
     }
     // end::get-aggregate-root[]
 
-    @PostMapping("/epics")
+    @PostMapping("/projects/epics/create")
     Epic newEpic(@RequestBody Epic newEpic){
         //Search for project with given id
         projectRep.findById(newEpic.getProject_id())
@@ -75,15 +81,25 @@ public class EpicController {
     }
 
     //Endpoint to archive a given epic
-    @PutMapping("projects/{project_id}/epics/{id}/archive")
-    void archiveEpic( @PathVariable Long id,@PathVariable Long project_id){
+    @PutMapping("projects/{project_id}/epics/{id}/archive/{user_id}")
+    void archiveEpic( @PathVariable Long id,@PathVariable Long project_id,@PathVariable Long user_id){
+        //Check that the developer requesting to archive this epic is the product owner of the project
+        Developer developer =  devRep.findById(new DeveloperId(user_id,project_id)).orElseThrow(()->new DeveloperNotFoundException(new DeveloperId(user_id,project_id)));
+        if(developer.getRole()!=1L)
+            throw new DeveloperNotFoundException(user_id,project_id);
+
         repository.archiveEpic(id,project_id);
         repository.archiveAllStoriesInEpic(id,project_id);
         repository.archiveAllTasksInEpic(id,project_id);
     }
 
-    @DeleteMapping("projects/{project_id}/epics/{id}")
-    void deleteEpic( @PathVariable Long id,@PathVariable Long project_id){
+    @DeleteMapping("projects/{project_id}/epics/{id}/delete/{user_id}")
+    void deleteEpic( @PathVariable Long id,@PathVariable Long project_id,@PathVariable Long user_id){
+        //Check that the developer requesting to delete this epic is the product owner of the project
+        Developer developer =  devRep.findById(new DeveloperId(user_id,project_id)).orElseThrow(()->new DeveloperNotFoundException(new DeveloperId(user_id,project_id)));
+        if(developer.getRole()!=1L)
+            throw new DeveloperNotFoundException(user_id,project_id);
+
         repository.deleteAllAssigneesInEpic(id,project_id);
         repository.deleteAllTasksInEpic(id,project_id);
         repository.deleteAllStoriesInEpic(id,project_id);

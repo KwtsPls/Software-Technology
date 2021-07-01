@@ -1,5 +1,6 @@
 package gr.uoa.di.jete.controllers;
 
+import gr.uoa.di.jete.exceptions.DeveloperNotFoundException;
 import gr.uoa.di.jete.exceptions.ProjectNotFoundException;
 import gr.uoa.di.jete.exceptions.SprintNotFoundException;
 import gr.uoa.di.jete.exceptions.UserNotFoundException;
@@ -82,12 +83,17 @@ public class ProjectController {
     }
 
     //Controller to finalize a given sprint
-    @PutMapping("/projects/{project_id}/sprints/{id}/archive")
-    Sprint archiveSprint(@PathVariable Long project_id,@PathVariable Long id){
+    @PutMapping("/projects/{project_id}/sprints/{id}/archive/{user_id}")
+    Sprint archiveSprint(@PathVariable Long project_id,@PathVariable Long id,@PathVariable Long user_id){
         Sprint sprint = sprintRep.findById(new SprintId(id,project_id))
                 .orElseThrow(()-> new SprintNotFoundException(new SprintId(id,project_id)));
         if(sprint.getStatus()!=1L)
             throw new SprintNotFoundException();
+
+        //Check that the developer requesting to create this sprint is the product owner of the project
+        Developer developer =  devRep.findById(new DeveloperId(user_id,project_id)).orElseThrow(()->new DeveloperNotFoundException(new DeveloperId(user_id,project_id)));
+        if(developer.getRole()!=1L)
+            throw new DeveloperNotFoundException(user_id,project_id);
 
         Long old_sprint_id = sprint.getId();
 
@@ -159,9 +165,20 @@ public class ProjectController {
             return "NO";
     }
 
-    @PutMapping("/projects/{id}/archive")
-    String archiveProject(@PathVariable Long id){
+    @PutMapping("/projects/{id}/archive/{user_id}")
+    String archiveProject(@PathVariable Long id,@PathVariable Long user_id){
+
+        //Check that the developer requesting to archive this project is the product owner of the project
+        Developer developer =  devRep.findById(new DeveloperId(user_id,id)).orElseThrow(()->new DeveloperNotFoundException(new DeveloperId(user_id,id)));
+        if(developer.getRole()!=1L)
+            throw new DeveloperNotFoundException(user_id,id);
+
         repository.findById(id).orElseThrow(() -> new ProjectNotFoundException(id));
+
+        //Save the date the project was finished
+        long millis=System.currentTimeMillis();
+        Date date_finished=new java.sql.Date(millis);
+
         //Archive all tasks in this project
         repository.archiveAllTasksInProject(id);
         //Archive all stories in this project
@@ -170,13 +187,21 @@ public class ProjectController {
         repository.archiveAllSprintsInProject(id);
         //Archive all epics in this project
         repository.archiveAllEpicsInProject(id);
-        repository.setStatusToArchived(id);
+        repository.setStatusToArchived(id,date_finished);
         return "OK";
     }
 
-    @DeleteMapping("/projects/{id}")
-    void deleteProject(@PathVariable Long id){
+    @DeleteMapping("/projects/{id}/delete/{user_id}")
+    void deleteProject(@PathVariable Long id,@PathVariable Long user_id){
+
+        //Check that the developer requesting to archive this project is the product owner of the project
+        Developer developer =  devRep.findById(new DeveloperId(user_id,id)).orElseThrow(()->new DeveloperNotFoundException(new DeveloperId(user_id,id)));
+        if(developer.getRole()!=1L)
+            throw new DeveloperNotFoundException(user_id,id);
+
         repository.findById(id).orElseThrow(() -> new ProjectNotFoundException(id));
+        //Delete all developers in this project
+        repository.deleteAllDevelopersInProject(id);
         //Delete all assignees in tasks in this project
         repository.deleteAllAssigneesInProject(id);
         //Delete all tasks in this project

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,10 +21,15 @@ public interface ProjectRepository extends JpaRepository<Project, Long>{
 
     @Transactional
     @Modifying
-    @Query("update Project p set p.status=1 where p.id=?1")
-    void setStatusToArchived(Long id);
+    @Query("update Project p set p.status=1,p.date_finished=?2 where p.id=?1")
+    void setStatusToArchived(Long id, Date date_finished);
 
     //-------------- Delete for project -----------------//
+    @Transactional
+    @Modifying
+    @Query("delete from Developer d where d.project_id=?1")
+    void deleteAllDevelopersInProject(Long project_id);
+
     @Transactional
     @Modifying
     @Query("delete from Assignee e where e.project_id=?1")

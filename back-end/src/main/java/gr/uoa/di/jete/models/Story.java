@@ -7,7 +7,7 @@ import java.util.Objects;
 @IdClass(StoryId.class)
 public
 class Story {
-    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+    private @Id Long id;
     private  @Id Long epic_id;
     private @Id Long sprint_id;
     private @Id Long project_id;
@@ -29,7 +29,7 @@ class Story {
         return id;
     }
 
-    public void setUserId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
