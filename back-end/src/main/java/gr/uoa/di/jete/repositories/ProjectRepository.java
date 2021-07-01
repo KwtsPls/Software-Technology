@@ -23,6 +23,12 @@ public interface ProjectRepository extends JpaRepository<Project, Long>{
     @Query("update Project p set p.status=1 where p.id=?1")
     void setStatusToArchived(Long id);
 
+    //-------------- Delete for project -----------------//
+    @Transactional
+    @Modifying
+    @Query("delete from Assignee e where e.project_id=?1")
+    void deleteAllAssigneesInProject(Long project_id);
+
     @Transactional
     @Modifying
     @Query("delete from Task t where t.project_id=?1")
@@ -42,7 +48,10 @@ public interface ProjectRepository extends JpaRepository<Project, Long>{
     @Modifying
     @Query("delete from Epic e where e.project_id=?1")
     void deleteAllEpicsInProject(Long project_id);
+    //--------------------------------------------------//
 
+
+    //-------------- Archive for project -----------------//
     @Transactional
     @Modifying
     @Query("update Task t set t.status=1 where t.project_id=?1")

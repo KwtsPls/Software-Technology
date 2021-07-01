@@ -50,7 +50,27 @@ public class StoryController {
     }
     // end::get-aggregate-root[]
 
-    @PostMapping("/projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/")
+    //Endpoint to get all stories in a sprint
+    @GetMapping("/projects/{project_id}/sprints/{sprint_id}/stories")
+    CollectionModel<EntityModel<Story>> getAllStoriesInSprint(@PathVariable Long project_id,@PathVariable Long sprint_id){
+        List<EntityModel<Story>> story = repository.findAllByProjectAndSprintId(project_id,sprint_id).stream() //
+                .map(assembler :: toModel) //
+                .collect(Collectors.toList());
+        return CollectionModel.of(story,
+                linkTo(methodOn(StoryController.class).getAllStoriesInSprint(project_id,sprint_id)).withSelfRel());
+    }
+
+    //Endpoint to get all stories in a sprint
+    @GetMapping("/projects/{project_id}/epics/{epic_id}/stories")
+    CollectionModel<EntityModel<Story>> getAllStoriesInEpic(@PathVariable Long project_id,@PathVariable Long epic_id){
+        List<EntityModel<Story>> story = repository.findAllByProjectAndEpicId(project_id,epic_id).stream() //
+                .map(assembler :: toModel) //
+                .collect(Collectors.toList());
+        return CollectionModel.of(story,
+                linkTo(methodOn(StoryController.class).getAllStoriesInEpic(project_id,epic_id)).withSelfRel());
+    }
+
+    @PostMapping("/projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories")
     Story newStory(@RequestBody Story newStory,@PathVariable Long project_id,@PathVariable Long sprint_id,@PathVariable Long epic_id){
         //Search for project with given id
         projectRep.findById(project_id).orElseThrow(()-> new ProjectNotFoundException(project_id));

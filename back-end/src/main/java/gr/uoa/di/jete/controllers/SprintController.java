@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+@CrossOrigin
 @RestController
 public class SprintController {
 
@@ -53,8 +54,28 @@ public class SprintController {
         return repository.save(newSprint);
     }
 
+    //Endpoint to get all sprints in project
+    @GetMapping("projects/{project_id}/sprints")
+    CollectionModel<EntityModel<Sprint>> getSprintsInProject(@PathVariable Long project_id){
+        List<EntityModel<Sprint>> sprint = repository.findSprintsInProject(project_id).stream() //
+                .map(assembler :: toModel) //
+                .collect(Collectors.toList());
+        return CollectionModel.of(sprint,
+                linkTo(methodOn(SprintController.class).getSprintsInProject(project_id)).withSelfRel());
+    }
+
+    //Endpoint to get all active sprints in project
+    @GetMapping("projects/{project_id}/sprints/active")
+    CollectionModel<EntityModel<Sprint>> getActiveSprintsInProject(@PathVariable Long project_id){
+        List<EntityModel<Sprint>> sprint = repository.findActiveSprintsInProject(project_id).stream() //
+                .map(assembler :: toModel) //
+                .collect(Collectors.toList());
+        return CollectionModel.of(sprint,
+                linkTo(methodOn(SprintController.class).getActiveSprintsInProject(project_id)).withSelfRel());
+    }
+
     //Single item
-    @GetMapping("/sprints/{id}/{project_id}")
+    @GetMapping("projects/{project_id}/sprints/{id}")
     EntityModel<Sprint> one(@PathVariable Long id,@PathVariable Long project_id){
         Sprint sprint = repository.findById(new SprintId(id,project_id)) //
                 .orElseThrow(()-> new SprintNotFoundException(new SprintId(id,project_id)));
@@ -62,8 +83,16 @@ public class SprintController {
         return assembler.toModel(sprint);
     }
 
-    @DeleteMapping("/sprints/{id}/{project_id}")
+    @DeleteMapping("projects/{project_id}/sprints/{id}")
     void deleteEpic( @PathVariable Long id,@PathVariable Long project_id){
+        Sprint sprint = repository.findById(new SprintId(id,project_id)) //
+                .orElseThrow(()-> new SprintNotFoundException(new SprintId(id,project_id)));
+        if(sprint.getStatus()!=0L)
+            throw new SprintNotFoundException(0L);
+
+        repository.deleteAllAssigneesInSprint(id,project_id);
+        repository.deleteAllTasksInSprint(id,project_id);
+        repository.deleteAllStoriesInSprint(id,project_id);
         repository.deleteById(new SprintId(id,project_id));
     }
 }

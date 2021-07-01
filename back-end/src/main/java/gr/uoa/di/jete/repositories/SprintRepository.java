@@ -22,6 +22,12 @@ public interface SprintRepository extends JpaRepository<Sprint, SprintId>{
     @Query("select s from Sprint s,Project p where s.status=?2 and s.project_id = p.id and p.id = ?1")
     Optional<Sprint> findSprintByStatusInProject(Long project_id,Long status);
 
+    @Query("select s from Sprint s,Project p where s.status>0 and s.project_id = p.id and p.id = ?1")
+    List<Sprint> findActiveSprintsInProject(Long project_id);
+
+    @Query("select s from Sprint s,Project p where s.project_id = p.id and p.id = ?1")
+    List<Sprint> findSprintsInProject(Long project_id);
+
     @Transactional
     @Modifying
     @Query("update Sprint s set s.status = s.status - 1 where s.project_id=?1 and s.status > 0")
@@ -36,4 +42,26 @@ public interface SprintRepository extends JpaRepository<Sprint, SprintId>{
     @Modifying
     @Query("update Task t set t.sprint_id = ?2 where t.sprint_id=?1 and t.status=0")
     void transferTasks(Long old_id,Long new_id);
+
+    @Transactional
+    @Modifying
+    @Query("update Assignee a set a.sprint_id = ?2 where a.sprint_id=?1")
+    void transferAssignees(Long old_id,Long new_id);
+
+    //------- Delete for inactive sprints ------------------------//
+    @Transactional
+    @Modifying
+    @Query("delete from Assignee a where a.sprint_id=?1 and a.project_id=?2")
+    void deleteAllAssigneesInSprint(Long id,Long project_id);
+
+    @Transactional
+    @Modifying
+    @Query("delete from Task t where t.sprint_id=?1 and t.project_id=?2 and t.status=0")
+    void deleteAllTasksInSprint(Long id,Long project_id);
+
+    @Transactional
+    @Modifying
+    @Query("delete from Story st where st.sprint_id=?1 and st.project_id=?2 and st.status=0")
+    void deleteAllStoriesInSprint(Long id,Long project_id);
+    //------------------------------------------------------------//
 }

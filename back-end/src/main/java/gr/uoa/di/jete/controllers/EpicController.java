@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+@CrossOrigin
 @RestController
 public class EpicController {
 
@@ -55,7 +56,7 @@ public class EpicController {
     }
 
     //Single item
-    @GetMapping("/epics/{id}/{project_id}")
+    @GetMapping("projects/{project_id}/epics/{id}")
     EntityModel<Epic> one(@PathVariable Long id,@PathVariable Long project_id){
         Epic epic = repository.findById(new EpicId(id,project_id)) //
                 .orElseThrow(()-> new EpicNotFoundException(new EpicId(id,project_id)));
@@ -63,8 +64,29 @@ public class EpicController {
         return assembler.toModel(epic);
     }
 
-    @DeleteMapping("/epics/{id}/{project_id}")
+    //Endpoint to get all epics in a project
+    @GetMapping("/projects/{project_id}/epics")
+    CollectionModel<EntityModel<Epic>> getEpicsInProject(@PathVariable Long project_id){
+        List<EntityModel<Epic>> epic = repository.findAllByProjectId(project_id).stream() //
+                .map(assembler :: toModel) //
+                .collect(Collectors.toList());
+        return CollectionModel.of(epic,
+                linkTo(methodOn(EpicController.class).getEpicsInProject(project_id)).withSelfRel());
+    }
+
+    //Endpoint to archive a given epic
+    @PutMapping("projects/{project_id}/epics/{id}/archive")
+    void archiveEpic( @PathVariable Long id,@PathVariable Long project_id){
+        repository.archiveEpic(id,project_id);
+        repository.archiveAllStoriesInEpic(id,project_id);
+        repository.archiveAllTasksInEpic(id,project_id);
+    }
+
+    @DeleteMapping("projects/{project_id}/epics/{id}")
     void deleteEpic( @PathVariable Long id,@PathVariable Long project_id){
+        repository.deleteAllAssigneesInEpic(id,project_id);
+        repository.deleteAllTasksInEpic(id,project_id);
+        repository.deleteAllStoriesInEpic(id,project_id);
         repository.deleteById(new EpicId(id,project_id));
     }
 }

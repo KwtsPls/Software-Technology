@@ -45,6 +45,36 @@ public class TaskController {
     }
     // end::get-aggregate-root[]
 
+    //Endpoint to get all tasks in project
+    @GetMapping("/projects/{project_id}/stories/{story_id}/tasks")
+    CollectionModel<EntityModel<Task>> getAllTasksInStory(@PathVariable Long project_id,@PathVariable Long story_id){
+        List<EntityModel<Task>> task = repository.findAllByProjectAndStoryId(project_id,story_id).stream() //
+                .map(assembler :: toModel) //
+                .collect(Collectors.toList());
+        return CollectionModel.of(task,
+                linkTo(methodOn(TaskController.class).getAllTasksInStory(project_id,story_id)).withSelfRel());
+    }
+
+    //Endpoint to get all tasks in an sprint
+    @GetMapping("/projects/{project_id}/sprints/{sprint_id}/stories/{story_id}/tasks")
+    CollectionModel<EntityModel<Task>> getAllTasksInSprint(@PathVariable Long project_id,@PathVariable Long sprint_id,@PathVariable Long story_id){
+        List<EntityModel<Task>> task = repository.findAllByProjectAndSprintAndStoryId(project_id,sprint_id,story_id).stream() //
+                .map(assembler :: toModel) //
+                .collect(Collectors.toList());
+        return CollectionModel.of(task,
+                linkTo(methodOn(TaskController.class).getAllTasksInSprint(project_id,sprint_id,story_id)).withSelfRel());
+    }
+
+    //Endpoint to get all tasks in epics
+    @GetMapping("/projects/{project_id}/epics/{epic_id}/stories/{story_id}/tasks")
+    CollectionModel<EntityModel<Task>> getAllTasksInEpic(@PathVariable Long project_id,@PathVariable Long epic_id,@PathVariable Long story_id){
+        List<EntityModel<Task>> task = repository.findAllByProjectAndEpicAndStoryId(project_id,epic_id,story_id).stream() //
+                .map(assembler :: toModel) //
+                .collect(Collectors.toList());
+        return CollectionModel.of(task,
+                linkTo(methodOn(TaskController.class).getAllTasksInEpic(project_id,epic_id,story_id)).withSelfRel());
+    }
+
     @PostMapping("/projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{story_id}/tasks")
     Task newTask(@RequestBody Task newTask,@PathVariable Long project_id,@PathVariable Long sprint_id,@PathVariable Long epic_id,@PathVariable Long story_id){
         //Search for project with given id

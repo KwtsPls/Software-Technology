@@ -99,6 +99,7 @@ public class ProjectController {
 
         //Transfer all unfinished tasks and stories to the new current sprint
         Long current_sprint_id = current_sprint.getId();
+        sprintRep.transferAssignees(old_sprint_id,current_sprint_id);
         sprintRep.transferStories(old_sprint_id,current_sprint_id);
         sprintRep.transferTasks(old_sprint_id,current_sprint_id);
 
@@ -176,6 +177,8 @@ public class ProjectController {
     @DeleteMapping("/projects/{id}")
     void deleteProject(@PathVariable Long id){
         repository.findById(id).orElseThrow(() -> new ProjectNotFoundException(id));
+        //Delete all assignees in tasks in this project
+        repository.deleteAllAssigneesInProject(id);
         //Delete all tasks in this project
         repository.deleteAllTasksInProject(id);
         //Delete all stories in this project
