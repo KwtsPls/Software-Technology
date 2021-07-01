@@ -4,7 +4,7 @@ import '../../css/projects.css';
 import SideNavBar from '../../components/SideNavBar.js'
 import Topbar from '../../components/Topbar.js'
 import Backlog from '../../components/Backlog.js'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import IssuePopUp from '../../components/IssuePopUp.js'
 import TaskInfoPopUp from '../../components/TaskInfoPopUp.js'
 
@@ -14,11 +14,25 @@ function ProjectNoPage() {
 
     const history = useHistory();
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+    const location = useLocation();
+    
+    let projectId = null//location.state.projectId;
+    let projectName = 100//location.state.projectName;
+    if (location.state){
+        projectId = location.state.projectId;
+        projectName = location.state.projectName;
+    }
+    else {
+        history.push("/projects");
+    }
+    //const projectId = 100//location.state.projectId;
+    //const projectName = 100//location.state.projectName;
 
     useEffect(() => {
         if (!loggedUser){
             history.push("/login");
         }
+        console.log("Project ID: " + projectId);
     }, []);
 
     const [modalIssueShow, setModalIssueShow] = useState(false);
@@ -98,12 +112,12 @@ function ProjectNoPage() {
                                     <a href="#" className="breadcrumb-option">Projects</a>
                                 </Link>
                             </li>
-                            <li className="breadcrumb-item active" aria-current="page">Proj Name</li>
+                            <li className="breadcrumb-item active" aria-current="page">{projectName}</li>
                         </ol>
                     </nav>
                     <div className="row justify-content-between">
                         <div className="col-6">
-                            <h1 className="text">Project Something</h1>
+                            <h1 className="text">{projectName}</h1>
                         </div>
                         <div className="col-6">
                             <button type="button" className="btn btn-outline-secondary float-end" onClick={() => setModalIssueShow(true)}>Create Issue</button>
@@ -114,16 +128,16 @@ function ProjectNoPage() {
                         <div className="col-8">
                             <ul className="nav nav-tabs"> 
                                 <li className="nav-item"  onClick={clickBacklog}>
-                                    <a className={backlog} aria-current="page" href="#">Backlog</a>
+                                    <a className={backlog} aria-current="page">Backlog</a>
                                 </li>
                                 <li className="nav-item"  onClick={clickSpr}>
-                                    <a className={spr} href="#">Sprints</a>
+                                    <a className={spr}>Sprints</a>
                                 </li>
                                 <li className="nav-item" onClick={clickEpics}>
-                                    <a className={epics} href="#">Epics</a>
+                                    <a className={epics}>Epics</a>
                                 </li>
                                 <li className="nav-item" onClick={clickPastSpr}>
-                                    <a className={pastSpr} href="#">Past Sprints</a>
+                                    <a className={pastSpr}>Past Sprints</a>
                                 </li>
                             </ul>
                         </div>
@@ -149,7 +163,7 @@ function ProjectNoPage() {
                                 </div>
                             )}
                             {(pressedTab === "sprints") && sprintsShown.map(i => 
-                                    <div className="col-4 full-col">
+                                    <div className="d-flex full-col" style={{width: '33%',"flex-wrap": "nowrap"}}>
                                         <div className="card full-col">
                                             <div className="card-body">
                                                 <h5 className="card-title">{i}</h5>

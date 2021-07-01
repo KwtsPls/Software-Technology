@@ -6,6 +6,7 @@ import Topbar from '../../components/Topbar.js'
 import { Link, useHistory } from 'react-router-dom'
 import NewProjectPopUp from '../../components/NewProjectPopUp.js'
 import ProjectInfoPopUp from '../../components/ProjectInfoPopUp.js'
+import ProjectAddDevPopUp from '../../components/ProjectAddDevPopUp.js'
 
 
 function ProjectsPage() {
@@ -21,7 +22,7 @@ function ProjectsPage() {
             history.push("/login");
         }
         else{
-            fetch('http://localhost:8080/users/1/projects', { // TO BE CHANGED
+            fetch('http://localhost:8080/users/'+ loggedUser.id +'/projects', {
                 method: 'get', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
             })
@@ -68,16 +69,32 @@ function ProjectsPage() {
 
     const [searchVal, setSearch] = useState("");
     const [modalShow, setModalShow] = useState(false);
-    const [modalInfoShow, setModalInfoShow] = useState(false);
+    const [modalInfoShow, setModalInfoShow] = useState(false); 
+    const [modalAddShow, setModalAddShow] = useState(false); 
+    const [infoId, setInfoId] = useState(0); // the id of the project, which will be passed to the info modal
+
 
     function addProj(name) {
         allNames.push(name)
     }
 
+    function showInfo(id){
+        setInfoId(id)
+        setModalInfoShow(true)
+    } 
+
+    function showAdd(id){
+        setInfoId(id)
+        setModalAddShow(true)
+    } 
+
+    useEffect(() => console.log("this happened1"),[infoId])
+
     return (
         <div>
             <NewProjectPopUp show={modalShow} onHide={() => setModalShow(false)} addProj={addProj}/>
-            <ProjectInfoPopUp show={modalInfoShow} onHide={() => setModalInfoShow(false)}/>
+            <ProjectInfoPopUp show={modalInfoShow} onHide={() => setModalInfoShow(false)} projectId={infoId}/>
+            <ProjectAddDevPopUp show={modalAddShow} onHide={() => setModalAddShow(false)} projectId={infoId}/>
 			<Topbar/>
             <SideNavBar/>
             <div className="mainContent">
@@ -125,12 +142,18 @@ function ProjectsPage() {
                                                     <div className="col-11">
                                                         <h5 className="card-title">{i.title}</h5>
                                                         <p className="card-text">{i.description}</p>
-                                                        <Link to='/projects/projectNo'>
+                                                        <Link to={{pathname: '/projects/projectNo',
+                                                                    state: {
+                                                                        projectId: i.id,
+                                                                        projectName: i.title
+                                                                    }
+                                                                }}>
                                                             <a href="#" className="btn btn-primary project-button">Go somewhere</a>
                                                         </Link>
                                                     </div>
                                                     <div className="col-1">
-                                                        <button onClick={() => setModalInfoShow(true)}>info</button>
+                                                        <button onClick={() => showInfo(i.id)}>info</button>
+                                                        <button onClick={() => showAdd(i.id)}>add</button>
                                                     </div>
                                                 </div>
                                             </div>
