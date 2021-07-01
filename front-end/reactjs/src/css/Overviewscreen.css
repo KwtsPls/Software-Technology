@@ -16,80 +16,70 @@
 
 
 
-/* greetings box */
-.greetingsBorder { 
-    /* size */
-    width: 90%;
-    /* height: 200px; */
-    height: 7vw;
 
 
-    /* position */
-    margin-top: 3%;
-    margin-left: 5%;
-    background-color: #f4f5f7;
+/* okkkkkk */
 
-    border-radius: 4px;
-    /* border: solid;
-    border-color: #202020;
-    border-width: 2px; */
-    box-shadow: rgba(0, 0, 0, 0.103) 0px 1px 3px, rgba(0, 0, 0, 0.171) 0px 1px 2px; 
-
-    
+.homepage{
+    margin-top: 70px;
 }
 
-.quotebox{
-    /* size */
-    width: 90%;
-    /* height: 200px; */
-    height: 2vw;
-
-
-    /* position */
-    margin-left: 5%;
-    background-color: #202020;
-    box-shadow: rgba(0, 0, 0, 0.103) 0px 1px 3px, rgba(0, 0, 0, 0.171) 0px 1px 2px; 
-
-}
-
-.quote{
+.homepage-text{
     font-family: myquoteFont;
-    color: #f4f5f7;
     
-    margin-left: 6%;
-    font-size: 0.9vw;
-    padding-top: 0.3%;
+}
+.greetings-text{
+    margin-top: 12px;
+    font-size: 3.5rem;
+    color: #ffffff;
 }
 
-
-/* greetings text */
-.greetings{
-    /* appearance */
-    font-family: mygreetingsFont;
-    font-size: 4vw;
-    color: #202020;
-
-    position: absolute;
-    z-index: 30;
-
-    /* position */
-    margin-left: 4%;
-    margin-top: 1%;
-}
-
-.greetings-Photo {
-    position: absolute;
-    z-index: 31;
-
+.sun-img{
     /* size adjustments */
-    width: 10vw;
-    height: 10vw;
-
-    /* position adjust */
-    margin-left: 62%;
-    margin-top: -32px;
+    width: 100px;
+    height: 100px;
 }
 
-#morning, #noon , #night{
-    display: none;
+.bg-trans{
+    background-color: #ffffff;
+}
+
+.project-tile{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;    text-decoration: none;
+    border-radius: 4px;
+    background-color: #7c3f7a !important;
+
+}
+
+.greetingstile{
+    
+    /* background-color: #202020 !important; */
+    background-color: #0f0f0f !important;
+
+    border-radius: 4px 0px 0px 4px;
+    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;     */
+}
+
+.tile-sun{
+    border-radius: 0px 4px 4px 0px;
+}
+
+.project-tile:hover{
+    text-decoration: none;
+    background-color: #202020 !important;
+    cursor: pointer;
+}
+
+.project-tile:hover h5{
+    
+    color: #ffffff !important;
+}
+
+.project-tile-name{
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+.recproj{
+    margin-top: 10vh !important;
 }

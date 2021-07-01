@@ -167,7 +167,7 @@ function SignUpPage() {
                             <span className = "details">Όνομα</span>
                             <input className="form-control"  type="text" value={firstName} onChange={e => setFirst(e.target.value)} placeholder="Πληκτρολογίστε το όνομα σας" />
                             <div>
-                                { (showEmptyFirstName) && <span class="badge bg-danger rounded-pill">Το Όνομα δεν μπορεί να είναι κενό</span>}
+                                { (showEmptyFirstName) && <span className="badge bg-danger rounded-pill">Το Όνομα δεν μπορεί να είναι κενό</span>}
                             </div>
                         </div>
 
@@ -175,7 +175,7 @@ function SignUpPage() {
                             <span className = "details">Επίθετο</span>
                             <input className="form-control"  type="text" value={lastName} onChange={e => setLast(e.target.value)} placeholder="Πληκτρολογίστε το επίθετο σας" />
                             <div>
-                                { (showEmptyLastName) && <span class="badge bg-danger rounded-pill">Το Επίθετο δεν μπορεί να είναι κενό</span>}
+                                { (showEmptyLastName) && <span className="badge bg-danger rounded-pill">Το Επίθετο δεν μπορεί να είναι κενό</span>}
                             </div>
                         </div>
 
@@ -183,10 +183,10 @@ function SignUpPage() {
                             <span className = "details">Username</span>
                             <input className="form-control"  type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Πληκτρολογίστε το username σας" aria-describedby="usernamehelp" />
                             <div>
-                                { (showEmptyUsername) && <span class="badge bg-danger rounded-pill">Το username δεν μπορεί να είναι κενό</span>}
+                                { (showEmptyUsername) && <span className="badge bg-danger rounded-pill">Το username δεν μπορεί να είναι κενό</span>}
                             </div>
                             <div>
-                                { (showAlreadyUsername) && <span class="badge bg-danger rounded-pill">Το username αυτό είναι ήδη σε χρήση</span>}
+                                { (showAlreadyUsername) && <span className="badge bg-danger rounded-pill">Το username αυτό είναι ήδη σε χρήση</span>}
                             </div>
                             <small id="usernamehelp" className="form-text text-muted">Το username σας πρέπει να αποτελείται από τουλάχιστον 6 λατινικούς χαρακτήρες και αριθμούς</small>
                         </div>
@@ -195,10 +195,10 @@ function SignUpPage() {
                             <span className = "details">Email</span>
                             <input className="form-control"  type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Πληκτρολογίστε το email σας" />
                             <div>
-                                { (showEmptyEmail) && <span class="badge bg-danger rounded-pill">Το email δεν μπορεί να είναι κενό</span>}
+                                { (showEmptyEmail) && <span className="badge bg-danger rounded-pill">Το email δεν μπορεί να είναι κενό</span>}
                             </div>
                             <div>
-                                { (showAlreadyEmail) && <span class="badge bg-danger rounded-pill">Το email αυτό είναι ήδη σε χρήση</span>}
+                                { (showAlreadyEmail) && <span className="badge bg-danger rounded-pill">Το email αυτό είναι ήδη σε χρήση</span>}
                             </div>
                         </div>
 
@@ -206,7 +206,7 @@ function SignUpPage() {
                             <span className = "details">Κωδικός πρόσβασης</span>
                             <input className="form-control"  type="password" value={pass1} onChange={e => setPass1(e.target.value)} placeholder="Πληκτρολογίστε τον κωδικό σας" />
                             <div>
-                                { (showEmptyPass1) && <span class="badge bg-danger rounded-pill">Ο κωδικός δεν μπορεί να είναι κενός</span>}
+                                { (showEmptyPass1) && <span className="badge bg-danger rounded-pill">Ο κωδικός δεν μπορεί να είναι κενός</span>}
                             </div>
                         </div>
 
@@ -214,10 +214,10 @@ function SignUpPage() {
                             <span className = "details">Επιβεβαίωση κωδικού</span>
                             <input  className="form-control" type="password" value={pass2} onChange={e => setPass2(e.target.value)} placeholder="Πληκτρολογίστε ξανά τον κωδικό" />
                             <div>
-                                { (showEmptyPass2) && <span class="badge bg-danger rounded-pill">Ο κωδικός δεν μπορεί να είναι κενός</span>}
+                                { (showEmptyPass2) && <span className="badge bg-danger rounded-pill">Ο κωδικός δεν μπορεί να είναι κενός</span>}
                             </div>
                             <div>
-                                { (showPasswordsDontMatch) && <span class="badge bg-danger rounded-pill">Οι δυο κωδικοί δεν είναι ίδιοι</span>}
+                                { (showPasswordsDontMatch) && <span className="badge bg-danger rounded-pill">Οι δυο κωδικοί δεν είναι ίδιοι</span>}
                             </div>
                         </div>
 
