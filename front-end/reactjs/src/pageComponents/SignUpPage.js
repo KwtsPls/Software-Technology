@@ -220,7 +220,8 @@ function SignUpPage() {
                             <input className="form-control"  type="password" value={pass1} onChange={e => setPass1(e.target.value)} placeholder="Πληκτρολογίστε τον κωδικό σας" />
                             <div>
                                 { (showBadPassInput) && <span className="badge bg-danger rounded-pill">Ο κωδικός πρέπει να περιέγχει τουλάχιστον <br/>ένα κεφαλαίο γράμμα και έναν αριθμό</span>}
-
+                            </div>
+                            <div>
                                 { (showEmptyPass1) && <span className="badge bg-danger rounded-pill">Ο κωδικός δεν μπορεί να είναι κενός</span>}
                             </div>
                         </div>

@@ -169,7 +169,7 @@ function ProjectsPage() {
                                                                     }
                                                                 }}>
 
-                                                            <a href="#" className="btn btn-primary  btn-sm project-button">Μετάβαση στο project</a>
+                                                            <a href="#" className="btn btn-primary  btn-sm project-button proj-list-btn">Μετάβαση στο project</a>
                                                         </Link>
                                                     </div>
                                                     

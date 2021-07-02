@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom'
 import '../css/Overviewscreen.css'
 import sunphoto from '../images/sun2.png'
 
@@ -15,6 +15,7 @@ function OverviewScreen() {
     const [isLoading, setLoading] = useState(true);
     const [tilecounter, setTileCounter] = useState(0);
     const [rawProjects, setRawProjects] = useState([]);
+    const [recentprojectList,setRecentProjectList] = useState([])
 
 
     useEffect(() => {
@@ -25,8 +26,8 @@ function OverviewScreen() {
             history.push("/login");
         }
         else{
-            // fetch('http://localhost:8080/users/'+ loggedUser.id +'/projects', {
-            fetch('http://localhost:8080/users/1/projects', {
+            fetch('http://localhost:8080/users/'+ loggedUser.id +'/projects', {
+            // fetch('http://localhost:8080/users/1/projects', {
 
                 method: 'get', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
@@ -41,6 +42,21 @@ function OverviewScreen() {
         }
 
     }, []);
+
+    const recProj = []
+
+    useEffect(() => {
+        if (!isLoading){
+            for (var i=0; recProj.length <3 && i < rawProjects._embedded.projectList.length; i++){
+                if (! rawProjects._embedded.projectList[i].status){
+                    recProj.push(rawProjects._embedded.projectList[i])
+                }   
+            }
+            
+            setRecentProjectList(recProj)
+        }
+    },[isLoading])
+
 
 
     function get_recentProjectTile(name){
@@ -90,16 +106,29 @@ function OverviewScreen() {
                 </div>
 
                 <div className="row mt-4 offset-md-1 tilesrow">
-                    
-                     {/* for the first three projects of the user call this with i.title as argument */}
-                        {get_recentProjectTile(0)}
-                        {get_recentProjectTile(0)}
-                        {get_recentProjectTile(0)}
+                    {
+                        recentprojectList.map(i => 
+
+                        (
+
+                            <a className="col-md-2 offset-md-1 mt-4 project-tile text-center">
+                                <Link to={{pathname: '/projects/projectNo',
+                                        state: {
+                                            projectId: i.id,
+                                            projectName: i.title
+                                        }
+                                    }}>
+                                
+                                    <h5 className="mt-3 mb-3 project-tile-name">{i.title}</h5>
+                                </Link>
+                            </a>    
+                        )
+
+                    )}
 
 
-                        {/* {projectList.map(i => i.title.toLowerCase().includes(searchVal.toLowerCase()) &&
+
                     
-                        )} */}
                     
                 </div>
 

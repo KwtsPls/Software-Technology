@@ -29,6 +29,8 @@ function ProjectNoPage() {
     //const projectName = 100//location.state.projectName;
 
     useEffect(() => {
+        document.body.style.background = "#fff";
+
         if (!loggedUser){
             history.push("/login");
         }
@@ -86,7 +88,7 @@ function ProjectNoPage() {
 
 
 
-    let sprNames = ['Sprint 1','Sprint 2','Sprint 3','Sprint 4','Sprint 5'];
+    let sprNames = ['Sprint 1','Sprint 2','Sprint 3','Sprint 4','Sprint 5','Sprint 2','Sprint 3','Sprint 4','Sprint 5','Sprint 2','Sprint 3','Sprint 4','Sprint 5'];
     let pastSprNames = ['Old Sprint 1','Old Sprint 2','Old Sprint 3','Old Sprint 4','Old Sprint 5'];
     let epicNames = ['Epic 1','Epic 2','Epic 3','Epic 4','Epic 5','Epic 6','Epic 7','Epic 8'];
     
@@ -123,7 +125,7 @@ function ProjectNoPage() {
                             <button type="button" className="btn btn-outline-secondary float-end" onClick={() => setModalIssueShow(true)}>Create Issue</button>
                         </div>
                     </div>
-                    <div className="row pt-4">
+                    <div className="row pt-4" >
                         {/* ----------- Nav Tabs ------------ */}
                         <div className="col-8">
                             <ul className="nav nav-tabs"> 
@@ -163,11 +165,15 @@ function ProjectNoPage() {
                                 </div>
                             )}
                             {(pressedTab === "sprints") && sprintsShown.map(i => 
-                                    <div className="d-flex full-col" style={{width: '33%',"flex-wrap": "nowrap"}}>
+                                    <div className="d-flex full-col mt-2" style={{width: '33%',"flex-wrap": "nowrap"}}>
                                         <div className="card full-col">
-                                            <div className="card-body">
+                                            <div className="card-body sprint-card ">
                                                 <h5 className="card-title">{i}</h5>
                                                 <p className="card-text">With supporting text below as a natural lead-in to additional content. With supporting text below as a natural lead-in to additional content.</p>
+                                                <p className="card-text">With supporting text below as a natural lead-in to additional content. With supporting text below as a natural lead-in to additional content.</p>
+                                                <p className="card-text">With supporting text below as a natural lead-in to additional content. With supporting text below as a natural lead-in to additional content.</p>
+                                                <p className="card-text">With supporting text below as a natural lead-in to additional content. With supporting text below as a natural lead-in to additional content.</p>
+                                                
                                                 <a href="#" className="btn btn-primary project-button">Go somewhere</a>
                                             </div>
                                         </div>

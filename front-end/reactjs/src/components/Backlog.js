@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import '../App.css';
+import '../css/projects.css';
+
 
 
 
@@ -15,11 +17,11 @@ function Backlog(props){
 
     function doneSatus(cond){
         if (cond){
-            return (<span class="badge bg-success rounded-pill cool-purple">
+            return (<span class="badge bg-success rounded-pill done-gradient">
                 Done
             </span>);
         }
-        return (<span class="badge bg-warning rounded-pill" style={{'background-image': "linear-gradient(to bottom right,#F58A07,#A72608)"}}>In progress</span>);
+        return (<span class="badge bg-warning rounded-pill inprogress-gradient" >In progress</span>);
     }
 
     function gg1(){
@@ -85,42 +87,49 @@ function Backlog(props){
     return (
         <div class="container">
             <div class="row">
-            <ul class="list-group" style={{width: '100%'}}>
-                <li class="list-group-item d-flex justify-content-between align-items-center" onClick={gg1}>
-                    {tasks[0]}
-                    {doneSatus(cond1)}
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center" onClick={gg2}>
-                    {tasks[1]}
-                    {doneSatus(cond2)}
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center" onClick={gg3}>
-                    {tasks[2]}
-                    {doneSatus(cond3)}
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center" onClick={gg4}>
-                    {tasks[3]}
-                    {doneSatus(cond4)}
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center" onClick={gg5}>
-                    {tasks[4]}
-                    {doneSatus(cond5)}
-                </li>
-            </ul>
+                <ul class="list-group" style={{width: '100%'}}>
+                    <li class="list-group-item d-flex justify-content-between align-items-center backlog-list" onClick={gg1}>
+                        {tasks[0]}
+                        {doneSatus(cond1)}
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center backlog-list" onClick={gg2}>
+                        {tasks[1]}
+                        {doneSatus(cond2)}
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center backlog-list" onClick={gg3}>
+                        {tasks[2]}
+                        {doneSatus(cond3)}
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center backlog-list" onClick={gg4}>
+                        {tasks[3]}
+                        {doneSatus(cond4)}
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center backlog-list" onClick={gg5}>
+                        {tasks[4]}
+                        {doneSatus(cond5)}
+                    </li>
+                </ul>
             </div>
             <div class="row">
-            <div style={{position:'absolute', bottom:'0', width: '70%'}}>
-                <div class="progress" style={{height: "20px"}}>
-                    <div class="progress-bar" role="progressbar" style={{width: '25%','background-image': "linear-gradient(to bottom right,#992b95,#2136f5a6)"}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                </div>
-                <div class="pt-3"/>
-                <div class="progress" style={{height: "20px"}}>
-                    <div class="progress-bar bg-info" role="progressbar" style={{width: `${perc}%`, 'background-image': "linear-gradient(to bottom right,#992b95,#2136f5a6)"}} aria-valuemin="0" aria-valuemax="100">{`${perc}`}%</div>
-                </div>
-                <div class="pt-3"/>
+                <div style={{position:'absolute', bottom:'0', width: '70%'}}>
+
+                    <div class="progress" style={{height: "20px"}}>
+                        <div class="progress-bar" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                    </div>
+
+                    <div class="pt-3"/>
+
+                    <div class="progress" style={{height: "20px"}}>
+                        <div class="progress-bar bg-info" role="progressbar" style={{width: `${perc}%`}} aria-valuemin="0" aria-valuemax="100">{`${perc}`}%</div>
+                    </div>
+                    
+                    <div class="pt-3"/>
+                
                 </div>
             </div>
-            </div>
+        </div>
+
+        
 
 
     );
