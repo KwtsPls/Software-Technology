@@ -38,10 +38,9 @@ function NewProjectPopUp(props){
             return ;
         }
 
-        props.addProj(title)
         props.onHide()
 
-        fetch('http://localhost:8080/projects/create/1', { // TO BE CHANGED
+        fetch('http://localhost:8080/projects/create/' + loggedUser.id, {
                 method: 'post', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken,
                             'Content-Type': 'application/json'  
@@ -127,9 +126,7 @@ function NewProjectPopUp(props){
                     </form>
                     <div className="row g-3 pt-3">
                         <div className="col-8">
-                            {/* <Link to='/home'> */}
-                                <button className="btn btn-primary" onClick={() => submit()}>Επιβεβαίωση</button>
-                            {/* </Link> */}
+                            <button className="btn btn-primary" onClick={() => submit()}>Επιβεβαίωση</button>
                         </div>
                     </div>
                 </Modal.Body>
