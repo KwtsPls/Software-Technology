@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import '../App.css';
 import {Modal, Button} from 'react-bootstrap';
+import { useHistory } from 'react-router-dom'
 import AssignDev from './AssignDev.js'
 
 
@@ -8,6 +9,7 @@ import AssignDev from './AssignDev.js'
 
 function NewProjectPopUp(props){
 
+    const history = useHistory();
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
 
     const [devs, setDevs] = useState([])
@@ -59,13 +61,15 @@ function NewProjectPopUp(props){
                     return data;
                     })
                 .then((data) => {
-                    for (const dev of devs){
-                        console.log("sending request for " + dev.username + " with id " + dev.id + " to project with id " + data.id);
+                    var i=0;
+                    var numResponses = 0;
+                    for (; i < devs.length; i++){
+                        console.log("sending request for " + devs[i].username + " with id " + devs[i].id + " to project with id " + data.id);
                         fetch('http://localhost:8080/developers/', { 
                             method: 'post', 
                             headers: { Authorization: 'Bearer ' + loggedUser.accessToken,
                                 'Content-Type': 'application/json'  },
-                            body: JSON.stringify({  user_id: dev.id,
+                            body: JSON.stringify({  user_id: devs[i].id,
                                         project_id: data.id,
                                         role: 0,
                                         accepted: 0
@@ -73,8 +77,18 @@ function NewProjectPopUp(props){
                         })
                             .then(res => res.json())
                             .then((data) => {
+                                console.log(numResponses)
                                 console.log(data);
+                                numResponses++
                             })
+                            .then(() => {
+                                if (numResponses === devs.length){
+                                    window.location.reload(false);
+                                }
+                            })
+                    }
+                    if (i === 0){
+                        window.location.reload(false);
                     }
                 })
         
