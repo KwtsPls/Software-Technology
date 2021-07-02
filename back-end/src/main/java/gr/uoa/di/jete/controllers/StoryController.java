@@ -1,11 +1,13 @@
 package gr.uoa.di.jete.controllers;
 
 
+import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.*;
 import gr.uoa.di.jete.models.*;
 import gr.uoa.di.jete.repositories.*;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -89,7 +91,7 @@ public class StoryController {
     }
 
     @PutMapping("/projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{id}/archive/{user_id}")
-    void archiveStory(@PathVariable Long id,@PathVariable Long project_id,@PathVariable Long sprint_id,@PathVariable Long epic_id,@PathVariable Long user_id){
+    ResponseEntity<?> archiveStory(@PathVariable Long id, @PathVariable Long project_id, @PathVariable Long sprint_id, @PathVariable Long epic_id, @PathVariable Long user_id){
         //Check that the developer requesting to delete this epic is the product owner of the project
         Developer developer =  devRep.findById(new DeveloperId(user_id,project_id)).orElseThrow(()->new DeveloperNotFoundException(new DeveloperId(user_id,project_id)));
         if(developer.getRole()!=1L)
@@ -97,10 +99,11 @@ public class StoryController {
 
         repository.archiveAllTasksInStory(id,project_id,sprint_id,epic_id);
         repository.archiveStory(id,project_id,sprint_id,epic_id);
+        return ResponseEntity.ok(new MessageResponse("OK"));
     }
 
     @DeleteMapping("/projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{id}/delete/{user_id}")
-    void deleteStory(@PathVariable Long id,@PathVariable Long project_id,@PathVariable Long sprint_id,@PathVariable Long epic_id,@PathVariable Long user_id){
+    ResponseEntity<?> deleteStory(@PathVariable Long id,@PathVariable Long project_id,@PathVariable Long sprint_id,@PathVariable Long epic_id,@PathVariable Long user_id){
         //Check that the developer requesting to delete this epic is the product owner of the project
         Developer developer =  devRep.findById(new DeveloperId(user_id,project_id)).orElseThrow(()->new DeveloperNotFoundException(new DeveloperId(user_id,project_id)));
         if(developer.getRole()!=1L)
@@ -109,5 +112,6 @@ public class StoryController {
         repository.deleteAllAssigneesInStory(id,project_id,sprint_id,epic_id);
         repository.deleteAllTasksInStory(id,project_id,sprint_id,epic_id);
         repository.deleteById(new StoryId(id,epic_id,sprint_id,project_id));
+        return ResponseEntity.ok(new MessageResponse("OK"));
     }
 }

@@ -1,6 +1,7 @@
 package gr.uoa.di.jete.controllers;
 
 
+import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.DeveloperNotFoundException;
 import gr.uoa.di.jete.exceptions.ProjectNotFoundException;
 import gr.uoa.di.jete.exceptions.UserNotFoundException;
@@ -8,6 +9,7 @@ import gr.uoa.di.jete.models.*;
 import gr.uoa.di.jete.repositories.DeveloperRepository;
 import gr.uoa.di.jete.repositories.ProjectRepository;
 import gr.uoa.di.jete.repositories.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.hateoas.*;
@@ -85,12 +87,12 @@ public class DeveloperController {
     }
 
     @PutMapping("/developers/users/{user_id}/projects/{project_id}/accept")
-    String acceptProjectInvitation(@PathVariable Long user_id,@PathVariable Long project_id){
+    ResponseEntity<?> acceptProjectInvitation(@PathVariable Long user_id, @PathVariable Long project_id){
         int status = repository.setDeveloperAcceptedTrue(user_id,project_id);
         if(status==1)
-            return "OK";
+            return ResponseEntity.ok(new MessageResponse("OK"));
         else
-            return "ERROR";
+            return ResponseEntity.ok(new MessageResponse("ERROR"));
     }
 
     //Endpoint to get the vital info of the developers of a project
