@@ -121,7 +121,7 @@ function NewProjectPopUp(props){
                         </div>
                         <div className="col-12">
                             <label for="assignDev" className="form-label">Πρόσκληση προς Developers</label>
-                            <AssignDev devs={devs} setDevs={setDevs} message=" will be requested to join "/>
+                            <AssignDev devs={devs} setDevs={setDevs} message=" will be requested to join " checkForReAdd={false} projId={0}/>
                         </div>
                     </form>
                     <div className="row g-3 pt-3">
