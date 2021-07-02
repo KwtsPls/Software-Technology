@@ -76,20 +76,20 @@ Create table for sprints for app and add some dummy data
 */
 drop table if exists sprint;
 create table sprint
-(id int not null, project_id int not null, title varchar(45) not null, status int not null,dateFrom date,dateTo date,
+(id int not null, project_id int not null, title varchar(45) not null, status int not null,date_from date,date_to date,
     constraint sprint_pk
         primary key (project_id, id),
     constraint fk_sprint_project1
         foreign key (project_id) references project (id)
 );
 
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(1,1,'sprint#1',1,'2021-06-10','2021-06-20');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(2,1,'sprint#2',0,'2021-06-10','2021-06-20');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(3,1,'sprint#3',0,'2021-06-10','2021-06-20');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(4,1,'sprint#4',2,'2021-06-10','2021-06-20');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(5,2,'sprint#1',1,'2021-06-10','2021-06-20');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(6,2,'sprint#2',2,'2021-06-10','2021-06-20');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(7,3,'sprint#1',1,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,date_from,date_to) values(1,1,'sprint#1',1,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,date_from,date_to) values(2,1,'sprint#2',0,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,date_from,date_to) values(3,1,'sprint#3',0,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,date_from,date_to) values(4,1,'sprint#4',2,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,date_from,date_to) values(5,2,'sprint#1',1,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,date_from,date_to) values(6,2,'sprint#2',2,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,date_from,date_to) values(7,3,'sprint#1',1,'2021-06-10','2021-06-20');
 
 /*
 --------------------------------------------------------

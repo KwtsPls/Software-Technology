@@ -1,5 +1,6 @@
 package gr.uoa.di.jete.controllers;
 
+import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.DeveloperNotFoundException;
 import gr.uoa.di.jete.exceptions.ProjectNotFoundException;
 import gr.uoa.di.jete.exceptions.SprintNotFoundException;
@@ -11,6 +12,7 @@ import gr.uoa.di.jete.repositories.SprintRepository;
 import gr.uoa.di.jete.repositories.UserRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -157,12 +159,12 @@ public class ProjectController {
 
     //Method to check if a user with a given username exists in a given project
     @GetMapping("/projects/{id}/user={username}")
-    String checkUserInProject(@PathVariable Long id,@PathVariable String username){
+    public ResponseEntity<?> checkUserInProject(@PathVariable Long id, @PathVariable String username){
         User user = repository.findUserByUsernameInProject(id,username).orElse(new User());
         if(user.getId()!=null)
-            return "YES";
+            return ResponseEntity.ok(new MessageResponse("YES"));
         else
-            return "NO";
+            return ResponseEntity.ok(new MessageResponse("NO"));
     }
 
     @PutMapping("/projects/{id}/archive/{user_id}")

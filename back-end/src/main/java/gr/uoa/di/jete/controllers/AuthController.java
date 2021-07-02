@@ -2,6 +2,7 @@ package gr.uoa.di.jete.controllers;
 
 import gr.uoa.di.jete.auth.*;
 import gr.uoa.di.jete.exceptions.InvalidUserRegistration;
+import gr.uoa.di.jete.exceptions.UserNotFoundException;
 import gr.uoa.di.jete.models.CustomUserDetails;
 import gr.uoa.di.jete.models.User;
 import gr.uoa.di.jete.models.UserDataTransferObject;
@@ -92,6 +93,23 @@ public class AuthController {
         else
             return ResponseEntity.ok(new MessageResponse("User verification failed"));
     }
+
+    @PostMapping("/users/{id}/updatePassword")
+    public ResponseEntity<?> updateUserPassword(@RequestParam("password") String password, @RequestParam("old_password") String old_password,@PathVariable Long id){
+        User user = userRepository.findById(id).orElseThrow(()->new UserNotFoundException(id));
+
+        //Check if the old password is the user's current password
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getUsername(), old_password));
+
+        //update the password
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String password_hash = passwordEncoder.encode(password);
+        userRepository.chageUserPassword(id,password_hash);
+
+        return ResponseEntity.ok(new MessageResponse("Password updated successfully!"));
+    }
+
 
     private void sendVerificationEmail(User user, String siteURL)
             throws MessagingException, UnsupportedEncodingException {
