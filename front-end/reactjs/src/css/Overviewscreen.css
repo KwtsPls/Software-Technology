@@ -87,3 +87,12 @@
 .curr-proj-title{
     margin-left: -12px !important;
 }
+
+.noproject-text{
+    padding-top: 10px;
+    border-radius: 4px;
+}
+
+.noproject-text > p{
+    font-size: 2rem;
+}

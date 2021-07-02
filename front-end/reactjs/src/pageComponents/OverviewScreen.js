@@ -47,10 +47,15 @@ function OverviewScreen() {
 
     useEffect(() => {
         if (!isLoading){
-            for (var i=0; recProj.length <3 && i < rawProjects._embedded.projectList.length; i++){
-                if (! rawProjects._embedded.projectList[i].status){
-                    recProj.push(rawProjects._embedded.projectList[i])
-                }   
+            if(rawProjects._embedded === undefined){
+                
+            }else{
+
+                for (var i=0; recProj.length <3 && i < rawProjects._embedded.projectList.length; i++){
+                    if (! rawProjects._embedded.projectList[i].status){
+                        recProj.push(rawProjects._embedded.projectList[i])
+                    }   
+                }
             }
             
             setRecentProjectList(recProj)
@@ -76,6 +81,18 @@ function OverviewScreen() {
 
     }
 
+    function emptyProjectsList(){
+        if(!recentprojectList.length){
+            return(
+            <div className="row">
+                <div className="col-md-9 mt-2 offset-1 bg-success text-center noproject-text">
+                    <p className="homepage-text"> Δεν έχετε ακόμα κάποιο τρέχων project</p>
+                </div>
+            </div>
+            );
+        }
+    
+    }
 
     return (
         <div className="homepage">
@@ -124,9 +141,11 @@ function OverviewScreen() {
                             </a>    
                         )
 
+                        
+
                     )}
 
-
+                    {emptyProjectsList()}
 
                     
                     

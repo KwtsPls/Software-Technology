@@ -53,21 +53,27 @@ function ProfilePage() {
                     // setLoading(false);
                    
                 })
-                
-                fetch('http://localhost:8080/users/1/projects', {
+
+                fetch('http://localhost:8080/users/'+ loggedUser.id +'/projects', {
+                // fetch('http://localhost:8080/users/1/projects', {
                     method: 'get', 
                     headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
                 })
                     .then(res => res.json())
                     .then((data) => {
                         console.log(data);
-                        for (var i=0; i < (data)._embedded.projectList.length; i++){
-                            if (data._embedded.projectList[i].status){  
-                                setdoneProjects(doneProjects+1);
-                            }
-                            else {
-                                setcurrentProjects(currentProjects+1);
+                        if(rawProjects._embedded === undefined){
+                
+                        }else{
 
+                            for (var i=0; i < (data)._embedded.projectList.length; i++){
+                                if (data._embedded.projectList[i].status){  
+                                    setdoneProjects(doneProjects+1);
+                                }
+                                else {
+                                    setcurrentProjects(currentProjects+1);
+
+                                }
                             }
                         }
                         setLoading(false);
@@ -79,7 +85,22 @@ function ProfilePage() {
     }, []);
 
 
+    function handleEmptyBio(){
+        
+        if(user["bio"] == null){
+            return (<p className="text-muted">--</p>);
+        }else{                             
+            return (<p className="text-muted">{user["bio"]}</p>);
+        }
+    }
 
+    function handleEmptyLocation(){
+        if(user["location"] == null){
+            return (<p className="text-muted">--</p>);
+        }else{                             
+            return (<p className="text-muted">{user["location"]}</p>);
+        }
+    }
     
 
     
@@ -130,7 +151,7 @@ function ProfilePage() {
                                                 <h4 className="profile-text"> Τοποθεσία </h4>
                                                 {/* <p className="text-muted">stavroskost@outlook.com</p> */}
 
-                                                <p className="text-muted">{user["location"]}</p>
+                                                {handleEmptyLocation()}
                                             </div>
 
                                             
@@ -141,7 +162,7 @@ function ProfilePage() {
                                                 <h4 className="profile-text"> Περιγραφή </h4>
                                                 {/* <p className="text-muted">skankhunt42</p> */}
 
-                                                <p className="text-muted">{user["bio"]}</p>
+                                                {handleEmptyBio()}
                                             </div>
                                             
 
