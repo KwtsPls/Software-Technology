@@ -75,7 +75,7 @@
 
 [num] , όπου num ένας ακέραιος.<br><br>
 
-# Epics
+### Epics
 
 `[POST] /projects/epics/create`
 
@@ -98,7 +98,7 @@ Endpoint για να γίνει archive το Epic με ${id} που βρίσκε
 
 Endpoint για να γίνει delete το Epic με ${id} που βρίσκεται στο project με ${project_id}, η οποία αίτηση γίνεται από το χρήστη ${user_id}.<br><br>
 
-# Sprints
+### Sprints
 
 `[PUT] /projects/{project_id}/sprints/{id}/archive/{user_id}`
 
@@ -116,7 +116,7 @@ Endpoint για την απόκτηση όλων των ενεργών sprint (s
 
 Διαγραφή του sprint με ${id} στο project ${project_id} από τον χρήστη ${user_id}. To sprint μπορεί να διαγραφεί μόνο αν είναι ολοκληρωμένο ( status : 0 ).<br><br>
 
-# Stories
+### Stories
 
 `[GET] /projects/{project_id}/epics/{epic_id}/stories`
 
@@ -139,7 +139,7 @@ Endpoint για να γίνει archive ένα story.<br><br>
 
 Endpoint για τη διαγραφή ενός story.<br><br>
 
-# Tasks
+### Tasks
 
 `[GET] /projects/{project_id}/stories/{story_id}/tasks`
 
