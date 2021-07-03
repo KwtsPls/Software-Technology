@@ -16,6 +16,12 @@
 `React`
 `npm`
 
+
+
+**Required npm installs:**
+
+npm install --save @fullcalendar/react @fullcalendar/daygrid
+
 ## Endpoints
 
 `[GET] /users/{user_id}/projects`
