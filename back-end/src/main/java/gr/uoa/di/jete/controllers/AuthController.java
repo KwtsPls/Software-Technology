@@ -7,6 +7,7 @@ import gr.uoa.di.jete.models.User;
 import gr.uoa.di.jete.models.UserDataTransferObject;
 import gr.uoa.di.jete.repositories.UserRepository;
 import net.bytebuddy.utility.RandomString;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -25,17 +26,18 @@ import java.io.UnsupportedEncodingException;
 @CrossOrigin
 @RestController
 public class AuthController {
-    final AuthenticationManager authenticationManager;
+    protected final AuthenticationManager authenticationManager;
 
-    final UserRepository userRepository;
+    protected final UserRepository userRepository;
 
-    final UserService userService;
+    protected final UserService userService;
 
     final PasswordEncoder encoder;
 
     final JavaMailSender mailSender;
 
-    final JwtUtils jwtUtils;
+    protected final JwtUtils jwtUtils;
+
 
     public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, UserService userService, PasswordEncoder encoder, JavaMailSender mailSender, JwtUtils jwtUtils) {
         this.authenticationManager = authenticationManager;
@@ -93,7 +95,7 @@ public class AuthController {
             return ResponseEntity.ok(new MessageResponse("User verification failed"));
     }
 
-    private void sendVerificationEmail(User user, String siteURL)
+    public void sendVerificationEmail(User user, String siteURL)
             throws MessagingException, UnsupportedEncodingException {
         String toAddress = user.getEmail();
         String fromAddress = "jeteappofficial@gmail.com";

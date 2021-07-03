@@ -27,6 +27,11 @@ class UserService{
         this.userModelAssembler = userModelAssembler;
     }
 
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+        userModelAssembler = new UserModelAssembler();
+    }
+
     //Returns all the User .json entities
     public List<EntityModel<User>> getUserCollectionList() {
         return userRepository.findAll().stream() //

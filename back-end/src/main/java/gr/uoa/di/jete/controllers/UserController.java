@@ -15,12 +15,12 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @CrossOrigin
 @RestController
-class UserController {
+public class UserController {
 
     private final UserService userService;
 
 
-    UserController(UserService userService){
+    public UserController(UserService userService){
         this.userService = userService;
     }
 

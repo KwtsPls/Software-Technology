@@ -35,6 +35,12 @@ public class DeveloperController {
         this.projectRep = projectRep;
     }
 
+    DeveloperController(DeveloperRepository repository,UserRepository userRep,ProjectRepository projectRep){
+        this.repository = repository;
+        this.assembler = new DeveloperModelAssembler();
+        this.userRep = userRep;
+        this.projectRep = projectRep;
+    }
     //Aggregate root
     //tag::get-aggregate-root[]
     @GetMapping("/developers/")
