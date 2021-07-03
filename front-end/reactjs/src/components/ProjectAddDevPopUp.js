@@ -75,7 +75,10 @@ function ProjectAddDevPopUp(props){
         
     }
 
-
+    function clickExit(){
+        props.onHide()
+        setDevs([])
+    }
 
     return (
         <div>
@@ -93,7 +96,7 @@ function ProjectAddDevPopUp(props){
                 <Modal.Body>
                     <div className="col-12">
                         <label for="assignDev" className="form-label">Πρόσκληση προς Developers</label>
-                        <AssignDev devs={devs} setDevs={setDevs} message=" will be requested to join "/>
+                        <AssignDev devs={devs} setDevs={setDevs} message=" will be requested to join " checkForReAdd={true} projId={props.projectId}/>
                     </div>
                     <div className="row g-3 pt-3">
                         <div className="col-8">
@@ -102,7 +105,7 @@ function ProjectAddDevPopUp(props){
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="outline-danger" onClick={props.onHide}>Άκυρο</Button>
+                    <Button variant="outline-danger" onClick={clickExit}>Άκυρο</Button>
                 </Modal.Footer>
             </Modal>
 		</div>

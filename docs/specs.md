@@ -75,6 +75,8 @@
 
 [num] , όπου num ένας ακέραιος.<br><br>
 
+### Epics
+
 `[POST] /projects/epics/create`
 
 Endpoint για τη δημιουργία ενός καινούριου epic. Το json που αναμένεται για το request είναι της εξής μορφής : <br><br>
@@ -96,6 +98,8 @@ Endpoint για να γίνει archive το Epic με ${id} που βρίσκε
 
 Endpoint για να γίνει delete το Epic με ${id} που βρίσκεται στο project με ${project_id}, η οποία αίτηση γίνεται από το χρήστη ${user_id}.<br><br>
 
+### Sprints
+
 `[PUT] /projects/{project_id}/sprints/{id}/archive/{user_id}`
 
 Endpoint για να γίνει archive το Sprint με ${id} που βρίσκεται στο project με ${project_id}, η οποία αίτηση γίνεται από το χρήστη ${user_id}. Αν δεν υπάρξει πρόβλημα στην εκτέλεση επιστρέφεται ένα καινούριου sprint ( με status 3 ) σε μορφή json.<br><br>
@@ -111,6 +115,8 @@ Endpoint για την απόκτηση όλων των ενεργών sprint (s
 `[DELETE] /projects/{project_id}/sprints/{id}/delete/{user_id}`
 
 Διαγραφή του sprint με ${id} στο project ${project_id} από τον χρήστη ${user_id}. To sprint μπορεί να διαγραφεί μόνο αν είναι ολοκληρωμένο ( status : 0 ).<br><br>
+
+### Stories
 
 `[GET] /projects/{project_id}/epics/{epic_id}/stories`
 
@@ -132,6 +138,8 @@ Endpoint για να γίνει archive ένα story.<br><br>
 `[DELETE] /projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{id}/delete/{user_id}`
 
 Endpoint για τη διαγραφή ενός story.<br><br>
+
+### Tasks
 
 `[GET] /projects/{project_id}/stories/{story_id}/tasks`
 

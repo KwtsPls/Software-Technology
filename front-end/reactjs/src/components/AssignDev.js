@@ -12,6 +12,11 @@ function AssignDev(props){
 
     const [count, setCount] = useState(0)
 
+    const [wrongDev, setWrongDev] = useState("")
+    const [showUserAlreadyIn, setShowUserAlreadyIn] = useState(false)
+    const [showIvalidUser, setShowIvalidUser] = useState(false)
+    const [showUserAlreadyTyped, setShowUserAlreadyTyped] = useState(false)
+
     function incr(){
         setCount(count+1)
     }
@@ -30,6 +35,9 @@ function AssignDev(props){
     }
 
     function addDev() {
+        setShowUserAlreadyIn(false)
+        setShowIvalidUser(false)
+        setShowUserAlreadyTyped(false)
         var index = indexOf(props.devs, devToBeAdded)
         if (index === -1) {
             fetch('http://localhost:8080/users/name=' + devToBeAdded, {
@@ -40,15 +48,43 @@ function AssignDev(props){
                 .then((data) => {
                     console.log(data);
                     if (data.id != null) {
-                        props.devs.push({id: data.id, username: devToBeAdded})
-                        console.log("added " + devToBeAdded)
-                        incr()
+                        if (!props.checkForReAdd){
+                            props.devs.push({id: data.id, username: devToBeAdded})
+                            console.log("added " + devToBeAdded)
+                            incr()
+                        }
+                        else{
+                            fetch('http://localhost:8080/projects/' + props.projId + '/user=' + devToBeAdded, {
+                                method: 'get', 
+                                headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
+                            })
+                                .then(res => res.json())
+                                .then((data) => {
+                                    console.log(data);
+                                    if (data.message === "YES"){
+                                        setWrongDev(devToBeAdded)
+                                        setShowUserAlreadyIn(true)
+                                        console.log(devToBeAdded + " is already in this project")
+                                    }
+                                    else {
+                                        props.devs.push({id: data.id, username: devToBeAdded})
+                                        console.log("added " + devToBeAdded)
+                                        incr()
+                                    }
+                                })
+                        }
                     }
                     else {
+                        setWrongDev(devToBeAdded)
+                        setShowIvalidUser(true)
                         console.log("tried to add " + devToBeAdded + " but username does not exist")
                     }
                 })
             
+        }
+        else {
+            setWrongDev(devToBeAdded)
+            setShowUserAlreadyTyped(true)
         }
         setDev("")
     }
@@ -68,6 +104,9 @@ function AssignDev(props){
             <div className="row" style={{position: 'relative', left: '0'}}>
                 <div className="col-10">
                     <input type="text" className="form-control" id="assignDev" placeholder="Username του Developer"  value={devToBeAdded} onChange={e => setDev(e.target.value)}/>
+                    { (showUserAlreadyIn) && <span className="badge bg-danger rounded-pill">Ο {wrongDev} είναι ήδη στο project</span>}
+                    { (showUserAlreadyTyped) && <span className="badge bg-danger rounded-pill">Ο χρήστης {wrongDev} έχει ήδη πληκτρολογήθει</span>}
+                    { (showIvalidUser) && <span className="badge bg-danger rounded-pill">Ο  χρήστης {wrongDev} δεν υπάρχει στο σύστημα</span>}
                 </div>
                 <div className="col-2">
                     <div className="btn btn-outline-primary" onClick={addDev}>Add</div>
