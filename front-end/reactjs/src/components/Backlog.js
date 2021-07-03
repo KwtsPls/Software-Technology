@@ -71,8 +71,8 @@ function Backlog(props){
         if (cond5){
             count += 1;
         }
-        console.log("here you go")
-        console.log(count / 5)
+        //console.log("here you go")
+        //console.log(count / 5)
         return (count / 5) * 100
     }
 
