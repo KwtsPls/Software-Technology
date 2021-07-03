@@ -94,23 +94,6 @@ public class AuthController {
             return ResponseEntity.ok(new MessageResponse("User verification failed"));
     }
 
-    @PostMapping("/users/{id}/updatePassword")
-    public ResponseEntity<?> updateUserPassword(@RequestParam("password") String password, @RequestParam("old_password") String old_password,@PathVariable Long id){
-        User user = userRepository.findById(id).orElseThrow(()->new UserNotFoundException(id));
-
-        //Check if the old password is the user's current password
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getUsername(), old_password));
-
-        //update the password
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String password_hash = passwordEncoder.encode(password);
-        userRepository.chageUserPassword(id,password_hash);
-
-        return ResponseEntity.ok(new MessageResponse("Password updated successfully!"));
-    }
-
-
     private void sendVerificationEmail(User user, String siteURL)
             throws MessagingException, UnsupportedEncodingException {
         String toAddress = user.getEmail();

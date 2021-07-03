@@ -36,12 +36,13 @@ public class SprintController {
         this.devRep = devRep;
     }
 
-    public SprintController(SprintRepository repository, ProjectRepository projectRep, DeveloperRepository devRep) {
+    SprintController(SprintRepository repository, ProjectRepository projectRep, DeveloperRepository devRep){
         this.repository = repository;
+        this.assembler = new SprintModelAssembler();
         this.projectRep = projectRep;
         this.devRep = devRep;
-        this.assembler = new SprintModelAssembler();
     }
+
 
     //Aggregate root
     //tag::get-aggregate-root[]

@@ -18,6 +18,15 @@ public interface StoryRepository extends JpaRepository<Story, StoryId>{
     @Query("select st from Story st where st.project_id = ?1 and st.sprint_id=?2")
     List<Story> findAllByProjectAndSprintId(Long project_id,Long sprint_id);
 
+    @Query("select st from Story st, Sprint s where st.project_id = ?1 and st.sprint_id=s.id and s.project_id = ?1 and s.status>0")
+    List<Story> findAllByProjectAndActiveSprints(Long project_id);
+
+    @Query("select st from Story st, Sprint s where st.project_id = ?1 and st.sprint_id=s.id and s.project_id = ?1 and s.status=0")
+    List<Story> findAllByProjectAndArchivedSprints(Long project_id);
+
+    @Query("select st from Story st, Sprint s where st.project_id = ?1 and st.sprint_id=s.id and s.project_id = ?1 and s.status=?2")
+    List<Story> findAllByProjectAndSprintStatus(Long project_id,Long status);
+
     @Query("select st from Story st where st.project_id = ?1 and st.epic_id=?2")
     List<Story> findAllByProjectAndEpicId(Long project_id,Long epic_id);
 

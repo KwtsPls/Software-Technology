@@ -41,8 +41,8 @@ public class ProjectController {
         this.devRep = devRep;
         this.sprintRep = sprintRep;
     }
-
-    public ProjectController(ProjectRepository repository, UserRepository userRep, DeveloperRepository devRep, SprintRepository sprintRep) {
+    ProjectController(ProjectRepository repository,
+                      UserRepository userRep, DeveloperRepository devRep, SprintRepository sprintRep){
         this.repository = repository;
         this.assembler = new ProjectModelAssembler();
         this.userRep = userRep;
