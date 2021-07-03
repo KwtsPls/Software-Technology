@@ -18,8 +18,7 @@ function ProjectInfoPopUp(props){
     const [title, setTitle] = useState("")
 
     function archive() {
-        console.log("about to archive project")
-        fetch('http://localhost:8080/projects/' + props.projectId + '/archive/'+ loggedUser.id , {
+        fetch('http://localhost:8080/projects/' + props.projectId + '/archive' , {
                 method: 'put', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken
                     }
@@ -28,7 +27,6 @@ function ProjectInfoPopUp(props){
                 .then((data) => {
                     console.log(data)
                 })
-                //.then(() => window.location.reload(false))
     }
 
     useEffect(() => {

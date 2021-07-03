@@ -84,7 +84,7 @@ hr.new5 {
 
 .paychoice-box{
   /* margin: 1%; */
-  height: 380px;
+  height: 400px;
   background-color: rgb(245, 245, 245);
   background-color: #fff;
 
@@ -110,7 +110,7 @@ hr.new5 {
 
 @media screen and (min-width: 991px) and (max-width: 1198px){
   .paychoice-box{
-    height: 420px;
+    height: 440px;
   }
   .premium{
     margin-top: 35px;
@@ -120,7 +120,7 @@ hr.new5 {
 @media screen and (min-width: 780px) and (max-width: 991px) {
   
   .paychoice-box{
-    height: 420px;
+    height: 440px;
   }
   .premium{
     margin-top: 75px;

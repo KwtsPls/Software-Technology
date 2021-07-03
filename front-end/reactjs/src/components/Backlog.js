@@ -113,14 +113,14 @@ function Backlog(props){
             <div class="row">
                 <div style={{position:'absolute', bottom:'0', width: '70%'}}>
 
-                    <div class="progress" style={{height: "20px"}}>
-                        <div class="progress-bar" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                    <div class="progress backprogress" style={{height: "20px"}}>
+                        <div class="progress-bar backprogress-bar" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
                     </div>
 
                     <div class="pt-3"/>
 
-                    <div class="progress" style={{height: "20px"}}>
-                        <div class="progress-bar bg-info" role="progressbar" style={{width: `${perc}%`}} aria-valuemin="0" aria-valuemax="100">{`${perc}`}%</div>
+                    <div class="progress backprogress" style={{height: "20px"}}>
+                        <div class="progress-bar  backprogress-bar bg-info" role="progressbar" style={{width: `${perc}%`}} aria-valuemin="0" aria-valuemax="100">{`${perc}`}%</div>
                     </div>
                     
                     <div class="pt-3"/>

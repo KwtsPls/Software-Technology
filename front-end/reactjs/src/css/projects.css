@@ -99,6 +99,6 @@
   background: linear-gradient(to top right, #cc3300 0%, #ff9900 100%) !important;
 }
 
-.progress-bar{
+.backprogress-bar{
   background: linear-gradient(to right, #33ccff 0%, #0033cc 100%);
 }
