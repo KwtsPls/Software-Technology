@@ -1,10 +1,12 @@
 package gr.uoa.di.jete.controllers;
 
+import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.*;
 import gr.uoa.di.jete.models.*;
 import gr.uoa.di.jete.repositories.*;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,15 +24,13 @@ public class TaskController {
     private final StoryRepository storyRep;
     private final EpicRepository epicRep;
     private final SprintRepository sprintRep;
-    private final ProjectRepository projectRep;
 
-    TaskController(TaskRepository repository, TaskModelAssembler assembler, StoryRepository storyRep, EpicRepository epicRep, SprintRepository sprintRep, ProjectRepository projectRep){
+    TaskController(TaskRepository repository, TaskModelAssembler assembler, StoryRepository storyRep, EpicRepository epicRep, SprintRepository sprintRep){
         this.repository = repository;
         this.assembler = assembler;
         this.storyRep = storyRep;
         this.epicRep = epicRep;
         this.sprintRep = sprintRep;
-        this.projectRep = projectRep;
     }
 
     public TaskController(TaskRepository repository, StoryRepository storyRep, EpicRepository epicRep, SprintRepository sprintRep, ProjectRepository projectRep) {
@@ -38,7 +38,6 @@ public class TaskController {
         this.storyRep = storyRep;
         this.epicRep = epicRep;
         this.sprintRep = sprintRep;
-        this.projectRep = projectRep;
         assembler = new TaskModelAssembler();
     }
 
@@ -108,13 +107,15 @@ public class TaskController {
     }
 
     @PutMapping("/projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{story_id}/tasks/{id}/archive")
-    void archiveTask(@PathVariable Long id,@PathVariable Long project_id,@PathVariable Long sprint_id,@PathVariable Long epic_id,@PathVariable Long story_id){
+    ResponseEntity<?> archiveTask(@PathVariable Long id, @PathVariable Long project_id, @PathVariable Long sprint_id, @PathVariable Long epic_id, @PathVariable Long story_id){
         repository.archiveTask(id,story_id,project_id,sprint_id,epic_id);
+        return ResponseEntity.ok(new MessageResponse("OK"));
     }
 
     @DeleteMapping("/projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{story_id}/tasks/{id}/delete")
-    void deleteTask(@PathVariable Long id,@PathVariable Long project_id,@PathVariable Long sprint_id,@PathVariable Long epic_id,@PathVariable Long story_id){
+    ResponseEntity<?> deleteTask(@PathVariable Long id,@PathVariable Long project_id,@PathVariable Long sprint_id,@PathVariable Long epic_id,@PathVariable Long story_id){
         repository.deleteAllAssigneesInTask(id,story_id,project_id,sprint_id,epic_id);
         repository.deleteById(new TaskId(id,epic_id,sprint_id,project_id,story_id));
+        return ResponseEntity.ok(new MessageResponse("OK"));
     }
 }

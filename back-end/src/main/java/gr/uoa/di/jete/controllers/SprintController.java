@@ -1,6 +1,7 @@
 package gr.uoa.di.jete.controllers;
 
 
+import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.DeveloperNotFoundException;
 import gr.uoa.di.jete.exceptions.ProjectNotFoundException;
 import gr.uoa.di.jete.exceptions.SprintNotFoundException;
@@ -8,6 +9,7 @@ import gr.uoa.di.jete.models.*;
 import gr.uoa.di.jete.repositories.DeveloperRepository;
 import gr.uoa.di.jete.repositories.ProjectRepository;
 import gr.uoa.di.jete.repositories.SprintRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.hateoas.*;
@@ -85,6 +87,16 @@ public class SprintController {
                 linkTo(methodOn(SprintController.class).getActiveSprintsInProject(project_id)).withSelfRel());
     }
 
+    //Endpoint to get all active sprints in project
+    @GetMapping("/projects/{project_id}/sprints/archived")
+    CollectionModel<EntityModel<Sprint>> getArchivedSprintsInProject(@PathVariable Long project_id){
+        List<EntityModel<Sprint>> sprint = repository.findArchivedSprintsInProject(project_id).stream() //
+                .map(assembler :: toModel) //
+                .collect(Collectors.toList());
+        return CollectionModel.of(sprint,
+                linkTo(methodOn(SprintController.class).getArchivedSprintsInProject(project_id)).withSelfRel());
+    }
+
     //Single item
     @GetMapping("/projects/{project_id}/sprints/{id}")
     EntityModel<Sprint> one(@PathVariable Long id,@PathVariable Long project_id){
@@ -95,7 +107,7 @@ public class SprintController {
     }
 
     @DeleteMapping("/projects/{project_id}/sprints/{id}/delete/{user_id}")
-    void deleteEpic( @PathVariable Long id,@PathVariable Long project_id,@PathVariable Long user_id){
+    ResponseEntity<?> deleteEpic(@PathVariable Long id, @PathVariable Long project_id, @PathVariable Long user_id){
         Sprint sprint = repository.findById(new SprintId(id,project_id)) //
                 .orElseThrow(()-> new SprintNotFoundException(new SprintId(id,project_id)));
         if(sprint.getStatus()!=0L)
@@ -110,5 +122,6 @@ public class SprintController {
         repository.deleteAllTasksInSprint(id,project_id);
         repository.deleteAllStoriesInSprint(id,project_id);
         repository.deleteById(new SprintId(id,project_id));
+        return ResponseEntity.ok(new MessageResponse("OK"));
     }
 }

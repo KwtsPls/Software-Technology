@@ -1,6 +1,7 @@
 package gr.uoa.di.jete.controllers;
 
 
+import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.DeveloperNotFoundException;
 import gr.uoa.di.jete.exceptions.EpicNotFoundException;
 import gr.uoa.di.jete.exceptions.ProjectNotFoundException;
@@ -13,6 +14,7 @@ import gr.uoa.di.jete.repositories.EpicRepository;
 import gr.uoa.di.jete.repositories.ProjectRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -89,7 +91,7 @@ public class EpicController {
 
     //Endpoint to archive a given epic
     @PutMapping("projects/{project_id}/epics/{id}/archive/{user_id}")
-    String archiveEpic( @PathVariable Long id,@PathVariable Long project_id,@PathVariable Long user_id){
+    ResponseEntity<?> archiveEpic(@PathVariable Long id, @PathVariable Long project_id, @PathVariable Long user_id){
         //Check that the developer requesting to archive this epic is the product owner of the project
         Developer developer =  devRep.findById(new DeveloperId(user_id,project_id)).orElseThrow(()->new DeveloperNotFoundException(new DeveloperId(user_id,project_id)));
         if(developer.getRole()!=1L)
@@ -98,11 +100,11 @@ public class EpicController {
         repository.archiveEpic(id,project_id);
         repository.archiveAllStoriesInEpic(id,project_id);
         repository.archiveAllTasksInEpic(id,project_id);
-        return "OK";
+        return ResponseEntity.ok(new MessageResponse("OK"));
     }
 
     @DeleteMapping("projects/{project_id}/epics/{id}/delete/{user_id}")
-    void deleteEpic( @PathVariable Long id,@PathVariable Long project_id,@PathVariable Long user_id){
+    ResponseEntity<?> deleteEpic( @PathVariable Long id,@PathVariable Long project_id,@PathVariable Long user_id){
         //Check that the developer requesting to delete this epic is the product owner of the project
         Developer developer =  devRep.findById(new DeveloperId(user_id,project_id)).orElseThrow(()->new DeveloperNotFoundException(new DeveloperId(user_id,project_id)));
         if(developer.getRole()!=1L)
@@ -112,5 +114,6 @@ public class EpicController {
         repository.deleteAllTasksInEpic(id,project_id);
         repository.deleteAllStoriesInEpic(id,project_id);
         repository.deleteById(new EpicId(id,project_id));
+        return ResponseEntity.ok(new MessageResponse("OK"));
     }
 }

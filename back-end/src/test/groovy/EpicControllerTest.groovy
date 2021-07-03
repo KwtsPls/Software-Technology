@@ -147,7 +147,7 @@ class EpicControllerTest extends Specification{
         then:"Response should be Ok and cnt == 3"
             cnt == 3
             response.getStatus() == 200
-            response.getContentAsString() == "OK"
+            response.getContentAsString().contains("OK")
         where:
             project_id |  id    |   user_id
                     1  |   1    |   1

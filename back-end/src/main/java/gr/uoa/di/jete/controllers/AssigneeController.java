@@ -6,10 +6,7 @@ import gr.uoa.di.jete.models.AssigneeId;
 import gr.uoa.di.jete.repositories.AssigneeRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,6 +48,11 @@ public class AssigneeController {
                 .orElseThrow(()-> new AssigneeNotFoundException( new AssigneeId(user_id,epic_id,sprint_id,project_id,story_id,task_id)));
 
         return assembler.toModel(assignee);
+    }
+
+    @PostMapping("/assignees/")
+    Assignee createAssignee(@RequestBody Assignee newAssignee){
+        return repository.save(newAssignee);
     }
 
 }

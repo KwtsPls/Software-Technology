@@ -1,9 +1,11 @@
 package gr.uoa.di.jete.controllers;
 
 
+import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.models.User;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -66,8 +68,9 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{id}")
-    void deleteEmployee(@PathVariable Long id){
+    ResponseEntity<?> deleteUser(@PathVariable Long id){
         userService.deleteById(id);
+        return ResponseEntity.ok(new MessageResponse("OK"));
     }
 
 }

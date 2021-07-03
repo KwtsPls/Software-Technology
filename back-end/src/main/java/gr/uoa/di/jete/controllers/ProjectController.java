@@ -1,5 +1,6 @@
 package gr.uoa.di.jete.controllers;
 
+import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.DeveloperNotFoundException;
 import gr.uoa.di.jete.exceptions.ProjectNotFoundException;
 import gr.uoa.di.jete.exceptions.SprintNotFoundException;
@@ -11,6 +12,7 @@ import gr.uoa.di.jete.repositories.SprintRepository;
 import gr.uoa.di.jete.repositories.UserRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -91,12 +93,10 @@ public class ProjectController {
     }
 
     //Controller to finalize a given sprint
-    @PutMapping("/projects/{project_id}/sprints/{id}/archive/{user_id}")
-    Sprint archiveSprint(@PathVariable Long project_id,@PathVariable Long id,@PathVariable Long user_id){
-        Sprint sprint = sprintRep.findById(new SprintId(id,project_id))
-                .orElseThrow(()-> new SprintNotFoundException(new SprintId(id,project_id)));
-        if(sprint.getStatus()!=1L)
-            throw new SprintNotFoundException();
+    @PutMapping("/projects/{project_id}/sprints/archive/{user_id}")
+    Sprint archiveSprint(@PathVariable Long project_id,@PathVariable Long user_id){
+        Sprint sprint = sprintRep.findSprintByStatusInProject(project_id,1L)
+                .orElseThrow(SprintNotFoundException::new);
 
         //Check that the developer requesting to create this sprint is the product owner of the project
         Developer developer =  devRep.findById(new DeveloperId(user_id,project_id)).orElseThrow(()->new DeveloperNotFoundException(new DeveloperId(user_id,project_id)));
@@ -165,16 +165,16 @@ public class ProjectController {
 
     //Method to check if a user with a given username exists in a given project
     @GetMapping("/projects/{id}/user={username}")
-    String checkUserInProject(@PathVariable Long id,@PathVariable String username){
+    public ResponseEntity<?> checkUserInProject(@PathVariable Long id, @PathVariable String username){
         User user = repository.findUserByUsernameInProject(id,username).orElse(new User());
         if(user.getId()!=null)
-            return "YES";
+            return ResponseEntity.ok(new MessageResponse("YES"));
         else
-            return "NO";
+            return ResponseEntity.ok(new MessageResponse("NO"));
     }
 
     @PutMapping("/projects/{id}/archive/{user_id}")
-    String archiveProject(@PathVariable Long id,@PathVariable Long user_id){
+    public ResponseEntity<?> archiveProject(@PathVariable Long id,@PathVariable Long user_id){
 
         //Check that the developer requesting to archive this project is the product owner of the project
         Developer developer =  devRep.findById(new DeveloperId(user_id,id)).orElseThrow(()->new DeveloperNotFoundException(new DeveloperId(user_id,id)));
@@ -196,11 +196,12 @@ public class ProjectController {
         //Archive all epics in this project
         repository.archiveAllEpicsInProject(id);
         repository.setStatusToArchived(id,date_finished);
-        return "OK";
+
+        return ResponseEntity.ok(new MessageResponse("OK"));
     }
 
     @DeleteMapping("/projects/{id}/delete/{user_id}")
-    void deleteProject(@PathVariable Long id,@PathVariable Long user_id){
+    ResponseEntity<?> deleteProject(@PathVariable Long id,@PathVariable Long user_id){
 
         //Check that the developer requesting to archive this project is the product owner of the project
         Developer developer =  devRep.findById(new DeveloperId(user_id,id)).orElseThrow(()->new DeveloperNotFoundException(new DeveloperId(user_id,id)));
@@ -221,6 +222,8 @@ public class ProjectController {
         //Delete all epics in this project
         repository.deleteAllEpicsInProject(id);
         repository.deleteById(id);
+
+        return ResponseEntity.ok(new MessageResponse("OK"));
     }
 
     public Date addDays(Date date, int days) {

@@ -2,12 +2,12 @@ package gr.uoa.di.jete.controllers;
 
 import gr.uoa.di.jete.auth.*;
 import gr.uoa.di.jete.exceptions.InvalidUserRegistration;
+import gr.uoa.di.jete.exceptions.UserNotFoundException;
 import gr.uoa.di.jete.models.CustomUserDetails;
 import gr.uoa.di.jete.models.User;
 import gr.uoa.di.jete.models.UserDataTransferObject;
 import gr.uoa.di.jete.repositories.UserRepository;
 import net.bytebuddy.utility.RandomString;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -26,18 +26,17 @@ import java.io.UnsupportedEncodingException;
 @CrossOrigin
 @RestController
 public class AuthController {
-    protected final AuthenticationManager authenticationManager;
+    final AuthenticationManager authenticationManager;
 
-    protected final UserRepository userRepository;
+    final UserRepository userRepository;
 
-    protected final UserService userService;
+    final UserService userService;
 
     final PasswordEncoder encoder;
 
     final JavaMailSender mailSender;
 
-    protected final JwtUtils jwtUtils;
-
+    final JwtUtils jwtUtils;
 
     public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, UserService userService, PasswordEncoder encoder, JavaMailSender mailSender, JwtUtils jwtUtils) {
         this.authenticationManager = authenticationManager;
@@ -95,7 +94,24 @@ public class AuthController {
             return ResponseEntity.ok(new MessageResponse("User verification failed"));
     }
 
-    public void sendVerificationEmail(User user, String siteURL)
+    @PostMapping("/users/{id}/updatePassword")
+    public ResponseEntity<?> updateUserPassword(@RequestParam("password") String password, @RequestParam("old_password") String old_password,@PathVariable Long id){
+        User user = userRepository.findById(id).orElseThrow(()->new UserNotFoundException(id));
+
+        //Check if the old password is the user's current password
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getUsername(), old_password));
+
+        //update the password
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String password_hash = passwordEncoder.encode(password);
+        userRepository.chageUserPassword(id,password_hash);
+
+        return ResponseEntity.ok(new MessageResponse("Password updated successfully!"));
+    }
+
+
+    private void sendVerificationEmail(User user, String siteURL)
             throws MessagingException, UnsupportedEncodingException {
         String toAddress = user.getEmail();
         String fromAddress = "jeteappofficial@gmail.com";

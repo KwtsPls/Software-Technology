@@ -148,8 +148,8 @@ class ProjectControllerTest extends Specification{
             def sprint = new Sprint(1L,1L,"Sprint#1",1L,date,date2)
             return sprint
         }
-        and: "Put @ /projects/1/sprints/1/archive/1"
-        def url = "/projects/1/sprints/1/archive/1"
+        and: "Put @ /projects/1/sprints/archive/1"
+        def url = "/projects/1/sprints/archive/1"
         MockHttpServletResponse response =  mvc.perform(
                 put(url)
         ).andReturn().getResponse()
@@ -250,10 +250,10 @@ class ProjectControllerTest extends Specification{
             ).andReturn().getResponse()
         then: "Response status is Ok and YES returned"
             response.getStatus() == 200
-            response.getContentAsString() == "YES"
+            response.getContentAsString().contains("YES")
         then: "Response status is Ok and NO returned"
             responseNotFound.getStatus() == 200
-            responseNotFound.getContentAsString() == "NO"
+            responseNotFound.getContentAsString().contains("NO")
     }
 
 
@@ -293,7 +293,7 @@ class ProjectControllerTest extends Specification{
             ).andReturn().getResponse()
         then: "Response status is Ok and cnt == 7"
         response.getStatus() == 200
-        response.getContentAsString() == "OK"
+        response.getContentAsString().contains("OK")
         cnt == 7
     }
 

@@ -137,8 +137,8 @@ class DeveloperControllerTest extends Specification {
         then: "Http ok is returned and response should be OK and ERROR"
             response.getStatus() == 200
             responseNotAccepted.getStatus() == 200
-            response.getContentAsString() == "OK"
-            responseNotAccepted.getContentAsString() == "ERROR"
+            response.getContentAsString().contains("OK")
+            responseNotAccepted.getContentAsString().contains("ERROR")
     }
 
     def "Get All devs on working on a certain project"() {
