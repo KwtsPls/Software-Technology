@@ -23,4 +23,8 @@ public interface DeveloperRepository extends JpaRepository<Developer, DeveloperI
     @Query("select count(d.accepted) from Developer d where d.accepted=0 and d.user_id=?1")
     List<?> getProjectsNotificationNumber(Long user_id);
 
+    @Transactional
+    @Modifying
+    @Query("delete from Assignee a where a.user_id=?1 and a.project_id=?2")
+    int deleteAssigneeDeveloper(Long user_id,Long project_id);
 }

@@ -85,12 +85,10 @@ public class ProjectController {
     }
 
     //Controller to finalize a given sprint
-    @PutMapping("/projects/{project_id}/sprints/{id}/archive/{user_id}")
-    Sprint archiveSprint(@PathVariable Long project_id,@PathVariable Long id,@PathVariable Long user_id){
-        Sprint sprint = sprintRep.findById(new SprintId(id,project_id))
-                .orElseThrow(()-> new SprintNotFoundException(new SprintId(id,project_id)));
-        if(sprint.getStatus()!=1L)
-            throw new SprintNotFoundException();
+    @PutMapping("/projects/{project_id}/sprints/archive/{user_id}")
+    Sprint archiveSprint(@PathVariable Long project_id,@PathVariable Long user_id){
+        Sprint sprint = sprintRep.findSprintByStatusInProject(project_id,1L)
+                .orElseThrow(SprintNotFoundException::new);
 
         //Check that the developer requesting to create this sprint is the product owner of the project
         Developer developer =  devRep.findById(new DeveloperId(user_id,project_id)).orElseThrow(()->new DeveloperNotFoundException(new DeveloperId(user_id,project_id)));
@@ -190,11 +188,12 @@ public class ProjectController {
         //Archive all epics in this project
         repository.archiveAllEpicsInProject(id);
         repository.setStatusToArchived(id,date_finished);
+
         return ResponseEntity.ok(new MessageResponse("OK"));
     }
 
     @DeleteMapping("/projects/{id}/delete/{user_id}")
-    void deleteProject(@PathVariable Long id,@PathVariable Long user_id){
+    ResponseEntity<?> deleteProject(@PathVariable Long id,@PathVariable Long user_id){
 
         //Check that the developer requesting to archive this project is the product owner of the project
         Developer developer =  devRep.findById(new DeveloperId(user_id,id)).orElseThrow(()->new DeveloperNotFoundException(new DeveloperId(user_id,id)));
@@ -215,6 +214,8 @@ public class ProjectController {
         //Delete all epics in this project
         repository.deleteAllEpicsInProject(id);
         repository.deleteById(id);
+
+        return ResponseEntity.ok(new MessageResponse("OK"));
     }
 
     public Date addDays(Date date, int days) {

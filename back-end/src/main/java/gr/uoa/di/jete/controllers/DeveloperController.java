@@ -99,8 +99,7 @@ public class DeveloperController {
     @GetMapping("/developers/projects/{project_id}")
     List<DeveloperInfo> allDevelopersInfo(@PathVariable Long project_id){
         List<?> devInfos = repository.findDeveloperInfoInProject(project_id);
-        List<DeveloperInfo> developerInfos = (List<DeveloperInfo>)(List<?>) devInfos;
-        return developerInfos;
+        return (List<DeveloperInfo>) devInfos;
     }
 
     @GetMapping("/developers/users/{user_id}/notifications")
@@ -109,7 +108,9 @@ public class DeveloperController {
     }
 
     @DeleteMapping("/developers/users/{user_id}/projects/{project_id}")
-    void deleteDeveloper( @PathVariable Long user_id,@PathVariable Long project_id){
+    ResponseEntity<?> deleteDeveloper( @PathVariable Long user_id,@PathVariable Long project_id){
+        repository.deleteAssigneeDeveloper(user_id,project_id);
         repository.deleteById(new DeveloperId(user_id,project_id));
+        return ResponseEntity.ok(new MessageResponse("OK"));
     }
 }

@@ -25,6 +25,9 @@ public interface SprintRepository extends JpaRepository<Sprint, SprintId>{
     @Query("select s from Sprint s,Project p where s.status>0 and s.project_id = p.id and p.id = ?1")
     List<Sprint> findActiveSprintsInProject(Long project_id);
 
+    @Query("select s from Sprint s,Project p where s.status=0 and s.project_id = p.id and p.id = ?1")
+    List<Sprint> findArchivedSprintsInProject(Long project_id);
+
     @Query("select s from Sprint s,Project p where s.project_id = p.id and p.id = ?1")
     List<Sprint> findSprintsInProject(Long project_id);
 
