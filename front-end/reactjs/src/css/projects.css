@@ -29,7 +29,7 @@
 }
 
 .horizontal-scrollable {
-  height: 500px;
+  height: 100%;
   width: 100%;
   overflow-x: scroll;
 }
@@ -47,6 +47,8 @@
 }
 
 .project-button{
+  /* margin-left: 20px; */
+
   background-color: #723c70 !important;
   border-color: #3d113c !important;
 }
@@ -71,4 +73,32 @@
 .btn-outline-secondary:hover{
   background-color: #202020 !important;
 
+}
+
+.proj-devadd-btn, .proj-list-btn{
+  margin-left: 20px;
+}
+
+.goproject{
+  background-color: #0f0f0f !important;
+}
+
+.backlog-list{
+  background-color: #ffffff !important;
+
+}
+
+.done-gradient{
+  cursor: pointer;
+  background: linear-gradient(to bottom right, #336600 0%, #009933 100%) !important;
+}
+
+.inprogress-gradient{
+  cursor: pointer;
+
+  background: linear-gradient(to top right, #cc3300 0%, #ff9900 100%) !important;
+}
+
+.backprogress-bar{
+  background: linear-gradient(to right, #33ccff 0%, #0033cc 100%);
 }

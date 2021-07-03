@@ -17,6 +17,7 @@ import ChatPage from './pageComponents/chat/ChatPage.js'
 import AddContactPage from './pageComponents/chat/AddContactPage.js'
 import ProjectNoPage from './pageComponents/projects/ProjectNoPage.js'
 import ProjectsPage from './pageComponents/projects/ProjectsPage.js'
+import GeneralBacklog from './pageComponents/GeneralBacklog.js'
 
 
 function App() {
@@ -34,6 +35,8 @@ function App() {
 					<Route path="/settings/billing" exact component={SettingsBillingPage} />
 					<Route path="/settings/profile" exact component={SettingsProfilePage} />
 					<Route path="/profile" exact component={ProfilePage} />
+					<Route path="/backlog" exact component={GeneralBacklog} />
+
 					<Route path="/chat" exact component={ChatPage} />
 					<Route path="/chat/addContact" exact component={AddContactPage} />
 					<Route path="/projects" exact component={ProjectsPage} />
