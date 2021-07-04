@@ -40,8 +40,8 @@ function OverviewScreen() {
 
                 <div class="row genbacklog-container d-flex justify-content-center">
                     <div class="col-xl-12">
-                        <div class="card proj-progress-card">
-                            <div class="card-block">
+                        <div class="card mycard proj-progress-card">
+                            <div class="card-block mycard-block">
                                 <div class="row">
                                     <div class="col-xl-4 col-md-6">
                                         <h3 className="backlogtitle">Ολοκληρωμένα Projects</h3>

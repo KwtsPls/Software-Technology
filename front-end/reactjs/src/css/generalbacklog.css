@@ -7,7 +7,7 @@
     padding: 4%;
 }
 
-.stretch-card>.card {
+.stretch-mycard>.mycard {
     width: 100%;
     min-width: 100%
 }
@@ -42,14 +42,14 @@ body {
     padding: 3rem
 }
 
-.card {
+.mycard {
     box-shadow: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     -ms-box-shadow: none
 }
 
-.card {
+.mycard {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -61,7 +61,7 @@ body {
     border-radius: 0
 }
 
-.card .card-block {
+.mycard .mycard-block {
     padding: 1.25rem
 }
 
