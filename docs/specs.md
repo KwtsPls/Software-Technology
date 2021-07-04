@@ -145,7 +145,7 @@ Endpoint για την επιστροφή όλων των task σε ένα proje
 
 `[GET] /projects/{project_id}/sprints/{sprint_id}/stories/{story_id}/tasks`
 
-Endpoint για την επιστροφή όλων των task σε ένα sprint.<br><br>
+Endpoint για την επιστροφή όλων των task σε ένα story.<br><br>
 
 `[GET] /projects/{project_id}/epics/{epic_id}/stories/{story_id}/tasks`
 
