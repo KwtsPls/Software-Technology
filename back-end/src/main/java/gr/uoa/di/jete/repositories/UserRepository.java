@@ -33,9 +33,4 @@ public interface UserRepository extends JpaRepository<User, Long>{
     @Modifying
     @Query("update User u set u.is_enabled=1 where u.verification_code=?1 and u.username=?2")
     int setEnabledToTrue(String code,String username);
-
-    @Transactional
-    @Modifying
-    @Query("update User u set u.password=?2 where u.id=?1")
-    int chageUserPassword(Long id,String password);
 }

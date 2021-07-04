@@ -23,9 +23,17 @@ public class PaymentsController {
     private final PaymentsModelAssembler assembler;
     private final UserRepository userRepository;
 
+
+
     public PaymentsController(PaymentsRepository repository, PaymentsModelAssembler assembler, UserRepository userRepository) {
         this.repository = repository;
         this.assembler = assembler;
+        this.userRepository = userRepository;
+    }
+
+    public PaymentsController(PaymentsRepository repository, UserRepository userRepository) {
+        this.repository = repository;
+        this.assembler = new PaymentsModelAssembler();
         this.userRepository = userRepository;
     }
 

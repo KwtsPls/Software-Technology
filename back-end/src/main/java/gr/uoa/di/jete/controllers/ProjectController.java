@@ -41,6 +41,14 @@ public class ProjectController {
         this.devRep = devRep;
         this.sprintRep = sprintRep;
     }
+    ProjectController(ProjectRepository repository,
+                      UserRepository userRep, DeveloperRepository devRep, SprintRepository sprintRep){
+        this.repository = repository;
+        this.assembler = new ProjectModelAssembler();
+        this.userRep = userRep;
+        this.devRep = devRep;
+        this.sprintRep = sprintRep;
+    }
 
     @GetMapping("/projects")
     CollectionModel<EntityModel<Project>> all(){

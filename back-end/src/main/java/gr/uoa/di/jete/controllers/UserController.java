@@ -17,6 +17,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @CrossOrigin
 @RestController
+public
 class UserController {
 
     private final UserService userService;

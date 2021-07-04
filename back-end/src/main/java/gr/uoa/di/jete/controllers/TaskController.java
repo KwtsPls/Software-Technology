@@ -33,6 +33,14 @@ public class TaskController {
         this.sprintRep = sprintRep;
     }
 
+    public TaskController(TaskRepository repository, StoryRepository storyRep, EpicRepository epicRep, SprintRepository sprintRep, ProjectRepository projectRep) {
+        this.repository = repository;
+        this.storyRep = storyRep;
+        this.epicRep = epicRep;
+        this.sprintRep = sprintRep;
+        assembler = new TaskModelAssembler();
+    }
+
     //Aggregate root
     //tag::get-aggregate-root[]
     @GetMapping("/tasks")

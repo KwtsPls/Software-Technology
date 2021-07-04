@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import '../App.css';
 import {Modal, Button} from 'react-bootstrap';
-import { useHistory } from 'react-router-dom'
 import AssignDev from './AssignDev.js'
 
 
@@ -9,7 +8,6 @@ import AssignDev from './AssignDev.js'
 
 function NewProjectPopUp(props){
 
-    const history = useHistory();
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
 
     const [devs, setDevs] = useState([])
@@ -40,9 +38,10 @@ function NewProjectPopUp(props){
             return ;
         }
 
+        props.addProj(title)
         props.onHide()
 
-        fetch('http://localhost:8080/projects/create/' + loggedUser.id, {
+        fetch('http://localhost:8080/projects/create/1', { // TO BE CHANGED
                 method: 'post', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken,
                             'Content-Type': 'application/json'  
@@ -61,15 +60,13 @@ function NewProjectPopUp(props){
                     return data;
                     })
                 .then((data) => {
-                    var i=0;
-                    var numResponses = 0;
-                    for (; i < devs.length; i++){
-                        console.log("sending request for " + devs[i].username + " with id " + devs[i].id + " to project with id " + data.id);
+                    for (const dev of devs){
+                        console.log("sending request for " + dev.username + " with id " + dev.id + " to project with id " + data.id);
                         fetch('http://localhost:8080/developers/', { 
                             method: 'post', 
                             headers: { Authorization: 'Bearer ' + loggedUser.accessToken,
                                 'Content-Type': 'application/json'  },
-                            body: JSON.stringify({  user_id: devs[i].id,
+                            body: JSON.stringify({  user_id: dev.id,
                                         project_id: data.id,
                                         role: 0,
                                         accepted: 0
@@ -77,18 +74,8 @@ function NewProjectPopUp(props){
                         })
                             .then(res => res.json())
                             .then((data) => {
-                                console.log(numResponses)
                                 console.log(data);
-                                numResponses++
                             })
-                            .then(() => {
-                                if (numResponses === devs.length){
-                                    window.location.reload(false);
-                                }
-                            })
-                    }
-                    if (i === 0){
-                        window.location.reload(false);
                     }
                 })
         
@@ -135,12 +122,14 @@ function NewProjectPopUp(props){
                         </div>
                         <div className="col-12">
                             <label for="assignDev" className="form-label">Πρόσκληση προς Developers</label>
-                            <AssignDev devs={devs} setDevs={setDevs} message=" will be requested to join " checkForReAdd={false} projId={0}/>
+                            <AssignDev devs={devs} setDevs={setDevs} message=" will be requested to join "/>
                         </div>
                     </form>
                     <div className="row g-3 pt-3">
                         <div className="col-8">
-                            <button className="btn btn-primary" onClick={() => submit()}>Επιβεβαίωση</button>
+                            {/* <Link to='/home'> */}
+                                <button className="btn btn-primary" onClick={() => submit()}>Επιβεβαίωση</button>
+                            {/* </Link> */}
                         </div>
                     </div>
                 </Modal.Body>

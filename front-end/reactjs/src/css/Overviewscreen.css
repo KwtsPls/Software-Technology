@@ -46,7 +46,7 @@
 
 .project-tile{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;    text-decoration: none;
-    border-radius: 3px;
+    border-radius: 4px;
     background-color: #7c3f7a !important;
 
 }
@@ -66,7 +66,7 @@
 
 .project-tile:hover{
     text-decoration: none;
-    background-color: #1F4068 !important;
+    background-color: #202020 !important;
     cursor: pointer;
 }
 
@@ -82,17 +82,4 @@
 
 .recproj{
     margin-top: 10vh !important;
-}
-
-.curr-proj-title{
-    margin-left: -12px !important;
-}
-
-.noproject-text{
-    padding-top: 10px;
-    border-radius: 4px;
-}
-
-.noproject-text > p{
-    font-size: 2rem;
 }

@@ -16,6 +16,12 @@
 `React`
 `npm`
 
+
+
+**Required npm installs:**
+
+npm install --save @fullcalendar/react @fullcalendar/daygrid
+
 ## Endpoints
 
 `[GET] /users/{user_id}/projects`
@@ -75,8 +81,6 @@
 
 [num] , όπου num ένας ακέραιος.<br><br>
 
-### Epics
-
 `[POST] /projects/epics/create`
 
 Endpoint για τη δημιουργία ενός καινούριου epic. Το json που αναμένεται για το request είναι της εξής μορφής : <br><br>
@@ -96,9 +100,9 @@ Endpoint για να γίνει archive το Epic με ${id} που βρίσκε
 
 `[DELETE] projects/{project_id}/epics/{id}/delete/{user_id}`
 
-Endpoint για να γίνει delete το Epic με ${id} που βρίσκεται στο project με ${project_id}, η οποία αίτηση γίνεται από το χρήστη ${user_id}.<br><br>
+### Epics
 
-### Sprints
+Endpoint για να γίνει delete το Epic με ${id} που βρίσκεται στο project με ${project_id}, η οποία αίτηση γίνεται από το χρήστη ${user_id}.<br><br>
 
 `[PUT] /projects/{project_id}/sprints/{id}/archive/{user_id}`
 
@@ -147,7 +151,7 @@ Endpoint για την επιστροφή όλων των task σε ένα proje
 
 `[GET] /projects/{project_id}/sprints/{sprint_id}/stories/{story_id}/tasks`
 
-Endpoint για την επιστροφή όλων των task σε ένα sprint.<br><br>
+Endpoint για την επιστροφή όλων των task σε ένα story.<br><br>
 
 `[GET] /projects/{project_id}/epics/{epic_id}/stories/{story_id}/tasks`
 

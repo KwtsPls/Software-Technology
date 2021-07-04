@@ -27,6 +27,11 @@ public class WalletController {
         this.userRepository = userRepository;
     }
 
+    public WalletController(WalletRepository repository, UserRepository userRepository) {
+        this.repository = repository;
+        this.userRepository = userRepository;
+        this.assembler = new WalletModelAssembler();
+    }
 
     @GetMapping("users/{username}/wallet")
     public EntityModel<Wallet> one(@PathVariable String username) {
@@ -44,7 +49,7 @@ public class WalletController {
     }
 
     @PostMapping("/wallets")
-    Wallet newWallet(@RequestBody Wallet wallet){
+    Wallet updateWallet(@RequestBody Wallet wallet){
         User user = userRepository.findById(wallet.getId())
                 .orElseThrow(()->new UserNotFoundException(wallet.getId()));
 

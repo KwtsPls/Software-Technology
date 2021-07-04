@@ -37,6 +37,14 @@ public class StoryController {
         this.devRep = devRep;
     }
 
+    StoryController(StoryRepository repository, EpicRepository epicRep, SprintRepository sprintRep, ProjectRepository projectRep, DeveloperRepository devRep){
+        this.repository = repository;
+        this.assembler = new StoryModelAssembler();
+        this.epicRep = epicRep;
+        this.sprintRep = sprintRep;
+        this.projectRep = projectRep;
+        this.devRep = devRep;
+    }
     //Aggregate root
     //tag::get-aggregate-root[]
     @GetMapping("/stories")

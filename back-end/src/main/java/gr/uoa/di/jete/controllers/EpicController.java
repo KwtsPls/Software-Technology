@@ -39,6 +39,13 @@ public class EpicController {
         this.devRep = devRep;
     }
 
+    public EpicController(EpicRepository repository, ProjectRepository projectRep, DeveloperRepository devRep) {
+        this.repository = repository;
+        this.assembler = new EpicModelAssembler();
+        this.projectRep = projectRep;
+        this.devRep = devRep;
+    }
+
     //Aggregate root
     //tag::get-aggregate-root[]
     @GetMapping("/epics")
@@ -64,7 +71,7 @@ public class EpicController {
     }
 
     //Single item
-    @GetMapping("projects/{project_id}/epics/{id}")
+    @GetMapping("/projects/{project_id}/epics/{id}")
     EntityModel<Epic> one(@PathVariable Long id,@PathVariable Long project_id){
         Epic epic = repository.findById(new EpicId(id,project_id)) //
                 .orElseThrow(()-> new EpicNotFoundException(new EpicId(id,project_id)));

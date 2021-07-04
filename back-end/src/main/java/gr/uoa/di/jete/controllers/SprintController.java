@@ -36,6 +36,14 @@ public class SprintController {
         this.devRep = devRep;
     }
 
+    SprintController(SprintRepository repository, ProjectRepository projectRep, DeveloperRepository devRep){
+        this.repository = repository;
+        this.assembler = new SprintModelAssembler();
+        this.projectRep = projectRep;
+        this.devRep = devRep;
+    }
+
+
     //Aggregate root
     //tag::get-aggregate-root[]
     @GetMapping("/sprints")

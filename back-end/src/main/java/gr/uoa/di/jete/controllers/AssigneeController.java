@@ -25,6 +25,11 @@ public class AssigneeController {
         this.assembler = assembler;
     }
 
+    public AssigneeController(AssigneeRepository repository) {
+        this.repository = repository;
+        this.assembler = new AssigneeModelAssembler();
+    }
+
     @GetMapping("/assignees/")
     CollectionModel<EntityModel<Assignee>> all(){
         List<EntityModel<Assignee>> assignees = repository.findAll().stream() //

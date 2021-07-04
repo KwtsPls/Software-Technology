@@ -84,10 +84,14 @@ function SideNavBar(){
 						<a href="#" className="navChoice" id="OverviewHover"><img className = "menu-icon home-icon" src={overviewhovericon} alt="logo"></img><span>Σύνοψη</span></a>
 					</div>
 				</Link>
+				<Link to='/backlog'>
+
 				<div id = "secondOption" onMouseEnter={() => fnover("Backlog")} onMouseLeave={() => fnout("Backlog")}>
 					<a href="#" className="navChoice" id="BacklogOut"><img className = "menu-icon backlog-icon" src={backlogicon} alt="logo"></img><span>Backlog</span></a>
 					<a href="#" className="navChoice" id="BacklogHover"><img className = "menu-icon backlog-icon" src={backloghovericon} alt="logo"></img><span>Backlog</span></a>
 				</div>
+				</Link>
+
 				<Link to='/projects'>
 					<div id = "thirdOption" onMouseEnter={() => fnover("Projects")} onMouseLeave={() => fnout("Projects")}>
 						<a href="#" className="navChoice" id="ProjectsOut"><img className = "menu-icon projects-icon" src={projecticon} alt="logo"></img><span>Projects</span></a>
