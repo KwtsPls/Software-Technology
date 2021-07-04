@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom'
 import '../css/Overviewscreen.css'
 import sunphoto from '../images/sun2.png'
 
@@ -14,29 +14,54 @@ function OverviewScreen() {
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
     const [isLoading, setLoading] = useState(true);
     const [tilecounter, setTileCounter] = useState(0);
+    const [rawProjects, setRawProjects] = useState([]);
+    const [recentprojectList,setRecentProjectList] = useState([])
 
 
     useEffect(() => {
         document.body.style.background = "#fff";
 
+        // setLoading(false);
         if (!loggedUser){
             history.push("/login");
         }
         else{
-            document.body.style.background = "#fff";
+            fetch('http://localhost:8080/users/'+ loggedUser.id +'/projects', {
+            // fetch('http://localhost:8080/users/1/projects', {
 
-            fetch('http://localhost:8080/users', {
                 method: 'get', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
             })
                 .then(res => res.json())
                 .then((data) => {
                     console.log(data);
+                    setRawProjects(data);
                     setLoading(false);
                 })
+            
         }
 
     }, []);
+
+    const recProj = []
+
+    useEffect(() => {
+        if (!isLoading){
+            if(rawProjects._embedded === undefined){
+                
+            }else{
+
+                for (var i=0; recProj.length <3 && i < rawProjects._embedded.projectList.length; i++){
+                    if (! rawProjects._embedded.projectList[i].status){
+                        recProj.push(rawProjects._embedded.projectList[i])
+                    }   
+                }
+            }
+            
+            setRecentProjectList(recProj)
+        }
+    },[isLoading])
+
 
 
     function get_recentProjectTile(name){
@@ -56,13 +81,25 @@ function OverviewScreen() {
 
     }
 
+    function emptyProjectsList(){
+        if(!recentprojectList.length){
+            return(
+            <div className="row">
+                <div className="col-md-9 mt-2 offset-1 bg-success text-center noproject-text">
+                    <p className="homepage-text"> Δεν έχετε ακόμα κάποιο τρέχων project</p>
+                </div>
+            </div>
+            );
+        }
+    
+    }
 
     return (
         <div className="homepage">
 
             <div className="row mt-5 d-flex justify-content-center">
                 <div className="col-md-6 pt-3 pb-3  greetingstile">
-                    <h1 className="homepage-text text-center greetings-text">Καλησπέρα, kostopez</h1>
+                    <h1 className="homepage-text text-center greetings-text">Καλησπέρα, {loggedUser && loggedUser.username}</h1>
 
                     
                 </div>
@@ -80,21 +117,37 @@ function OverviewScreen() {
             <div className="recproj">
                 <div className="row mt-5 d-flex justify-content-center">
                     <div className="col-md-8 mt-5 bg-trans ">
-                        <h2 className="homepage-text">Πρόσφατα projects &bull; </h2>
+                        <h2 className="homepage-text curr-proj-title">Πρόσφατα projects &bull; </h2>
 
                     </div>
                 </div>
 
                 <div className="row mt-4 offset-md-1 tilesrow">
-                    
-                     {/* for the first three projects of the user call this with i.title as argument */}
-                        {get_recentProjectTile(0)}
-                        {get_recentProjectTile(0)}
-                        {get_recentProjectTile(0)}
+                    {
+                        recentprojectList.map(i => 
 
-                        {/* {projectList.map(i => i.title.toLowerCase().includes(searchVal.toLowerCase()) &&
+                        (
+
+                            <a className="col-md-2 offset-md-1 mt-4 project-tile text-center">
+                                <Link to={{pathname: '/projects/projectNo',
+                                        state: {
+                                            projectId: i.id,
+                                            projectName: i.title
+                                        }
+                                    }}>
+                                
+                                    <h5 className="mt-3 mb-3 project-tile-name">{i.title}</h5>
+                                </Link>
+                            </a>    
+                        )
+
+                        
+
+                    )}
+
+                    {emptyProjectsList()}
+
                     
-                        )} */}
                     
                 </div>
 
