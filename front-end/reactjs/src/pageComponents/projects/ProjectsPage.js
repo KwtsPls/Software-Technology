@@ -7,6 +7,8 @@ import { Link, useHistory } from 'react-router-dom'
 import NewProjectPopUp from '../../components/NewProjectPopUp.js'
 import ProjectInfoPopUp from '../../components/ProjectInfoPopUp.js'
 import ProjectAddDevPopUp from '../../components/ProjectAddDevPopUp.js'
+import info from '../../images/info.png'
+import adddev from '../../images/add.png'
 
 
 function ProjectsPage() {
@@ -158,12 +160,28 @@ function ProjectsPage() {
                                         <div className="card">
                                             <div className="card-body proj-container">
                                                 <div className="row">
+                                                    {/* <div className="col-12"> */}
+                                                        <div className="col-12 col-md-11">
+
+                                                            <h5 className="card-title">{i.title}</h5>
+                                                            <p className="card-text">{i.description}</p>
+
+                                                        </div>
+                                                        <div className="col-6 col-md-1">
+                                                            {!i.status && (<img src={adddev} className="img-btn-proj add-btn"  onClick={() => showAdd(i.id,i.title)}></img>)}
+                                                            <img src={info} className="img-btn-proj" onClick={() => showInfo(i.id,i.title,i.status)}></img>
+
+                                                        </div>
+
+
+
+                                                    
+                                                </div>
+                                                <div className="row mt-4">
                                                     <div className="col-12">
-                                                        
-                                                        <h5 className="card-title">{i.title}</h5>
-                                                        <p className="card-text">{i.description}</p>
-                                                        <button className="btn btn-primary btn-sm btn-dark proj-info-btn" onClick={() => showInfo(i.id,i.title,i.status)}>Πληροφορίες / Αρχειοθέτηση</button>
-                                                        {!i.status && (<button className="btn btn-primary btn-sm btn btn-success proj-devadd-btn"  onClick={() => showAdd(i.id,i.title)}>Προσθήκη συνεργάτη</button>)}
+                                                    
+                                                        {/* <button className="btn btn-primary btn-sm btn-dark proj-info-btn" onClick={() => showInfo(i.id,i.title,i.status)}>Πληροφορίες / Αρχειοθέτηση</button> */}
+                                                        {/* {!i.status && (<button className="btn btn-primary btn-sm btn btn-success proj-devadd-btn"  onClick={() => showAdd(i.id,i.title)}>Προσθήκη συνεργάτη</button>)} */}
                                                         <Link to={{pathname: '/projects/projectNo',
                                                                     state: {
                                                                         projectId: i.id,
@@ -173,9 +191,11 @@ function ProjectsPage() {
 
                                                             <a className="btn btn-primary  btn-sm project-button proj-list-btn">Μετάβαση στο project</a>
                                                         </Link>
+                                                    {/* </div> */}
                                                     </div>
-                                                    
+
                                                 </div>
+                                                  
                                             </div>
                                         </div>
                                     </div>
