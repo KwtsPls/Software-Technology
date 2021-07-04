@@ -18,7 +18,7 @@ function StoriesInEpicsPopUp(props){
 
     const [view, setView] = useState("stories")
     const [focusStory, setFocusStory] = useState({id: 0, title: ""})
-    const [focusTask, setFocusTask] = useState(-1)
+    const [focusTask, setFocusTask] = useState({id: 0, title: ""})
 
     const [devs, setDevs] = useState([])
 
@@ -138,7 +138,7 @@ function StoriesInEpicsPopUp(props){
                                 <div>
                                     <button class="btn btn-secondary" onClick={() => goBack2()}>{"< Back"}</button>
                                 </div>
-                                <TaskWindow epic={32} focusTask={focusTask} focusStory={focusStory} devs={devs} projId={props.projId}/>
+                                <TaskWindow epic={props.epic} focusTask={focusTask} focusStory={focusStory} devs={devs} projId={props.projId}/>
                             </div> 
                         }
                     </div>
