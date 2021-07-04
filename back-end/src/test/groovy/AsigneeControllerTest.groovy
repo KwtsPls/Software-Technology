@@ -1,11 +1,8 @@
-import com.fasterxml.jackson.databind.JsonNode
+import gr.uoa.di.jete.Assemblers.AssigneeModelAssembler
 import gr.uoa.di.jete.controllers.AssigneeController
-import gr.uoa.di.jete.exceptions.AssigneeNotFoundException
 import gr.uoa.di.jete.models.Assignee
 import gr.uoa.di.jete.models.AssigneeId
 import gr.uoa.di.jete.repositories.AssigneeRepository
-import org.spockframework.mock.IDefaultResponse
-import org.spockframework.mock.ZeroOrNullResponse
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
@@ -19,16 +16,18 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @SpringBootTest
 @WebMvcTest(AssigneeController.class)
-class AsigneeControllerTest extends Specification {
+class AssigneeControllerTest extends Specification {
 
     MockMvc mvc
 
     AssigneeRepository repository
+    AssigneeModelAssembler assembler
 
     AssigneeController controller
     def setup(){
         repository = Stub(AssigneeRepository.class)
-        controller = new AssigneeController(repository)
+        assembler = Stub(AssigneeModelAssembler.class)
+        controller = new AssigneeController(repository,assembler)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()
     }
@@ -36,7 +35,7 @@ class AsigneeControllerTest extends Specification {
     def "Getting assignees"(){
         when: "When having assignees"
         def as1 = new Assignee(1L,1L,1L,1L,1L,1L)
-        def as2 = new Assignee(2, 2, 2, 2, 2, 2)
+        def as2 = new Assignee(2L, 2L, 2L, 2L, 2L, 2L)
         and: "Stubbing  Rep and Model assembler"
         def  asList = [as1, as2]
         repository.findAll() >> asList

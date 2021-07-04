@@ -1,3 +1,4 @@
+import gr.uoa.di.jete.Assemblers.WalletModelAssembler
 import gr.uoa.di.jete.controllers.WalletController
 import gr.uoa.di.jete.models.User
 import gr.uoa.di.jete.models.Wallet
@@ -20,12 +21,14 @@ class WalletControllerTest extends Specification {
     WalletRepository repository
     UserRepository userRepository
     WalletController controller
+    WalletModelAssembler assembler
 
     def setup()
     {
         repository = Stub()
         userRepository = Stub()
-        controller = new WalletController(repository,userRepository)
+        assembler = Stub()
+        controller = new WalletController(repository,assembler,userRepository)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()
     }

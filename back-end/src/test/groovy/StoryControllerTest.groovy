@@ -1,3 +1,4 @@
+import gr.uoa.di.jete.Assemblers.StoryModelAssembler
 import gr.uoa.di.jete.controllers.StoryController
 import gr.uoa.di.jete.models.*
 import gr.uoa.di.jete.repositories.*
@@ -20,6 +21,7 @@ class StoryControllerTest extends Specification{
     SprintRepository sprintRepository
     ProjectRepository projectRepository
     DeveloperRepository developerRepository
+    StoryModelAssembler assembler
 
     StoryController controller
 
@@ -29,7 +31,8 @@ class StoryControllerTest extends Specification{
         developerRepository = Stub()
         sprintRepository = Stub()
         projectRepository = Stub()
-        controller = new StoryController(repository,epicRepository,sprintRepository,projectRepository,developerRepository)
+        assembler = Stub()
+        controller = new StoryController(repository,assembler,epicRepository,sprintRepository,projectRepository,developerRepository)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()
     }

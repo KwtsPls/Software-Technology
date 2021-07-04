@@ -1,9 +1,7 @@
-import gr.uoa.di.jete.controllers.StoryController
+import gr.uoa.di.jete.Assemblers.TaskModelAssembler
 import gr.uoa.di.jete.controllers.TaskController
-import gr.uoa.di.jete.exceptions.SprintNotFoundException
 import gr.uoa.di.jete.models.*
 import gr.uoa.di.jete.repositories.*
-import groovy.cli.Option
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
@@ -21,16 +19,16 @@ class TaskControllerTest extends Specification {
     StoryRepository storyRepository
     EpicRepository epicRepository
     SprintRepository sprintRepository
-    ProjectRepository projectRepository
     TaskController controller
+    TaskModelAssembler assembler
 
     def setup() {
         repository = Stub()
         epicRepository = Stub()
         storyRepository = Stub()
         sprintRepository = Stub()
-        projectRepository = Stub()
-        controller = new TaskController(repository, storyRepository, epicRepository, sprintRepository, projectRepository)
+        assembler = Stub()
+        controller = new TaskController(repository,assembler,storyRepository, epicRepository, sprintRepository)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()
     }

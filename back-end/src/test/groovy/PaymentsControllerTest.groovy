@@ -1,3 +1,4 @@
+import gr.uoa.di.jete.Assemblers.PaymentsModelAssembler
 import gr.uoa.di.jete.controllers.PaymentsController
 import gr.uoa.di.jete.models.Payments
 import gr.uoa.di.jete.models.User
@@ -25,11 +26,13 @@ class PaymentsControllerTest extends Specification{
     UserRepository userRepository
     PaymentsRepository repository
     PaymentsController controller
+    PaymentsModelAssembler assembler
 
     void setup(){
         userRepository = Stub()
         repository = Stub()
-        controller = new PaymentsController(repository,userRepository)
+        assembler = Stub()
+        controller = new PaymentsController(repository,assembler,userRepository)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()
     }

@@ -1,5 +1,6 @@
 package gr.uoa.di.jete.controllers;
 
+import gr.uoa.di.jete.Assemblers.UserModelAssembler;
 import gr.uoa.di.jete.exceptions.EmailInUseException;
 import gr.uoa.di.jete.exceptions.UserInUseException;
 import gr.uoa.di.jete.exceptions.UserNotFoundException;
@@ -25,11 +26,6 @@ class UserService{
     public UserService(UserRepository userRepository, UserModelAssembler userModelAssembler) {
         this.userRepository = userRepository;
         this.userModelAssembler = userModelAssembler;
-    }
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-        userModelAssembler = new UserModelAssembler();
     }
 
     //Returns all the User .json entities

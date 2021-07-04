@@ -1,6 +1,7 @@
 package gr.uoa.di.jete.controllers;
 
 
+import gr.uoa.di.jete.Assemblers.SprintModelAssembler;
 import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.DeveloperNotFoundException;
 import gr.uoa.di.jete.exceptions.ProjectNotFoundException;
@@ -29,16 +30,9 @@ public class SprintController {
     private final ProjectRepository projectRep;
     private final DeveloperRepository devRep;
 
-    SprintController(SprintRepository repository, SprintModelAssembler assembler, ProjectRepository projectRep, DeveloperRepository devRep){
+    public SprintController(SprintRepository repository, SprintModelAssembler assembler, ProjectRepository projectRep, DeveloperRepository devRep){
         this.repository = repository;
         this.assembler = assembler;
-        this.projectRep = projectRep;
-        this.devRep = devRep;
-    }
-
-    SprintController(SprintRepository repository, ProjectRepository projectRep, DeveloperRepository devRep){
-        this.repository = repository;
-        this.assembler = new SprintModelAssembler();
         this.projectRep = projectRep;
         this.devRep = devRep;
     }
@@ -47,7 +41,7 @@ public class SprintController {
     //Aggregate root
     //tag::get-aggregate-root[]
     @GetMapping("/sprints")
-    CollectionModel<EntityModel<Sprint>> all(){
+    public CollectionModel<EntityModel<Sprint>> all(){
         List<EntityModel<Sprint>> sprint = repository.findAll().stream() //
                 .map(assembler :: toModel) //
                 .collect(Collectors.toList());
@@ -100,7 +94,7 @@ public class SprintController {
 
     //Single item
     @GetMapping("/projects/{project_id}/sprints/{id}")
-    EntityModel<Sprint> one(@PathVariable Long id,@PathVariable Long project_id){
+    public EntityModel<Sprint> one(@PathVariable Long id, @PathVariable Long project_id){
         Sprint sprint = repository.findById(new SprintId(id,project_id)) //
                 .orElseThrow(()-> new SprintNotFoundException(new SprintId(id,project_id)));
 

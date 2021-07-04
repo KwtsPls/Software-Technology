@@ -15,15 +15,7 @@ class Assignee {
     private @Id Long task_id;
 
     public Assignee(){}
-    Assignee(Long epic_id, Long sprint_id, Long project_id, Long story_id, Long user_id, Long task_id){
-        this.epic_id = epic_id;
-        this.sprint_id = sprint_id;
-        this.project_id = project_id;
-        this.story_id = story_id;
-        this.user_id = user_id;
-        this.task_id = task_id;
-    }
-    Assignee(Long epic_id, Long sprint_id, Long project_id, Long story_id, String title, Long status, String description, Long user_id, Long task_id){
+    public Assignee(Long epic_id, Long sprint_id, Long project_id, Long story_id, Long user_id, Long task_id){
         this.epic_id = epic_id;
         this.sprint_id = sprint_id;
         this.project_id = project_id;

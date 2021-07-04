@@ -1,3 +1,4 @@
+import gr.uoa.di.jete.Assemblers.EpicModelAssembler
 import gr.uoa.di.jete.controllers.EpicController
 import gr.uoa.di.jete.models.Developer
 import gr.uoa.di.jete.models.DeveloperId
@@ -27,13 +28,15 @@ class EpicControllerTest extends Specification{
     EpicRepository repository
     ProjectRepository projectRep
     DeveloperRepository devRep
+    EpicModelAssembler assembler
     def controller
 
     void setup(){
         repository = Stub(EpicRepository.class)
         projectRep = Stub(ProjectRepository.class)
         devRep = Stub(DeveloperRepository.class)
-        controller = new EpicController(repository,projectRep,devRep)
+        assembler = Stub(EpicModelAssembler.class)
+        controller = new EpicController(repository,assembler,projectRep,devRep)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()
     }

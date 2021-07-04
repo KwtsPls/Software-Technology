@@ -1,5 +1,6 @@
 package gr.uoa.di.jete.controllers;
 
+import gr.uoa.di.jete.Assemblers.ProjectModelAssembler;
 import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.DeveloperNotFoundException;
 import gr.uoa.di.jete.exceptions.ProjectNotFoundException;
@@ -33,7 +34,7 @@ public class ProjectController {
     private final DeveloperRepository devRep;
     private final SprintRepository sprintRep;
 
-    ProjectController(ProjectRepository repository, ProjectModelAssembler assembler,
+    public ProjectController(ProjectRepository repository, ProjectModelAssembler assembler,
                       UserRepository userRep, DeveloperRepository devRep, SprintRepository sprintRep){
         this.repository = repository;
         this.assembler = assembler;
@@ -41,17 +42,9 @@ public class ProjectController {
         this.devRep = devRep;
         this.sprintRep = sprintRep;
     }
-    ProjectController(ProjectRepository repository,
-                      UserRepository userRep, DeveloperRepository devRep, SprintRepository sprintRep){
-        this.repository = repository;
-        this.assembler = new ProjectModelAssembler();
-        this.userRep = userRep;
-        this.devRep = devRep;
-        this.sprintRep = sprintRep;
-    }
 
     @GetMapping("/projects")
-    CollectionModel<EntityModel<Project>> all(){
+    public CollectionModel<EntityModel<Project>> all(){
         List<EntityModel<Project>> projects = repository.findAll().stream() //
                 .map(assembler :: toModel) //
                 .collect(Collectors.toList());
@@ -132,7 +125,7 @@ public class ProjectController {
 
     //Single item
     @GetMapping("/projects/{id}")
-    EntityModel<Project> one(@PathVariable Long id){
+    public EntityModel<Project> one(@PathVariable Long id){
         Project project = repository.findById(id) //
                 .orElseThrow(()-> new ProjectNotFoundException(id));
 

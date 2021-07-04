@@ -1,3 +1,4 @@
+import gr.uoa.di.jete.Assemblers.DeveloperModelAssembler
 import gr.uoa.di.jete.controllers.DeveloperController
 import gr.uoa.di.jete.models.*
 import gr.uoa.di.jete.repositories.DeveloperRepository
@@ -21,12 +22,14 @@ class DeveloperControllerTest extends Specification {
     UserRepository userRepository
     ProjectRepository projectRep
     DeveloperController controller
+    DeveloperModelAssembler assembler
 
     void setup(){
         repository = Stub(DeveloperRepository.class)
         userRepository = Stub(UserRepository.class)
         projectRep = Stub(ProjectRepository.class)
-        controller = new DeveloperController(repository,userRepository,projectRep)
+        assembler = Stub(DeveloperModelAssembler.class)
+        controller = new DeveloperController(repository,assembler,userRepository,projectRep)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()
     }

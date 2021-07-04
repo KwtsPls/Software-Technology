@@ -1,6 +1,7 @@
 package gr.uoa.di.jete.controllers;
 
 
+import gr.uoa.di.jete.Assemblers.DeveloperModelAssembler;
 import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.DeveloperNotFoundException;
 import gr.uoa.di.jete.exceptions.ProjectNotFoundException;
@@ -29,7 +30,7 @@ public class DeveloperController {
     private final UserRepository userRep;
     private final ProjectRepository projectRep;
 
-    DeveloperController(DeveloperRepository repository, DeveloperModelAssembler assembler,
+    public DeveloperController(DeveloperRepository repository, DeveloperModelAssembler assembler,
                         UserRepository userRep,ProjectRepository projectRep){
         this.repository = repository;
         this.assembler = assembler;
@@ -37,18 +38,10 @@ public class DeveloperController {
         this.projectRep = projectRep;
     }
 
-    DeveloperController(DeveloperRepository repository,
-                        UserRepository userRep,ProjectRepository projectRep){
-        this.repository = repository;
-        this.assembler = new DeveloperModelAssembler();
-        this.userRep = userRep;
-        this.projectRep = projectRep;
-    }
-
     //Aggregate root
     //tag::get-aggregate-root[]
     @GetMapping("/developers/")
-    CollectionModel<EntityModel<Developer>> all(){
+    public CollectionModel<EntityModel<Developer>> all(){
         List<EntityModel<Developer>> developer = repository.findAll().stream() //
                 .map(assembler :: toModel) //
                 .collect(Collectors.toList());
@@ -73,7 +66,7 @@ public class DeveloperController {
 
     //Single item
     @GetMapping("/developers/users/{user_id}/projects/{project_id}")
-    EntityModel<Developer> one(@PathVariable Long user_id,@PathVariable Long project_id){
+    public EntityModel<Developer> one(@PathVariable Long user_id, @PathVariable Long project_id){
         Developer developer = repository.findById(new DeveloperId(user_id,project_id)) //
                 .orElseThrow(()-> new DeveloperNotFoundException(new DeveloperId(user_id,project_id)));
 

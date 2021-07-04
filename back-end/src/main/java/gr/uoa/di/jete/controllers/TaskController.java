@@ -1,5 +1,6 @@
 package gr.uoa.di.jete.controllers;
 
+import gr.uoa.di.jete.Assemblers.TaskModelAssembler;
 import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.*;
 import gr.uoa.di.jete.models.*;
@@ -25,7 +26,7 @@ public class TaskController {
     private final EpicRepository epicRep;
     private final SprintRepository sprintRep;
 
-    TaskController(TaskRepository repository, TaskModelAssembler assembler, StoryRepository storyRep, EpicRepository epicRep, SprintRepository sprintRep){
+    public TaskController(TaskRepository repository, TaskModelAssembler assembler, StoryRepository storyRep, EpicRepository epicRep, SprintRepository sprintRep){
         this.repository = repository;
         this.assembler = assembler;
         this.storyRep = storyRep;
@@ -33,18 +34,10 @@ public class TaskController {
         this.sprintRep = sprintRep;
     }
 
-    public TaskController(TaskRepository repository, StoryRepository storyRep, EpicRepository epicRep, SprintRepository sprintRep, ProjectRepository projectRep) {
-        this.repository = repository;
-        this.storyRep = storyRep;
-        this.epicRep = epicRep;
-        this.sprintRep = sprintRep;
-        assembler = new TaskModelAssembler();
-    }
-
     //Aggregate root
     //tag::get-aggregate-root[]
     @GetMapping("/tasks")
-    CollectionModel<EntityModel<Task>> all(){
+    public CollectionModel<EntityModel<Task>> all(){
         List<EntityModel<Task>> task = repository.findAll().stream() //
                 .map(assembler :: toModel) //
                 .collect(Collectors.toList());
@@ -99,7 +92,7 @@ public class TaskController {
 
     //Single item
     @GetMapping("/projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{story_id}/tasks/{id}")
-    EntityModel<Task> one(@PathVariable Long id,@PathVariable Long project_id,@PathVariable Long sprint_id,@PathVariable Long epic_id,@PathVariable Long story_id){
+    public EntityModel<Task> one(@PathVariable Long id, @PathVariable Long project_id, @PathVariable Long sprint_id, @PathVariable Long epic_id, @PathVariable Long story_id){
         Task task = repository.findById(new TaskId(id,epic_id,sprint_id,project_id,story_id)) //
                 .orElseThrow(()-> new TaskNotFoundException(new TaskId(id,epic_id,sprint_id,project_id,story_id)));
 
