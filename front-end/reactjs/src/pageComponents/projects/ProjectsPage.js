@@ -6,6 +6,7 @@ import Topbar from '../../components/Topbar.js'
 import { Link, useHistory } from 'react-router-dom'
 import NewProjectPopUp from '../../components/NewProjectPopUp.js'
 import ProjectInfoPopUp from '../../components/ProjectInfoPopUp.js'
+import ProjectAddDevPopUp from '../../components/ProjectAddDevPopUp.js'
 
 
 function ProjectsPage() {
@@ -17,67 +18,102 @@ function ProjectsPage() {
     const [rawProjects, setRawProjects] = useState([]);
 
     useEffect(() => {
+        document.body.style.background = "#fff";
+
+        // setLoading(false);
         if (!loggedUser){
             history.push("/login");
         }
         else{
-            fetch('http://localhost:8080/users/1/projects', { // TO BE CHANGED
+            fetch('http://localhost:8080/users/'+ loggedUser.id +'/projects', {
+            // fetch('http://localhost:8080/users/1/projects', {
+
                 method: 'get', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
             })
                 .then(res => res.json())
                 .then((data) => {
                     console.log(data);
-                    setRawProjects(data);
-                    setLoading(false);
-                    })
+                    if (data._embedded){
+                        setRawProjects(data._embedded.projectList);
+                        setLoading(false);
+                    }
+                })
+            
         }
     }, []);
 
     const [projectList,setProjectList] = useState([])
+    const [projectListCurrent,setProjectListCurrent] = useState([])
+    const [projectListArch,setProjectListArch] = useState([])
+
+    const rpCurr = []
+    const rpArch = []
 
     useEffect(() => {
         if (!isLoading){
-            setProjectList(rawProjects._embedded.projectList)
+            for (var i=0; i < rawProjects.length; i++){
+                if (rawProjects[i].status){
+                    rpArch.push(rawProjects[i])
+                }
+                else {
+                    rpCurr.push(rawProjects[i])
+                }
+            }
+            setProjectListCurrent(rpCurr)
+            setProjectListArch(rpArch)
+            setProjectList(rpCurr)
         }
     },[isLoading])
 
-    const [all, changeAll] = useState("nav-link active");
+    const [all, changeCurrent] = useState("nav-link active");
     const [arch, changeArch] = useState("nav-link");
 
-    function clickAll() {
-        changeAll("nav-link active");
+    function clickCurrent() {
+        changeCurrent("nav-link active");
         changeArch("nav-link");
-        changeProj(allNames);
+        setProjectList(projectListCurrent);
     }
 
     function clickArch() {
-        changeAll("nav-link");
+        changeCurrent("nav-link");
         changeArch("nav-link active")
-        changeProj(archNames);
+        setProjectList(projectListArch);
     }
 
-    const [allNames, setAllNames] = useState(['Atlas','Zeus','Prometheus','Apollo','Johnny','Porta']);
-    let archNames = ['Epikalesths','Thomas','Margarita','Pokopikos','Johnny palios'];
 
-
-    const [projNames, changeProj] = useState(allNames);
 
     const searchButton = document.getElementById('search-button');
     const searchInput = document.getElementById('search-input');
 
     const [searchVal, setSearch] = useState("");
     const [modalShow, setModalShow] = useState(false);
-    const [modalInfoShow, setModalInfoShow] = useState(false);
+    const [modalInfoShow, setModalInfoShow] = useState(false); 
+    const [modalAddShow, setModalAddShow] = useState(false); 
+    const [infoId, setInfoId] = useState(0); // the id of the project, which will be passed to the info modal
+    const [infoName, setInfoName] = useState("Project");
+    const [infoArchStatus, setInfoArchStatus] = useState(0);
 
-    function addProj(name) {
-        allNames.push(name)
-    }
+    function showInfo(id,name,status){
+        setInfoId(id)
+        setInfoName(name)
+        setInfoArchStatus(status)
+        setModalInfoShow(true)
+    } 
+
+    function showAdd(id,name){
+        setInfoId(id)
+        setInfoName(name)
+        setModalAddShow(true)
+    } 
+
+    useEffect(() => console.log("this happened1"),[infoId])
 
     return (
         <div>
-            <NewProjectPopUp show={modalShow} onHide={() => setModalShow(false)} addProj={addProj}/>
-            <ProjectInfoPopUp show={modalInfoShow} onHide={() => setModalInfoShow(false)}/>
+            <NewProjectPopUp show={modalShow} onHide={() => setModalShow(false)} />
+            <ProjectInfoPopUp show={modalInfoShow} onHide={() => setModalInfoShow(false)} projectId={infoId} status={infoArchStatus} projName={infoName}/>
+            <ProjectAddDevPopUp show={modalAddShow} onHide={() => setModalAddShow(false)} projectId={infoId} projName={infoName}/>
 			<Topbar/>
             <SideNavBar/>
             <div className="mainContent">
@@ -99,11 +135,11 @@ function ProjectsPage() {
                         {/* ----------- Nav Tabs ------------ */}
                         <div className="col-8">
                             <ul className="nav nav-tabs"> 
-                                <li className="nav-item"  onClick={clickAll}>
-                                    <a className={all} aria-current="page" href="#">Σε εξέλιξη</a>
+                                <li className="nav-item"  onClick={clickCurrent}>
+                                    <a className={all} aria-current="page">Σε εξέλιξη</a>
                                 </li>
                                 <li className="nav-item" onClick={clickArch}>
-                                    <a className={arch} href="#">Αρχειοθετημένα</a>
+                                    <a className={arch}>Αρχειοθετημένα</a>
                                 </li>
                             </ul>
                         </div>
@@ -120,18 +156,25 @@ function ProjectsPage() {
                                 (<div key={i.id + i.title} className="row pt-3">
                                     <div className="col-12">
                                         <div className="card">
-                                            <div className="card-body container">
+                                            <div className="card-body proj-container">
                                                 <div className="row">
-                                                    <div className="col-11">
+                                                    <div className="col-12">
+                                                        
                                                         <h5 className="card-title">{i.title}</h5>
                                                         <p className="card-text">{i.description}</p>
-                                                        <Link to='/projects/projectNo'>
-                                                            <a href="#" className="btn btn-primary project-button">Go somewhere</a>
+                                                        <button className="btn btn-primary btn-sm btn-dark proj-info-btn" onClick={() => showInfo(i.id,i.title,i.status)}>Πληροφορίες / Αρχειοθέτηση</button>
+                                                        {!i.status && (<button className="btn btn-primary btn-sm btn btn-success proj-devadd-btn"  onClick={() => showAdd(i.id,i.title)}>Προσθήκη συνεργάτη</button>)}
+                                                        <Link to={{pathname: '/projects/projectNo',
+                                                                    state: {
+                                                                        projectId: i.id,
+                                                                        projectName: i.title
+                                                                    }
+                                                                }}>
+
+                                                            <a className="btn btn-primary  btn-sm project-button proj-list-btn">Μετάβαση στο project</a>
                                                         </Link>
                                                     </div>
-                                                    <div className="col-1">
-                                                        <button onClick={() => setModalInfoShow(true)}>info</button>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>

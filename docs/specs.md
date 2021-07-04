@@ -92,7 +92,7 @@ Endpoint για την απόκτηση ενός Epic. Σε περίπτωση �
 
 `[GET] /projects/{project_id}/epics`
 
-Endpoint για την απόκτηση όλων τωω Epic.<br><br>
+Endpoint για την απόκτηση όλων των Epic.<br><br>
 
 `[PUT] projects/{project_id}/epics/{id}/archive/{user_id}`
 
@@ -104,9 +104,9 @@ Endpoint για να γίνει archive το Epic με ${id} που βρίσκε
 
 Endpoint για να γίνει delete το Epic με ${id} που βρίσκεται στο project με ${project_id}, η οποία αίτηση γίνεται από το χρήστη ${user_id}.<br><br>
 
-`[PUT] /projects/{project_id}/sprints/{id}/archive/{user_id}`
+`[PUT] /projects/{project_id}/sprints/archive/{user_id}`
 
-Endpoint για να γίνει archive το Sprint με ${id} που βρίσκεται στο project με ${project_id}, η οποία αίτηση γίνεται από το χρήστη ${user_id}. Αν δεν υπάρξει πρόβλημα στην εκτέλεση επιστρέφεται ένα καινούριου sprint ( με status 3 ) σε μορφή json.<br><br>
+Endpoint για να γίνει archive το πιο πρόσφατο Sprint που βρίσκεται στο project με ${project_id}, η οποία αίτηση γίνεται από το χρήστη ${user_id}. Αν δεν υπάρξει πρόβλημα στην εκτέλεση επιστρέφεται ένα καινούριου sprint ( με status 3 ) σε μορφή json.<br><br>
 
 `[GET] /projects/{project_id}/sprints`
 
@@ -115,6 +115,10 @@ Endpoint για την απόκτηση όλων των sprint σε ένα proje
 `[GET] /projects/{project_id}/sprints/active`
 
 Endpoint για την απόκτηση όλων των ενεργών sprint (status: 1/2/3) σε ένα project σε μορφή Json.<br><br>
+
+`[GET] /projects/{project_id}/sprints/archived`
+
+Endpoint για την απόκτηση όλων των archived sprint (status: 0) σε ένα project σε μορφή Json.<br><br>
 
 `[DELETE] /projects/{project_id}/sprints/{id}/delete/{user_id}`
 
@@ -143,6 +147,22 @@ Endpoint για να γίνει archive ένα story.<br><br>
 
 Endpoint για τη διαγραφή ενός story.<br><br>
 
+`[GET] /projects/{project_id}/sprints/active/stories`
+
+Endpoint για την επιστροφή όλων των ενεργών stories των ενεργών sprint σε ένα project με ${project_id} σε μορφή json.<br><br>
+
+`[GET] /projects/{project_id}/sprints/active/storiesInList`
+
+Endpoint για την επιστροφή όλων των ενεργών stories των ενεργών sprint σε ένα project με ${project_id} σε μορφή μιας λίστας από json, όπου κάθε στοιχείο της λίστας είναι όλα τα ενεργά stories ενός sprint σε μορφή json.<br><br>
+
+`[GET] /projects/{project_id}/sprints/archived/stories`
+
+Endpoint για την επιστροφή όλων των archived stories των archived sprint σε ένα project με ${project_id} σε μορφή json.<br><br>
+
+`[GET] /projects/{project_id}/sprints/archived/storiesInList`
+
+Endpoint για την επιστροφή όλων των archived stories των archived sprint σε ένα project με ${project_id} σε μορφή μιας λίστας από json, όπου κάθε στοιχείο της λίστας είναι όλα τα archived stories ενός sprint σε μορφή json.<br><br>
+
 ### Tasks
 
 `[GET] /projects/{project_id}/stories/{story_id}/tasks`
@@ -160,7 +180,7 @@ Endpoint για την επιστροφή όλων των task σε ένα epic.
 `[POST] /projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{story_id}/tasks/create`
 
 Endpoint για τη δημιουργία ενός καινουρίου task στο project με id ${project_id} που ανήκει στο sprint ${sprint_id} και στο epic ${epic_id}. To json που αναμένεται από το request είναι της μορφής :
-{"title":"Title","description":"Description","status":0,"project_id":"${project_id}","epic_id":"${epic_id}","sprint_id}":"${sprint_id}","story_id":"${story_id}"}.<br><br>
+{"title":"Title","description":"Description","status":0,"project_id":"${project_id}","epic_id":"${epic_id}","sprint_id":"${sprint_id}","story_id":"${story_id}"}.<br><br>
 
 `[GET] /projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{story_id}/tasks/{id}/archive`
 
@@ -169,3 +189,16 @@ Endpoint για να γίνει archive ένα task.<br><br>
 `[DELETE] /projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{story_id}/tasks/{id}/delete`
 
 Endpoint για να γίνει delete ένα task.<br><br>
+
+### Assignees
+
+`[GET] /assignees/users/projects/{project_id}/tasks/{task_id}`
+
+Endpoint για την επιστροφή όλων των users που συμμετέχουν στο task με {task_id} σε μορφή json.<br><br>
+
+`[POST] /assignees/`
+
+Endpoint για να γίνει assign ένας χρήστης σε ένα task.To json που αναμένεται από το request είναι της μορφής :
+{"user_id":"${user_id}","project_id":"${project_id}","epic_id":"${epic_id}","sprint_id":"${sprint_id}","story_id":"${story_id}","task_id":"${task_id}"}.<br><br>
+
+

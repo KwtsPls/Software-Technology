@@ -29,3 +29,15 @@ back-end/src/main/java/gr/uoa/di/jete/api/UserController.java
 back-end/src/main/java/gr/uoa/di/jete/api/UserController.java
 .idea/sqldialects.xml
 back-end/src/main/resources/data/mysql/data.sql
+*.xml
+*.meta
+*.zip
+*.properties
+back-end/production/SoftwareTechnology/main/resources/data/mysql/data.sql
+back-end/src/main/main.iml
+back-end/src/main/resources/data/mysql/data.sql
+back-end/src/test/test.iml
+lib/groovy-3.0.8.jar
+back-end/src/main/resources/data/mysql/data.sql
+back-end/src/main/resources/data/mysql/data.sql
+*.sql
