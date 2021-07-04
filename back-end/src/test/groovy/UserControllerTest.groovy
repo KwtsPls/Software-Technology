@@ -202,6 +202,7 @@ class UserControllerTest extends Specification{
          then:
          cnt == 1
          response.getStatus() == 200
+         response.getContentAsString().contains("OK")
      }
 
 }

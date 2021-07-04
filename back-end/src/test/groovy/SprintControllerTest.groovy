@@ -126,6 +126,28 @@ class SprintControllerTest extends Specification {
         response.getContentAsString().contains("\"id\":2")
     }
 
+    def "Get Archived Sprints in Project"(){
+        when: "Sprints exists"
+        repository.findArchivedSprintsInProject(_ as Long) >> {
+            def sprint = new Sprint()
+            sprint.setId(1L)
+            def sprint2 = new Sprint()
+            sprint2.setId(2L)
+
+            return [sprint,sprint2]
+        }
+        and: "Get @ /projects/1/sprints/archived"
+        def url = "/projects/1/sprints/archived"
+        MockHttpServletResponse response =  mvc.perform(
+                get(url)
+        ).andReturn().getResponse()
+        then: "Response status is Ok AND sprints with id 1 and 2 returned"
+            response.getStatus() == 200
+            response.getContentAsString().contains("\"id\":1")
+            response.getContentAsString().contains("\"id\":2")
+
+    }
+
     def "Get certain Sprint"(){
         when: "Sprints exists"
             repository.findById(_ as SprintId) >> {

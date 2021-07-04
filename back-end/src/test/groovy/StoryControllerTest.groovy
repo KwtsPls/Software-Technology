@@ -76,6 +76,72 @@ class StoryControllerTest extends Specification{
 
     }
 
+    def "Get All stories inside an active Sprint"(){
+        when: "Stories exists"
+        repository.findAllByProjectAndActiveSprints(_ as Long) >> {
+            def proj = new Story()
+            def proj2 = new Story()
+            proj.setId(1L)
+            proj2.setId(2L)
+            return [proj,proj2]
+        }
+        and: "Get @ /projects/1/sprints/active/stories"
+        def url = "/projects/1/sprints/active/stories"
+        MockHttpServletResponse response =  mvc.perform(
+                get(url)
+        ).andReturn().getResponse()
+        then: "Response status is Ok AND stories with id 1 and 2 returned"
+        response.getStatus() == 200
+        response.getContentAsString().contains("\"id\":1")
+        response.getContentAsString().contains("\"id\":2")
+
+    }
+
+    def "Get All active stories inside a Project list"(){
+        when: "Stories exists"
+        def cnt = 0
+        repository.findAllByProjectAndSprintStatus(_ as Long,1L) >> {
+            cnt++
+            def proj = new Story()
+            def proj2 = new Story()
+            proj.setId(1L)
+            proj2.setId(2L)
+            return [proj,proj2]
+        }
+        repository.findAllByProjectAndSprintStatus(_ as Long,2L) >> {
+            cnt++
+            def proj = new Story()
+            def proj2 = new Story()
+            proj.setId(3L)
+            proj2.setId(4L)
+            return [proj,proj2]
+        }
+        repository.findAllByProjectAndSprintStatus(_ as Long,3L) >> {
+            cnt++
+            def proj = new Story()
+            def proj2 = new Story()
+            proj.setId(5L)
+            proj2.setId(6L)
+            return [proj,proj2]
+        }
+        and: "Get @ /projects/1/sprints/active/storiesInList"
+        def url = "/projects/1/sprints/active/storiesInList"
+        MockHttpServletResponse response =  mvc.perform(
+                get(url)
+        ).andReturn().getResponse()
+        then: "Response status is Ok AND stories with id 1 and 2 returned"
+        response.getStatus() == 200
+        cnt == 3
+        response.getContentAsString().contains("\"id\":1")
+        response.getContentAsString().contains("\"id\":2")
+        response.getContentAsString().contains("\"id\":3")
+        response.getContentAsString().contains("\"id\":4")
+        response.getContentAsString().contains("\"id\":5")
+        response.getContentAsString().contains("\"id\":6")
+
+
+    }
+
     def "Get All stories inside an Epic"(){
         when: "Stories exists"
         repository.findAllByProjectAndEpicId(_ as Long,_ as Long) >> {

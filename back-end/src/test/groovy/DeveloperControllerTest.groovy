@@ -158,6 +158,25 @@ class DeveloperControllerTest extends Specification {
 
     }
 
+    def "Get Notifications Number"() {
+        when: "Stubbing Repository"
+
+        repository.getProjectsNotificationNumber(_ as Long)>>
+                {
+                    return [1L,2L]
+                }
+        and: "Getting @ /developers/users/1/notifications"
+        def url = "/developers/users/1/notifications"
+        MockHttpServletResponse response =  mvc.perform(
+                get(url)
+        ).andReturn().getResponse()
+        then: "Ok should be returned and test1 and test2 should be contained in the response message"
+            response.getStatus() == 200
+            response.getContentAsString().contains("1")
+            response.getContentAsString().contains("2")
+
+    }
+
     def "Delete Developers from a certain project"(){
         when:"Delete @ /developers/users/{user_id}/projects/{project_id}"
         def dev = new DeveloperId(user_id, project_id)

@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import spock.lang.Specification
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 
 @SpringBootTest
 @WebMvcTest(AssigneeController.class)
@@ -68,28 +69,34 @@ class AsigneeControllerTest extends Specification {
         response.getStatus() == 200
     }
 
-/*
-
-    def "Exception is thrown when assignee doesnt exist"(){
-        when: "When having certain assignee to find and not to find"
-        def asIDNotFound = new AssigneeId(2L,2L,2L,2L,2L,2L)
-//        Optional<Assignee> as1 = new Optional()
+    def "Post Assignee" (){
+        when: "Creating Assignee"
+            def cnt = 0
+            def body = new String("{\n" +
+                    "\"id\":1,\n" +
+                    "\"project_id\":1,\n" +
+                    "\"story_id\":1,\n" +
+                    "\"epic_id\":1,\n" +
+                    "\"sprint_id\":1,\n" +
+                    "\"task_id\":1\n}")
         and: "Stubbing Repository"
-        new AssigneeId(2L,2L,2L,2L,2L,2L) >> asIDNotFound
-        repository.findById(asIDNotFound) >> [IDefaultResponse: ZeroOrNullResponse.INSTANCE]
-        and: "Getting to path"
-        def urlNotFound = "/assignees/users/2/projects/2/sprints&epics/2&2/stories/2/tasks/2"
-        MockHttpServletResponse response2 =  mvc.perform(
-                get(urlNotFound)
-                .accept(MediaType.ALL)
+            repository.save(_ as Assignee) >> {
+                cnt++
+                def ass = new Assignee()
+                ass.setUser_id(1L)
+                return ass
+            }
+        and: "Post to path"
+        def url = "/assignees/"
+        MockHttpServletResponse response =  mvc.perform(
+                post(url).content(body).contentType(MediaType.APPLICATION_JSON)
         ).andReturn().getResponse()
 
-        then: "Ok is returned and 1 , 2 should exist"
-        final AssigneeNotFoundException exception = thrown()
-//        exception.message.contains("Could not find Assignee with user_id2 in project 2 in sprint and epic2&2 in story 2 and in task 2")
-        1==1
+        then: "Ok is returned assignee with user_id  1"
+            response.getStatus() == 200
+            response.getContentAsString().contains("\"user_id\":1")
+            cnt==1
     }
-    */
 }
 
 
