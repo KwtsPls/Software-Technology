@@ -3,6 +3,7 @@ import '../App.css';
 import {Modal, Button} from 'react-bootstrap';
 import { useHistory } from 'react-router-dom'
 import AssignDev from './AssignDev.js'
+import TaskWindow from './TaskWindow.js'
 
 
 
@@ -103,17 +104,6 @@ function StoriesInEpicsPopUp(props){
         return (<span class="badge bg-warning rounded-pill inprogress-gradient">In progress</span>);
     }
 
-    function markAsDone() {
-        fetch('http://localhost:8080/projects/'+props.projId+'/sprints&epics/'+focusStory.sprint_id+'&'+focusStory.epic_id+'/stories/'+focusStory.id+'/tasks/'+focusTask.id+'/archive', {
-                    method: 'put', 
-                    headers: { Authorization: 'Bearer ' + loggedUser.accessToken}
-                })
-                    .then(res => res.json())
-                    .then((data) => {
-                        console.log("Trying to mark as done");
-                        console.log(data);
-                    })
-    }  
 
     return (
         <div>
@@ -148,34 +138,7 @@ function StoriesInEpicsPopUp(props){
                                 <div>
                                     <button class="btn btn-secondary" onClick={() => goBack2()}>{"< Back"}</button>
                                 </div>
-                                <form className="row g-3 pt-4">
-                                    <div className="col-12">
-                                        <label for="inputDescription" className="form-label">Περιγραφή Task: </label>
-                                        <div>
-                                            <small>{focusTask.description}</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-12">
-                                        <label className="form-label">Story που υπάγεται το task: </label>
-                                        <small> {focusStory.title} </small>
-                                    </div>
-                                    <div className="col-12">
-                                        <label className="form-label">Epic που υπάγεται το story: </label>
-                                        <small> {props.epic.title} </small>
-                                    </div>
-                                    <div className="col-12">
-                                        <label className="form-label">{"Κατάσταση:   "}</label>
-                                        {doneSatus(focusTask.status)}
-                                    </div>
-                                    <div className="col-12">
-                                        <label for="assignDev" className="form-label">Του(ς) έχει ανατεθεί: </label>
-                                        {devs.map(i => <div><span class="badge bg-primary rounded-pill cool-purple">{i}</span></div>
-                                        )}
-                                    </div>
-                                    <div>
-                                        {(focusTask.status === 0) && <div class="btn btn-success" onClick={() => markAsDone()}>Μάρκαρε ως Done</div>}
-                                    </div>
-                                </form>
+                                <TaskWindow epic={32} focusTask={focusTask} focusStory={focusStory} devs={devs} projId={props.projId}/>
                             </div> 
                         }
                     </div>

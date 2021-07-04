@@ -9,6 +9,7 @@ import IssuePopUp from '../../components/IssuePopUp.js'
 import TaskInfoPopUp from '../../components/TaskInfoPopUp.js'
 import StoriesInEpicsPopUp from '../../components/StoriesInEpicsPopUp.js'
 import { OverlayTrigger, Popover} from 'react-bootstrap'
+import TasksInStoryOfSprintPopUp from '../../components/TasksInStoryOfSprintPopUp.js'
 
 
 
@@ -97,6 +98,7 @@ function ProjectNoPage() {
     const [modalIssueShow, setModalIssueShow] = useState(false);
     const [modalTaskInfoShow, setModalTaskInfoShow] = useState(false);
     const [modalSinE, setModalSinE] = useState(false);
+    const [modalTinSofS, setModalTinSofS] = useState(false);
     const [epicTBDel, setEpicTBDel] = useState({id: 0});
 
     const [backlog, changeBacklog] = useState("nav-link active");
@@ -170,9 +172,12 @@ function ProjectNoPage() {
                 method: 'delete', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
             })
-            //.then(res => res.json())
+            .then(res => res.json())
             .then((data) => {
                 console.log(data);
+                if (data.message === "OK"){
+                    window.location.reload(false);
+                }
             })
     }
 
@@ -197,6 +202,7 @@ function ProjectNoPage() {
 
     return (
         <div>
+            <TasksInStoryOfSprintPopUp show={modalTinSofS} onHide={() => setModalTinSofS(false)} projId={projectId} epic={epicTBDel}/>
             <StoriesInEpicsPopUp show={modalSinE} onHide={() => setModalSinE(false)} projId={projectId} epic={epicTBDel}/>
             <IssuePopUp show={modalIssueShow} onHide={() => setModalIssueShow(false)} projId={projectId} epics={epicList} sprints={activeSprints} activeStories={activeStories}/>
             <TaskInfoPopUp show={modalTaskInfoShow} taskName={clickedTask} onHide={() => setModalTaskInfoShow(false)}/>
@@ -261,7 +267,7 @@ function ProjectNoPage() {
                                                     </div>
                                                     <div className="col-1">
                                                         <OverlayTrigger trigger="click" placement="left" overlay={epicPopover}>
-                                                            <div className="btn btn-primary" onClick={()=>setEpicTBDel(i.id)}>del</div>
+                                                            <div className="btn btn-primary" onClick={()=>setEpicTBDel(i)}>del</div>
                                                         </OverlayTrigger>
                                                     </div>
                                                 </div>

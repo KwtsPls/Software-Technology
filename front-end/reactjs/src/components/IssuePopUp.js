@@ -85,7 +85,31 @@ function IssuePopUp(props){
         return -1
     }
 
+    const [showEmptyTitle, setShowEmptyTitle] = useState(false)
+    const [showEmptyDescription, setShowEmptyDescription] = useState(false)
+
     function submit() {
+        let earlyExit = false
+        if (title === ""){
+            earlyExit = true;
+            setShowEmptyTitle(true);
+        }
+        else {
+            setShowEmptyTitle(false)
+        }
+        if (description === ""){
+            earlyExit = true;
+            setShowEmptyDescription(true);
+        }
+        else {
+            setShowEmptyDescription(false)
+        }
+        if (earlyExit){
+            return ;
+        }
+
+        props.onHide()
+
         let fetchAdr = ''
         let body = ''
         if (selectedType === 'Task'){
@@ -132,6 +156,12 @@ function IssuePopUp(props){
                 console.log(data)
                 setTitle("")
                 setDescription("")
+                if (data.id){
+                    window.location.reload(false);
+                }
+                else {
+                    console.log("Something went wrong while creating issue")
+                }
                 return data;
             })
             // .then((data) => {
@@ -185,10 +215,16 @@ function IssuePopUp(props){
                         <div className="col-12">
                             <label for="inputTittle" className="form-label">Τίτλος Issue <RedAsterisc/></label>
                             <input type="text" className="form-control" id="issueTittle" placeholder="Τίτλος" value={title} onChange={e => setTitle(e.target.value)}/>
+                            <div>
+                                { (showEmptyTitle) && <span class="badge bg-danger rounded-pill">Ο τίτλος δεν μπορεί να είναι κενός</span>}
+                            </div>
                         </div>
                         <div className="col-12">
                             <label for="inputDescription" className="form-label">Περιγραφή Issue <RedAsterisc/></label>
                             <textarea type="text" className="form-control" id="issueDescription" placeholder="Περιγραφή" value={description} onChange={e => setDescription(e.target.value)}/>
+                            <div>
+                                { (showEmptyDescription) && <span class="badge bg-danger rounded-pill">Η περιγραφή δεν μπορεί να είναι κενή</span>}
+                            </div>
                         </div>
                         <div className="col-md-6">
                             <label for="inputIssueType" className="form-label">Είδος Issue <RedAsterisc/></label>
