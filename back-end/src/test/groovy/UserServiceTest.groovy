@@ -13,7 +13,7 @@ class UserServiceTest extends Specification{
 
     def setup(){
         repository = Stub()
-        assembler = Stub()
+        assembler = new UserModelAssembler()
         service = new UserService(repository,assembler)
     }
 

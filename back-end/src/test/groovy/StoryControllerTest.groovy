@@ -31,7 +31,7 @@ class StoryControllerTest extends Specification{
         developerRepository = Stub()
         sprintRepository = Stub()
         projectRepository = Stub()
-        assembler = Stub()
+        assembler = new StoryModelAssembler()
         controller = new StoryController(repository,assembler,epicRepository,sprintRepository,projectRepository,developerRepository)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()

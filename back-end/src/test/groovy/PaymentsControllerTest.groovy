@@ -31,7 +31,7 @@ class PaymentsControllerTest extends Specification{
     void setup(){
         userRepository = Stub()
         repository = Stub()
-        assembler = Stub()
+        assembler = new PaymentsModelAssembler()
         controller = new PaymentsController(repository,assembler,userRepository)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()

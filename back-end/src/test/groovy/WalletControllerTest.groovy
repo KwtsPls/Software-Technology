@@ -27,7 +27,7 @@ class WalletControllerTest extends Specification {
     {
         repository = Stub()
         userRepository = Stub()
-        assembler = Stub()
+        assembler = new WalletModelAssembler()
         controller = new WalletController(repository,assembler,userRepository)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()

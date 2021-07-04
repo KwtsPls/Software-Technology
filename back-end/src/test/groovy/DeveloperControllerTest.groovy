@@ -28,7 +28,7 @@ class DeveloperControllerTest extends Specification {
         repository = Stub(DeveloperRepository.class)
         userRepository = Stub(UserRepository.class)
         projectRep = Stub(ProjectRepository.class)
-        assembler = Stub(DeveloperModelAssembler.class)
+        assembler = new DeveloperModelAssembler()
         controller = new DeveloperController(repository,assembler,userRepository,projectRep)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()

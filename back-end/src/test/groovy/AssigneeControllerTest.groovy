@@ -26,7 +26,7 @@ class AssigneeControllerTest extends Specification {
     AssigneeController controller
     def setup(){
         repository = Stub(AssigneeRepository.class)
-        assembler = Stub(AssigneeModelAssembler.class)
+        assembler = new AssigneeModelAssembler()
         controller = new AssigneeController(repository,assembler)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()

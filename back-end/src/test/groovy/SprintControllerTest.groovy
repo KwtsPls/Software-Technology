@@ -30,7 +30,7 @@ class SprintControllerTest extends Specification {
         repository = Stub()
         projectRepository = Stub()
         developerRepository = Stub()
-        assembler = Stub()
+        assembler = new SprintModelAssembler()
         controller = new SprintController(repository,assembler,projectRepository, developerRepository)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()

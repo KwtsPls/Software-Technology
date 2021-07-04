@@ -35,7 +35,7 @@ class EpicControllerTest extends Specification{
         repository = Stub(EpicRepository.class)
         projectRep = Stub(ProjectRepository.class)
         devRep = Stub(DeveloperRepository.class)
-        assembler = Stub(EpicModelAssembler.class)
+        assembler = new EpicModelAssembler()
         controller = new EpicController(repository,assembler,projectRep,devRep)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()

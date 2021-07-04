@@ -42,7 +42,7 @@ class ProjectControllerTest extends Specification{
         userRepository = Stub()
         developerRepository = Stub()
         sprintRepository = Stub()
-        assembler = Stub()
+        assembler = new ProjectModelAssembler()
         controller = new ProjectController(repository,assembler,userRepository,developerRepository,sprintRepository)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()

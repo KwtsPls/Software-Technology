@@ -27,7 +27,7 @@ class TaskControllerTest extends Specification {
         epicRepository = Stub()
         storyRepository = Stub()
         sprintRepository = Stub()
-        assembler = Stub()
+        assembler = new TaskModelAssembler()
         controller = new TaskController(repository,assembler,storyRepository, epicRepository, sprintRepository)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()
