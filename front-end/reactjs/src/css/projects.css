@@ -122,3 +122,26 @@
   margin-left: 20px;
   /* opacity: 0.9; */
 }
+
+.buttons-proj{
+  padding-left: 7%;
+}
+
+.buttons-epic{
+  padding-left: 4%;
+}
+
+.delete-icon{
+  height: 17px;
+  width: 17px;
+  /* margin-left: 25px; */
+}
+
+@media screen and (max-width: 1300px) {
+  
+  
+  .buttons-proj{
+    padding-left: 0%;
+    /* margin-left: -200px; */
+  }
+}

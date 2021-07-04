@@ -10,6 +10,7 @@ import TaskInfoPopUp from '../../components/TaskInfoPopUp.js'
 import StoriesInEpicsPopUp from '../../components/StoriesInEpicsPopUp.js'
 import { OverlayTrigger, Popover} from 'react-bootstrap'
 import TasksInStoryOfSprintPopUp from '../../components/TasksInStoryOfSprintPopUp.js'
+import deleteicon from '../../images/delete.png'
 
 
 
@@ -283,9 +284,9 @@ function ProjectNoPage() {
                                                         <p className="card-text">{i.description}</p>
                                                         <div className="btn btn-primary project-button" onClick={()=>showStoriesOfEpic(i)}>Εμφάνιση των Stories</div>
                                                     </div>
-                                                    <div className="col-1">
+                                                    <div className="col-1 buttons-epic">
                                                         <OverlayTrigger trigger="click" placement="left" overlay={epicPopover}>
-                                                            <div className="btn btn-primary" onClick={()=>setEpicTBDel(i)}>del</div>
+                                                            <img src={deleteicon} className="img-btn-proj delete-icon " onClick={()=>setEpicTBDel(i)}></img>
                                                         </OverlayTrigger>
                                                     </div>
                                                 </div>
