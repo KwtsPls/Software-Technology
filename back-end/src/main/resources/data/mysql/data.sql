@@ -5,12 +5,13 @@ Create table for users for app and add some dummy data
 */
 drop table if exists user;
 create table user(id int primary key auto_increment, username varchar(100),
-    password varchar(100),email varchar(100),bio varchar(200),location varchar(100),status int,pronouns varchar(20),firstname varchar(100), lastname varchar(100) );
+    password varchar(100),email varchar(100),bio varchar(200),location varchar(100),status int,pronouns varchar(20),firstname varchar(100), lastname varchar(100),
+                  verification_code varchar(18),is_enabled boolean);
 
-insert into user(username,password,email,bio,location,status,pronouns,firstname,lastname) values('Adam647','aosdid1209j','adamj@test.com','Not much too say','USA,Illinois',1,'he/him','Adam','Jonhson');
-insert into user(username,password,email,bio,location,status,pronouns,firstname,lastname) values('TTa6','asfafgv578','trevorm@test.com','Coding for the masses...','USA,California',0,'he/him','Trevor','Martin');
-insert into user(username,password,email,bio,location,status,pronouns,firstname,lastname) values('mary_happy_j_99','asdkhf23asca','themarryjule@test.com','Happy to be here','Sweden',2,'they/them','Marry','Jules');
-insert into user(username,password,email,bio,location,status,pronouns,firstname,lastname) values('JuneO760','asdav12465fs','juneosborn@test.com','Badass','Canada,Ottawa',2,'she/her','June','Osborn');
+insert into user(username,password,email,bio,location,status,pronouns,firstname,lastname,is_enabled,verification_code) values('Adam647','aosdid1209j','adamj@test.com','Not much too say','USA,Illinois',1,'he/him','Adam','Jonhson',1,'askwi1924nNak*I19d');
+insert into user(username,password,email,bio,location,status,pronouns,firstname,lastname,is_enabled,verification_code) values('TTa6','asfafgv578','trevorm@test.com','Coding for the masses...','USA,California',0,'he/him','Trevor','Martin',1,'askwi1924nNak*I19d');
+insert into user(username,password,email,bio,location,status,pronouns,firstname,lastname,is_enabled,verification_code) values('mary_happy_j_99','asdkhf23asca','themarryjule@test.com','Happy to be here','Sweden',2,'they/them','Marry','Jules',1,'askwi1924nNak*I19d');
+insert into user(username,password,email,bio,location,status,pronouns,firstname,lastname,is_enabled,verification_code) values('JuneO760','asdav12465fs','juneosborn@test.com','Badass','Canada,Ottawa',2,'she/her','June','Osborn',1,'askwi1924nNak*I19d');
 
 
 /*
@@ -76,20 +77,20 @@ Create table for sprints for app and add some dummy data
 */
 drop table if exists sprint;
 create table sprint
-(id int not null, project_id int not null, title varchar(45) not null, status int not null,dateFrom date,dateTo date,
+(id int not null, project_id int not null, title varchar(45) not null, status int not null,date_from date,date_to date,
     constraint sprint_pk
         primary key (project_id, id),
     constraint fk_sprint_project1
         foreign key (project_id) references project (id)
 );
 
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(1,1,'sprint#1',1,'2021-06-10','2021-06-20');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(2,1,'sprint#2',0,'2021-06-10','2021-06-20');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(3,1,'sprint#3',0,'2021-06-10','2021-06-20');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(4,1,'sprint#4',2,'2021-06-10','2021-06-20');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(5,2,'sprint#1',1,'2021-06-10','2021-06-20');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(6,2,'sprint#2',2,'2021-06-10','2021-06-20');
-insert into sprint(id,project_id, title, status,dateFrom,dateTo) values(7,3,'sprint#1',1,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,date_from,date_to) values(1,1,'sprint#1',1,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,date_from,date_to) values(2,1,'sprint#2',0,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,date_from,date_to) values(3,1,'sprint#3',0,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,date_from,date_to) values(4,1,'sprint#4',2,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,date_from,date_to) values(5,2,'sprint#1',1,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,date_from,date_to) values(6,2,'sprint#2',2,'2021-06-10','2021-06-20');
+insert into sprint(id,project_id, title, status,date_from,date_to) values(7,3,'sprint#1',1,'2021-06-10','2021-06-20');
 
 /*
 --------------------------------------------------------
