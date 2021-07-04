@@ -1,4 +1,4 @@
-package gr.uoa.di.jete.Assemblers;
+package gr.uoa.di.jete.assemblers;
 
 import gr.uoa.di.jete.controllers.AssigneeController;
 import gr.uoa.di.jete.models.Assignee;

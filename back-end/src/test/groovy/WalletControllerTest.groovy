@@ -1,4 +1,4 @@
-import gr.uoa.di.jete.Assemblers.WalletModelAssembler
+import gr.uoa.di.jete.assemblers.WalletModelAssembler
 import gr.uoa.di.jete.controllers.WalletController
 import gr.uoa.di.jete.models.User
 import gr.uoa.di.jete.models.Wallet

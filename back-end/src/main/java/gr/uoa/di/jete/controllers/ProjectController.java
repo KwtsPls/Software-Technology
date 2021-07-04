@@ -1,6 +1,6 @@
 package gr.uoa.di.jete.controllers;
 
-import gr.uoa.di.jete.Assemblers.ProjectModelAssembler;
+import gr.uoa.di.jete.assemblers.ProjectModelAssembler;
 import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.DeveloperNotFoundException;
 import gr.uoa.di.jete.exceptions.ProjectNotFoundException;

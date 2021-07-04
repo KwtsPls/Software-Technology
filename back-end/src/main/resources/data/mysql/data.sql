@@ -131,6 +131,7 @@ create table task(id int not null,story_id int not null,epic_id int not null,spr
 Create table for assignee for app and add some dummy data
 --------------------------------------------------------
 */
+drop table if exists assignee;
 create table assignee
 (
     user_id int not null,
