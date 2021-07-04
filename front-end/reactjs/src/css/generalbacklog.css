@@ -3,9 +3,7 @@
     src:url('../fonts/SourceSansPro-Regular.ttf') format('truetype');
 }
 
-.genbacklog-container{
-    padding: 4%;
-}
+
 
 .stretch-mycard>.mycard {
     width: 100%;
