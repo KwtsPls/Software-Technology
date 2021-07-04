@@ -1,17 +1,17 @@
 package gr.uoa.di.jete.controllers;
 
 
+import gr.uoa.di.jete.Assemblers.WalletModelAssembler;
 import gr.uoa.di.jete.exceptions.UserNotFoundException;
 import gr.uoa.di.jete.exceptions.WalletNotFoundException;
 import gr.uoa.di.jete.models.User;
 import gr.uoa.di.jete.models.Wallet;
-//import gr.uoa.di.jete.models.WalletId;
 import gr.uoa.di.jete.repositories.UserRepository;
 import gr.uoa.di.jete.repositories.WalletRepository;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+//import gr.uoa.di.jete.models.WalletId;
 
 @CrossOrigin
 @RestController
@@ -25,12 +25,6 @@ public class WalletController {
         this.repository = repository;
         this.assembler = assembler;
         this.userRepository = userRepository;
-    }
-
-    public WalletController(WalletRepository repository, UserRepository userRepository) {
-        this.repository = repository;
-        this.userRepository = userRepository;
-        this.assembler = new WalletModelAssembler();
     }
 
     @GetMapping("users/{username}/wallet")

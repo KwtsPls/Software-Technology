@@ -32,7 +32,7 @@ class UserController {
     }
 
     @GetMapping("/users")
-    CollectionModel<EntityModel<User>> all(){
+    public CollectionModel<EntityModel<User>> all(){
         List<EntityModel<User>> users = userService.getUserCollectionList();
         return CollectionModel.of(users,
                 linkTo(methodOn(UserController.class).all()).withSelfRel());
@@ -51,7 +51,7 @@ class UserController {
 
     //Single item
     @GetMapping("/users/{id}")
-     EntityModel<User> one(@PathVariable Long id){
+    public EntityModel<User> one(@PathVariable Long id){
         return userService.getUserById(id);
     }
 

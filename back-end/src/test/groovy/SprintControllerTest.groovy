@@ -1,15 +1,9 @@
-import gr.uoa.di.jete.controllers.ProjectController
+import gr.uoa.di.jete.Assemblers.SprintModelAssembler
 import gr.uoa.di.jete.controllers.SprintController
-import gr.uoa.di.jete.exceptions.SprintNotFoundException
-import gr.uoa.di.jete.models.Developer
-import gr.uoa.di.jete.models.DeveloperId
-import gr.uoa.di.jete.models.Project
-import gr.uoa.di.jete.models.Sprint
-import gr.uoa.di.jete.models.SprintId
+import gr.uoa.di.jete.models.*
 import gr.uoa.di.jete.repositories.DeveloperRepository
 import gr.uoa.di.jete.repositories.ProjectRepository
 import gr.uoa.di.jete.repositories.SprintRepository
-import gr.uoa.di.jete.repositories.UserRepository
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
@@ -18,11 +12,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import spock.lang.Specification
 
 import java.sql.Date
-import java.time.LocalDate
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 
 @SpringBootTest
 @WebMvcTest(SprintController.class)
@@ -31,6 +22,7 @@ class SprintControllerTest extends Specification {
     SprintRepository repository
     ProjectRepository projectRepository
     DeveloperRepository developerRepository
+    SprintModelAssembler assembler
 
     SprintController controller
 
@@ -38,7 +30,8 @@ class SprintControllerTest extends Specification {
         repository = Stub()
         projectRepository = Stub()
         developerRepository = Stub()
-        controller = new SprintController(repository, projectRepository, developerRepository)
+        assembler = Stub()
+        controller = new SprintController(repository,assembler,projectRepository, developerRepository)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()
     }

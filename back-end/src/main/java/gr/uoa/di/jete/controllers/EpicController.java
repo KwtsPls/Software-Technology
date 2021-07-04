@@ -1,6 +1,7 @@
 package gr.uoa.di.jete.controllers;
 
 
+import gr.uoa.di.jete.Assemblers.EpicModelAssembler;
 import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.DeveloperNotFoundException;
 import gr.uoa.di.jete.exceptions.EpicNotFoundException;
@@ -32,16 +33,9 @@ public class EpicController {
     private final ProjectRepository projectRep;
     private final DeveloperRepository devRep;
 
-    EpicController(EpicRepository repository, EpicModelAssembler assembler, ProjectRepository projectRep, DeveloperRepository devRep){
+    public EpicController(EpicRepository repository, EpicModelAssembler assembler, ProjectRepository projectRep, DeveloperRepository devRep){
         this.repository = repository;
         this.assembler = assembler;
-        this.projectRep = projectRep;
-        this.devRep = devRep;
-    }
-
-    public EpicController(EpicRepository repository, ProjectRepository projectRep, DeveloperRepository devRep) {
-        this.repository = repository;
-        this.assembler = new EpicModelAssembler();
         this.projectRep = projectRep;
         this.devRep = devRep;
     }
@@ -49,7 +43,7 @@ public class EpicController {
     //Aggregate root
     //tag::get-aggregate-root[]
     @GetMapping("/epics")
-    CollectionModel<EntityModel<Epic>> all(){
+    public CollectionModel<EntityModel<Epic>> all(){
         List<EntityModel<Epic>> epic = repository.findAll().stream() //
                 .map(assembler :: toModel) //
                 .collect(Collectors.toList());
@@ -72,7 +66,7 @@ public class EpicController {
 
     //Single item
     @GetMapping("/projects/{project_id}/epics/{id}")
-    EntityModel<Epic> one(@PathVariable Long id,@PathVariable Long project_id){
+    public EntityModel<Epic> one(@PathVariable Long id, @PathVariable Long project_id){
         Epic epic = repository.findById(new EpicId(id,project_id)) //
                 .orElseThrow(()-> new EpicNotFoundException(new EpicId(id,project_id)));
 

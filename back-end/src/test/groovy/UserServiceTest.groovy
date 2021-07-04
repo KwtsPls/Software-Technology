@@ -1,3 +1,4 @@
+import gr.uoa.di.jete.Assemblers.UserModelAssembler
 import gr.uoa.di.jete.controllers.UserService
 import gr.uoa.di.jete.exceptions.EmailInUseException
 import gr.uoa.di.jete.exceptions.UserInUseException
@@ -7,11 +8,13 @@ import spock.lang.Specification
 
 class UserServiceTest extends Specification{
     UserRepository repository
+    UserModelAssembler assembler
     UserService service
 
     def setup(){
         repository = Stub()
-        service = new UserService(repository)
+        assembler = Stub()
+        service = new UserService(repository,assembler)
     }
 
     def "Get all Users"(){

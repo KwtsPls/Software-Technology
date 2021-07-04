@@ -1,6 +1,7 @@
 package gr.uoa.di.jete.controllers;
 
 
+import gr.uoa.di.jete.Assemblers.StoryModelAssembler;
 import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.*;
 import gr.uoa.di.jete.models.*;
@@ -28,7 +29,7 @@ public class StoryController {
     private final ProjectRepository projectRep;
     private final DeveloperRepository devRep;
 
-    StoryController(StoryRepository repository, StoryModelAssembler assembler, EpicRepository epicRep, SprintRepository sprintRep, ProjectRepository projectRep, DeveloperRepository devRep){
+    public StoryController(StoryRepository repository, StoryModelAssembler assembler, EpicRepository epicRep, SprintRepository sprintRep, ProjectRepository projectRep, DeveloperRepository devRep){
         this.repository = repository;
         this.assembler = assembler;
         this.epicRep = epicRep;
@@ -37,18 +38,10 @@ public class StoryController {
         this.devRep = devRep;
     }
 
-    StoryController(StoryRepository repository, EpicRepository epicRep, SprintRepository sprintRep, ProjectRepository projectRep, DeveloperRepository devRep){
-        this.repository = repository;
-        this.assembler = new StoryModelAssembler();
-        this.epicRep = epicRep;
-        this.sprintRep = sprintRep;
-        this.projectRep = projectRep;
-        this.devRep = devRep;
-    }
     //Aggregate root
     //tag::get-aggregate-root[]
     @GetMapping("/stories")
-    CollectionModel<EntityModel<Story>> all(){
+    public CollectionModel<EntityModel<Story>> all(){
         List<EntityModel<Story>> story = repository.findAll().stream() //
                 .map(assembler :: toModel) //
                 .collect(Collectors.toList());
@@ -160,7 +153,7 @@ public class StoryController {
 
     //Single item
     @GetMapping("/projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{id}")
-    EntityModel<Story> one(@PathVariable Long id,@PathVariable Long project_id,@PathVariable Long sprint_id,@PathVariable Long epic_id){
+    public EntityModel<Story> one(@PathVariable Long id, @PathVariable Long project_id, @PathVariable Long sprint_id, @PathVariable Long epic_id){
         Story story = repository.findById(new StoryId(id,epic_id,sprint_id,project_id)) //
                 .orElseThrow(()-> new StoryNotFoundException(new StoryId(id,epic_id,sprint_id,project_id)));
 

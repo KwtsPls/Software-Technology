@@ -1,3 +1,4 @@
+import gr.uoa.di.jete.Assemblers.ProjectModelAssembler
 import gr.uoa.di.jete.controllers.ProjectController
 import gr.uoa.di.jete.models.Developer
 import gr.uoa.di.jete.models.DeveloperId
@@ -33,7 +34,7 @@ class ProjectControllerTest extends Specification{
     UserRepository userRepository
     DeveloperRepository developerRepository
     SprintRepository sprintRepository
-
+    ProjectModelAssembler assembler
     ProjectController controller
 
     def setup(){
@@ -41,7 +42,8 @@ class ProjectControllerTest extends Specification{
         userRepository = Stub()
         developerRepository = Stub()
         sprintRepository = Stub()
-        controller = new ProjectController(repository,userRepository,developerRepository,sprintRepository)
+        assembler = Stub()
+        controller = new ProjectController(repository,assembler,userRepository,developerRepository,sprintRepository)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()
     }

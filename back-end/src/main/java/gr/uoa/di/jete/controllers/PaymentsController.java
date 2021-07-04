@@ -1,5 +1,6 @@
 package gr.uoa.di.jete.controllers;
 
+import gr.uoa.di.jete.Assemblers.PaymentsModelAssembler;
 import gr.uoa.di.jete.exceptions.PaymentsNotFoundException;
 import gr.uoa.di.jete.exceptions.UserNotFoundException;
 import gr.uoa.di.jete.models.Payments;
@@ -23,17 +24,9 @@ public class PaymentsController {
     private final PaymentsModelAssembler assembler;
     private final UserRepository userRepository;
 
-
-
     public PaymentsController(PaymentsRepository repository, PaymentsModelAssembler assembler, UserRepository userRepository) {
         this.repository = repository;
         this.assembler = assembler;
-        this.userRepository = userRepository;
-    }
-
-    public PaymentsController(PaymentsRepository repository, UserRepository userRepository) {
-        this.repository = repository;
-        this.assembler = new PaymentsModelAssembler();
         this.userRepository = userRepository;
     }
 
@@ -46,7 +39,7 @@ public class PaymentsController {
 
 
     @GetMapping("/payments")
-    CollectionModel<EntityModel<Payments>> all() {
+    public CollectionModel<EntityModel<Payments>> all() {
         List<EntityModel<Payments>> paymentsList = repository.findAll().stream()
                 .map(assembler::toModel).collect(Collectors.toList());
         return CollectionModel.of(paymentsList,

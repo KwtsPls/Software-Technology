@@ -1,5 +1,6 @@
 package gr.uoa.di.jete.controllers;
 
+import gr.uoa.di.jete.Assemblers.AssigneeModelAssembler;
 import gr.uoa.di.jete.exceptions.AssigneeNotFoundException;
 import gr.uoa.di.jete.models.Assignee;
 import gr.uoa.di.jete.models.AssigneeId;
@@ -25,13 +26,9 @@ public class AssigneeController {
         this.assembler = assembler;
     }
 
-    public AssigneeController(AssigneeRepository repository) {
-        this.repository = repository;
-        this.assembler = new AssigneeModelAssembler();
-    }
 
     @GetMapping("/assignees/")
-    CollectionModel<EntityModel<Assignee>> all(){
+    public CollectionModel<EntityModel<Assignee>> all(){
         List<EntityModel<Assignee>> assignees = repository.findAll().stream() //
                 .map(assembler :: toModel) //
                 .collect(Collectors.toList());
@@ -41,8 +38,8 @@ public class AssigneeController {
 
     //Single item
     @GetMapping("/assignees/users/{user_id}/projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{story_id}/tasks/{task_id}")
-    EntityModel<Assignee> one(@PathVariable Long user_id, @PathVariable Long project_id, @PathVariable Long sprint_id,
-                               @PathVariable Long epic_id,@PathVariable Long story_id,@PathVariable Long task_id){
+    public EntityModel<Assignee> one(@PathVariable Long user_id, @PathVariable Long project_id, @PathVariable Long sprint_id,
+                                     @PathVariable Long epic_id, @PathVariable Long story_id, @PathVariable Long task_id){
         Assignee assignee = repository.findById(new AssigneeId(user_id,epic_id,sprint_id,project_id,story_id,task_id)) //
                 .orElseThrow(()-> new AssigneeNotFoundException(new AssigneeId(user_id,epic_id,sprint_id,project_id,story_id,task_id)));
 
