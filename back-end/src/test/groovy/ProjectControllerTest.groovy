@@ -1,4 +1,4 @@
-import gr.uoa.di.jete.Assemblers.ProjectModelAssembler
+import gr.uoa.di.jete.assemblers.ProjectModelAssembler
 import gr.uoa.di.jete.controllers.ProjectController
 import gr.uoa.di.jete.models.Developer
 import gr.uoa.di.jete.models.DeveloperId

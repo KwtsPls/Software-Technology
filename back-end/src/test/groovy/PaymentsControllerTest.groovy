@@ -1,4 +1,4 @@
-import gr.uoa.di.jete.Assemblers.PaymentsModelAssembler
+import gr.uoa.di.jete.assemblers.PaymentsModelAssembler
 import gr.uoa.di.jete.controllers.PaymentsController
 import gr.uoa.di.jete.models.Payments
 import gr.uoa.di.jete.models.User

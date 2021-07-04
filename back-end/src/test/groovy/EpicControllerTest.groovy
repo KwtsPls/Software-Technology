@@ -1,4 +1,4 @@
-import gr.uoa.di.jete.Assemblers.EpicModelAssembler
+import gr.uoa.di.jete.assemblers.EpicModelAssembler
 import gr.uoa.di.jete.controllers.EpicController
 import gr.uoa.di.jete.models.Developer
 import gr.uoa.di.jete.models.DeveloperId

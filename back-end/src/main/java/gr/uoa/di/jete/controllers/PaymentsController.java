@@ -1,6 +1,6 @@
 package gr.uoa.di.jete.controllers;
 
-import gr.uoa.di.jete.Assemblers.PaymentsModelAssembler;
+import gr.uoa.di.jete.assemblers.PaymentsModelAssembler;
 import gr.uoa.di.jete.exceptions.PaymentsNotFoundException;
 import gr.uoa.di.jete.exceptions.UserNotFoundException;
 import gr.uoa.di.jete.models.Payments;

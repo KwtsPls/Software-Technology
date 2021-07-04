@@ -1,4 +1,4 @@
-package gr.uoa.di.jete.Assemblers;
+package gr.uoa.di.jete.assemblers;
 
 import gr.uoa.di.jete.controllers.PaymentsController;
 import gr.uoa.di.jete.models.Payments;

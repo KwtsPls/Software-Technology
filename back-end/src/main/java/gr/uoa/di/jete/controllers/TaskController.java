@@ -1,6 +1,6 @@
 package gr.uoa.di.jete.controllers;
 
-import gr.uoa.di.jete.Assemblers.TaskModelAssembler;
+import gr.uoa.di.jete.assemblers.TaskModelAssembler;
 import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.*;
 import gr.uoa.di.jete.models.*;

@@ -1,7 +1,7 @@
 package gr.uoa.di.jete.controllers;
 
 
-import gr.uoa.di.jete.Assemblers.WalletModelAssembler;
+import gr.uoa.di.jete.assemblers.WalletModelAssembler;
 import gr.uoa.di.jete.exceptions.UserNotFoundException;
 import gr.uoa.di.jete.exceptions.WalletNotFoundException;
 import gr.uoa.di.jete.models.User;

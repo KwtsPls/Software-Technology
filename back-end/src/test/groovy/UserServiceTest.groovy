@@ -1,4 +1,4 @@
-import gr.uoa.di.jete.Assemblers.UserModelAssembler
+import gr.uoa.di.jete.assemblers.UserModelAssembler
 import gr.uoa.di.jete.controllers.UserService
 import gr.uoa.di.jete.exceptions.EmailInUseException
 import gr.uoa.di.jete.exceptions.UserInUseException
