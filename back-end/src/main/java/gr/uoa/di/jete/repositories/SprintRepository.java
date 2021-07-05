@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Tuple;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,20 +37,28 @@ public interface SprintRepository extends JpaRepository<Sprint, SprintId>{
     @Query("update Sprint s set s.status = s.status - 1 where s.project_id=?1 and s.status > 0")
     void updateActiveSprintsInProject(Long project_id);
 
-    @Transactional
-    @Modifying
-    @Query("update Story st set st.sprint_id = ?2 where st.sprint_id=?1 and st.status=0")
-    void transferStories(Long old_id,Long new_id);
+    @Query("select count(t.status) as count, sum(t.status) as sum,st.id as id from Task t, Story st where st.id = t.story_id and st.sprint_id=?1 group by st.id")
+    List<Tuple> getStoriesWithTaskCountsInSprint(Long sprint_id);
 
     @Transactional
     @Modifying
-    @Query("update Task t set t.sprint_id = ?2 where t.sprint_id=?1 and t.status=0")
-    void transferTasks(Long old_id,Long new_id);
+    @Query("update Story st set st.sprint_id = ?2 where st.sprint_id=?1 and st.id=?3")
+    void transferStories(Long old_id,Long new_id,Long story_id);
 
     @Transactional
     @Modifying
-    @Query("update Assignee a set a.sprint_id = ?2 where a.sprint_id=?1")
-    void transferAssignees(Long old_id,Long new_id);
+    @Query("update Task t set t.sprint_id = ?2 where t.sprint_id=?1 and t.story_id=?3")
+    void transferTasks(Long old_id,Long new_id,Long story_id);
+
+    @Transactional
+    @Modifying
+    @Query("update Assignee a set a.sprint_id = ?2 where a.sprint_id=?1 and a.story_id=?3")
+    void transferAssignees(Long old_id,Long new_id,Long story_id);
+
+    @Transactional
+    @Modifying
+    @Query("update Story st set st.status=1 where st.id=?1 and st.project_id=?2 and st.sprint_id=?3")
+    int archiveStory(Long id,Long project_id,Long sprint_id);
 
     //------- Delete for inactive sprints ------------------------//
     @Transactional

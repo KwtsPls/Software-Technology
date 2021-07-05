@@ -16,6 +16,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Tuple;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
@@ -106,9 +107,23 @@ public class ProjectController {
 
         //Transfer all unfinished tasks and stories to the new current sprint
         Long current_sprint_id = current_sprint.getId();
-        sprintRep.transferAssignees(old_sprint_id,current_sprint_id);
-        sprintRep.transferStories(old_sprint_id,current_sprint_id);
-        sprintRep.transferTasks(old_sprint_id,current_sprint_id);
+        //Get story id's alongside the number of total tasks and number of active tasks
+        List<Tuple> tupleList = sprintRep.getStoriesWithTaskCountsInSprint(old_sprint_id);
+        for(Tuple t : tupleList){
+            Long count = (Long)t.get(0);
+            Long sum = (Long)t.get(1);
+            Long story_id = (Long)t.get(2);
+            //There are still active tasks in this story - do not archive it
+            if(!count.equals(sum)){
+                sprintRep.transferAssignees(old_sprint_id,current_sprint_id,story_id);
+                sprintRep.transferStories(old_sprint_id,current_sprint_id,story_id);
+                sprintRep.transferTasks(old_sprint_id,current_sprint_id,story_id);
+            }
+            //Story has no more active tasks - archive it
+            else{
+                sprintRep.archiveStory(story_id,project_id,old_sprint_id);
+            }
+        }
 
         //Create a new sprint to replace the archived one
         Long maxId = sprintRep.findMaxId().orElse(0L);
