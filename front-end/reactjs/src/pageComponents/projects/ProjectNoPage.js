@@ -80,17 +80,28 @@ function ProjectNoPage() {
                     changeStorShown(data)
                 })
             // Fetch Inactive Sprints
-            fetch('http://localhost:8080/projects/' + projectId + '/sprints', {
+            fetch('http://localhost:8080/projects/' + projectId + '/sprints/archived', {
                 method: 'get', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
             })
                 .then(res => res.json())
                 .then((data) => {
-                    console.log("AllSprints:");
+                    console.log("ArchivedSprints:");
                     console.log(data);
                     if (data._embedded){
-                        setAllSprints(data._embedded.sprintList)
+                        setArchivedSprints(data._embedded.sprintList)
                     }
+                })
+            // Fetch Stories of Archived
+            fetch('http://localhost:8080/projects/' + projectId + '/sprints/archived/storiesInList', {
+                method: 'get', 
+                headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    console.log("These are the stories of archived sprints:")
+                    console.log(data);
+                    setArchivedStories(data)
                 })
         }
         console.log("Project ID: " + projectId);
@@ -114,7 +125,6 @@ function ProjectNoPage() {
         changeSpr("nav-link");
         changeEpics("nav-link");
         changePastSpr("nav-link");
-        changeSprShown(activeSprints);
         changeTab("backlog");
         changeVerHoz("row pt-3 vertical-scrollable overflow-auto");
     }
@@ -125,6 +135,7 @@ function ProjectNoPage() {
         changeEpics("nav-link");
         changePastSpr("nav-link");
         changeSprShown(activeSprints);
+        changeStorShown(activeStories)
         changeTab("sprints");
         changeVerHoz("row pt-3 overflow-auto horizontal-scrollable");
     }
@@ -143,7 +154,8 @@ function ProjectNoPage() {
         changeSpr("nav-link");
         changeEpics("nav-link");
         changePastSpr("nav-link active");
-        changeSprShown(allSprints);
+        changeSprShown(archivedSprints);
+        changeStorShown(archivedStories)
         changeTab("sprints");
         changeVerHoz("row pt-3 overflow-auto horizontal-scrollable");
     }
@@ -154,14 +166,15 @@ function ProjectNoPage() {
     //let pastSprNames = ['Old Sprint 1','Old Sprint 2','Old Sprint 3','Old Sprint 4','Old Sprint 5'];
     const [epicList, setEpicList] = useState([])
     const [activeSprints, setActiveSprints] = useState([])
-    const [allSprints, setAllSprints] = useState([])
+    const [archivedSprints, setArchivedSprints] = useState([])
     const [activeStories, setActiveStories] = useState([[],[],[]])
+    const [archivedStories, setArchivedStories] = useState([[],[],[]])
     //let epicNames = ['Epic 1','Epic 2','Epic 3','Epic 4','Epic 5','Epic 6','Epic 7','Epic 8'];
     
     const [sprintsShown, changeSprShown] = useState(activeSprints);
     const [storiesShown, changeStorShown] = useState(activeSprints);
 
-    const [clickedTask, setClickedTask] = useState("");
+    const [clickedTask, setClickedTask] = useState({id:'0',title:'_'});
 
     function showStoriesOfEpic(epic) {
         setEpicTBDel(epic)
@@ -224,7 +237,7 @@ function ProjectNoPage() {
             <TasksInStoryOfSprintPopUp show={modalTinSofS} onHide={() => setModalTinSofS(false)} projId={projectId} epicId={focusStory.epic_id} focusStory={focusStory}/>
             <StoriesInEpicsPopUp show={modalSinE} onHide={() => setModalSinE(false)} projId={projectId} epic={epicTBDel}/>
             <IssuePopUp show={modalIssueShow} onHide={() => setModalIssueShow(false)} projId={projectId} epics={epicList} sprints={activeSprints} activeStories={activeStories}/>
-            <TaskInfoPopUp show={modalTaskInfoShow} taskName={clickedTask} onHide={() => setModalTaskInfoShow(false)}/>
+            <TaskInfoPopUp show={modalTaskInfoShow} task={clickedTask} onHide={() => setModalTaskInfoShow(false)} projId={projectId}/>
 			<Topbar/>
             <SideNavBar/>
             <div className="mainContent">
@@ -298,23 +311,31 @@ function ProjectNoPage() {
                             {(pressedTab === "sprints") && sprintsShown.map(i => 
                                     {var index = sprintsShown.indexOf(i);
                                      var st =  activeStories[index];
+                                     var nm = "";
+                                     if (index === 0){
+                                         nm = 'Τρέχων Sprint'
+                                     }
+                                     else if (index === 1){
+                                         nm = 'Επόμενο Sprint'
+                                     }
+                                     else if (index === 2){
+                                         nm = 'Παράεπομενο Sprint'
+                                     }
                                      console.log("Kako")
                                      console.log(st)
-                                    return (<div className="d-flex full-col mt-2" style={{width: '33%',"flex-wrap": "nowrap"}}>
+                                    return (<div className=" full-col mt-2" style={{width: '33%',"flex-wrap": "nowrap"}}>
                                         <div className="card full-col">
                                             <div className="card-body sprint-card ">
-                                                <h5 className="card-title">{i.title}</h5>
+                                                {(sprintsShown === activeSprints) && <h5 className="card-title">{nm}</h5>}
+                                                {(sprintsShown != activeSprints) && <h5 className="card-title">{i.title}</h5>}
                                                 <div class="list-group pt-3" style={{width: '100%',"flex-wrap": "nowrap"}}>
                                                     {st.content.map(k => <button type="button" class="list-group-item list-group-item-action" onClick={()=>openStory(k)}>{k.title}</button>)}
-                                                </div>
-                                                <div className="pt-3">
-                                                <div className="btn btn-primary project-button">Go somewhere</div>
                                                 </div>
                                             </div>
                                         </div> 
                                     </div>)}
                             )}
-                            {(pressedTab === "backlog") && (<Backlog setModalTaskInfoShow={setModalTaskInfoShow} setSelectedTask={setClickedTask} selectedTask={clickedTask}/>)}
+                            {(pressedTab === "backlog") && (<Backlog setModalTaskInfoShow={setModalTaskInfoShow} setSelectedTask={setClickedTask} selectedTask={clickedTask} activeStories={activeStories[0]} projectId={projectId} activeSprints={activeSprints}/>)}
                         </div>
                     </div>
                 </div>

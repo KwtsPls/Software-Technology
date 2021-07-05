@@ -8,6 +8,31 @@ import '../css/projects.css';
 
 function Backlog(props){
 
+    const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+
+    const [date, setDate] = useState("")
+
+    useEffect(()=>{
+            fetch('http://localhost:8080/projects/'+ props.projectId +'/sprints/active/tasks', {
+                method: 'get', 
+                headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    console.log("Ligo apola:");
+                    console.log(data);
+                })
+    },[])
+
+    // useEffect(()=>{
+    //     console.log("This is it")
+    //     console.log(props.activeSprints)
+    //     if (props.activeSprints){
+    //         setDate(props.activeSprints[0].date_to)
+    //     }
+
+    // },[props.activeSprints])
+
     const [cond1, setCond1] = useState(true);
     const [cond2, setCond2] = useState(false);
     const [cond3, setCond3] = useState(true);
@@ -87,6 +112,28 @@ function Backlog(props){
     return (
         <div class="container">
             <div class="row">
+                <div class="card">
+                    <div class="pt-3">
+                    <h5> Ποσοστό ολοκληρωμένων task: </h5>
+                    <div class="progress backprogress" style={{height: "20px"}}>
+                        <div class="progress-bar  backprogress-bar bg-info" role="progressbar" style={{width: `${perc}%`}} aria-valuemin="0" aria-valuemax="100">{`${perc}`}%</div>
+                    </div>
+
+                    <div class="pt-3"/>
+                    <h5> Χρόνος που έχει περάσει από την αρχή του τρέχοντος Sprint: </h5>
+                    <div class="progress backprogress" style={{height: "20px"}}>
+                        <div class="progress-bar backprogress-bar" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                    </div>
+                    
+                    <div class="pt-3"/> 
+                    <h5> Καταληκτική ημερομηνία τρέχοντος Sprint: {date}</h5>
+
+                    <div class="pt-3"/>
+                
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-4">
                 <ul class="list-group" style={{width: '100%'}}>
                     <li class="list-group-item d-flex justify-content-between align-items-center backlog-list" onClick={gg1}>
                         {tasks[0]}
@@ -109,23 +156,6 @@ function Backlog(props){
                         {doneSatus(cond5)}
                     </li>
                 </ul>
-            </div>
-            <div class="row">
-                <div style={{position:'absolute', bottom:'0', width: '70%'}}>
-
-                    <div class="progress backprogress" style={{height: "20px"}}>
-                        <div class="progress-bar backprogress-bar" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                    </div>
-
-                    <div class="pt-3"/>
-
-                    <div class="progress backprogress" style={{height: "20px"}}>
-                        <div class="progress-bar  backprogress-bar bg-info" role="progressbar" style={{width: `${perc}%`}} aria-valuemin="0" aria-valuemax="100">{`${perc}`}%</div>
-                    </div>
-                    
-                    <div class="pt-3"/>
-                
-                </div>
             </div>
         </div>
 
