@@ -1,4 +1,4 @@
-import gr.uoa.di.jete.Assemblers.TaskModelAssembler
+import gr.uoa.di.jete.assemblers.TaskModelAssembler
 import gr.uoa.di.jete.controllers.TaskController
 import gr.uoa.di.jete.models.*
 import gr.uoa.di.jete.repositories.*

@@ -1,4 +1,4 @@
-import gr.uoa.di.jete.Assemblers.DeveloperModelAssembler
+import gr.uoa.di.jete.assemblers.DeveloperModelAssembler
 import gr.uoa.di.jete.controllers.DeveloperController
 import gr.uoa.di.jete.models.*
 import gr.uoa.di.jete.repositories.DeveloperRepository

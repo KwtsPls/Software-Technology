@@ -1,4 +1,4 @@
-import gr.uoa.di.jete.Assemblers.StoryModelAssembler
+import gr.uoa.di.jete.assemblers.StoryModelAssembler
 import gr.uoa.di.jete.controllers.StoryController
 import gr.uoa.di.jete.models.*
 import gr.uoa.di.jete.repositories.*

@@ -85,7 +85,7 @@ function OverviewScreen() {
         if(!recentprojectList.length){
             return(
             <div className="row">
-                <div className="col-md-9 mt-2 offset-1 bg-success text-center noproject-text">
+                <div className="col-md-9 mt-2 mb-5 offset-1 bg-success text-center noproject-text">
                     <p className="homepage-text"> Δεν έχετε ακόμα κάποιο τρέχων project</p>
                 </div>
             </div>
@@ -116,7 +116,7 @@ function OverviewScreen() {
             
             <div className="recproj">
                 <div className="row mt-5 d-flex justify-content-center">
-                    <div className="col-md-8 mt-5 bg-trans ">
+                    <div className="col-md-8 mt-2 bg-trans ">
                         <h2 className="homepage-text curr-proj-title">Πρόσφατα projects &bull; </h2>
 
                     </div>
@@ -128,7 +128,7 @@ function OverviewScreen() {
 
                         (
 
-                            <a className="col-md-2 offset-md-1 mt-4 project-tile text-center">
+                            <a className="col-md-2 offset-md-1 mt-4 mb-5 project-tile text-center">
                                 <Link to={{pathname: '/projects/projectNo',
                                         state: {
                                             projectId: i.id,
@@ -152,7 +152,138 @@ function OverviewScreen() {
                 </div>
 
             </div>
-        
+
+            <div className="row mt-5 d-flex justify-content-center">
+                <div className="col-md-8 mt-2 bg-trans ">
+                    <h2 className="homepage-text curr-proj-title">Σύνοψη &bull; </h2>
+
+                </div>
+            </div>
+
+                                    {/* bars */}
+            <div class="row genbacklog-container d-flex justify-content-center">
+                    <div class="col-md-9 mt-4 mb-4">
+                        <div class="card mycard proj-progress-card">
+                            <div class="card-block mycard-block">
+                                <div class="row">
+                                    <div class="col-xl-4 col-md-6">
+                                        <h3 className="backlogtitle">Ολοκληρωμένα Projects</h3>
+                                        <h5 class="m-b-30 f-w-700">1 από 4</h5>
+                                        <div class="progress countprogress">
+                                            <div class="progress-bar countprogress-bar bg-c-red" style={{width:'25%'}}></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-md-6">
+                                        <h3 className="backlogtitle">Ολοκληρωμένα Epics</h3>
+                                        <h5 class="m-b-30 f-w-700">4 από 6</h5>
+                                        <div class="progress countprogress">
+                                            <div class="progress-bar countprogress-bar bg-c-blue" style={{width:'65%'}}></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-md-6">
+                                        <h3 className="backlogtitle">Ολοκληρωμένα Stories</h3>
+                                        <h5 class="m-b-30 f-w-700">10 από 20</h5>
+                                        <div class="progress countprogress">
+                                            <div class="progress-bar countprogress-bar bg-c-green" style={{width:'85%'}}></div>
+                                        </div>
+                                    </div>
+                                    {/* <div class="col-xl-3 col-md-6">
+                                        <h3 className="backlogtitle">Ανοικτά Issues</h3>
+                                        <h5 class="m-b-30 f-w-700"></h5>
+                                        <div class="progress countprogress">
+                                            <div class="progress-bar countprogress-bar bg-c-yellow" style={{width:'45%'}}></div>
+                                        </div>
+                                    </div> */}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row genbacklog-container justify-content-center someprojects-container">
+
+                    <div className="col-md-3 mt-5">
+                        
+                        
+                            
+
+                            <div class="col-md-8 ">
+                            <h2 className="backlogtitle">Project 1</h2>
+                            <h4 className="backlogtitle mt-4">Ολοκληρωμένα Epics</h4>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                </div>
+                            </div>
+
+
+                        
+                            <div class="col-md-8 mt-3">
+                                <h4 className="backlogtitle">Ολοκληρωμένα Tasks</h4>
+
+                                <div class="progress">
+                                    <div class="progress-bar bg-danger" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                </div>
+                            </div>
+
+                        
+                    </div>
+
+                    <div className="col-md-3 mt-5">
+                        
+                        
+                            
+
+                            <div class="col-md-8">
+                            <h2 className="backlogtitle">Project 1</h2>
+                            <h4 className="backlogtitle mt-4">Ολοκληρωμένα Epics</h4>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                </div>
+                            </div>
+
+
+                        
+                            <div class="col-md-8 mt-3">
+                                <h4 className="backlogtitle">Ολοκληρωμένα Tasks</h4>
+
+                                <div class="progress">
+                                    <div class="progress-bar bg-danger" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                </div>
+                            </div>
+
+                        
+                    </div>
+
+                    <div className="col-md-3 mt-5">
+                        
+                        
+                            
+
+                            <div class="col-md-8">
+                            <h2 className="backlogtitle">Project 1</h2>
+                            <h4 className="backlogtitle mt-4">Ολοκληρωμένα Epics</h4>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                </div>
+                            </div>
+
+
+                        
+                            <div class="col-md-8 mt-3">
+                                <h4 className="backlogtitle">Ολοκληρωμένα Tasks</h4>
+
+                                <div class="progress">
+                                    <div class="progress-bar bg-danger" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                </div>
+                            </div>
+
+                        
+                    </div>
+
+                    <div className="col-12" style={{height: '200px' , background: 'white'}}> </div>
+
+
+                </div>
         </div>
 
     );

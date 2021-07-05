@@ -1,6 +1,6 @@
 package gr.uoa.di.jete.controllers;
 
-import gr.uoa.di.jete.Assemblers.UserModelAssembler;
+import gr.uoa.di.jete.assemblers.UserModelAssembler;
 import gr.uoa.di.jete.exceptions.EmailInUseException;
 import gr.uoa.di.jete.exceptions.UserInUseException;
 import gr.uoa.di.jete.exceptions.UserNotFoundException;

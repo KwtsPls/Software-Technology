@@ -18,14 +18,20 @@ function ProjectInfoPopUp(props){
     const [title, setTitle] = useState("")
 
     function archive() {
-        fetch('http://localhost:8080/projects/' + props.projectId + '/archive' , {
+        fetch('http://localhost:8080/projects/' + props.projectId + '/archive/'+loggedUser.id , {
                 method: 'put', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken
                     }
             })
                 .then(res => res.json())
                 .then((data) => {
-                    console.log(data)
+                    console.log(data) // expects {message:"OK"}
+                    if (data.message){
+                        if (data.message === "OK"){
+                            window.location.reload(false);
+                        }
+
+                    }
                 })
     }
 

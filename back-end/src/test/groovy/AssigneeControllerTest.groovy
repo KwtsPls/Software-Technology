@@ -1,4 +1,5 @@
-import gr.uoa.di.jete.Assemblers.AssigneeModelAssembler
+import gr.uoa.di.jete.assemblers.AssigneeModelAssembler
+import gr.uoa.di.jete.assemblers.UserModelAssembler
 import gr.uoa.di.jete.controllers.AssigneeController
 import gr.uoa.di.jete.models.Assignee
 import gr.uoa.di.jete.models.AssigneeId
@@ -22,12 +23,14 @@ class AssigneeControllerTest extends Specification {
 
     AssigneeRepository repository
     AssigneeModelAssembler assembler
+    UserModelAssembler userModelAssembler
 
     AssigneeController controller
     def setup(){
         repository = Stub(AssigneeRepository.class)
         assembler = new AssigneeModelAssembler()
-        controller = new AssigneeController(repository,assembler)
+        userModelAssembler = new UserModelAssembler()
+        controller = new AssigneeController(repository,assembler,userModelAssembler)
         mvc = MockMvcBuilders.standaloneSetup(controller)
                 .build()
     }

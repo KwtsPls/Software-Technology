@@ -1,7 +1,7 @@
 package gr.uoa.di.jete.controllers;
 
 
-import gr.uoa.di.jete.Assemblers.SprintModelAssembler;
+import gr.uoa.di.jete.assemblers.SprintModelAssembler;
 import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.DeveloperNotFoundException;
 import gr.uoa.di.jete.exceptions.ProjectNotFoundException;

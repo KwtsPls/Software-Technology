@@ -1,0 +1,22 @@
+
+
+.notifications-title{
+    font-family: myquoteFont;
+    color: #202020ee;
+    font-weight: 200;
+    font-size: 1.9em;
+}
+
+.notification-desc{
+    padding-top: 10px;
+    /* margin-top: 3px; */
+}
+
+.notification-box{
+    border-bottom: 1px solid #dbdbdb70;
+    margin: 4px;
+}
+
+.notification-btns{
+    margin-top: 6px;
+}

@@ -1,7 +1,7 @@
 package gr.uoa.di.jete.controllers;
 
 
-import gr.uoa.di.jete.Assemblers.DeveloperModelAssembler;
+import gr.uoa.di.jete.assemblers.DeveloperModelAssembler;
 import gr.uoa.di.jete.auth.MessageResponse;
 import gr.uoa.di.jete.exceptions.DeveloperNotFoundException;
 import gr.uoa.di.jete.exceptions.ProjectNotFoundException;
@@ -10,11 +10,13 @@ import gr.uoa.di.jete.models.*;
 import gr.uoa.di.jete.repositories.DeveloperRepository;
 import gr.uoa.di.jete.repositories.ProjectRepository;
 import gr.uoa.di.jete.repositories.UserRepository;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.hateoas.*;
-
+import javax.persistence.Tuple;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -106,6 +108,17 @@ public class DeveloperController {
     @GetMapping("/developers/users/{user_id}/notifications")
     List<?> getNotificationsNumber(@PathVariable Long user_id){
         return repository.getProjectsNotificationNumber(user_id);
+    }
+
+    @GetMapping("/developers/users/{user_id}/invitations")
+    ResponseEntity<?> getNotifications(@PathVariable Long user_id){
+        List<Tuple> list = repository.findProjectInvitations(user_id);
+        List<ProjectInvitation> invitationList = new ArrayList<>();
+        for (Tuple t : list) {
+            ProjectInvitation projectInvitation = new ProjectInvitation((Long) t.get(0), (String) t.get(1), (String) t.get(2));
+            invitationList.add(projectInvitation);
+        }
+        return ResponseEntity.ok(new ProjectInvitationResponse(invitationList));
     }
 
     @DeleteMapping("/developers/users/{user_id}/projects/{project_id}")

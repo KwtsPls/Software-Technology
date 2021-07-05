@@ -1,15 +1,23 @@
 package gr.uoa.di.jete.controllers;
 
-import gr.uoa.di.jete.Assemblers.TaskModelAssembler;
+import gr.uoa.di.jete.assemblers.TaskModelAssembler;
 import gr.uoa.di.jete.auth.MessageResponse;
-import gr.uoa.di.jete.exceptions.*;
+import gr.uoa.di.jete.exceptions.EpicNotFoundException;
+import gr.uoa.di.jete.exceptions.SprintNotFoundException;
+import gr.uoa.di.jete.exceptions.StoryNotFoundException;
+import gr.uoa.di.jete.exceptions.TaskNotFoundException;
 import gr.uoa.di.jete.models.*;
-import gr.uoa.di.jete.repositories.*;
+import gr.uoa.di.jete.repositories.EpicRepository;
+import gr.uoa.di.jete.repositories.SprintRepository;
+import gr.uoa.di.jete.repositories.StoryRepository;
+import gr.uoa.di.jete.repositories.TaskRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Tuple;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -97,6 +105,18 @@ public class TaskController {
                 .orElseThrow(()-> new TaskNotFoundException(new TaskId(id,epic_id,sprint_id,project_id,story_id)));
 
         return assembler.toModel(task);
+    }
+
+    @GetMapping("/projects/{project_id}/sprints/active/tasks")
+    ResponseEntity<?> getAllTasksInActiveSprint(@PathVariable Long project_id){
+        List<Tuple> list = repository.findAllTasksInActiveSprint(project_id);
+        List<ProjectTasks> projectTasksList = new ArrayList<>();
+        for (Tuple t : list) {
+            ProjectTasks projectTasks = new ProjectTasks((Long) t.get(0), (Long) t.get(1), (Long) t.get(2),(Long) t.get(3),(Long) t.get(4),
+                    (String) t.get(5),(String) t.get(6),(Long) t.get(7),(String) t.get(8),(String) t.get(9));
+            projectTasksList.add(projectTasks);
+        }
+        return ResponseEntity.ok(new ProjectTasksResponse(projectTasksList));
     }
 
     @PutMapping("/projects/{project_id}/sprints&epics/{sprint_id}&{epic_id}/stories/{story_id}/tasks/{id}/archive")

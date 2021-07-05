@@ -76,7 +76,7 @@
 }
 
 .proj-devadd-btn, .proj-list-btn{
-  margin-left: 20px;
+  margin-left: 0px;
 }
 
 .goproject{
@@ -101,4 +101,47 @@
 
 .backprogress-bar{
   background: linear-gradient(to right, #33ccff 0%, #0033cc 100%);
+}
+
+.img-btn-proj{
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+  opacity: 0.7;
+
+}
+
+.img-btn-proj:hover{
+  opacity: 0.9;
+
+
+}
+
+.add-btn{
+  margin-left: 20px;
+  /* opacity: 0.9; */
+}
+
+.buttons-proj{
+  padding-left: 7%;
+}
+
+.buttons-epic{
+  padding-left: 4%;
+}
+
+.delete-icon{
+  height: 17px;
+  width: 17px;
+  /* margin-left: 25px; */
+}
+
+@media screen and (max-width: 1300px) {
+  
+  
+  .buttons-proj{
+    padding-left: 0%;
+    /* margin-left: -200px; */
+  }
 }

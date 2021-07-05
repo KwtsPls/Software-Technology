@@ -1,4 +1,4 @@
-import gr.uoa.di.jete.Assemblers.SprintModelAssembler
+import gr.uoa.di.jete.assemblers.SprintModelAssembler
 import gr.uoa.di.jete.controllers.SprintController
 import gr.uoa.di.jete.models.*
 import gr.uoa.di.jete.repositories.DeveloperRepository
