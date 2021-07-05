@@ -85,6 +85,22 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
+    @PostMapping("/users/{id}/updatePassword")
+    public ResponseEntity<?> updateUserPassword(@RequestParam("password") String password, @RequestParam("old_password") String old_password,@PathVariable Long id){
+        User user = userRepository.findById(id).orElseThrow(()->new UserNotFoundException(id));
+
+        //Check if the old password is the user's current password
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getUsername(), old_password));
+
+        //update the password
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String password_hash = passwordEncoder.encode(password);
+        userRepository.changeUserPassword(id,password_hash);
+
+        return ResponseEntity.ok(new MessageResponse("Password updated successfully!"));
+    }
+
     @GetMapping("/verify/code={code}&u={username}")
     public ResponseEntity<?> verifyUser(@PathVariable String code, @PathVariable String username){
         int status = userService.setUserToEnabled(code,username);
