@@ -15,6 +15,7 @@ function Backlog(props){
     const [clickedTask, setClickedTask] = useState({id:'0',title:'_',epic_title:"_",story_title:"_"});
 
     const [date, setDate] = useState("")
+    const [sprintId, setSprintId] = useState(0)
 
     const [tasksList, setTasksList] = useState([])
 
@@ -51,6 +52,7 @@ function Backlog(props){
         console.log(props.activeSprint)
         if (props.activeSprint){
             setDate(props.activeSprint.date_to)
+            setSprintId(props.activeSprint.id)
         }
 
     },[props.activeSprint])
@@ -77,6 +79,24 @@ function Backlog(props){
     function openTask(task){
         setClickedTask(task)
         setModalTaskInfoShow(true)
+    }
+
+    function finalizeSprint(){
+        fetch('http://localhost:8080/projects/'+ props.projectId +'/sprints/archive/'+loggedUser.id, {
+                method: 'put', 
+                headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    console.log("Newly created paraepomeno sprint:");
+                    console.log(data);
+                    if (data.id){
+                        if (data.status === 3){
+                            window.location.reload(false);
+                        }
+                    }
+                })
+
     }
 
     const tasks = ['Make Unittests for new modules','Correct port connectivity for PDCH','Rewrite auth for system_aaa','Make new OHM samples','Cook a nice carbonara']
@@ -108,6 +128,11 @@ function Backlog(props){
                             {doneSatus(i.status)}
                         </li>)}
                     </ul>
+                </div>
+                <div class="row pt-4">
+                    <div>
+                        <button className='btn btn-primary' onClick={()=>finalizeSprint()}>Ολοκλήρωση του Sprint</button>
+                    </div>
                 </div>
             </div>
         </div>

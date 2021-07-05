@@ -14,7 +14,6 @@ import SettingsProfilePage from './pageComponents/settings/SettingsProfilePage.j
 import ProfilePage from './pageComponents/ProfilePage.js'
 import ProjectNoPage from './pageComponents/projects/ProjectNoPage.js'
 import ProjectsPage from './pageComponents/projects/ProjectsPage.js'
-import GeneralBacklog from './pageComponents/GeneralBacklog.js'
 import Notifications from './pageComponents/Notifications.js'
 
 

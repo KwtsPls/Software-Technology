@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../App.css';
 import backlogicon from '../images/backlogout.png'
 import backloghovericon from '../images/backloghover.png'
@@ -61,6 +61,27 @@ function SideNavBar(){
 	// 	setTimeout(function(){window.location.reload();}, 10);
     // }
 
+	const [notifs, setNotifs] = useState(0)
+
+	useEffect(()=>{// /developers/users/{user_id}/notifications
+		if (loggedUser){
+			fetch('http://localhost:8080/developers/users/' + loggedUser.id + '/notifications', {
+                method: 'get', 
+                headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    console.log("These is the number of notifs:")
+                    console.log(data);
+					if (data){
+						setNotifs(data[0])
+					}
+                })
+		}
+	},[])
+
+	
+
     return (
         <div className="SideNavBar" >
 			<Link to='/profile'>
@@ -81,8 +102,8 @@ function SideNavBar(){
 				<Link to='/notifications'>
 
 				<div id = "secondOption" onMouseEnter={() => fnover("Backlog")} onMouseLeave={() => fnout("Backlog")}>
-					<a href="#" className="navChoice" id="BacklogOut"><img className = "menu-icon backlog-icon" src={backlogicon} alt="logo"></img><span>Ειδοποιήσεις</span></a>
-					<a href="#" className="navChoice" id="BacklogHover"><img className = "menu-icon backlog-icon" src={backloghovericon} alt="logo"></img><span>Ειδοποιήσεις</span></a>
+					<a href="#" className="navChoice" id="BacklogOut"><img className = "menu-icon backlog-icon" src={backlogicon} alt="logo"></img><span>Ειδοποιήσεις  </span>{(notifs != 0) && <span class="badge bg-danger rounded-pill">{notifs}</span>}</a>
+					<a href="#" className="navChoice" id="BacklogHover"><img className = "menu-icon backlog-icon" src={backloghovericon} alt="logo"></img><span>Ειδοποιήσεις  </span>{(notifs != 0) && <span class="badge bg-danger rounded-pill">{notifs}</span>}</a>
 				</div>
 				</Link>
 

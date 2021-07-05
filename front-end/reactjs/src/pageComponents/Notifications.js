@@ -20,7 +20,6 @@ function OverviewScreen() {
             history.push("/login");
         }
         else {
-            // /developers/users/{user_id}/invitations
             fetch('http://localhost:8080/developers/users/'+loggedUser.id+'/invitations', {
                     method: 'get', 
                     headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
@@ -47,6 +46,11 @@ function OverviewScreen() {
                     .then((data) => {
                         console.log("Tried to delete:");
                         console.log(data); // expecting {message:"OK"}
+                        if (data.message){
+                            if (data.message === "OK"){
+                                window.location.reload(false);
+                            }
+                        }
                     })
     }
 
@@ -59,6 +63,11 @@ function OverviewScreen() {
                     .then((data) => {
                         console.log("Trying to accept:");
                         console.log(data); // expecting {message:"OK"}
+                        if (data.message){
+                            if (data.message === "OK"){
+                                window.location.reload(false);
+                            }
+                        }
                     })
     }
 
@@ -93,7 +102,7 @@ function OverviewScreen() {
                         </div>
                     </>)} 
                 </div>)}
-                {(notifs.length === 0) && <div>No requests</div>}
+                {(notifs.length === 0) && <div className= "justify-content-center text-center"><p className=" text-muted">Καμία Ειδοποίηση</p></div>}
                 
 
 
