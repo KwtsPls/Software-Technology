@@ -310,7 +310,7 @@ function ProjectNoPage() {
                             )}
                             {(pressedTab === "sprints") && sprintsShown.map(i => 
                                     {var index = sprintsShown.indexOf(i);
-                                     var st =  activeStories[index];
+                                     var st =  storiesShown[index];
                                      var nm = "";
                                      if (index === 0){
                                          nm = 'Τρέχων Sprint'
