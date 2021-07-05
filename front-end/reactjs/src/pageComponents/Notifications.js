@@ -102,7 +102,7 @@ function OverviewScreen() {
                         </div>
                     </>)} 
                 </div>)}
-                {(notifs.length === 0) && <div className= "justify-content-center text-center"><p className=" text-muted">No requests</p></div>}
+                {(notifs.length === 0) && <div className= "justify-content-center text-center"><p className=" text-muted">Καμία Ειδοποίηση</p></div>}
                 
 
 
