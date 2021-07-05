@@ -4,6 +4,7 @@ import gr.uoa.di.jete.auth.*;
 import gr.uoa.di.jete.exceptions.InvalidUserRegistration;
 import gr.uoa.di.jete.exceptions.UserNotFoundException;
 import gr.uoa.di.jete.models.CustomUserDetails;
+import gr.uoa.di.jete.models.UpdatePasswordDTO;
 import gr.uoa.di.jete.models.User;
 import gr.uoa.di.jete.models.UserDataTransferObject;
 import gr.uoa.di.jete.repositories.UserRepository;
@@ -86,8 +87,11 @@ public class AuthController {
     }
 
     @PostMapping("/users/{id}/updatePassword")
-    public ResponseEntity<?> updateUserPassword(@RequestParam("password") String password, @RequestParam("old_password") String old_password,@PathVariable Long id){
+    public ResponseEntity<?> updateUserPassword(@RequestBody UpdatePasswordDTO updatePasswordDTO, @PathVariable Long id){
         User user = userRepository.findById(id).orElseThrow(()->new UserNotFoundException(id));
+
+        String old_password = updatePasswordDTO.getOld_password();
+        String password = updatePasswordDTO.getPassword();
 
         //Check if the old password is the user's current password
         authenticationManager.authenticate(
