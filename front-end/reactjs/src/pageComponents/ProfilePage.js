@@ -15,7 +15,7 @@ function ProfilePage() {
 
     console.log(loggedUser);
 
-    const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(null);
     const [doneProjects, setdoneProjects] = useState(0);
     const [currentProjects, setcurrentProjects] = useState(0);
     const [user, setUser] = useState([])
@@ -35,6 +35,9 @@ function ProfilePage() {
 
 
     useEffect(() => {
+        let doneProjects = 0
+        let currProjects = 0
+
         document.body.style.background = "#fff";
 
         if (!loggedUser){
@@ -70,17 +73,20 @@ function ProfilePage() {
 
                             for (var i=0; i < (data)._embedded.projectList.length; i++){
                                 if (data._embedded.projectList[i].status){  
-                                    setdoneProjects(doneProjects+1);
+                                    doneProjects++;
                                 }
                                 else {
                                     // console.log("currProj");
-                                    console.log(currentProjects)
-                                    setcurrentProjects(currentProjects+1);
-                                    console.log(currentProjects)
+                                    currProjects++;
 
+                                    console.log(currentProjects)
+                                    console.log(currentProjects)
+                                    
                                 }
                             }
                         }
+                        setdoneProjects(doneProjects);
+                        setcurrentProjects(currProjects);
                         setLoading(false);
 
                     }) 
@@ -107,7 +113,15 @@ function ProfilePage() {
         }
     }
     
+        if((isLoading === null)){
+            return (
 
+            <div className="text-center">
+                <h4 className="homepage-text loading-text ">Loading posts...</h4>
+            </div>
+            
+            );
+        }
     
 
         return (

@@ -15,7 +15,9 @@
 }
 
 
-
+.mycontprojs{
+    margin-left: 120px;
+}
 
 
 /* okkkkkk */
@@ -103,6 +105,8 @@
     padding-left: 4%;
 }
 
-.someprojects-container{
-    
+.genbacklogs-container{
+    padding-right: 7%;
+    padding-left: 7%;
 }
+
