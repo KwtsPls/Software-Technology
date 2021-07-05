@@ -10,6 +10,7 @@ import TaskInfoPopUp from '../../components/TaskInfoPopUp.js'
 import StoriesInEpicsPopUp from '../../components/StoriesInEpicsPopUp.js'
 import { OverlayTrigger, Popover} from 'react-bootstrap'
 import TasksInStoryOfSprintPopUp from '../../components/TasksInStoryOfSprintPopUp.js'
+import deleteicon from '../../images/delete.png'
 
 
 
@@ -38,7 +39,7 @@ function ProjectNoPage() {
             history.push("/login");
         }
         else{
-            // Fetch Projects
+            // Fetch Epics
             fetch('http://localhost:8080/projects/'+ projectId +'/epics', {
                 method: 'get', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
@@ -147,7 +148,7 @@ function ProjectNoPage() {
         changeVerHoz("row pt-3 overflow-auto horizontal-scrollable");
     }
 
-
+    const [focusStory, setFocusStory] = useState({id: 0, title: ""})
 
     //const sprNames = ['Sprint 1','Sprint 2','Sprint 3','Sprint 4','Sprint 5','Sprint 2','Sprint 3','Sprint 4','Sprint 5','Sprint 2','Sprint 3','Sprint 4','Sprint 5'];
     //let pastSprNames = ['Old Sprint 1','Old Sprint 2','Old Sprint 3','Old Sprint 4','Old Sprint 5'];
@@ -165,6 +166,24 @@ function ProjectNoPage() {
     function showStoriesOfEpic(epic) {
         setEpicTBDel(epic)
         setModalSinE(true)
+    }
+
+    function getEpic(id){
+        for (var i=0; i<epicList.length; i++){
+            if (id === epicList[i].id){
+                console.log("found epic:")
+                console.log(epicList[i])
+                return epicList[i]
+            }
+        }
+        console.log('Epic was not found')
+        return {id: 0, title: "__"}
+    }
+
+    function openStory(story){
+        setFocusStory({id: 0, title: ""}) // PROBLEM
+        setFocusStory(story)
+        setModalTinSofS(true)
     }
 
     function delEpic(){
@@ -202,7 +221,7 @@ function ProjectNoPage() {
 
     return (
         <div>
-            <TasksInStoryOfSprintPopUp show={modalTinSofS} onHide={() => setModalTinSofS(false)} projId={projectId} epic={epicTBDel}/>
+            <TasksInStoryOfSprintPopUp show={modalTinSofS} onHide={() => setModalTinSofS(false)} projId={projectId} epicId={focusStory.epic_id} focusStory={focusStory}/>
             <StoriesInEpicsPopUp show={modalSinE} onHide={() => setModalSinE(false)} projId={projectId} epic={epicTBDel}/>
             <IssuePopUp show={modalIssueShow} onHide={() => setModalIssueShow(false)} projId={projectId} epics={epicList} sprints={activeSprints} activeStories={activeStories}/>
             <TaskInfoPopUp show={modalTaskInfoShow} taskName={clickedTask} onHide={() => setModalTaskInfoShow(false)}/>
@@ -265,9 +284,9 @@ function ProjectNoPage() {
                                                         <p className="card-text">{i.description}</p>
                                                         <div className="btn btn-primary project-button" onClick={()=>showStoriesOfEpic(i)}>Εμφάνιση των Stories</div>
                                                     </div>
-                                                    <div className="col-1">
+                                                    <div className="col-1 buttons-epic">
                                                         <OverlayTrigger trigger="click" placement="left" overlay={epicPopover}>
-                                                            <div className="btn btn-primary" onClick={()=>setEpicTBDel(i)}>del</div>
+                                                            <img src={deleteicon} className="img-btn-proj delete-icon " onClick={()=>setEpicTBDel(i)}></img>
                                                         </OverlayTrigger>
                                                     </div>
                                                 </div>
@@ -286,7 +305,7 @@ function ProjectNoPage() {
                                             <div className="card-body sprint-card ">
                                                 <h5 className="card-title">{i.title}</h5>
                                                 <div class="list-group pt-3" style={{width: '100%',"flex-wrap": "nowrap"}}>
-                                                    {st.content.map(k => <button type="button" class="list-group-item list-group-item-action">{k.title}</button>)}
+                                                    {st.content.map(k => <button type="button" class="list-group-item list-group-item-action" onClick={()=>openStory(k)}>{k.title}</button>)}
                                                 </div>
                                                 <div className="pt-3">
                                                 <div className="btn btn-primary project-button">Go somewhere</div>

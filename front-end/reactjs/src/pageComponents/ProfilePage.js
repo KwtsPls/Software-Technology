@@ -62,7 +62,9 @@ function ProfilePage() {
                     .then(res => res.json())
                     .then((data) => {
                         console.log(data);
-                        if(rawProjects._embedded === undefined){
+
+                        if(data._embedded === undefined){
+                            console.log("noprojects at all");
                 
                         }else{
 
@@ -71,7 +73,10 @@ function ProfilePage() {
                                     setdoneProjects(doneProjects+1);
                                 }
                                 else {
+                                    // console.log("currProj");
+                                    console.log(currentProjects)
                                     setcurrentProjects(currentProjects+1);
+                                    console.log(currentProjects)
 
                                 }
                             }
