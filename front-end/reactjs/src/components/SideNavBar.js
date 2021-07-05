@@ -31,12 +31,6 @@ function Dropdown(){
 				<a href="#" className="navChoiceSmall text-center" id="ProfileHover"><span>Προφίλ</span></a>
 			</div>
 		</Link>
-		<Link to='/settings/personalisation'>
-			<div id = "secondOption1" onMouseEnter={() => fnover("Personalisation")} onMouseLeave={() => fnout("Personalisation")}>
-				<a href="#" className="navChoiceSmall text-center" id="PersonalisationOut"><span>Εξατομίκευση</span></a>
-				<a href="#" className="navChoiceSmall text-center" id="PersonalisationHover"><span>Εξατομίκευση</span></a>
-			</div>
-		</Link>
 		<Link to='/settings/security'>
 			<div id = "thirdOption1" onMouseEnter={() => fnover("Security")} onMouseLeave={() => fnout("Security")}>
 				<a href="#" className="navChoiceSmall text-center" id="SecurityOut"><span>Ασφάλεια</span></a>

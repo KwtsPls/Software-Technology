@@ -2,13 +2,14 @@ import React, {useState} from 'react';
 import '../App.css';
 import {Modal, Button} from 'react-bootstrap';
 import AssignDev from './AssignDev.js'
+import TaskWindow from './TaskWindow.js'
 
 
 
 
 function TaskInfoPopUp(props){
 
-    const devs = ["nick", "alex", "jojo"]
+    const [devs, setDevs] = useState([])
 
     return (
         <div>
@@ -20,31 +21,12 @@ function TaskInfoPopUp(props){
                 >
                 <Modal.Header>
                     <Modal.Title id="contained-modal-title-vcenter">
-                    {props.taskName}
+                    {props.task.title}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form className="row g-3">
-                        <div className="col-12">
-                            <label for="inputDescription" className="form-label">Περιγραφή Task: </label>
-                            <div>
-                                <small> Αυτό ειναι ένα τακσ που κάνει διαφορα πράγματα και τα λοιπά </small>
-                            </div>
-                        </div>
-                        <div className="col-12">
-                            <label className="form-label">Story που υπάγεται το task: </label>
-                            <small> Story No. 45 </small>
-                        </div>
-                        <div className="col-12">
-                            <label className="form-label">Epic που υπάγεται το story: </label>
-                            <small> Epic No. 7 </small>
-                        </div>
-                        <div className="col-12">
-                            <label for="assignDev" className="form-label">Developers: </label>
-                            {devs.map(i => <div><span class="badge bg-primary rounded-pill cool-purple">{i}</span></div>
-                            )}
-                        </div>
-                    </form>
+                    {/* <TaskWindow epic={props.epic} focusTask={focusTask} focusStory={focusStory} devs={devs} projId={props.projId}/> */}
+                    <TaskWindow epic={{title: props.task.epic_title}} focusTask={props.task} focusStory={{title: props.task.story_title}} devs={devs} projId={props.projId}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="outline-danger" onClick={props.onHide}>Άκυρο</Button>
