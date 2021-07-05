@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import '../App.css';
 import {Modal, Button} from 'react-bootstrap';
 import AssignDev from './AssignDev.js'
+import { useHistory } from 'react-router-dom'
 
 
 
@@ -9,6 +10,9 @@ import AssignDev from './AssignDev.js'
 function ProjectInfoPopUp(props){
 
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+    const history = useHistory();
+
+
 
     //const devs = ['alex','mich34','nikos','alejiz90']
     const [owner,setOwner] = useState([])
@@ -36,40 +40,44 @@ function ProjectInfoPopUp(props){
     }
 
     useEffect(() => {
-        setOwner([])
-        setDevs([])
-        setDevsPending([])
-        if (props.show){
-            fetch('http://localhost:8080/developers/projects/' + props.projectId, {
-                method: 'get', 
-                headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
-            })
-                .then(res => res.json())
-                .then((data) => {
-                    console.log(data)
-                    for (var i=0; i< data.length; i++){
-                        if(data[i][3]){
-                            owner.push(data[i][1])
-                        }
-                        else {
-                            if (data[i][2]){
-                                devs.push(data[i][1])
+        if (!loggedUser){
+            history.push("/login");
+        }
+        else {
+            setOwner([])
+            setDevs([])
+            setDevsPending([])
+            if (props.show){
+                fetch('http://localhost:8080/developers/projects/' + props.projectId, {
+                    method: 'get', 
+                    headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
+                })
+                    .then(res => res.json())
+                    .then((data) => {
+                        console.log(data)
+                        for (var i=0; i< data.length; i++){
+                            if(data[i][3]){
+                                owner.push(data[i][1])
                             }
                             else {
-                                devsPending.push(data[i][1])
-                            }
+                                if (data[i][2]){
+                                    devs.push(data[i][1])
+                                }
+                                else {
+                                    devsPending.push(data[i][1])
+                                }
 
+                            }
                         }
-                    }
-                    setOwner(owner)
-                    setDevs(devs)
-                    setDevsPending(devsPending)
-                    // setTitle("")
-                    // setDescription("")
-                    // return data;
-                    })
+                        setOwner(owner)
+                        setDevs(devs)
+                        setDevsPending(devsPending)
+                        // setTitle("")
+                        // setDescription("")
+                        // return data;
+                        })
+            }
         }
-        
     },[props.show])
 
     function retDevs(){
