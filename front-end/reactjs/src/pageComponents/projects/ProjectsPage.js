@@ -156,25 +156,32 @@ function ProjectsPage() {
                             {
                                 projectList.map(i => i.title.toLowerCase().includes(searchVal.toLowerCase()) &&
                                 (<div key={i.id + i.title} className="row pt-3">
-                                    <div className="col-12">
+                                    <div className="col-md-12">
                                         <div className="card">
                                             <div className="card-body proj-container">
                                                 <div className="row">
-                                                    <div className="col-12 col-md-10">
+                                                    {/* <div className="col-12"> */}
+                                                        <div className="col-12 col-md-10">
 
-                                                        <h5 className="card-title">{i.title}</h5>
-                                                        <p className="card-text">{i.description}</p>
+                                                            <h5 className="card-title">{i.title}</h5>
+                                                            <p className="card-text">{i.description}</p>
 
-                                                    </div>
-                                                    <div className="col-6 col-md-2 buttons-proj">
-                                                        <div className="float-end">
+                                                        </div>
+                                                        <div className="col-6 col-md-2 buttons-proj">
                                                             {!i.status && (<img src={adddev} className="img-btn-proj add-btn"  onClick={() => showAdd(i.id,i.title)}></img>)}
                                                             <img src={info} className="img-btn-proj" onClick={() => showInfo(i.id,i.title,i.status)}></img>
+
                                                         </div>
-                                                    </div>
+
+
+
+                                                    
                                                 </div>
                                                 <div className="row mt-4">
                                                     <div className="col-12">
+                                                    
+                                                        {/* <button className="btn btn-primary btn-sm btn-dark proj-info-btn" onClick={() => showInfo(i.id,i.title,i.status)}>Πληροφορίες / Αρχειοθέτηση</button> */}
+                                                        {/* {!i.status && (<button className="btn btn-primary btn-sm btn btn-success proj-devadd-btn"  onClick={() => showAdd(i.id,i.title)}>Προσθήκη συνεργάτη</button>)} */}
                                                         <Link to={{pathname: '/projects/projectNo',
                                                                     state: {
                                                                         projectId: i.id,
@@ -184,13 +191,18 @@ function ProjectsPage() {
 
                                                             <a className="btn btn-primary  btn-sm project-button proj-list-btn">Μετάβαση στο project</a>
                                                         </Link>
+                                                    {/* </div> */}
                                                     </div>
-                                                </div> 
+
+                                                </div>
+                                                  
                                             </div>
                                         </div>
                                     </div>
                                 </div>)
                             )}
+                            {(projectList.length === 0) && <div className= "justify-content-center text-center"><p className=" text-muted">Δεν υπάρχει ακόμα κάποιο project</p></div>}
+
                         </div>
                     </div>
                 </div>
