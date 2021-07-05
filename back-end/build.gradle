@@ -55,6 +55,14 @@ dependencies {
 
 }
 
+jar {
+	manifest {
+		attributes(
+				'Main-Class': 'gr.uoa.di.jete.JeteApplication'
+		)
+	}
+}
+
 test {
 	useJUnitPlatform()
 	testLogging {

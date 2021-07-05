@@ -1,7 +1,7 @@
 package gr.uoa.di.jete.models;
 
 public class ProjectTasks {
-    Long task_id;
+    Long id;
     Long story_id;
     Long epic_id;
     Long sprint_id;
@@ -12,10 +12,10 @@ public class ProjectTasks {
     String story_title;
     String epic_title;
 
-    public ProjectTasks(Long task_id,Long story_id,Long epic_id,Long sprint_id,Long project_id
+    public ProjectTasks(Long id,Long story_id,Long epic_id,Long sprint_id,Long project_id
             ,String title,String description,Long status,String story_title,String epic_title){
 
-        this.task_id = task_id;
+        this.id = id;
         this.story_id = story_id;
         this.epic_id = epic_id;
         this.sprint_id = sprint_id;
@@ -26,6 +26,14 @@ public class ProjectTasks {
         this.story_title = story_title;
         this.epic_title = epic_title;
 
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setTitle(String title) {
@@ -80,7 +88,6 @@ public class ProjectTasks {
         return story_title;
     }
 
-
     public String getDescription() {
         return description;
     }
@@ -89,20 +96,12 @@ public class ProjectTasks {
         this.description = description;
     }
 
-    public Long getTask_id() {
-        return task_id;
-    }
-
     public void setEpic_id(Long epic_id) {
         this.epic_id = epic_id;
     }
 
     public void setEpic_title(String epic_title) {
         this.epic_title = epic_title;
-    }
-
-    public void setTask_id(Long task_id) {
-        this.task_id = task_id;
     }
 
     public void setStory_title(String story_title) {
