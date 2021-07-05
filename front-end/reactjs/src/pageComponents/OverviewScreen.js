@@ -2,6 +2,8 @@ import { set } from 'date-fns';
 import React, { Component, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import '../css/Overviewscreen.css'
+import '../css/generalbacklog.css'
+
 import sunphoto from '../images/sun2.png'
 
 
@@ -13,13 +15,15 @@ function OverviewScreen() {
 
     const history = useHistory();
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
-    const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(null);
     const [tilecounter, setTileCounter] = useState(0);
     const [rawProjects, setRawProjects] = useState(null);
     const [recentprojectList,setRecentProjectList] = useState([]);
     const [projectidList, setProjectidList] = useState([]);
     const [projectSprintInfo, setProjectSprintInfo] = useState(0)
     const [projectSprintDict, setProjectSprintDict] = useState({})
+
+    const [lastSprintNumber, setLastSprintNumber] = useState(0)
 
     const [totalSprintNumber, setTotalSprintNumber] = useState(0)
     const [doneProjects, setDoneProjects] = useState(null);
@@ -46,6 +50,8 @@ function OverviewScreen() {
             history.push("/login");
         }
         else{
+            let overall_dict = {};
+
             fetch('http://localhost:8080/users/'+ loggedUser.id +'/projects', {
             // fetch('http://localhost:8080/users/1/projects', {
 
@@ -117,8 +123,12 @@ function OverviewScreen() {
                     
 
                     console.log("Project id " + idProj[1])
+                    var dict = {};
                     
                     for(var i=0 ; i < idProj.length ; i++){
+
+                        let count = 0;
+                        let i_counter = i;
 
                         fetch('http://localhost:8080/projects/' + idProj[i] + '/sprints/active', {
                         // fetch('http://localhost:8080/users/1/projects', {
@@ -127,7 +137,7 @@ function OverviewScreen() {
                             headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
                         })
                             .then(res => res.json())
-                            .then((data, i) => {
+                            .then((data) => {
                                 // console.log(idProj[i])
                                 
                                 if(data._embedded){
@@ -136,54 +146,50 @@ function OverviewScreen() {
                                     
         
 
-                                    totalProj += data._embedded.sprintList.length;
-                                    
-                                    otin =data._embedded.sprintList.length;
+                                    count = data._embedded.sprintList.length;
+                                    console.log("exw toso re file " + count)
                                 }  
                                 
 
                                 
-                                // setTotalSprintNumber(totalSprints)
+                                setLastSprintNumber(count)
+                                console.log("etsigoust " + idProj[i_counter] +"ontws" + count);
+                                dict[idProj[i_counter]] = count;
+                                console.log(dict)
+                                
+                                
                             })
-                            //get last number of sprints
-                            setProjectSprintInfo(otin)
-                            console.log("malistusss " + projectSprintInfo)
-                            // console.log("asa " + projectSprintInfo)
-                            // var temp = idProj[i] + projectSprintInfo
-                            
-                        sprint_proj_info[idProj[i]] = projectSprintInfo
-
-                        // console.log("les? " + temp)
-                        // console.log(sprint_proj_info)
-
-                        // console.log("sigamhn " + projectSprintDict)
                     }
+
+
                     console.log("OURLAIZEW")
+                    console.log(dict)
+                    console.log("OURLAIZAAAAAAAAAAAAs")
+                
+                
                     
-                    
-                    setProjectSprintDict(sprint_proj_info)
-                    console.log(sprint_proj_info)
-                    console.log(projectSprintDict)
-
                     var totalSprints = 0;
-                    for (var key in projectSprintDict) {
-                        totalSprints += projectSprintDict[key];
-                        // your code here...
-                    }
-
+                    // for (var key in projectSprintDict) {
+                    //     totalSprints += projectSprintDict[key];
+                    //     // your code here...
+                    // }
+                    console.log(dict)
+                    
                     setTotalSprintNumber(totalSprints)
+                    // setLoading(false);
+                    setProjectSprintDict(dict);
 
-                    console.log("malista " + totalSprintNumber)
 
 
+                    
+                    
                 })
-
+                
 
                 //Epics
                 
 
 
-                setLoading(false);
 
             
         }
@@ -290,7 +296,7 @@ function OverviewScreen() {
     
     }
     
-    if(donePerc === null){
+    if(projectSprintDict === null){
         return (
 
         <div className="text-center">
@@ -420,6 +426,8 @@ function OverviewScreen() {
                                 <h2 className="backlogtitle">{i.title}</h2>
                                 <h4 className="backlogtitle mt-4">Sprints</h4>
                                     <div className="progress">
+                                        {console.log("ti els " + i.id + "totso " + projectSprintDict)}
+                                        {console.log(projectSprintDict)}
                                         <div className="progress-bar bg-warning" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{projectSprintDict[i.id]}</div>
                                     </div>
                                 </div>
