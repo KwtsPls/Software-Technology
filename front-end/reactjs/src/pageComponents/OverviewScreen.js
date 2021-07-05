@@ -1,3 +1,4 @@
+import { set } from 'date-fns';
 import React, { Component, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import '../css/Overviewscreen.css'
@@ -14,9 +15,28 @@ function OverviewScreen() {
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
     const [isLoading, setLoading] = useState(true);
     const [tilecounter, setTileCounter] = useState(0);
-    const [rawProjects, setRawProjects] = useState([]);
-    const [recentprojectList,setRecentProjectList] = useState([])
+    const [rawProjects, setRawProjects] = useState(null);
+    const [recentprojectList,setRecentProjectList] = useState([]);
+    const [projectidList, setProjectidList] = useState([]);
+    const [projectSprintInfo, setProjectSprintInfo] = useState(0)
+    const [projectSprintDict, setProjectSprintDict] = useState({})
 
+    const [totalSprintNumber, setTotalSprintNumber] = useState(0)
+    const [doneProjects, setDoneProjects] = useState(null);
+    const [currProjects, setCurrProjects] = useState(null);
+    const [allProjects, setAllProjects] = useState(null);
+    
+    const [donePerc, setDonePerc] = useState(null);
+    
+    const recProj = []
+    const currProj = []
+    const doneProj = []
+    const allProj = []
+    const idProj = []
+    const sprint_proj_info = {}
+    var totalProj = 0;
+    var otin=0;
+    var percentageStr = null
 
     useEffect(() => {
         document.body.style.background = "#fff";
@@ -34,34 +54,210 @@ function OverviewScreen() {
             })
                 .then(res => res.json())
                 .then((data) => {
-                    console.log(data);
-                    setRawProjects(data);
-                    setLoading(false);
+                    
+                    
+                    if(data._embedded){
+                        console.log(data);
+                        
+                        setRawProjects(data._embedded.projectList);
+                        console.log(data);
+
+                        console.log(data._embedded.projectList);
+                        
+                        for (var i=0; i < data._embedded.projectList.length; i++){
+                            if (! data._embedded.projectList[i].status){
+                                
+                                if(recProj.length < 3){
+                                    recProj.push(data._embedded.projectList[i])
+                                    idProj.push(data._embedded.projectList[i].id)
+
+                                }
+        
+                                currProj.push(data._embedded.projectList[i])
+                            
+                            }else{
+                            
+                                doneProj.push(data._embedded.projectList[i])
+                                
+                            }
+                            
+                            allProj.push(data._embedded.projectList[i])
+                        }
+                        
+                        
+                        if(allProj.length != 0){
+
+                            var percentage = (doneProj.length * 100) / allProj.length;
+                            
+                            console.log(idProj)
+                            
+                            
+                            // setDonePerc(((doneProj.length * 100) / allProj.length) + '%')
+                            percentageStr = percentage + '%'
+                        }else{
+                            percentageStr = '0%'
+                            
+                        }
+                        
+                        
+                        
+                        
+                        
+                    }
+                    
+                    setAllProjects(data._embedded.projectList.length)
+                    setDoneProjects(doneProj.length)
+                    setCurrProjects(currProj.length)
+                    setProjectidList(idProj);
+                    setRecentProjectList(recProj)
+                    setDonePerc(percentageStr)
+
                 })
+                .then((kappa) => {
+                    
+
+                    console.log("Project id " + idProj[1])
+                    
+                    for(var i=0 ; i < idProj.length ; i++){
+
+                        fetch('http://localhost:8080/projects/' + idProj[i] + '/sprints/active', {
+                        // fetch('http://localhost:8080/users/1/projects', {
+
+                            method: 'get', 
+                            headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
+                        })
+                            .then(res => res.json())
+                            .then((data, i) => {
+                                // console.log(idProj[i])
+                                
+                                if(data._embedded){
+
+                                    console.log(data)
+                                    
+        
+
+                                    totalProj += data._embedded.sprintList.length;
+                                    
+                                    otin =data._embedded.sprintList.length;
+                                }  
+                                
+
+                                
+                                // setTotalSprintNumber(totalSprints)
+                            })
+                            //get last number of sprints
+                            setProjectSprintInfo(otin)
+                            console.log("malistusss " + projectSprintInfo)
+                            // console.log("asa " + projectSprintInfo)
+                            // var temp = idProj[i] + projectSprintInfo
+                            
+                        sprint_proj_info[idProj[i]] = projectSprintInfo
+
+                        // console.log("les? " + temp)
+                        // console.log(sprint_proj_info)
+
+                        // console.log("sigamhn " + projectSprintDict)
+                    }
+                    console.log("OURLAIZEW")
+                    
+                    
+                    setProjectSprintDict(sprint_proj_info)
+                    console.log(sprint_proj_info)
+                    console.log(projectSprintDict)
+
+                    var totalSprints = 0;
+                    for (var key in projectSprintDict) {
+                        totalSprints += projectSprintDict[key];
+                        // your code here...
+                    }
+
+                    setTotalSprintNumber(totalSprints)
+
+                    console.log("malista " + totalSprintNumber)
+
+
+                })
+
+
+                //Epics
+                
+
+
+                setLoading(false);
+
             
         }
 
     }, []);
 
-    const recProj = []
+   
 
-    useEffect(() => {
-        if (!isLoading){
-            if(rawProjects._embedded === undefined){
+
+    // useEffect(() => {
+        
+    //     if (!isLoading){
+    //         if(rawProjects._embedded === undefined){
                 
-            }else{
+    //         }else{
 
-                for (var i=0; recProj.length <3 && i < rawProjects._embedded.projectList.length; i++){
-                    if (! rawProjects._embedded.projectList[i].status){
-                        recProj.push(rawProjects._embedded.projectList[i])
-                    }   
-                }
-            }
+    //             for (var i=0; i < rawProjects._embedded.projectList.length; i++){
+    //                 console.log(rawProjects._embedded.projectList.length)
+    //                 if (! rawProjects._embedded.projectList[i].status){
+                        
+    //                     if(recProj.length < 3){
+    //                         recProj.push(rawProjects._embedded.projectList[i])
+    //                     }
+
+    //                     currProj.push(rawProjects._embedded.projectList[i])
+                    
+    //                 }else{
+                    
+    //                     doneProj.push(rawProjects._embedded.projectList[i])
+                        
+    //                 }
+                    
+    //                 allProj.push(rawProjects._embedded.projectList[i])
+                    
+    //             }
+                
+    //             setAllProjects(rawProjects._embedded.projectList.length)
+    //             setDoneProjects(doneProj.length)
+    //             setCurrProjects(currProj.length)
+
+    //             console.log("tiptoa")
+
+    //             console.log(allProjects)
+    //             console.log(currProjects)
+    //             console.log(doneProjects)
+               
+    //             var percentage = (doneProjects * 100) / allProjects;
+    //             console.log(percentage)
+    //             console.log(percentage + 'sdasdasd')
+                
+    //             console.log("tiptoa")
+                
+                
+                
+    //             setDonePerc(((doneProjects * 100) / allProjects) + '%')
+                
+                
+    //             console.log("tiiii" + donePerc)
+
+    //             console.log(doneProj)
+    
+                
+    //         }
             
-            setRecentProjectList(recProj)
-        }
-    },[isLoading])
+    //         setRecentProjectList(recProj)
+    //     }
+    // },[isLoading])
 
+
+   
+
+    function doneProjectsNumber(){
+        return doneProj.length;
+    }
 
 
     function get_recentProjectTile(name){
@@ -92,6 +288,16 @@ function OverviewScreen() {
             );
         }
     
+    }
+    
+    if(donePerc === null){
+        return (
+
+        <div className="text-center">
+            <h4 className="homepage-text loading-text ">Loading posts...</h4>
+        </div>
+        
+        );
     }
 
     return (
@@ -161,37 +367,37 @@ function OverviewScreen() {
             </div>
 
                                     {/* bars */}
-            <div class="row genbacklog-container d-flex justify-content-center">
-                    <div class="col-md-9 mt-4 mb-4">
-                        <div class="card mycard proj-progress-card">
-                            <div class="card-block mycard-block">
-                                <div class="row">
-                                    <div class="col-xl-4 col-md-6">
+            <div className="row genbacklog-container d-flex justify-content-center">
+                    <div className="col-md-9 mt-4 mb-4">
+                        <div className="card mycard proj-progress-card">
+                            <div className="card-block mycard-block">
+                                <div className="row">
+                                    <div className="col-xl-12 col-md-6">
                                         <h3 className="backlogtitle">Ολοκληρωμένα Projects</h3>
-                                        <h5 class="m-b-30 f-w-700">1 από 4</h5>
-                                        <div class="progress countprogress">
-                                            <div class="progress-bar countprogress-bar bg-c-red" style={{width:'25%'}}></div>
+                                        <h5 className="m-b-30 f-w-700">{doneProjects} από {allProjects}</h5>
+                                        <div className="progress countprogress">
+                                            <div className="progress-bar countprogress-bar bg-c-green" style={{width: donePerc }}></div>
                                         </div>
                                     </div>
-                                    <div class="col-xl-4 col-md-6">
+                                    {/* <div className="col-xl-4 col-md-6">
                                         <h3 className="backlogtitle">Ολοκληρωμένα Epics</h3>
-                                        <h5 class="m-b-30 f-w-700">4 από 6</h5>
-                                        <div class="progress countprogress">
-                                            <div class="progress-bar countprogress-bar bg-c-blue" style={{width:'65%'}}></div>
+                                        <h5 className="m-b-30 f-w-700">4 από 6</h5>
+                                        <div className="progress countprogress">
+                                            <div className="progress-bar countprogress-bar bg-c-blue" style={{width:'65%'}}></div>
                                         </div>
                                     </div>
-                                    <div class="col-xl-4 col-md-6">
+                                    <div className="col-xl-4 col-md-6">
                                         <h3 className="backlogtitle">Ολοκληρωμένα Stories</h3>
-                                        <h5 class="m-b-30 f-w-700">10 από 20</h5>
-                                        <div class="progress countprogress">
-                                            <div class="progress-bar countprogress-bar bg-c-green" style={{width:'85%'}}></div>
+                                        <h5 className="m-b-30 f-w-700">10 από 20</h5>
+                                        <div className="progress countprogress">
+                                            <div className="progress-bar countprogress-bar bg-c-green" style={{width:'85%'}}></div>
                                         </div>
-                                    </div>
-                                    {/* <div class="col-xl-3 col-md-6">
+                                    </div> */}
+                                    {/* <div className="col-xl-3 col-md-6">
                                         <h3 className="backlogtitle">Ανοικτά Issues</h3>
-                                        <h5 class="m-b-30 f-w-700"></h5>
-                                        <div class="progress countprogress">
-                                            <div class="progress-bar countprogress-bar bg-c-yellow" style={{width:'45%'}}></div>
+                                        <h5 className="m-b-30 f-w-700"></h5>
+                                        <div className="progress countprogress">
+                                            <div className="progress-bar countprogress-bar bg-c-yellow" style={{width:'45%'}}></div>
                                         </div>
                                     </div> */}
                                 </div>
@@ -200,28 +406,58 @@ function OverviewScreen() {
                     </div>
                 </div>
 
-                <div className="row genbacklog-container justify-content-center someprojects-container">
+                <div className="row offset-1 genbacklogs-container justify-content-start someprojects-container">
+                                    
+                    {
+                        recentprojectList.map(i =>
 
-                    <div className="col-md-3 mt-5">
+                        (<div className="col-4 mt-5">
+                            
+                            
+                                
+
+                                <div className="col-md-8 ">
+                                <h2 className="backlogtitle">{i.title}</h2>
+                                <h4 className="backlogtitle mt-4">Sprints</h4>
+                                    <div className="progress">
+                                        <div className="progress-bar bg-warning" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{projectSprintDict[i.id]}</div>
+                                    </div>
+                                </div>
+
+
+                            
+                                <div className="col-md-8 mt-3">
+                                    <h4 className="backlogtitle">Ολοκληρωμένα Tasks</h4>
+
+                                    <div className="progress">
+                                        <div className="progress-bar bg-danger" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                    </div>
+                                </div>
+
+                            
+                        </div>)
+                    )}
+
+                    {/* <div className="col-md-3 mt-5">
                         
                         
                             
 
-                            <div class="col-md-8 ">
+                            <div className="col-md-8">
                             <h2 className="backlogtitle">Project 1</h2>
                             <h4 className="backlogtitle mt-4">Ολοκληρωμένα Epics</h4>
-                                <div class="progress">
-                                    <div class="progress-bar bg-warning" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                <div className="progress">
+                                    <div className="progress-bar bg-warning" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
                                 </div>
                             </div>
 
 
                         
-                            <div class="col-md-8 mt-3">
+                            <div className="col-md-8 mt-3">
                                 <h4 className="backlogtitle">Ολοκληρωμένα Tasks</h4>
 
-                                <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                <div className="progress">
+                                    <div className="progress-bar bg-danger" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
                                 </div>
                             </div>
 
@@ -233,52 +469,26 @@ function OverviewScreen() {
                         
                             
 
-                            <div class="col-md-8">
+                            <div className="col-md-8">
                             <h2 className="backlogtitle">Project 1</h2>
                             <h4 className="backlogtitle mt-4">Ολοκληρωμένα Epics</h4>
-                                <div class="progress">
-                                    <div class="progress-bar bg-warning" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                <div className="progress">
+                                    <div className="progress-bar bg-warning" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
                                 </div>
                             </div>
 
 
                         
-                            <div class="col-md-8 mt-3">
+                            <div className="col-md-8 mt-3">
                                 <h4 className="backlogtitle">Ολοκληρωμένα Tasks</h4>
 
-                                <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                <div className="progress">
+                                    <div className="progress-bar bg-danger" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
                                 </div>
                             </div>
 
                         
-                    </div>
-
-                    <div className="col-md-3 mt-5">
-                        
-                        
-                            
-
-                            <div class="col-md-8">
-                            <h2 className="backlogtitle">Project 1</h2>
-                            <h4 className="backlogtitle mt-4">Ολοκληρωμένα Epics</h4>
-                                <div class="progress">
-                                    <div class="progress-bar bg-warning" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                                </div>
-                            </div>
-
-
-                        
-                            <div class="col-md-8 mt-3">
-                                <h4 className="backlogtitle">Ολοκληρωμένα Tasks</h4>
-
-                                <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                                </div>
-                            </div>
-
-                        
-                    </div>
+                    </div> */}
 
                     <div className="col-12" style={{height: '200px' , background: 'white'}}> </div>
 
