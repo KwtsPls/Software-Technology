@@ -22,11 +22,11 @@ function TaskWindow(props){
 
     function doneSatus(cond){
         if (cond){
-            return (<span class="badge bg-success rounded-pill done-gradient">
+            return (<span className="badge bg-success rounded-pill done-gradient">
                 Done
             </span>);
         }
-        return (<span class="badge bg-warning rounded-pill inprogress-gradient">In progress</span>);
+        return (<span className="badge bg-warning rounded-pill inprogress-gradient">In progress</span>);
     }
 
     return (
@@ -51,11 +51,11 @@ function TaskWindow(props){
         </div>
         <div className="col-12">
             <label for="assignDev" className="form-label">Του(ς) έχει ανατεθεί: </label>
-            {props.devs.map(i => <div><span class="badge bg-primary rounded-pill cool-purple">{i}</span></div>
+            {props.devs.map(i => <div><span className="badge bg-primary rounded-pill cool-purple">{i}</span></div>
             )}
         </div>
         <div>
-            {(props.focusTask.status === 0) && <div class="btn btn-success" onClick={() => markAsDone()}>Μάρκαρε ως Done</div>}
+            {(props.focusTask.status === 0) && <div className="btn btn-success" onClick={() => markAsDone()}>Μάρκαρε ως Done</div>}
         </div>
     </form>);
 }

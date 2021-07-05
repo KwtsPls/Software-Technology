@@ -244,12 +244,10 @@ function ProjectNoPage() {
                 <div className="projects-frame">
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item">
-                                <Link to='/projects'>
-                                    <a href="#" className="breadcrumb-option">Projects</a>
-                                </Link>
+                            <li key="bci" className="breadcrumb-item">
+                                <Link to='/projects' className="breadcrumb-option">Projects</Link>
                             </li>
-                            <li className="breadcrumb-item active" aria-current="page">{projectName}</li>
+                            <li key="pn" className="breadcrumb-item active" aria-current="page">{projectName}</li>
                         </ol>
                     </nav>
                     <div className="row justify-content-between">
@@ -264,17 +262,17 @@ function ProjectNoPage() {
                         {/* ----------- Nav Tabs ------------ */}
                         <div className="col-8">
                             <ul className="nav nav-tabs"> 
-                                <li className="nav-item"  onClick={clickBacklog}>
-                                    <a className={backlog} aria-current="page">Backlog</a>
+                                <li key="bck" className="nav-item"  onClick={clickBacklog}>
+                                    <div className={backlog} aria-current="page">Backlog</div>
                                 </li>
-                                <li className="nav-item"  onClick={clickSpr}>
-                                    <a className={spr}>Sprints</a>
+                                <li key="spr" className="nav-item"  onClick={clickSpr}>
+                                    <div className={spr}>Sprints</div>
                                 </li>
-                                <li className="nav-item" onClick={clickEpics}>
-                                    <a className={epics}>Epics</a>
+                                <li key="epc" className="nav-item" onClick={clickEpics}>
+                                    <div className={epics}>Epics</div>
                                 </li>
-                                <li className="nav-item" onClick={clickPastSpr}>
-                                    <a className={pastSpr}>Past Sprints</a>
+                                <li key="pspr" className="nav-item" onClick={clickPastSpr}>
+                                    <div className={pastSpr}>Past Sprints</div>
                                 </li>
                             </ul>
                         </div>
@@ -291,7 +289,7 @@ function ProjectNoPage() {
                                     <div className="col-12 container">
                                         <div className="card">
                                             <div className="card-body">
-                                                <div class="row">
+                                                <div className="row">
                                                     <div className="col-11">
                                                         <h5 className="card-title">{i.title}</h5>
                                                         <p className="card-text">{i.description}</p>
@@ -323,13 +321,13 @@ function ProjectNoPage() {
                                      }
                                      console.log("Kako")
                                      console.log(st)
-                                    return (<div className=" full-col mt-2" style={{width: '33%',"flex-wrap": "nowrap"}}>
+                                    return (<div className=" full-col mt-2" style={{width: '33%'}}>
                                         <div className="card full-col">
                                             <div className="card-body sprint-card ">
                                                 {(sprintsShown === activeSprints) && <h5 className="card-title">{nm}</h5>}
                                                 {(sprintsShown != activeSprints) && <h5 className="card-title">{i.title}</h5>}
-                                                <div class="list-group pt-3" style={{width: '100%',"flex-wrap": "nowrap"}}>
-                                                    {st.content.map(k => <button type="button" class="list-group-item list-group-item-action" onClick={()=>openStory(k)}>{k.title}</button>)}
+                                                <div className="list-group pt-3" style={{width: '100%'}}>
+                                                    {st.content.map(k => <button type="button" className="list-group-item list-group-item-action" onClick={()=>openStory(k)}>{k.title}</button>)}
                                                 </div>
                                             </div>
                                         </div> 

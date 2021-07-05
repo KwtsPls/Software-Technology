@@ -138,10 +138,10 @@ function ProjectsPage() {
                         <div className="col-8">
                             <ul className="nav nav-tabs"> 
                                 <li className="nav-item"  onClick={clickCurrent}>
-                                    <a className={all} aria-current="page">Σε εξέλιξη</a>
+                                    <div className={all} aria-current="page">Σε εξέλιξη</div>
                                 </li>
                                 <li className="nav-item" onClick={clickArch}>
-                                    <a className={arch}>Αρχειοθετημένα</a>
+                                    <div className={arch}>Αρχειοθετημένα</div>
                                 </li>
                             </ul>
                         </div>
@@ -189,7 +189,7 @@ function ProjectsPage() {
                                                                     }
                                                                 }}>
 
-                                                            <a className="btn btn-primary  btn-sm project-button proj-list-btn">Μετάβαση στο project</a>
+                                                            <div className="btn btn-primary  btn-sm project-button proj-list-btn">Μετάβαση στο project</div>
                                                         </Link>
                                                     {/* </div> */}
                                                     </div>

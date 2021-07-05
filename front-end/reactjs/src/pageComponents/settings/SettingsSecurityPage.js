@@ -112,6 +112,9 @@ function SettingsSecurityPage(){
                 if (data.message){
                     if (data.message === "Password updated successfully!"){
                         setSuccess(true)
+                        setOldpass("")
+                        setPass1("")
+                        setPass2("")
                     }
                     else {
                         setFailure(true)

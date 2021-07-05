@@ -66,11 +66,11 @@ function Backlog(props){
 
     function doneSatus(cond){
         if (cond){
-            return (<span class="badge bg-success rounded-pill done-gradient">
+            return (<span className="badge bg-success rounded-pill done-gradient">
                 Done
             </span>);
         }
-        return (<span class="badge bg-warning rounded-pill inprogress-gradient" >In progress</span>);
+        return (<span className="badge bg-warning rounded-pill inprogress-gradient" >In progress</span>);
     }
 
     const [perc, setPerc] = useState(0);
@@ -104,32 +104,32 @@ function Backlog(props){
     return (
         <div>
             <TaskInfoPopUp show={modalTaskInfoShow} task={clickedTask} onHide={() => setModalTaskInfoShow(false)} projId={props.projectId}/>
-            <div class="container">
-                <div class="row">
-                    <div class="card">
-                        <div class="pt-3">
+            <div className="container">
+                <div className="row">
+                    <div className="card">
+                        <div className="pt-3">
                         <h5> Ποσοστό ολοκληρωμένων task: </h5>
-                        <div class="progress backprogress" style={{height: "20px"}}>
-                            <div class="progress-bar  backprogress-bar bg-info" role="progressbar" style={{width: `${perc}%`}} aria-valuemin="0" aria-valuemax="100">{`${perc}`}%</div>
+                        <div className="progress backprogress" style={{height: "20px"}}>
+                            <div className="progress-bar  backprogress-bar bg-info" role="progressbar" style={{width: `${perc}%`}} aria-valuemin="0" aria-valuemax="100">{`${perc}`}%</div>
                         </div>
                         
-                        <div class="pt-3"/> 
+                        <div className="pt-3"/> 
                         <h5> Καταληκτική ημερομηνία τρέχοντος Sprint: {date}</h5>
 
-                        <div class="pt-3"/>
+                        <div className="pt-3"/>
                     
                         </div>
                     </div>
                 </div>
-                <div class="row pt-4">
-                    <ul class="list-group" style={{width: '100%'}}>
-                        {tasksList.map(i=> <li class="list-group-item d-flex justify-content-between align-items-center backlog-list" onClick={()=>openTask(i)}>
+                <div className="row pt-4">
+                    <ul className="list-group" style={{width: '100%'}}>
+                        {tasksList.map(i=> <li key={i.id} className="list-group-item d-flex justify-content-between align-items-center backlog-list" onClick={()=>openTask(i)}>
                             {i.epic_title + ' / ' + i.story_title + ' / ' + i.title}
                             {doneSatus(i.status)}
                         </li>)}
                     </ul>
                 </div>
-                <div class="row pt-4">
+                <div className="row pt-4">
                     <div>
                         <button className='btn btn-primary' onClick={()=>finalizeSprint()}>Ολοκλήρωση του Sprint</button>
                     </div>
