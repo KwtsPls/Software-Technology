@@ -3,6 +3,7 @@ import gr.uoa.di.jete.assemblers.UserModelAssembler
 import gr.uoa.di.jete.controllers.AssigneeController
 import gr.uoa.di.jete.models.Assignee
 import gr.uoa.di.jete.models.AssigneeId
+import gr.uoa.di.jete.models.User
 import gr.uoa.di.jete.repositories.AssigneeRepository
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.SpringBootTest
@@ -12,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import spock.lang.Specification
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 
@@ -71,6 +73,28 @@ class AssigneeControllerTest extends Specification {
         response.getStatus() == 200
     }
 
+    def "Getting all users assigned to a task"(){
+        when: "When having users"
+        repository.findUsersInTask(_ as Long, _ as Long)>>{
+            def user = new User()
+            def user2 = new User()
+            user.setId(1L)
+            user2.setId(2L)
+            return [user,user2]
+        }
+        and: "Getting to path"
+        def url = "/assignees/users/projects/1/tasks/1"
+        MockHttpServletResponse response =  mvc.perform(
+                get(url)
+        ).andReturn().getResponse()
+
+        then: "Ok is returned and 1 , 2 should exist"
+        response.getStatus() == 200
+        response.getContentAsString().contains("\"id\":1")
+        response.getContentAsString().contains("\"id\":2")
+
+    }
+
     def "Post Assignee" (){
         when: "Creating Assignee"
             def cnt = 0
@@ -98,6 +122,26 @@ class AssigneeControllerTest extends Specification {
             response.getStatus() == 200
             response.getContentAsString().contains("\"user_id\":1")
             cnt==1
+    }
+
+    def "Delete assignee"(){
+        when: "When deleteById is called"
+        def cnt = 0
+        repository.deleteById(_ as AssigneeId) >> {
+            cnt++
+        }
+        and: "Deleting to path"
+        def url = "/assignees/users/1/projects/1/sprints&epics/" +
+                "1&1/stories/1/tasks/1"
+        MockHttpServletResponse response =  mvc.perform(
+                delete(url)
+        ).andReturn().getResponse()
+
+        then: "Ok is returned and cnt == 1"
+        response.getStatus() == 200
+        cnt == 1
+        response.getContentAsString().contains("OK")
+
     }
 }
 
