@@ -2,6 +2,8 @@ import { set } from 'date-fns';
 import React, { Component, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import '../css/Overviewscreen.css'
+import '../css/generalbacklog.css'
+
 import sunphoto from '../images/sun2.png'
 
 
