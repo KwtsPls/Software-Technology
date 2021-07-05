@@ -8,6 +8,8 @@ import org.springframework.http.MediaType
 import org.springframework.mock.web.MockHttpServletResponse
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import spock.lang.Specification
+import javax.persistence.Tuple;
+
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 
@@ -162,6 +164,59 @@ class TaskControllerTest extends Specification {
         then: "Response status is Ok AND task with id 1 returned"
         response.getStatus() == 200
         response.getContentAsString().contains("\"id\":1")
+
+    }
+
+    def "Get All Tasks Active in sprint"() {
+        when: "Tasks exists"
+            Tuple tu = Stub()
+            Tuple tu2 = Stub()
+
+            repository.findAllTasksInActiveSprint(_ as Long)>>{
+                return [tu,tu2]
+            }
+            tu.get(0) >> 1L
+            tu2.get(0) >> 2L
+            tu.get(1) >> 1L
+            tu2.get(1) >> 2L
+            tu.get(2) >> 1L
+            tu2.get(2) >> 2L
+            tu.get(3) >> 1L
+            tu2.get(3) >> 2L
+            tu.get(4) >> 1L
+            tu2.get(4) >> 2L
+            tu.get(7) >> 1L
+            tu2.get(7) >> 2L
+
+            tu.get(5) >> "kati"
+            tu2.get(5) >> "kati2"
+            tu.get(6) >> "kati"
+            tu2.get(6) >> "kati2"
+            tu.get(8) >> "kati"
+            tu2.get(8) >> "kati2"
+            tu.get(9) >> "kati"
+            tu2.get(9) >> "kati2"
+
+
+        new ProjectTasks(_ as Long,
+            _ as Long, _ as Long,
+            _ as Long, _ as Long,
+            _ as String, _ as String,
+            _ as Long, _ as String,
+            _ as String) >> Mock(ProjectTasks.class)
+
+
+        and: "Get @ /projects/1/sprints/active/tasks"
+        def url = "/projects/1/sprints/active/tasks"
+        MockHttpServletResponse response = mvc.perform(
+                get(url)
+        ).andReturn().getResponse()
+        then: "Response status is Ok AND task with id 1 and 2 is returned"
+        response.getStatus() == 200
+        response.getContentAsString().contains("\"task_id\":1")
+        response.getContentAsString().contains("kati")
+        response.getContentAsString().contains("kati2")
+        response.getContentAsString().contains("\"task_id\":2")
 
     }
 

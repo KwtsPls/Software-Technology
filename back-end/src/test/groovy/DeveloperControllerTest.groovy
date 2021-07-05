@@ -11,6 +11,8 @@ import org.springframework.mock.web.MockHttpServletResponse
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import spock.lang.Specification
 
+import javax.persistence.Tuple
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 
 @SpringBootTest
@@ -177,6 +179,35 @@ class DeveloperControllerTest extends Specification {
             response.getStatus() == 200
             response.getContentAsString().contains("1")
             response.getContentAsString().contains("2")
+
+    }
+
+    def "Get Notifications"() {
+        when: "Stubbing Repository"
+        Tuple tu = Stub()
+        Tuple tu2 = Stub()
+        repository.findProjectInvitations(_ as Long) >> {
+            return [tu,tu2]
+        }
+        tu.get(0) >> 1L
+        tu.get(1) >> "kati"
+        tu.get(2) >> "kati"
+
+        tu2.get(0) >> 2L
+        tu2.get(1) >> "kati2"
+        tu2.get(2) >> "kati2"
+
+        and: "Getting @ /developers/users/1/invitations"
+        def url = "/developers/users/1/invitations"
+        MockHttpServletResponse response =  mvc.perform(
+                get(url)
+        ).andReturn().getResponse()
+        then: "Ok should be returned and id 1 and 2 shoulb be contained"
+        response.getStatus() == 200
+        response.getContentAsString().contains("\"project_id\":1")
+        response.getContentAsString().contains("\"project_id\":2")
+        response.getContentAsString().contains("\"title\":\"kati\"")
+        response.getContentAsString().contains("\"title\":\"kati2\"")
 
     }
 
