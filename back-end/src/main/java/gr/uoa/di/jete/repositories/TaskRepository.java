@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Tuple;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +24,9 @@ public interface TaskRepository extends JpaRepository<Task, TaskId>{
 
     @Query("select t from Task t where t.project_id=?1 and t.epic_id=?2 and t.story_id=?3")
     List<Task> findAllByProjectAndEpicAndStoryId(Long project_id,Long epic_id,Long story_id);
+
+    @Query("select t.id,t.story_id,t.epic_id,t.sprint_id,t.project_id,t.title,t.description,t.status,st.title,e.title from Task t,Story st,Epic e,Project p,Sprint s where p.id = ?1 and t.project_id = p.id and t.epic_id = e.id and t.story_id = st.id and t.sprint_id = s.id and s.status=1")
+    List<Tuple> findAllTasksInActiveSprint(Long project_id);
 
     @Transactional
     @Modifying
