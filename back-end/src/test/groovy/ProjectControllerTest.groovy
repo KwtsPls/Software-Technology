@@ -135,11 +135,11 @@ class ProjectControllerTest extends Specification{
             def sprint = new Sprint(1L,1L,"Sprint#1",1L,date,date2)
             return Optional.of(sprint)
         }
-        sprintRepository.transferAssignees(_ as Long,_ as Long) >> {cnt++}
-        sprintRepository.transferStories(_ as Long,_ as Long) >> {
+        sprintRepository.transferAssignees(_ as Long,_ as Long,_ as Long) >> {cnt++}
+        sprintRepository.transferStories(_ as Long,_ as Long, _ as Long) >> {
             cnt++
         }
-        sprintRepository.transferTasks(_ as Long,_ as Long) >> {
+        sprintRepository.transferTasks(_ as Long,_ as Long, _ as Long) >> {
             cnt++
         }
         sprintRepository.findMaxId() >> Optional.of(1L)
@@ -155,10 +155,10 @@ class ProjectControllerTest extends Specification{
         MockHttpServletResponse response =  mvc.perform(
                 put(url)
         ).andReturn().getResponse()
-        then: "Response status is Ok and project with id is returned and cnt == 9"
+        then: "Response status is Ok and project with id is returned and cnt == 6"
         response.getStatus() == 200
         response.getContentAsString().contains("\"id\":1")
-        cnt == 9
+        cnt == 6
 
     }
 

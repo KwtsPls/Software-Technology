@@ -24,11 +24,14 @@ function SettingsSecurityPage(){
 
     }, []);
 
+
     const [showEmptyOldPass, setShowEmptyOldPass] = useState(false)
     const [showEmptyPass1, setShowEmptyPass1] = useState(false)
     const [showEmptyPass2, setShowEmptyPass2] = useState(false)
     const [showPasswordsDontMatch, setShowPasswordsDontMatch] = useState(false)
     const [showBadPassInput, setShowBadPassInput] = useState(false)
+    const [success, setSuccess] = useState(false)
+    const [failure, setFailure] = useState(false)
 
     useEffect(() => {
         setShowPasswordsDontMatch(false);
@@ -89,19 +92,34 @@ function SettingsSecurityPage(){
         if (earlyExit){
             return ;
         }
+        setSuccess(false)
+        setFailure(false)
 
         const requestOptions = {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + loggedUser.accessToken  
-                    },
-            body: JSON.stringify({  password: pass1
+            method: 'post',
+            headers: { 'Authorization': 'Bearer ' + loggedUser.accessToken,
+                       'Content-Type': 'application/json'  },
+            body: JSON.stringify({  password: pass1,
+                                    old_password: oldpass
                                 })
         };
-        fetch('http://localhost:8080/users/' + loggedUser.id, requestOptions)
+        fetch('http://localhost:8080/users/' + loggedUser.id + '/updatePassword', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data); // JSON data parsed by `data.json()` call
+                console.log(oldpass+pass1)
+                console.log("Password change answer:")
+                console.log(data); // expect {message:"OK"}
+                if (data.message){
+                    if (data.message === "Password updated successfully!"){
+                        setSuccess(true)
+                    }
+                    else {
+                        setFailure(true)
+                    }
+                }
+                else{
+                    console.log("went")
+                }
               });
 
     }
@@ -123,8 +141,6 @@ function SettingsSecurityPage(){
                 <div className="settingsContains settings-postition">
                     <h1 className="settings-header">Ασφάλεια λογαριασμού</h1>
                     <hr className="new4"/>
-
-
                     <p className="settings-unit">
                         <b>Αλλαγή κωδικού πρόσβασης:</b>
                     </p>
@@ -136,6 +152,8 @@ function SettingsSecurityPage(){
                             <input type="password" className="form-control" value={oldpass} id="settingsoldpassword" onChange={e => setOldpass(e.target.value)} placeholder="Πληκτρολογίστε τον τωρινό κωδικό σας"/>
                             <div>
                                 { (showEmptyOldPass) && <span className="badge bg-danger rounded-pill">Συμπληρώστε τον τωρινό σας κωδικό</span>}
+                                { (success) && <span className="badge bg-primary rounded-pill">Η αλλαγή έγινε με επιτυχία</span>}
+                                { (failure) && <span className="badge bg-danger rounded-pill">Ο κωδικός ήταν λάθος</span>}
                             </div>
                         </div>
                             
@@ -166,21 +184,12 @@ function SettingsSecurityPage(){
                         <button type="button" className="btn btn-primary passwordchange-button" onClick={sendPasswordChange}>Επιβεβαίωση</button>
 
                     </form>
-
                     <hr className="changepasswordline"/>
-
-                    
-
-                    
                     <p className="settings-unit">
                         <b>Επαλήθευση email:</b>&emsp; &emsp; &emsp; Το email σας είναι ήδη επαληθευμένο!
                     </p>
-                    
                     <div className="blankspace"/>                            
-
                 </div>
-                
-                
             </div>
         </div>
     );

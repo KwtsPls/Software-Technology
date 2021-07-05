@@ -213,10 +213,10 @@ class TaskControllerTest extends Specification {
         ).andReturn().getResponse()
         then: "Response status is Ok AND task with id 1 and 2 is returned"
         response.getStatus() == 200
-        response.getContentAsString().contains("\"task_id\":1")
+        response.getContentAsString().contains("\"id\":1")
         response.getContentAsString().contains("kati")
         response.getContentAsString().contains("kati2")
-        response.getContentAsString().contains("\"task_id\":2")
+        response.getContentAsString().contains("\"id\":2")
 
     }
 
