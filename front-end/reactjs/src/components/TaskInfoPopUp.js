@@ -26,7 +26,7 @@ function TaskInfoPopUp(props){
                 </Modal.Header>
                 <Modal.Body>
                     {/* <TaskWindow epic={props.epic} focusTask={focusTask} focusStory={focusStory} devs={devs} projId={props.projId}/> */}
-                    <TaskWindow epic={{title:"oki"}} focusTask={props.task} focusStory={{title:"oki"}} devs={devs} projId={props.projId}/>
+                    <TaskWindow epic={{title: props.task.epic_title}} focusTask={props.task} focusStory={{title: props.task.story_title}} devs={devs} projId={props.projId}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="outline-danger" onClick={props.onHide}>Άκυρο</Button>

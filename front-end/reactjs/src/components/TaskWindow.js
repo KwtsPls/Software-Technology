@@ -6,7 +6,7 @@ function TaskWindow(props){
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
 
     function markAsDone() {
-        fetch('http://localhost:8080/projects/'+props.projId+'/sprints&epics/'+props.focusStory.sprint_id+'&'+props.focusStory.epic_id+'/stories/'+props.focusStory.id+'/tasks/'+props.focusTask.id+'/archive', {
+        fetch('http://localhost:8080/projects/'+props.projId+'/sprints&epics/'+props.focusTask.sprint_id+'&'+props.focusTask.epic_id+'/stories/'+props.focusTask.story_id+'/tasks/'+props.focusTask.id+'/archive', {
                     method: 'put', 
                     headers: { Authorization: 'Bearer ' + loggedUser.accessToken}
                 })

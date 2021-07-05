@@ -6,7 +6,7 @@ import Topbar from '../../components/Topbar.js'
 import Backlog from '../../components/Backlog.js'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import IssuePopUp from '../../components/IssuePopUp.js'
-import TaskInfoPopUp from '../../components/TaskInfoPopUp.js'
+//import TaskInfoPopUp from '../../components/TaskInfoPopUp.js' 33
 import StoriesInEpicsPopUp from '../../components/StoriesInEpicsPopUp.js'
 import { OverlayTrigger, Popover} from 'react-bootstrap'
 import TasksInStoryOfSprintPopUp from '../../components/TasksInStoryOfSprintPopUp.js'
@@ -108,7 +108,7 @@ function ProjectNoPage() {
     }, []);
 
     const [modalIssueShow, setModalIssueShow] = useState(false);
-    const [modalTaskInfoShow, setModalTaskInfoShow] = useState(false);
+    // const [modalTaskInfoShow, setModalTaskInfoShow] = useState(false); 33
     const [modalSinE, setModalSinE] = useState(false);
     const [modalTinSofS, setModalTinSofS] = useState(false);
     const [epicTBDel, setEpicTBDel] = useState({id: 0});
@@ -165,7 +165,7 @@ function ProjectNoPage() {
     //const sprNames = ['Sprint 1','Sprint 2','Sprint 3','Sprint 4','Sprint 5','Sprint 2','Sprint 3','Sprint 4','Sprint 5','Sprint 2','Sprint 3','Sprint 4','Sprint 5'];
     //let pastSprNames = ['Old Sprint 1','Old Sprint 2','Old Sprint 3','Old Sprint 4','Old Sprint 5'];
     const [epicList, setEpicList] = useState([])
-    const [activeSprints, setActiveSprints] = useState([])
+    const [activeSprints, setActiveSprints] = useState([{to_date:"0"},{},{}])
     const [archivedSprints, setArchivedSprints] = useState([])
     const [activeStories, setActiveStories] = useState([[],[],[]])
     const [archivedStories, setArchivedStories] = useState([[],[],[]])
@@ -174,7 +174,7 @@ function ProjectNoPage() {
     const [sprintsShown, changeSprShown] = useState(activeSprints);
     const [storiesShown, changeStorShown] = useState(activeSprints);
 
-    const [clickedTask, setClickedTask] = useState({id:'0',title:'_'});
+    // const [clickedTask, setClickedTask] = useState({id:'0',title:'_'}); 33
 
     function showStoriesOfEpic(epic) {
         setEpicTBDel(epic)
@@ -237,7 +237,7 @@ function ProjectNoPage() {
             <TasksInStoryOfSprintPopUp show={modalTinSofS} onHide={() => setModalTinSofS(false)} projId={projectId} epicId={focusStory.epic_id} focusStory={focusStory}/>
             <StoriesInEpicsPopUp show={modalSinE} onHide={() => setModalSinE(false)} projId={projectId} epic={epicTBDel}/>
             <IssuePopUp show={modalIssueShow} onHide={() => setModalIssueShow(false)} projId={projectId} epics={epicList} sprints={activeSprints} activeStories={activeStories}/>
-            <TaskInfoPopUp show={modalTaskInfoShow} task={clickedTask} onHide={() => setModalTaskInfoShow(false)} projId={projectId}/>
+            {/* <TaskInfoPopUp show={modalTaskInfoShow} task={clickedTask} onHide={() => setModalTaskInfoShow(false)} projId={projectId}/> */}
 			<Topbar/>
             <SideNavBar/>
             <div className="mainContent">
@@ -335,7 +335,9 @@ function ProjectNoPage() {
                                         </div> 
                                     </div>)}
                             )}
-                            {(pressedTab === "backlog") && (<Backlog setModalTaskInfoShow={setModalTaskInfoShow} setSelectedTask={setClickedTask} selectedTask={clickedTask} activeStories={activeStories[0]} projectId={projectId} activeSprints={activeSprints}/>)}
+                            {/* {(pressedTab === "backlog") && (<Backlog setModalTaskInfoShow={setModalTaskInfoShow} setSelectedTask={setClickedTask} selectedTask={clickedTask} activeStories={activeStories[0]} projectId={projectId} activeSprints={activeSprints}/>)} */}
+                            {(pressedTab === "backlog") && (<Backlog activeStories={activeStories[0]} projectId={projectId} activeSprint={activeSprints[0]}/>)}
+
                         </div>
                     </div>
                 </div>
