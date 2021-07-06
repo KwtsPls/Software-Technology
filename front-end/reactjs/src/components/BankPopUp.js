@@ -4,6 +4,7 @@ import {Modal, Button} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PaymentIcon from 'react-payment-icons-inline';
+import { Link } from 'react-router-dom'
 
 
 
@@ -59,9 +60,9 @@ function BankPopUp(props){
                         <PaymentIcon icon="maestro" style={{ margin: 10, width: 70 }} />
                         <PaymentIcon icon="paypal" style={{ margin: 10, width: 70 }} />
                         <div className="col-8">
-                            {/* <Link to='/home'> */}
-                                <button type="submit" className="btn btn-primary mybtn">Επιβεβαίωση</button>
-                            {/* </Link> */}
+                            <Link to='/home'>
+                                <button className="btn btn-primary mybtn">Επιβεβαίωση</button>
+                            </Link>
                         </div>
                     </form>
                 </Modal.Body>
