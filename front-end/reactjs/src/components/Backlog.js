@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import '../App.css';
 import '../css/projects.css';
+import { useHistory } from 'react-router-dom'
 import TaskInfoPopUp from './TaskInfoPopUp.js'
-
 
 
 
 
 function Backlog(props){
 
+    const history = useHistory();
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
 
     const [modalTaskInfoShow, setModalTaskInfoShow] = useState(false);
@@ -20,31 +21,34 @@ function Backlog(props){
     const [tasksList, setTasksList] = useState([])
 
     useEffect(()=>{
-            fetch('http://localhost:8080/projects/'+ props.projectId +'/sprints/active/tasks', {
-                method: 'get', 
-                headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
-            })
-                .then(res => res.json())
-                .then((data) => {
-                    console.log("Ligo apola:");
-                    console.log(data);
-                    if (data.tasksList){
-                        setTasksList(data.tasksList)
-                        var cou = 0;
-                        for(var i=0; i<data.tasksList.length;i++){
-                            if (data.tasksList[i].status){
-                                cou++
-                            }
-                        }
-                        if (data.tasksList.length === 0){
-                            setPerc(0)
-                        }
-                        else {
-                            setPerc(((cou / data.tasksList.length) * 100).toFixed())
+        if (!loggedUser){
+            history.push("/login");
+        }
+        fetch('http://localhost:8080/projects/'+ props.projectId +'/sprints/active/tasks', {
+            method: 'get', 
+            headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
+        })
+            .then(res => res.json())
+            .then((data) => {
+                console.log("Ligo apola:");
+                console.log(data);
+                if (data.tasksList){
+                    setTasksList(data.tasksList)
+                    var cou = 0;
+                    for(var i=0; i<data.tasksList.length;i++){
+                        if (data.tasksList[i].status){
+                            cou++
                         }
                     }
-                    
-                })
+                    if (data.tasksList.length === 0){
+                        setPerc(0)
+                    }
+                    else {
+                        setPerc(((cou / data.tasksList.length) * 100).toFixed())
+                    }
+                }
+                
+            })
     },[])
 
     useEffect(()=>{

@@ -1,33 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import logo from '../images/logo2.png';
 import helpicon from '../images/helpicon.png'
+import { useHistory } from 'react-router-dom'
 
-class TopBar extends Component {
+function TopBar() {
 
-    constructor(props) {
-        super(props);
-        this.loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+    const history = useHistory();
+    const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
 
-    }
-
-    logout = () => {
+    function logout () {
         localStorage.removeItem("loggedUser");
 		console.log("logging out");
-		setTimeout(function(){window.location.reload();}, 10);
+        history.push("/login")
     }
 
-    render() { 
-        return (
-            <div>
-                <div className="TopBar"></div>
-			    <img className = "logo-icon" src={logo} alt="logo"></img>
-			    
-			    {/* <button className="btn  btn-outline-danger btn-sm logout-option">Αποσύνδεση</button> */}
+    return (
+        <div>
+            <div className="TopBar"></div>
+            <img className = "logo-icon" src={logo} alt="logo"></img>
+            
+            {/* <button className="btn  btn-outline-danger btn-sm logout-option">Αποσύνδεση</button> */}
 
-                <a className="logout-option" onClick={this.logout}>Αποσύνδεση</a>
-            </div>
-        );
-    }
+            <a className="logout-option" onClick={()=>logout()}>Αποσύνδεση</a>
+        </div>
+    )
 }
  
 export default TopBar;

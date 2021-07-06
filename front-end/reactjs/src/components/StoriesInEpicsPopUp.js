@@ -6,8 +6,6 @@ import AssignDev from './AssignDev.js'
 import TaskWindow from './TaskWindow.js'
 
 
-
-
 function StoriesInEpicsPopUp(props){
 
     const history = useHistory();
@@ -23,6 +21,9 @@ function StoriesInEpicsPopUp(props){
     const [devs, setDevs] = useState([])
 
     useEffect(() => {
+        if (!loggedUser){
+            history.push("/login");
+        }
         if (props.show){
             fetch('http://localhost:8080/projects/'+props.projId+'/epics/'+props.epic.id+'/stories', {
                     method: 'get', 
@@ -46,6 +47,9 @@ function StoriesInEpicsPopUp(props){
     },[props.show])
 
     useEffect(() => {
+        if (!loggedUser){
+            history.push("/login");
+        }
         if (focusStory != {id: 0, title: ""}){
             fetch('http://localhost:8080/projects/'+props.projId+'/stories/'+focusStory.id+'/tasks', {
                     method: 'get', 
