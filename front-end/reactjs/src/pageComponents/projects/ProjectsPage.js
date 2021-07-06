@@ -160,7 +160,6 @@ function ProjectsPage() {
                                         <div className="card">
                                             <div className="card-body proj-container">
                                                 <div className="row">
-                                                    {/* <div className="col-12"> */}
                                                         <div className="col-12 col-md-10">
 
                                                             <h5 className="card-title">{i.title}</h5>
@@ -168,14 +167,11 @@ function ProjectsPage() {
 
                                                         </div>
                                                         <div className="col-6 col-md-2 buttons-proj">
-                                                            {!i.status && (<img src={adddev} className="img-btn-proj add-btn"  onClick={() => showAdd(i.id,i.title)}></img>)}
-                                                            <img src={info} className="img-btn-proj" onClick={() => showInfo(i.id,i.title,i.status)}></img>
-
+                                                            <div className="float-end">
+                                                                {!i.status && (<img src={adddev} className="img-btn-proj add-btn"  onClick={() => showAdd(i.id,i.title)}></img>)}
+                                                                <img src={info} className="img-btn-proj" onClick={() => showInfo(i.id,i.title,i.status)}></img>
+                                                            </div>
                                                         </div>
-
-
-
-                                                    
                                                 </div>
                                                 <div className="row mt-4">
                                                     <div className="col-12">
@@ -191,7 +187,6 @@ function ProjectsPage() {
 
                                                             <div className="btn btn-primary  btn-sm project-button proj-list-btn">Μετάβαση στο project</div>
                                                         </Link>
-                                                    {/* </div> */}
                                                     </div>
 
                                                 </div>
