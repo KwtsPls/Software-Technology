@@ -1,0 +1,44 @@
+Before everything MySql Db should be created
+
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql:5.7
+
+#####
+
+It should be executed 
+
+docker exec -it mysql mysql -uroot -p
+
+#####
+
+and added
+
+create database jete_db;
+use jete_db
+GRANT ALL PRIVILEGES
+ON jete_db.*
+TO 'root'@'%'
+IDENTIFIED BY 'root';
+
+#####
+
+For server go to backend
+
+docker build -t jete .
+docker run --name jeteback -d -p 8080:8080 jete
+
+
+For frontend go to frontend/reactjs
+
+docker build -t jetefront .
+docker run -it --rm -v "$(pwd):/src"  -v /node_modules -p 3000:3000 -e CHOKIDAR_USEPOLLING=true jetefront
+
+For cli go to software-technology
+docker build -t cli .
+docker run -it -p 8090:8090 cli
+
+
+#####################################
+
+If you want run script.sh for server and front end(Prequisites mysql is up)
+
+If you also want cli run scriptcli.sh (Prequisites mysql and server is up)
