@@ -119,74 +119,74 @@ function OverviewScreen() {
                     setDonePerc(percentageStr)
 
                 })
-                .then((kappa) => {
+                // .then((kappa) => {
                     
 
-                    console.log("Project id " + idProj[1])
-                    var dict = {};
+                //     console.log("Project id " + idProj[1])
+                //     var dict = {};
                     
-                    for(var i=0 ; i < idProj.length ; i++){
+                //     for(var i=0 ; i < idProj.length ; i++){
 
-                        let count = 0;
-                        let i_counter = i;
+                //         let count = 0;
+                //         let i_counter = i;
 
-                        fetch('http://localhost:8080/projects/' + idProj[i] + '/sprints/active', {
-                        // fetch('http://localhost:8080/users/1/projects', {
+                //         fetch('http://localhost:8080/projects/' + idProj[i] + '/sprints/active', {
+                //         // fetch('http://localhost:8080/users/1/projects', {
 
-                            method: 'get', 
-                            headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
-                        })
-                            .then(res => res.json())
-                            .then((data) => {
-                                // console.log(idProj[i])
+                //             method: 'get', 
+                //             headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
+                //         })
+                //             .then(res => res.json())
+                //             .then((data) => {
+                //                 // console.log(idProj[i])
                                 
-                                if(data._embedded){
+                //                 if(data._embedded){
 
-                                    console.log(data)
+                //                     console.log(data)
                                     
         
 
-                                    count = data._embedded.sprintList.length;
-                                    console.log("exw toso re file " + count)
-                                }  
+                //                     count = data._embedded.sprintList.length;
+                //                     console.log("exw toso re file " + count)
+                //                 }  
                                 
 
                                 
-                                setLastSprintNumber(count)
-                                console.log("etsigoust " + idProj[i_counter] +"ontws" + count);
-                                dict[idProj[i_counter]] = count;
-                                console.log(dict)
+                //                 setLastSprintNumber(count)
+                //                 console.log("etsigoust " + idProj[i_counter] +"ontws" + count);
+                //                 dict[idProj[i_counter]] = count;
+                //                 console.log(dict)
                                 
                                 
-                            })
-                    }
+                //             })
+                //     }
 
 
-                    console.log("OURLAIZEW")
-                    console.log(dict)
-                    console.log("OURLAIZAAAAAAAAAAAAs")
+                //     console.log("OURLAIZEW")
+                //     console.log(dict)
+                //     console.log("OURLAIZAAAAAAAAAAAAs")
                 
                 
                     
-                    var totalSprints = 0;
-                    // for (var key in projectSprintDict) {
-                    //     totalSprints += projectSprintDict[key];
-                    //     // your code here...
-                    // }
-                    console.log(dict)
+                //     var totalSprints = 0;
+                //     // for (var key in projectSprintDict) {
+                //     //     totalSprints += projectSprintDict[key];
+                //     //     // your code here...
+                //     // }
+                //     console.log(dict)
                     
-                    setTotalSprintNumber(totalSprints)
-                    // setLoading(false);
-                    setProjectSprintDict(dict);
+                //     setTotalSprintNumber(totalSprints)
+                //     // setLoading(false);
+                //     setProjectSprintDict(dict);
 
 
 
                     
                     
-                })
+                // })
                 
 
-                //Epics
+                
                 
 
 
@@ -296,7 +296,7 @@ function OverviewScreen() {
     
     }
     
-    if(projectSprintDict === null){
+    if(donePerc === null){
         return (
 
         <div className="text-center">
@@ -414,7 +414,7 @@ function OverviewScreen() {
 
                 <div className="row offset-1 genbacklogs-container justify-content-start someprojects-container">
                                     
-                    {
+                    {/* {
                         recentprojectList.map(i =>
 
                         (<div className="col-4 mt-5">
@@ -444,7 +444,7 @@ function OverviewScreen() {
 
                             
                         </div>)
-                    )}
+                    )} */}
 
                     {/* <div className="col-md-3 mt-5">
                         

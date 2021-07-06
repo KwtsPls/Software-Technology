@@ -5,9 +5,6 @@ import { useHistory } from 'react-router-dom'
 import AssignDev from './AssignDev.js'
 import TaskWindow from './TaskWindow.js'
 
-
-
-
 function TasksInStoryOfSprintPopUp(props){
 
     const history = useHistory();
@@ -23,6 +20,9 @@ function TasksInStoryOfSprintPopUp(props){
     const [devs, setDevs] = useState([])
 
     useEffect(() => {
+        if (!loggedUser){
+            history.push("/login");
+        }
         if (props.epicId){
             fetch('http://localhost:8080/projects/'+props.projId+'/epics/'+props.epicId, {
                     method: 'get', 
@@ -40,8 +40,10 @@ function TasksInStoryOfSprintPopUp(props){
 
     },[props.epicId])
 
-
     useEffect(() => {
+        if (!loggedUser){
+            history.push("/login");
+        }
         if (props.focusStory != {id: 0, title: ""}){
             fetch('http://localhost:8080/projects/'+props.projId+'/stories/'+props.focusStory.id+'/tasks', {
                     method: 'get', 

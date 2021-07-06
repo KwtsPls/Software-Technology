@@ -105,10 +105,6 @@ function LoginPage() {
                                 <label for="exampleInputPassword1">Κωδικός πρόσβασης</label>
                                 <input type="password" className = "form-control loginform-control" id="exampleInputPassword1" placeholder="Πληκτρολογίστε τον κωδικό σας"  value={pass} onChange={e => setPass(e.target.value)}/>
                             </div>
-                            <div className="form-group loginformgroup form-check">
-                                <input type="checkbox" className="form-check-input mycheckbox" id="exampleCheck1"/>
-                                <label className="form-check-label" for="exampleCheck1">Remember me</label>
-                            </div>
                             <button type="button" className="btn-lg btn-primary login-button mybtn" onClick={sendLoginCredentials}>Σύνδεση</button>
                             <div className="signupadvice">
                                 <small id="emailHelp" className="form-text text-muted signupadvice-muted-text">Είναι η πρώτη σας φορά εδώ; </small>

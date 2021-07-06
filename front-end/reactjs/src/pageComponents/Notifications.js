@@ -95,9 +95,9 @@ function OverviewScreen() {
                             <p className="notification-desc"> Ο χρήστης <b>{i.owner_username}</b> σας προσκάλεσε να συμμετέχετε στο <b>{i.title}</b></p>
                         </div>
                         <div className="col-6 col-md-1 mt-3 ">
-                            <div class="btn-group notification-btns" role="group" aria-label="Basic mixed styles example">
-                                <button class="btn btn-success btn-sm" onClick={()=>accept(i.project_id)}>Αποδοχή</button>
-                                <button class="btn btn-danger btn-sm" onClick={()=>decline(i.project_id)}>Απόρριψη</button>
+                            <div className="btn-group notification-btns" role="group" aria-label="Basic mixed styles example">
+                                <button className="btn btn-success btn-sm" onClick={()=>accept(i.project_id)}>Αποδοχή</button>
+                                <button className="btn btn-danger btn-sm" onClick={()=>decline(i.project_id)}>Απόρριψη</button>
                             </div>
                         </div>
                     </>)} 

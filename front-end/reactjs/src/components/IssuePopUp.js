@@ -6,14 +6,15 @@ import { useHistory } from 'react-router-dom'
 import RedAsterisc from './RedAsterisc.js'
 
 
-
-
 function IssuePopUp(props){
 
     const history = useHistory();
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
 
     useEffect(() => {
+        if (!loggedUser){
+            history.push("/login");
+        }
         fetch('http://localhost:8080/projects/' + props.projId + '/sprints/active/stories', {
                 method: 'get', 
                 headers: { Authorization: 'Bearer ' + loggedUser.accessToken }
@@ -157,44 +158,50 @@ function IssuePopUp(props){
                 setTitle("")
                 setDescription("")
                 if (data.id){
-                    window.location.reload(false);
+                    if (selectedType != 'Task'){
+                        window.location.reload(false);
+                    }
                 }
                 else {
                     console.log("Something went wrong while creating issue")
                 }
                 return data;
             })
-            // .then((data) => {
-            //     var i=0;
-            //     var numResponses = 0;
-            //     for (; i < devs.length; i++){
-            //         console.log("sending request for " + devs[i].username + " with id " + devs[i].id + " to task with id " + data.id);
-            //         fetch('http://localhost:8080/developers/', { 
-            //             method: 'post', 
-            //             headers: { Authorization: 'Bearer ' + loggedUser.accessToken,
-            //                 'Content-Type': 'application/json'  },
-            //             body: JSON.stringify({  user_id: devs[i].id,
-            //                         project_id: data.id,
-            //                         role: 0,
-            //                         accepted: 0
-            //                     })
-            //         })
-            //             .then(res => res.json())
-            //             .then((data) => {
-            //                 console.log(numResponses)
-            //                 console.log(data);
-            //                 numResponses++
-            //             })
-            //             .then(() => {
-            //                 if (numResponses === devs.length){
-            //                     window.location.reload(false);
-            //                 }
-            //             })
-            //     }
-            //     if (i === 0){
-            //         window.location.reload(false);
-            //     }
-            // })
+            .then((data) => {
+                if (selectedType === 'Task' && data.id){
+                    var i=0;
+                    var numResponses = 0;
+                    for (; i < devs.length; i++){ 
+                        console.log("assigning " + devs[i].username + " with id " + devs[i].id + " to task with id " + data.id);
+                        fetch('http://localhost:8080/assignees/', { 
+                            method: 'post', 
+                            headers: { Authorization: 'Bearer ' + loggedUser.accessToken,
+                                'Content-Type': 'application/json'  },
+                            body: JSON.stringify({  user_id: devs[i].id,
+                                        project_id: data.project_id,
+                                        epic_id: data.epic_id,
+                                        sprint_id: data.sprint_id,
+                                        story_id: data.story_id,
+                                        task_id: data.id
+                                    })
+                        })
+                            .then(res => res.json())
+                            .then((data) => {
+                                console.log(numResponses)
+                                console.log(data);
+                                numResponses++
+                            })
+                            .then(() => {
+                                if (numResponses === devs.length){
+                                    window.location.reload(false);
+                                }
+                            })
+                    }
+                    if (i === 0){
+                        window.location.reload(false);
+                    }
+                }
+            })
     }
 
     return (

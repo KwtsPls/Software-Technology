@@ -81,7 +81,7 @@ function ProjectInfoPopUp(props){
     },[props.show])
 
     function retDevs(){
-        return devs.map(i => <div><span class="badge bg-primary rounded-pill cool-purple">{i}</span></div>)
+        return devs.map(i => <div><span className="badge bg-primary rounded-pill cool-purple">{i}</span></div>)
     }
 
     return (
@@ -101,15 +101,15 @@ function ProjectInfoPopUp(props){
                     <form className="row g-3">
                         <div className="col-12">
                             <label for="inputTittle" className="form-label">Product Owner:</label>
-                            <div><span class="badge bg-primary rounded-pill cool-purple">{owner[0]}</span></div>
+                            <div><span className="badge bg-primary rounded-pill cool-purple">{owner[0]}</span></div>
                         </div>
                         <div className="col-12">
                             <label className="form-label">Developers: </label>
-                            {devs.map(i => <div><span class="badge bg-primary rounded-pill cool-purple">{i}</span></div>)}
+                            {devs.map(i => <div><span className="badge bg-primary rounded-pill cool-purple">{i}</span></div>)}
                         </div>
                         <div className="col-12">
                             <label className="form-label">Developers που δεν έχουν απαντήσει: </label>
-                            {devsPending.map(i => <div><span class="badge bg-primary rounded-pill cool-purple">{i}</span></div>)}
+                            {devsPending.map(i => <div><span className="badge bg-primary rounded-pill cool-purple">{i}</span></div>)}
                         </div>
                     </form>
                     { !props.status && (loggedUser.id === loggedUser.id) &&

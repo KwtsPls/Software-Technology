@@ -6,8 +6,6 @@ import AssignDev from './AssignDev.js'
 import TaskWindow from './TaskWindow.js'
 
 
-
-
 function StoriesInEpicsPopUp(props){
 
     const history = useHistory();
@@ -23,6 +21,9 @@ function StoriesInEpicsPopUp(props){
     const [devs, setDevs] = useState([])
 
     useEffect(() => {
+        if (!loggedUser){
+            history.push("/login");
+        }
         if (props.show){
             fetch('http://localhost:8080/projects/'+props.projId+'/epics/'+props.epic.id+'/stories', {
                     method: 'get', 
@@ -46,6 +47,9 @@ function StoriesInEpicsPopUp(props){
     },[props.show])
 
     useEffect(() => {
+        if (!loggedUser){
+            history.push("/login");
+        }
         if (focusStory != {id: 0, title: ""}){
             fetch('http://localhost:8080/projects/'+props.projId+'/stories/'+focusStory.id+'/tasks', {
                     method: 'get', 
@@ -97,11 +101,11 @@ function StoriesInEpicsPopUp(props){
 
     function doneSatus(cond){
         if (cond){
-            return (<span class="badge bg-success rounded-pill done-gradient">
+            return (<span className="badge bg-success rounded-pill done-gradient">
                 Done
             </span>);
         }
-        return (<span class="badge bg-warning rounded-pill inprogress-gradient">In progress</span>);
+        return (<span className="badge bg-warning rounded-pill inprogress-gradient">In progress</span>);
     }
 
 
@@ -121,22 +125,22 @@ function StoriesInEpicsPopUp(props){
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div class="list-group pt-3" style={{width: '100%',"flex-wrap": "nowrap"}}>
-                        {(view === 'stories') && storiesList.map(i => <div class="list-group-item list-group-item-action" onClick={() => openStory(i)}>{i.title}</div>)}
+                    <div className="list-group pt-3" style={{width: '100%'}}>
+                        {(view === 'stories') && storiesList.map(i => <div key={i.id} className="list-group-item list-group-item-action" onClick={() => openStory(i)}>{i.title}</div>)}
                         {(view === 'tasks') && 
                             <div>
                                 <div>
-                                    <button class="btn btn-secondary" onClick={() => goBack()}>{"< Back"}</button>
+                                    <button className="btn btn-secondary" onClick={() => goBack()}>{"< Back"}</button>
                                 </div>
                                 <div className="pt-3">
-                                    {tasksList.map(i => <div class="list-group-item list-group-item-action justify-content-between align-items-center" onClick={() => openTask(i)}>{i.title + "     "}{doneSatus(i.status)}</div>)}
+                                    {tasksList.map(i => <div className="list-group-item list-group-item-action justify-content-between align-items-center" onClick={() => openTask(i)}>{i.title + "     "}{doneSatus(i.status)}</div>)}
                                 </div>
                             </div> 
                         }
                         {(view === 'taskInfo') && 
                             <div>
                                 <div>
-                                    <button class="btn btn-secondary" onClick={() => goBack2()}>{"< Back"}</button>
+                                    <button className="btn btn-secondary" onClick={() => goBack2()}>{"< Back"}</button>
                                 </div>
                                 <TaskWindow epic={props.epic} focusTask={focusTask} focusStory={focusStory} devs={devs} projId={props.projId}/>
                             </div> 
@@ -153,8 +157,8 @@ function StoriesInEpicsPopUp(props){
 
 export default StoriesInEpicsPopUp;
 
-{/* <ul class="list-group" style={{width: '100%'}}>
-                    <li class="list-group-item d-flex justify-content-between align-items-center backlog-list" onClick={gg1}>
+{/* <ul className="list-group" style={{width: '100%'}}>
+                    <li className="list-group-item d-flex justify-content-between align-items-center backlog-list" onClick={gg1}>
                         {tasks[0]}
                         {doneSatus(cond1)}
                     </li> */}

@@ -1,9 +1,34 @@
 import React, {useState, useEffect} from 'react';
+import { useHistory } from 'react-router-dom'
 import '../App.css';
 
 function TaskWindow(props){
 
+    const history = useHistory();
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+
+    const [devs, setDevs] = useState([])
+
+    useEffect(()=>{
+        if (!loggedUser){
+            history.push("/login");
+        }
+        if (props.focusTask.id){// /assignees/users/projects/{project_id}/tasks/{task_id}
+            fetch('http://localhost:8080/assignees/users/projects/'+props.projId+'/tasks/'+props.focusTask.id, {
+                    method: 'get', 
+                    headers: { Authorization: 'Bearer ' + loggedUser.accessToken}
+                })
+                    .then(res => res.json())
+                    .then((data) => {
+                        console.log("Assignees of task " + props.focusTask.title +":");
+                        console.log('http://localhost:8080/assignees/users/projects/'+props.projId+'/tasks/'+props.focusTask.id)
+                        console.log(data);
+                        if (data._embedded){
+                            setDevs(data._embedded.userList)
+                        }
+                    })
+        }
+    },[props.focusTask])
 
     function markAsDone() {
         fetch('http://localhost:8080/projects/'+props.projId+'/sprints&epics/'+props.focusTask.sprint_id+'&'+props.focusTask.epic_id+'/stories/'+props.focusTask.story_id+'/tasks/'+props.focusTask.id+'/archive', {
@@ -22,11 +47,11 @@ function TaskWindow(props){
 
     function doneSatus(cond){
         if (cond){
-            return (<span class="badge bg-success rounded-pill done-gradient">
+            return (<span className="badge bg-success rounded-pill done-gradient">
                 Done
             </span>);
         }
-        return (<span class="badge bg-warning rounded-pill inprogress-gradient">In progress</span>);
+        return (<span className="badge bg-warning rounded-pill inprogress-gradient">In progress</span>);
     }
 
     return (
@@ -51,11 +76,11 @@ function TaskWindow(props){
         </div>
         <div className="col-12">
             <label for="assignDev" className="form-label">Του(ς) έχει ανατεθεί: </label>
-            {props.devs.map(i => <div><span class="badge bg-primary rounded-pill cool-purple">{i}</span></div>
+            {devs.map(i => <div><span className="badge bg-primary rounded-pill cool-purple">{i.username}</span></div>
             )}
         </div>
         <div>
-            {(props.focusTask.status === 0) && <div class="btn btn-success" onClick={() => markAsDone()}>Μάρκαρε ως Done</div>}
+            {(props.focusTask.status === 0) && <div className="btn btn-success" onClick={() => markAsDone()}>Μάρκαρε ως Done</div>}
         </div>
     </form>);
 }

@@ -123,14 +123,14 @@ function NewProjectPopUp(props){
                             <label for="inputTittle" className="form-label">Τίτλος Project <span style={{color: "#cc0000"}}>*</span></label>
                             <input type="text" className="form-control" id="projectTittle" placeholder="Τίτλος" value={title} onChange={e => setTitle(e.target.value)}/>
                             <div>
-                                { (showEmptyTitle) && <span class="badge bg-danger rounded-pill">Ο τίτλος δεν μπορεί να είναι κενός</span>}
+                                { (showEmptyTitle) && <span className="badge bg-danger rounded-pill">Ο τίτλος δεν μπορεί να είναι κενός</span>}
                             </div>
                         </div>
                         <div className="col-12">
                             <label for="inputDescription" className="form-label">Περιγραφή Project <span style={{color: "#cc0000"}}>*</span></label>
                             <textarea type="text" className="form-control" id="projectDescription" placeholder="Περιγραφή" value={description} onChange={e => setDescription(e.target.value)}/>
                             <div>
-                                { (showEmptyDescription) && <span class="badge bg-danger rounded-pill">Η περιγραφή δεν μπορεί να είναι κενή</span>}
+                                { (showEmptyDescription) && <span className="badge bg-danger rounded-pill">Η περιγραφή δεν μπορεί να είναι κενή</span>}
                             </div>
                         </div>
                         <div className="col-12">
