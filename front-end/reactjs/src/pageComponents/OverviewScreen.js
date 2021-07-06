@@ -26,11 +26,11 @@ function OverviewScreen() {
     const [lastSprintNumber, setLastSprintNumber] = useState(0)
 
     const [totalSprintNumber, setTotalSprintNumber] = useState(0)
-    const [doneProjects, setDoneProjects] = useState(null);
-    const [currProjects, setCurrProjects] = useState(null);
-    const [allProjects, setAllProjects] = useState(null);
+    const [doneProjects, setDoneProjects] = useState(0);
+    const [currProjects, setCurrProjects] = useState(0);
+    const [allProjects, setAllProjects] = useState(0);
     
-    const [donePerc, setDonePerc] = useState(null);
+    const [donePerc, setDonePerc] = useState('0%');
     
     const recProj = []
     const currProj = []
@@ -60,8 +60,6 @@ function OverviewScreen() {
             })
                 .then(res => res.json())
                 .then((data) => {
-                    
-                    
                     if(data._embedded){
                         console.log(data);
                         
@@ -104,20 +102,13 @@ function OverviewScreen() {
                             percentageStr = '0%'
                             
                         }
-                        
-                        
-                        
-                        
-                        
+                        setAllProjects(data._embedded.projectList.length)
+                        setDoneProjects(doneProj.length)
+                        setCurrProjects(currProj.length)
+                        setProjectidList(idProj);
+                        setRecentProjectList(recProj)
+                        setDonePerc(percentageStr)
                     }
-                    
-                    setAllProjects(data._embedded.projectList.length)
-                    setDoneProjects(doneProj.length)
-                    setCurrProjects(currProj.length)
-                    setProjectidList(idProj);
-                    setRecentProjectList(recProj)
-                    setDonePerc(percentageStr)
-
                 })
                 // .then((kappa) => {
                     
